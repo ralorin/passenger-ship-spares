@@ -1,0 +1,41 @@
+A ship that cannot be resupplied between calls must choose its spares from the
+predictive distribution of a mission failure count, and for power-electronic
+equipment that distribution has to be built from evidence that is small per ship
+and divided between parties. This paper has formulated that decision, together
+with the censoring, preventive-replacement, removal and dependence mechanisms a
+fleet must declare before its records can be used, and has set out a
+hierarchical count model with an exposure offset and crossed product and
+data-holder effects, estimable from messages that leave unit-level records and
+each holder's own effect in place.
+
+For the idealised mixed-Poisson case, the cover a nominal-$p$ plan delivers when
+latent spread is ignored is an exact one-dimensional mixture integral, and that
+integral rather than its shortcut is what should be computed. The reduction to
+$\kappa=\sigma\sqrt\lambda$ and the margin factor $\sqrt{1+\kappa^2}$ are
+first-order approximations whose error has been explored numerically over a grid
+of \gridPts{} points: the exact cover of a 99\,\% plan varies by
+\spreadKTwoNn{} percentage points among pairs $(\lambda,\sigma)$ sharing
+$\kappa=2$, the largest discrepancy observed for the closed form is
+\domBigKappa{} points and its sign is almost always conservative, and the margin
+factor misstates the required quantile by up to \marMaxUnits{} units. These are
+exploratory maxima rather than analytical bounds, and the plan for a real
+population belongs to the full predictive distribution.
+
+Because spares are held per reference, the decision is a stock vector, and the
+joint and aggregate coverage criteria
+respond to the division of one total latent variance with opposite signs.
+Per-reference 99\,\% quantiles deliver only \svNaiveShip\,\% joint cover at
+eight references, and meeting the joint criterion there requires
+\svJointTotEight{} units against \mpShipEight{} under interchangeability. Until a
+fleet measures the division between the ship-wide and interaction terms, a single
+holder-level $\sigma$ is not an adequate basis for a multi-reference plan under
+either criterion, and the conservative extreme is the defensible choice.
+
+What remains is empirical. Of \nSources{} candidate sources examined,
+\nSuitable{} met the four requirements, and the one retained yields no credible
+times to failure. A campaign therefore needs repeated missions rather than a
+snapshot, several references followed on the same ships, and records of the
+common-cause events that would break the independence assumed here. Without them
+the contribution is the formulation, the account of what a plan delivers, the
+treatment of ship--product dependence, the estimator and the campaign design, and
+not a number about any ship.

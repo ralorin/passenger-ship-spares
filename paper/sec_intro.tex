@@ -1,0 +1,80 @@
+\IEEEPARstart{A}{passenger} ship is electrically a dense and repetitive estate
+of power-electronic equipment: cabin lighting drivers, cabin and public-area
+supplies, charging outlets, fan-coil and pump drives, and converters feeding
+navigation and hotel loads. This estate is maintained by the ship's own crew
+and, unlike a plant ashore, cannot be resupplied between calls. A unit that
+fails is replaced from what was embarked, or the function it served remains
+degraded until the next port. Provisioning is therefore a bounded decision taken
+before sailing, and the quantity it requires is the predictive distribution of
+the number of failures during the mission rather than its mean.
+
+Three properties of this setting make that distribution difficult to obtain.
+Counts are small, so a single ship's history supports little inference. The
+evidence that would help is divided: a ship holds its maintenance and
+environmental records, an operator holds those of its ships, an integrator or
+manufacturer holds qualification data, and unit-level records are commonly not
+pooled across those boundaries. Finally, the population to be provisioned is
+frequently new to the evidence, as for a newly delivered ship, a refitted zone
+or a product installed for the first time, so the predictor must extrapolate to
+a data holder it has never observed.
+
+This paper develops the decision, the estimator and the theory of the
+provisioning plan for that setting, subject to one limitation stated at the
+outset. No public record of failures of shipboard power-electronic equipment with
+the installed populations, exposure and data-holder structure that the decision
+requires could be located, and no private record was available;
+Section~\ref{sec:evidence} documents the sources examined and the reason each
+fails. Consequently no empirical claim about the reliability of shipboard power
+electronics is made, no failure rate or spares count is reported as measured, and
+no simulated quantity is presented as observed. The contribution is methodological.
+
+The specific contributions are as follows. First, the decision is stated so that
+it can be audited, covering the installed population, failure event, exposure,
+mission horizon, data holders and the covariates available at the moment of
+decision, together with the censoring, preventive-replacement, unit-removal and
+dependence mechanisms that a fleet must declare before its records can be
+modelled. Second, the cover delivered by a nominal-$p$ plan that ignores latent
+log-rate spread $\sigma$ for a population expecting $\lambda$ failures is shown
+to be a one-dimensional mixture integral (Proposition~\ref{prop:exact}) that
+depends on $\lambda$ and $\sigma$ separately; the reduction to the dimensionless
+group $\kappa=\sigma\sqrt\lambda$ and the margin factor $\sqrt{1+\kappa^2}$ are
+first-order approximations (Proposition~\ref{prop:approx}) whose error is
+quantified by numerical exploration over a stated grid, and which fail in the
+regime most relevant to provisioning; both results hold exactly for an idealised
+mixed-Poisson case and approximately for the full model. Third, because a zone
+carries several references and spares are not interchangeable across them, the
+decision is a stock vector, and the joint and aggregate coverage criteria respond
+to the ship--product dependence structure with opposite signs, neither being
+solved by per-reference quantiles. Fourth, the hierarchical likelihood is
+maximised from messages computed locally by each data holder, so that unit-level
+records and each holder's own effect never leave it, and the disclosure properties
+of that protocol are stated. Fifth, a simulation study indicates, for the
+configurations examined, how many ships, missions and failures are required before
+the ship-wide and interaction terms can be distinguished.
+
+Three strands of existing work cover parts of this ground, and none is claimed
+as new. Random-effects models are known to give wider and better calibrated
+predictive intervals for a new group than pooled models~\cite{higgins2009}, and
+hierarchical models of heterogeneous field reliability data are
+established~\cite{hong2013dynamic,meeker2022}. Generalized linear mixed models
+can be fitted across sites from aggregates without loss of likelihood,
+iteratively~\cite{wu2012glore,luo2022dpql}, in one
+shot~\cite{luo2022dlmm,tong2025cola}, and with Laplace or quadrature treatment of
+crossed random effects~\cite{li2022fedglmm}; the federated computation used here
+is an instance of that literature. The present contribution is specific to the
+decision: the exact cover of a plan and the delimited validity of its $\kappa$
+shortcut, the effect of the ship--product dependence structure on a
+multi-product plan, and the design conditions under which either could be
+estimated from a fleet. On the equipment side, the wear-out of aluminium
+electrolytic capacitors in converter and power-supply stages is a documented
+degradation mechanism~\cite{celaya2012,kulkarni2012}.
+
+The remainder of this paper is organized as follows.
+Sections~\ref{sec:decision} and~\ref{sec:model} state the decision and the count
+model. Section~\ref{sec:cover} derives the cover a plan delivers and quantifies
+the error of its closed-form approximation, and Section~\ref{sec:multi} treats a
+zone carrying several references. Section~\ref{sec:fed} gives the federated
+estimator, Section~\ref{sec:design} the design simulation, and
+Section~\ref{sec:evidence} the audit of available evidence.
+Section~\ref{sec:limits} states the limitations and the requirements for
+validation, and Section~\ref{sec:conclusion} concludes.

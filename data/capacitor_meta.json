@@ -1,0 +1,11 @@
+{
+ "reference_frequency_Hz": 120.0,
+ "esr_failure_ratio": 2.8,
+ "units": 24,
+ "stress_levels": [
+  10,
+  12,
+  14
+ ],
+ "source": "NASA PCoE, 12. Capacitor Electrical Stress (raw MATLAB v7.3)"
+}

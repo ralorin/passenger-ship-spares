@@ -1,0 +1,101 @@
+Sections~\ref{sec:cover} and~\ref{sec:multi} establish that a multi-reference
+plan depends on how the latent spread is divided between a ship-wide term $\tau$
+and a ship--product interaction $\omega$. Whether a fleet's records could support
+that estimate is answerable by simulation before any record is collected.
+
+Every number in this section is simulated under assumed parameters. None is
+a measurement of shipboard equipment, and what the simulation establishes is
+conditional: what a campaign of a given size could estimate \emph{if the model of
+Section~\ref{sec:model} held}.
+
+\subsection{Design of the Study}
+For ship $s$, reference $p$ and mission $t$, the generating model is
+\begin{equation}
+y_{spt}\sim\mathrm{Poisson}\!\left(H\exp\{\beta_0+u_s+w_{sp}+e_{spt}\}\right),
+\label{eq:sim}
+\end{equation}
+with $u_s\sim\mathcal N(0,\tau^2)$, $w_{sp}\sim\mathcal N(0,\omega^2)$ and a
+mission-level term $e_{spt}\sim\mathcal N(0,\varepsilon^2)$, $\varepsilon=\dsEps$,
+all mean-corrected. Exposure is equal across cells and scaled so that each (ship,
+reference, mission) expects $m$ failures. The number of ships $S$, the missions per
+ship $M$ and $m$ are varied over three allocations of the same total spread:
+ship-wide only ($\tau=0.6$), interaction only ($\omega=0.6$) and an equal split
+($\tau=\omega=0.42$), with four references per ship. Each grid cell is replicated
+\dsReps{} times and fitted with the estimator of Section~\ref{sec:model}, both
+terms present; an estimate at or below $\dsBound$ counts as at the boundary.
+
+That conditioning is specific: the latent effects are Gaussian, the references
+are four and equally sized, $\varepsilon$ is fixed, and there are no common-cause
+events, reference changes or very rare failures. The configurations examined
+therefore bound nothing about a real fleet.
+
+Two quantities are measured. The first is recovery of the \emph{allocation},
+defined as the fraction of campaigns in which the larger estimate corresponds to
+the larger true term; this is a weak criterion by construction, since a fleet
+unable to order the two terms cannot size a plan from them. The second is the
+cover that a 99\,\% plan for a new ship's four-product zone, built from the
+campaign's estimates through the exact convolution of Section~\ref{sec:multi},
+delivers under the true structure.
+
+\subsection{Results}
+Four findings are stable across the grid, which the accompanying result files
+report in full.
+
+\subsubsection{Insufficiency of a Single Mission}
+With $M=1$ the
+allocation is recovered in only \dsAllocOneLo--\dsAllocOneHi\,\% of campaigns, and
+under the equal split the interaction term collapses to the boundary in
+\dsOneOmBound\,\% of them. The cause is structural rather than one of sample size:
+with one observation per (ship, reference) pair the interaction term is not
+separable from the mission-level dispersion $e_{spt}$, since both vary at the same
+level. A cross-sectional snapshot therefore cannot support this model, and no
+number of ships repairs it.
+
+\subsubsection{Effect of Repeated Missions}
+With four missions per
+ship and ten ships, a median of \dsTenFail{} failures in the campaign, the
+allocation is recovered in \dsAllocTenLo--\dsAllocTenHi\,\% of campaigns, and
+with twenty ships in at least \dsAllocTwentyLo\,\%. In the configurations
+examined this is the scale at which the choice between the two multi-reference
+plans of Section~\ref{sec:multi} could begin to rest on evidence rather than on
+the conservative default.
+
+\subsubsection{Ordering Versus Resolution}
+This result is the most consequential for practice. When the truth is interaction
+only, a spurious ship-wide term is nevertheless estimated in
+\dsSpurShipLo--\dsSpurShipHi\,\% of campaigns, and when the truth is ship-wide a
+spurious interaction term appears in \dsSpurInterLo--\dsSpurInterHi\,\%. Neither
+rate falls away over the range studied: at forty ships and four missions they are
+still \dsSpurShipForty\,\% and \dsSpurInterForty\,\%. Under the equal split the
+component root-mean-square errors remain substantial, \dsTenTauRmse{} and
+\dsTenOmRmse{} at ten ships and \dsFortyTauRmse{} at forty. A fleet should
+therefore report both components with wide intervals and not treat a small
+non-zero estimate of either as established.
+
+\subsubsection{Cover for an Unobserved Ship}
+From a ten-ship,
+four-mission campaign under the equal split the 99\,\% plan delivers
+\dsTenCover\,\% cover on average and \dsTenCoverPTen\,\% in the worst tenth of
+campaigns, rising to \dsFortyCover\,\% and \dsFortyCoverPTen\,\% at forty ships.
+The weak case is again the single-mission campaign, whose plan delivers only
+\dsShipOneCoverPTen\,\% in the worst tenth under a ship-wide truth, because a
+campaign that has mistaken the allocation under-provisions the zone total as
+Section~\ref{sec:multi} describes.
+
+\subsection{Implications for a First Campaign}
+Within the configurations examined, a campaign should be designed for repeated
+missions per ship and for several references followed on the same ships rather
+than for breadth alone; ten ships over four missions is the smallest
+configuration in this grid that orders the two variance components reliably. No
+claim is made that it would suffice for a fleet exhibiting common-cause events,
+product changes during the campaign, or failure rates far below those simulated,
+all of which would require more data. The components themselves are imprecise
+even in the favourable configurations, so the plan should be computed under both
+allocations while the ordering is uncertain. Because these conclusions are
+conditional on~\eqref{eq:sim}, the calculation should be repeated with a first
+batch of real records, at which point $\tau$, $\omega$, $\varepsilon$ and $m$
+cease to be assumptions.
+
+
+
+

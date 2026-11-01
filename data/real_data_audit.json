@@ -1,0 +1,134 @@
+{
+ "requirements": [
+  "installed count per population",
+  "exposure per population",
+  "failure count over a bounded horizon",
+  "data-holder label"
+ ],
+ "sources": [
+  {
+   "key": "capacitor_es",
+   "name": "NASA PCoE, Capacitor Electrical Stress",
+   "provenance": "NASA Prognostics Center of Excellence data repository; raw MATLAB v7.3 impedance-sweep files, read directly (no figure digitisation).",
+   "device": "Aluminium electrolytic capacitors, nominally 2000 uF",
+   "environment": "Laboratory, raised DC bias at 10/12/14 V, room ambient",
+   "has": [
+    "exposure per population"
+   ],
+   "lacks": [
+    "installed count per population",
+    "failure count over a bounded horizon",
+    "data-holder label"
+   ],
+   "used_for": "Failure mechanism (ESR growth) and the censoring it produces. Not used for any rate, coefficient, coverage or spares count.",
+   "verdict": "retained, context only",
+   "meets_all_requirements": false
+  },
+  {
+   "key": "igbt_aging",
+   "name": "NASA PCoE, IGBT Accelerated Aging",
+   "provenance": "https://phm-datasets.s3.amazonaws.com/NASA/8.+IGBT+Accelerated+Aging.zip (230 MB), downloaded and unpacked 2026-09-27.",
+   "device": "IGBT IRG4BC30K",
+   "environment": "Laboratory, thermal overstress, DC and square-wave gate bias",
+   "has": [],
+   "lacks": [
+    "installed count per population",
+    "exposure per population",
+    "failure count over a bounded horizon",
+    "data-holder label"
+   ],
+   "used_for": "Not used.",
+   "verdict": "discarded: six devices, waveform-level characterisation, no populations, no exposure in service and no data holders",
+   "meets_all_requirements": false
+  },
+  {
+   "key": "oedi_pv_om",
+   "name": "OEDI/NREL, Extreme Weather Impacts on Utility-Scale PV Plant Performance",
+   "provenance": "https://data.openei.org/files/4055/oedi_data.xlsx, CC-BY 4.0, downloaded 2026-09-27; 51 504 plant-days, 174 anonymised plants, 2018-02-22 to 2020-03-01.",
+   "device": "Utility-scale PV plants (inverters not individually identified)",
+   "environment": "Field, continental United States",
+   "has": [
+    "data-holder label"
+   ],
+   "lacks": [
+    "installed count per population",
+    "exposure per population",
+    "failure count over a bounded horizon"
+   ],
+   "used_for": "Not used.",
+   "verdict": "discarded: the O&M fields are weather-event tickets and an affected-asset TYPE, not replacement counts; no inverter population and no exposure",
+   "meets_all_requirements": false
+  },
+  {
+   "key": "shipboard",
+   "name": "Shipboard power-electronics field failure records",
+   "provenance": "Searched: no public source located. Port-state-control deficiency databases record inspection findings per ship but no installed populations or exposure; marine casualty databases record incidents without denominators.",
+   "device": "Converters, inverters, chargers, power supplies on board",
+   "environment": "Passenger ships in service",
+   "has": [],
+   "lacks": [
+    "installed count per population",
+    "exposure per population",
+    "failure count over a bounded horizon",
+    "data-holder label"
+   ],
+   "used_for": "Not used: none available.",
+   "verdict": "unavailable",
+   "meets_all_requirements": false
+  }
+ ],
+ "capacitor": {
+  "source": "NASA PCoE, 12. Capacitor Electrical Stress (raw MATLAB v7.3)",
+  "units": 24,
+  "stress_levels": [
+   10,
+   12,
+   14
+  ],
+  "failure_criterion_esr_ratio": 2.8,
+  "reference_frequency_Hz": 120.0,
+  "test_hours": 5424.0,
+  "units_with_any_crossing": 5,
+  "units_with_sustained_crossing": 3,
+  "units_ending_above_criterion": 0,
+  "max_final_ratio": 1.8889134914472814,
+  "median_sweep_of_first_crossing": 4.0,
+  "within_stress_final_ratio_sd": 0.07008029765191727,
+  "shipped_flag_failures": 5,
+  "by_stress": [
+   {
+    "stress_V": 10,
+    "units": 8,
+    "max_ratio_mean": 2.076626482850268,
+    "final_ratio_mean": 1.0105883977993977,
+    "final_ratio_min": 0.9561027830875556,
+    "final_ratio_max": 1.0814468104220292,
+    "any_crossing": 0,
+    "sustained": 0,
+    "ends_above": 0
+   },
+   {
+    "stress_V": 12,
+    "units": 8,
+    "max_ratio_mean": 2.718767869477683,
+    "final_ratio_mean": 1.2940396532299814,
+    "final_ratio_min": 1.2475475489495227,
+    "final_ratio_max": 1.3163494471505157,
+    "any_crossing": 1,
+    "sustained": 0,
+    "ends_above": 0
+   },
+   {
+    "stress_V": 14,
+    "units": 8,
+    "max_ratio_mean": 2.8093084809055004,
+    "final_ratio_mean": 1.612441493383044,
+    "final_ratio_min": 1.463049507263321,
+    "final_ratio_max": 1.8889134914472814,
+    "any_crossing": 4,
+    "sustained": 3,
+    "ends_above": 0
+   }
+  ]
+ }
+}

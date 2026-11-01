@@ -1,0 +1,17 @@
+P,planned_under,truth,q99,delivered
+1,A: ship-wide only,A: ship-wide only,29,0.9909225871109517
+1,A: ship-wide only,B: interaction only,29,0.9909225871109515
+1,B: interaction only,A: ship-wide only,29,0.9909225871109517
+1,B: interaction only,B: interaction only,29,0.9909225871109515
+2,A: ship-wide only,A: ship-wide only,29,0.9909225871109519
+2,A: ship-wide only,B: interaction only,29,0.9980343144194075
+2,B: interaction only,A: ship-wide only,23,0.9760748572683519
+2,B: interaction only,B: interaction only,23,0.9914573524382466
+4,A: ship-wide only,A: ship-wide only,29,0.990922587110952
+4,A: ship-wide only,B: interaction only,29,0.9997933739068614
+4,B: interaction only,A: ship-wide only,19,0.9522678186868885
+4,B: interaction only,B: interaction only,19,0.9907148640329493
+8,A: ship-wide only,A: ship-wide only,29,0.990922587110952
+8,A: ship-wide only,B: interaction only,29,0.9999893140419294
+8,B: interaction only,A: ship-wide only,17,0.9316977213756718
+8,B: interaction only,B: interaction only,17,0.9908743874296247

@@ -1,0 +1,144 @@
+\documentclass[journal,10pt]{IEEEtran}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+
+% IEEE house style for theorem-like environments: italic head, colon, italic body
+\newtheoremstyle{ieeethm}{\topsep}{\topsep}{\itshape}{0pt}{\itshape}{:}{.5em}{}
+\theoremstyle{ieeethm}
+\newtheorem{proposition}{Proposition}
+\newtheorem{assumption}{Assumption}
+\newtheoremstyle{ieeerem}{\topsep}{\topsep}{\normalfont}{0pt}{\itshape}{:}{.5em}{}
+\theoremstyle{ieeerem}
+\newtheorem{remark}{Remark}
+% Proofs use IEEEtran's own IEEEproof environment, which sets an italic
+% "Proof:" head and closes with the filled QED box of IEEE house style.
+
+% \input inside a tabular
+\makeatletter
+\newcommand{\tabinput}[1]{\@@input #1 }
+\makeatother
+
+\input{numbers}
+
+\markboth{IEEE Transactions on Reliability}%
+{Spares Provisioning for Shipboard Power Electronics from Divided Evidence}
+
+\begin{document}
+\bstctlcite{BSTcontrol}
+
+\title{Spares Provisioning for Shipboard Power Electronics\\
+from Divided Evidence: Exact Plan Cover, Ship--Product\\
+Dependence and Federated Count Estimation}
+
+\author{Paula~Lamo,~\IEEEmembership{Senior Member,~IEEE}%
+\thanks{Manuscript submitted September 2026.}%
+\thanks{P. Lamo is with the Universidad de Cantabria, 39005 Santander, Spain
+(e-mail: paula.lamo@unican.es).}%
+\thanks{No shipboard failure records were available for this study;
+Section~\ref{sec:evidence} documents the search and its outcome.}}
+
+\maketitle
+
+\begin{abstract}
+Spares for power-electronic equipment on a passenger ship must be embarked before
+sailing, since no resupply is possible between calls. The required quantity is the
+predictive distribution of the mission failure count, which is hard to obtain:
+counts per ship are small and the supporting evidence is divided among ships,
+operators and integrators. This paper formulates the decision and models the
+count hierarchically, with an exposure offset and crossed product and data-holder
+effects separating ship-wide heterogeneity from ship--product interaction. For an
+idealised mixed-Poisson case, the cover a nominal plan delivers when latent
+spread is ignored is shown to be an exact one-dimensional mixture integral, and
+the customary reduction of that integral to a single dimensionless group, together
+with its associated margin factor, is shown to be a first-order approximation
+whose error over a grid of \gridPts{} points reaches \spreadKTwoNn{} percentage
+points in cover and \marMaxUnits{} spare units. Because spares are held per
+product reference, the decision is a stock vector, and the joint and aggregate
+coverage criteria respond to the dependence structure with opposite signs:
+per-reference 99\,\% quantiles deliver only \svNaiveShip\,\% joint cover at eight
+references. A simulation study indicates the campaign size at which that structure
+becomes estimable, and the estimator admits a federated form keeping unit-level
+records and all ship-level effects local. No shipboard failure records were
+available, so the contribution is methodological; the records required for
+empirical validation are specified.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Experiment design, failure count prediction, federated
+estimation, hierarchical models, identifiability, power electronics, predictive
+distribution, random effects, ships, spare parts.
+\end{IEEEkeywords}
+
+\IEEEpeerreviewmaketitle
+
+\section{Introduction}
+\label{sec:intro}
+\input{sec_intro}
+
+\section{The Provisioning Decision}
+\label{sec:decision}
+\input{sec_decision}
+
+\section{Hierarchical Count Model}
+\label{sec:model}
+\input{sec_model}
+
+\section{Cover Delivered by a Provisioning Plan}
+\label{sec:cover}
+\input{sec_cover}
+
+\section{Zones Carrying Several Product References}
+\label{sec:multi}
+\input{sec_multi}
+
+\section{Federated Estimation}
+\label{sec:fed}
+\input{sec_fed}
+
+\section{Identifiability and Campaign Design}
+\label{sec:design}
+\input{sec_design}
+
+\section{Available Power-Electronics Evidence}
+\label{sec:evidence}
+\input{sec_evidence}
+
+\section{Limitations and Requirements for Validation}
+\label{sec:limits}
+\input{sec_limits}
+
+\section{Conclusion}
+\label{sec:conclusion}
+\input{sec_conclusion}
+
+\section*{Acknowledgment}
+Claude (Anthropic) was used as an aid for writing and translation. The author
+takes responsibility for the content of this paper and has verified that the
+content was not modified and that the final version is as intended.
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\begin{IEEEbiographynophoto}{Paula Lamo}
+(Senior Member, IEEE) received the bachelor's degree in naval engineering and
+marine engineering from the University of Cantabria, Cantabria, Spain, in 2010;
+the master's degrees in maritime engineering and teacher training from the
+University of Cantabria, in 2011; the integrated master's degree in management of
+environmental quality and occupational risk prevention and renewable energy, and
+the master's degree in occupational risk prevention and industrial engineering
+from University CEU San Pablo, Madrid, Spain, in 2012, 2013, and 2014,
+respectively; and the Ph.D. degree in occupational risk prevention and industrial
+engineering from the University of Cantabria, in 2019.
+
+From 2019 to 2025, she was an Associate Professor with the Universidad
+Internacional de La Rioja, Logro\~no, Spain. Since then, she has been an
+Associate Professor with the Universidad de Cantabria, Santander, Spain. She is
+also the President of the IEEE Power Electronics and Industrial Electronics
+Spanish Chapter.
+\end{IEEEbiographynophoto}
+
+\end{document}

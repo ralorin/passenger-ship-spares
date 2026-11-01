@@ -1,0 +1,25 @@
+\begin{table}[!t]
+\caption{Campaign design (\textsc{simulation}; \dsReps{} replicates per row,
+four products per ship, $\varepsilon=\dsEps$). ``Bound.'' is the share of
+campaigns with that component at the boundary; under a true value of zero it
+should be high, and the complement is a spurious component. ``Alloc.'' is the
+share of campaigns ordering the two components correctly, undefined when they
+are equal. Cover is that of a 99\,\% plan for a new ship's four-product zone;
+it is not computed for the rows with a larger expected count, marked ---}
+\label{tab:design}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}cc ccc c cc cc c cc@{}}
+\toprule
+\multicolumn{2}{c}{truth} & & & & \multicolumn{1}{c}{fail-} &
+\multicolumn{2}{c}{bound. (\%)} & \multicolumn{2}{c}{RMSE} &
+\multicolumn{1}{c}{alloc.} & \multicolumn{2}{c}{cover (\%)} \\
+\cmidrule(lr){1-2}\cmidrule(lr){7-8}\cmidrule(lr){9-10}\cmidrule(lr){12-13}
+$\tau$ & $\omega$ & $S$ & $M$ & $m$ & ures & $\tau$ & $\omega$ &
+$\tau$ & $\omega$ & (\%) & mean & p10 \\
+\midrule
+\tabinput{tables/tab_design.tex}
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,88 @@
+\subsection{Cells, Counts, and Exposure}
+A \emph{cell} is a group of units of one product, held by one data holder, in
+one band of age and of operating condition, over one mission. Let cell $c$
+record $y_c$ failures over an exposure of $H_c$ powered unit-hours. The count is
+modelled directly,
+\begin{equation}
+y_c\sim\mathrm{NB}(\mu_c,\phi),\qquad
+\log\mu_c=\log H_c+\mathbf{x}_c^{\top}\boldsymbol\beta+\sum_{k}b^{(k)}_{\ell_k(c)},
+\label{eq:model}
+\end{equation}
+with $\log H_c$ an offset of coefficient fixed at one, $\mathbf{x}_c$ the
+covariates available at the decision (Section~\ref{sec:decision}) and one
+Gaussian random effect $b^{(k)}_\ell\sim\mathcal N(0,\sigma_k^2)$ for each level
+$\ell$ of each grouping $k$. The negative binomial variance
+$\mathrm{Var}(y_c)=\mu_c+\mu_c^2/\phi$ absorbs dispersion between cells that the
+grouped effects do not explain, and $\phi\to\infty$ recovers the Poisson model.
+Cells with $y_c=0$ enter~\eqref{eq:model} like any other, since nothing is taken
+on the logarithmic scale; populations that record no failure therefore
+contribute their exposure, which matters because on board most of them will.
+
+The groupings are of two kinds: on the product side the product and its
+manufacturer, and on the data-holding side the operator, the ship and, where
+zones are recorded separately, the zone. The two sides are crossed rather than
+nested, since the same product is installed on many ships and a ship carries many
+products. This is what identifies product and holder effects separately, and what
+raises the question treated in Section~\ref{sec:multi}.
+
+The model predicts a \emph{mission failure count}: the number of failures in a
+population of known size, age and condition over a bounded horizon. It is not a
+model of remaining life, as Section~\ref{sec:limits} sets out.
+
+\subsection{Ship-Wide Heterogeneity and Ship--Product Interaction}
+\label{sec:structure}
+Two quantities that are easily conflated must be separated. Write the
+data-holding part of the latent log rate for product $p$ on ship $s$ as
+\begin{equation}
+u_s+w_{sp},\qquad u_s\sim\mathcal N(0,\tau^2),\quad
+w_{sp}\sim\mathcal N(0,\omega^2),
+\label{eq:structure}
+\end{equation}
+independently. Here $\tau$ is \emph{ship-wide} heterogeneity: a deviation shared
+by every product on that ship, as would arise from its environment, its
+electrical supply quality, its crew's maintenance practice or its recording
+conventions. The second, $\omega$, is the \emph{ship--product interaction}: the
+deviation of one product at one ship, as would arise from a bad installation
+batch, a zone-specific duty cycle or a product that suits one vessel's
+conditions worse than another's.
+
+For a single population the two are indistinguishable. Their sum has variance
+$\tau^2+\omega^2$, and any allocation of a given total reproduces the same
+marginal distribution, the same predictive mean and the same one-population
+predictive interval. They differ only
+in the dependence they induce between the products of one ship, and therefore
+only in a plan that spans the products of one zone, which is the plan a ship
+requires. Both terms in~\eqref{eq:structure} are therefore retained and reported
+separately, and their allocation is treated as an empirical question that
+shipboard records have not yet answered.
+
+\subsection{Estimation}
+The random effects $\mathbf b$ and the coefficients $\boldsymbol\beta$ are
+integrated by a Laplace approximation at their joint
+mode~\cite{tierney1986,breslow1993}, the restricted-likelihood analogue in common
+use~\cite{brooks2017}, and the approximate marginal likelihood is maximised over
+$\boldsymbol\theta=(\log\sigma_k,\log\phi)$. Each non-intercept coefficient
+carries a weakly informative $\mathcal N(0,5^2)$ prior on the log-rate-ratio
+scale, negligible for identified coefficients but keeping the mode finite when a
+covariate class records no failure, as a first shipboard campaign should expect.
+Standard errors of $\boldsymbol\beta$ come from the joint Hessian and so include
+the uncertainty of $\mathbf b$.
+
+\subsection{Predictive Distribution for an Unobserved Population}
+The object the decision needs is the predictive distribution of the count of a
+population that was not used in fitting, typically at a ship with no history.
+It is obtained by drawing jointly from the Gaussian approximation to
+$(\boldsymbol\beta,\mathbf b)$; a level present in the fit keeps its conditional
+draw, while a level never seen (a new ship, a new operator, a newly installed
+product) receives a draw from $\mathcal N(0,\hat\sigma_k^2)$ shared by all its
+cells, and each cell then receives its dispersion multiplier. Given the latent
+draws the total count of any set of cells is Poisson with the summed mean, which
+gives both draws of the total and an exact predictive probability for scoring.
+The plan is a quantile of that distribution.
+
+Two consequences follow, made precise in Section~\ref{sec:cover}. A predictor
+without a holder term has no draw for a new ship, so its predictive spread
+reflects only coefficient uncertainty and Poisson noise and is too narrow; and the
+shortfall is not fixed, but grows with the provisioned population, since the
+latent deviation does not average away as the count grows while Poisson noise
+does.

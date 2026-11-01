@@ -1,0 +1,71 @@
+\subsection{Scope of the Results}
+Three classes of statement are supported. The analytical class:
+Propositions~\ref{prop:exact} and~\ref{prop:multi} are exact under their stated
+assumptions, and the figures accompanying Proposition~\ref{prop:approx} are maxima
+observed on the stated grid, properties of the idealised mixture rather than of any
+fleet. The simulated class: everything in Section~\ref{sec:design} is generated
+under~\eqref{eq:sim} with assumed parameters. The measured class: only the capacitor
+figures of Section~\ref{sec:evidence}. A manifest accompanying the code gives every
+reported value's script, result file and provenance tag; no tag denotes a shipboard
+measurement, because there is none.
+
+\subsection{Limitations}
+\subsubsection{No Shipboard Quantity}
+No failure rate, temperature coefficient, variance
+component, coverage or spares count for shipboard power electronics is reported,
+because none could be estimated. The values $\sigma=\mpSigma$ and $\tau,\omega$
+used in Sections~\ref{sec:multi} and~\ref{sec:design} illustrate the arithmetic
+and must not be quoted as fleet characteristics.
+
+\subsubsection{No Empirical Calibration}
+No predictive interval has been checked against
+observed shipboard failures, so the calibration of the predictive distribution
+remains open and is the first thing a campaign should test.
+
+\subsubsection{No Identified Dependence Structure}
+The division of latent spread between
+the ship-wide and interaction terms is not determined by any evidence here. Since
+it changes a multi-reference plan materially under either criterion
+(Section~\ref{sec:multi}) and is difficult to estimate
+(Section~\ref{sec:design}), this limits any provisioning recommendation,
+including the one developed here.
+
+\subsubsection{Idealised Theory}
+Propositions~\ref{prop:exact} and~\ref{prop:approx}
+concern the mixed-Poisson case~\eqref{eq:mixture}, not the full model with its
+cell dispersion, crossed effects and parameter uncertainty; the common-cause and
+cascading mechanisms of Section~\ref{sec:mechanisms} are outside
+Assumption~\ref{as:mix} altogether and act on the upper tail, where a
+provisioning quantile lies. A plan computed under Assumption~\ref{as:mix} will
+understate the stock required if such events occur at non-negligible rates.
+
+\subsubsection{No Remaining-Life Estimate}
+The model gives a failure count over a bounded
+horizon; extending it to remaining life requires unit-level time-to-event records
+and a survival or recurrent-event formulation~\cite{meeker2022} within the same
+hierarchy. Finally, the federated protocol is not the cheaper option for
+cell-aggregated counts and offers no confidentiality guarantee
+(Section~\ref{sec:fed}).
+
+\subsection{Requirements for Empirical Validation}
+\label{sec:needed}
+Six records are necessary. The first is an inventory of the installed population
+by ship, zone, reference, manufacturer and installation date, maintained through
+refits. The second is a set of event records in which every replacement is dated
+and classified as functional failure or preventive by a rule fixed in advance,
+with removals for refit, obsolescence and cannibalisation recorded separately;
+where that classification is ambiguous the ambiguity must be quantified and the
+analysis repeated under both readings. The third is exposure in powered
+unit-hours per population and mission. The fourth is a set of covariates logged
+over complete missions, so that the previous mission's summaries exist at the
+moment of decision, since a covariate available only contemporaneously cannot
+enter this decision however predictive it is. The fifth is repeated missions and
+several references per ship, without which the two terms of~\eqref{eq:structure}
+cannot be separated (Section~\ref{sec:design}). The sixth is a record of
+common-cause events, together with teardown of a sample of removed units, so
+that conditional independence and the limiting failure mode are tested rather
+than assumed.
+
+With such records the analysis developed here can be carried out on ships, and its
+calibration, variance components and dependence structure become measurable. In
+their absence those quantities cannot be estimated, and none is reported.

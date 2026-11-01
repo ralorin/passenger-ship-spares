@@ -1,0 +1,26 @@
+# LaTeX build
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+paper/*.pdf
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# HPC run output
+logs/
+slurm-*.out
+data/v2/raw/
+
+# internal notes, not part of the code release
+deliverables/
+
+# other publications kept here for reference
+A_Deployment-Oriented_*.pdf
