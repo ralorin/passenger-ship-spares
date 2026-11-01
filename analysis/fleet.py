@@ -61,12 +61,13 @@ SD = dict(tau=0.3, omega=0.3, maker=0.3, eps=0.15)
 BASE = dict(latent="normal", shock_rate=0.0, shock_size=0.0, misclass=0.0, lot=False,
             refit=False, field_factor=PAR["field_factor"], ship_frac=1.0,
             horizon_days=PAR["horizon_days"], train_days=PAR["train_days"])
-REALISTIC = dict(BASE, shock_rate=0.05, shock_size=0.001, misclass=0.10, lot=True, refit=True)
+REALISTIC = dict(BASE, shock_rate=PAR["shock_rate_per_ship_year"], shock_size=0.0005, misclass=0.10,
+                 lot=True, refit=True)
 SCENARIOS = {
     "clean": BASE,
     "baseline": REALISTIC,
     "heavy_tail": dict(REALISTIC, latent="t3"),
-    "shocks": dict(REALISTIC, shock_rate=0.15, shock_size=0.003),
+    "shocks": dict(REALISTIC, shock_rate=0.5, shock_size=0.001),
     "misclass": dict(REALISTIC, misclass=0.25),
     "sparse": dict(REALISTIC, ship_frac=0.5, horizon_days=365, train_days=274),
     "datasheet_ok": dict(REALISTIC, field_factor=1.0),
@@ -102,8 +103,8 @@ def hours_per_day(use, occ, ambient):
 
 
 def zone_counts(c):
-    return dict(pax_cabin=c["pax_cabins"], crew_cabin=c["crew_cabins"], public=c["public_zones"],
-                galley=c["galleys"], exterior=c["exterior_units"], technical=c["technical_units"])
+    return dict(pax_cabin=c["pax_cabins"], crew_cabin=c["crew_cabins"], public=c["public_units"],
+                galley=c["galley_units"], exterior=c["exterior_units"], technical=c["technical_units"])
 
 
 def itinerary(cls, horizon, rng):
@@ -117,9 +118,10 @@ def itinerary(cls, horizon, rng):
     while day < horizon:
         dur = int(rng.choice(durations))
         month = (10 + day // 30) % 12            # day 0 is 1 November
-        region = winter if month in (10, 11, 0, 1, 2, 3) else summer
+        season = "winter" if month in (10, 11, 0, 1, 2, 3) else "summer"
+        region = winter if season == "winter" else summer
         occ_plan = float(np.clip(rng.normal(PAR["occupancy_mean"], PAR["occupancy_sd"]), 0.4, 1.0))
-        out.append(dict(start=day, nights=dur, region=region, occ_plan=occ_plan))
+        out.append(dict(start=day, nights=dur, region=region, season=season, occ_plan=occ_plan))
         day += dur
     return out
 
@@ -143,12 +145,11 @@ def simulate(scn, rng):
             age0 = rng.uniform(*PAR["age_years"])
             refit_day = rng.uniform(0, scn["horizon_days"]) if scn["refit"] and rng.random() < 0.3 else None
             for t, mis in enumerate(itinerary(cls, scn["horizon_days"], rng)):
-                normal = PAR["regions"][mis["region"]]
+                normal = PAR["regions"][mis["region"]][mis["season"]]
                 ambient = normal + rng.normal(0, 2.0)
                 occ = float(np.clip(mis["occ_plan"] + rng.normal(0, 0.03), 0.3, 1.0))
-                shock_zone = None
-                if rng.random() < scn["shock_rate"] * min(1.0, mis["nights"] / 7):
-                    shock_zone = str(rng.choice(list(counts)))
+                # a ship-wide supply event (blackout and recovery) damages a share of every population
+                shock = rng.random() < -math.expm1(-scn["shock_rate"] * mis["nights"] / 365.0)
                 for p in PRODUCTS:
                     spec = PAR["products"][p]
                     for zone, per in spec["zones"].items():
@@ -165,10 +166,10 @@ def simulate(scn, rng):
                                 * (age / 5.0) ** (PAR["weibull_shape"] - 1)
                                 * math.exp(u + w[p] + m_eff[(p, maker_of[p])] + rng.normal(0, SD["eps"])))
                         if lot and lot[0] == p and i in lot[1]:
-                            rate *= 3.0
+                            rate *= PAR["lot_factor"]
                         mu = N * h_act * rate
                         y = rng.poisson(mu)
-                        if shock_zone == zone:
+                        if shock:
                             y += rng.binomial(N, scn["shock_size"])
                         prev = rng.poisson(0.3 * mu)
                         rec = y + (rng.binomial(prev, scn["misclass"]) if scn["misclass"] else 0)
