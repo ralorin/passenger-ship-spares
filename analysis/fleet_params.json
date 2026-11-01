@@ -1,0 +1,31 @@
+{
+ "_status": "PROVISIONAL - to be replaced by values from public sources",
+ "classes": {
+  "expedition": {"ships": 3, "pax_cabins": 100, "crew_cabins": 60, "public_zones": 6, "galleys": 1, "exterior_units": 120, "technical_units": 12},
+  "midsize": {"ships": 6, "pax_cabins": 1000, "crew_cabins": 450, "public_zones": 25, "galleys": 3, "exterior_units": 600, "technical_units": 60},
+  "large": {"ships": 6, "pax_cabins": 2500, "crew_cabins": 1000, "public_zones": 50, "galleys": 6, "exterior_units": 1200, "technical_units": 120},
+  "ropax": {"ships": 5, "pax_cabins": 250, "crew_cabins": 80, "public_zones": 12, "galleys": 2, "exterior_units": 300, "technical_units": 30}
+ },
+ "products": {
+  "cabin_led_driver": {"zones": {"pax_cabin": 3, "crew_cabin": 2}, "mtbf_h": 300000, "use": "light", "cost": 1.0},
+  "cabin_usb_psu": {"zones": {"pax_cabin": 1, "crew_cabin": 1}, "mtbf_h": 500000, "use": "occupancy", "cost": 0.6},
+  "fancoil_ec_drive": {"zones": {"pax_cabin": 1, "crew_cabin": 1}, "mtbf_h": 150000, "use": "hvac", "cost": 4.0},
+  "public_led_driver": {"zones": {"public": 40}, "mtbf_h": 300000, "use": "public", "cost": 1.2},
+  "galley_smps": {"zones": {"galley": 30}, "mtbf_h": 200000, "use": "galley", "cost": 2.0},
+  "exterior_led_driver": {"zones": {"exterior": 1}, "mtbf_h": 200000, "use": "night", "cost": 1.5},
+  "technical_vfd": {"zones": {"technical": 1}, "mtbf_h": 100000, "use": "always", "cost": 8.0}
+ },
+ "makers_per_product": 2,
+ "zone_temp_offset_c": {"pax_cabin": 0.0, "crew_cabin": 1.0, "public": 0.0, "galley": 8.0, "technical": 12.0, "exterior": null},
+ "zone_temp_base_c": {"pax_cabin": 23.0, "crew_cabin": 24.0, "public": 23.0, "galley": 30.0, "technical": 35.0},
+ "regions": {"caribbean": 28.0, "mediterranean": 24.0, "northern_europe": 15.0, "alaska": 12.0},
+ "durations_nights": [3, 4, 5, 7, 7, 7, 7, 10, 14],
+ "occupancy_mean": 0.95,
+ "occupancy_sd": 0.05,
+ "activation_energy_ev": 0.4,
+ "field_factor": 2.0,
+ "age_years": [0, 15],
+ "weibull_shape": 1.3,
+ "horizon_days": 730,
+ "train_days": 548
+}
