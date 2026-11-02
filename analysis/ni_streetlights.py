@@ -33,7 +33,7 @@ from scipy.stats import poisson
 import hglmm
 from campaign import profile_ci
 from fleet import EBGamma, log_score, pit
-from plan_cover import greedy_joint, plan_joint_draws, plan_marginal_draws
+from plan_cover import greedy_joint, plan_joint_draws_robust, plan_marginal_draws
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "..", "data", "v2")
@@ -42,6 +42,7 @@ TEST = ("2026-04", "2026-10")
 LEVEL = 0.99
 R_DRAWS = 6000
 SEED = 20261102
+SIGMA_MAX = 3.0
 
 
 def load(inv, period):
@@ -62,7 +63,7 @@ class Model:
         cells = self.prepare(train)
         self.fixed = [c for c in cells.columns if "=" in c]
         self.fit = hglmm.Fit(hglmm.Design(cells, self.fixed, random, y="y", H="hours_pure"),
-                             family).fit()
+                             family).fit(sigma_max=SIGMA_MAX)
 
     def prepare(self, d):
         d = d.reset_index(drop=True)
@@ -136,10 +137,10 @@ def evaluate(models, test, kind, rng, acc):
         record("poisson", start, None)
         record("poisson_jnt", greedy_joint(lambda s: float(np.prod(poisson.cdf(s, lam))), start, LEVEL))
         Y = models["eb"].predict(area, g.family.tolist(), g.hours_plan.to_numpy(), R_DRAWS, rng)
-        record("eb_gamma", plan_joint_draws(Y, LEVEL), Y)
+        record("eb_gamma", plan_joint_draws_robust(Y, LEVEL), Y)
         for m, key in src.items():
             Y = models[key].predict(g, Z[m], rng)
-            record(m, plan_joint_draws(Y, LEVEL), Y)
+            record(m, plan_joint_draws_robust(Y, LEVEL), Y)
             if m == "hier_pred":
                 record("hier_marg", plan_marginal_draws(Y, LEVEL))
 

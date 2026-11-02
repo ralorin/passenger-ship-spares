@@ -117,15 +117,21 @@ class Fit:
         val = ll + logprior + 0.5 * d.dim * LOG2PI - 0.5 * self._logdet(*blocks)
         return val, z, blocks
 
-    def fit(self, theta0=None, lower=-6.0, upper=12.0):
+    def fit(self, theta0=None, lower=-6.0, upper=12.0, sigma_max=None):
+        """sigma_max, if given, caps every random-effect sd (not the NB shape); it
+        keeps weakly identified terms from drifting to absurd values."""
         nth = self.k + (1 if self.family == "nb" else 0)
         if theta0 is None:
             theta0 = np.r_[np.full(self.k, math.log(0.5)),
                            [math.log(5.0)] if self.family == "nb" else []]
+        ub = np.full(nth, upper)
+        if sigma_max is not None:
+            ub[:self.k] = math.log(sigma_max)
+        theta0 = np.minimum(theta0, ub)
         cache = {"z": None}
 
         def obj(th):
-            th = np.clip(th, lower, upper)
+            th = np.clip(th, lower, ub)
             v, z, _ = self.laplace(th, cache["z"])
             if not np.isfinite(v):
                 v, z, _ = self.laplace(th, None)
@@ -136,7 +142,7 @@ class Fit:
 
         if nth:
             res = optimize.minimize(obj, theta0, method="L-BFGS-B",
-                                    bounds=[(lower, upper)] * nth,
+                                    bounds=list(zip(np.full(nth, lower), ub)),
                                     options=dict(maxiter=500, ftol=1e-11, gtol=1e-6))
             self.theta, self.converged, self.n_eval = res.x, bool(res.success), res.nfev
         else:

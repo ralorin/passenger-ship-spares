@@ -146,5 +146,37 @@ def plan_joint_draws(Y, level, cost=None):
                         level, cost)
 
 
+def plan_joint_draws_robust(Y, level, cost=None, max_drops=500):
+    """Joint plan from draws that stays fast when the draws are heavy-tailed.
+
+    Raise all references to a common marginal level until the joint target is
+    met (bisection), then remove units one at a time, the costliest first,
+    while the target still holds."""
+    cost = np.ones(Y.shape[1]) if cost is None else np.asarray(cost, float)
+    lo, hi = level, 1.0
+    for _ in range(40):
+        mid = 0.5 * (lo + hi)
+        if joint_cover_draws(Y, plan_marginal_draws(Y, mid)) >= level:
+            hi = mid
+        else:
+            lo = mid
+    s = plan_marginal_draws(Y, hi)
+    for _ in range(max_drops):
+        best = None
+        for p in np.argsort(-cost):
+            if s[p] == 0:
+                continue
+            s[p] -= 1
+            if joint_cover_draws(Y, s) >= level:
+                best = p
+            s[p] += 1
+            if best is not None:
+                break
+        if best is None:
+            break
+        s[best] -= 1
+    return s
+
+
 def plan_aggregate_draws(Y, level):
     return int(np.ceil(np.quantile(Y.sum(axis=1), level, method="inverted_cdf")))

@@ -44,7 +44,7 @@ from scipy.special import gammaln
 from scipy.stats import poisson
 
 import hglmm
-from plan_cover import greedy_joint, plan_joint_draws, plan_marginal_draws
+from plan_cover import greedy_joint, plan_joint_draws_robust, plan_marginal_draws
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "..", "data", "v2")
@@ -57,6 +57,7 @@ R_DRAWS = 6000
 REPS = 200
 K_EV = 8.617e-5
 SD = dict(tau=0.3, omega=0.3, maker=0.3, eps=0.15)
+SIGMA_MAX = 3.0     # cap on fitted log-rate sds; see hglmm.Fit.fit
 
 BASE = dict(latent="normal", shock_rate=0.0, shock_size=0.0, misclass=0.0, lot=False,
             refit=False, field_factor=PAR["field_factor"], ship_frac=1.0,
@@ -202,12 +203,18 @@ class Hier:
         cells = self.prepare(train)
         self.fixed = [c for c in cells.columns if "=" in c] + ["temp_c", "log_age", "occ_c"]
         self.random = ["maker", "ship", "sp"] + (["sm"] if shock else [])
-        self.fit = hglmm.Fit(hglmm.Design(cells, self.fixed, self.random)).fit()
+        self.fit = hglmm.Fit(hglmm.Design(cells, self.fixed, self.random)).fit(sigma_max=SIGMA_MAX)
+
+    # Class is left out: size enters through exposure, and with few ships per
+    # class a class effect cannot be told apart from the ship effect. Of the
+    # zones only crew against passenger cabins is kept; the other zones hold a
+    # single reference and are absorbed by the product effect.
+    factors = ("product",)
 
     def prepare(self, d):
         d = d.reset_index(drop=True)
-        cols = {}
-        for col in ("product", "zone", "cls"):
+        cols = {"crew=1": (d.zone == "crew_cabin").astype(float)}
+        for col in self.factors:
             cols.update(dummies(d, col, self.levels[col]))
         return pd.concat([d, pd.DataFrame(cols)], axis=1)
 
@@ -254,14 +261,9 @@ class Pooled(Hier):
         cells = self.prepare(train)
         self.fixed = [c for c in cells.columns if "=" in c] + ["temp_c", "log_age", "occ_c"]
         self.random = []
-        self.fit = hglmm.Fit(hglmm.Design(cells, self.fixed, [])).fit()
+        self.fit = hglmm.Fit(hglmm.Design(cells, self.fixed, [])).fit(sigma_max=SIGMA_MAX)
 
-    def prepare(self, d):
-        d = d.reset_index(drop=True)
-        cols = {}
-        for col in ("product", "zone", "cls", "maker"):
-            cols.update(dummies(d, col, self.levels[col]))
-        return pd.concat([d, pd.DataFrame(cols)], axis=1)
+    factors = ("maker",)            # maker is nested in product
 
 
 class EBGamma:
@@ -347,13 +349,13 @@ def one_fleet(name, rep):
         record("mtbf_joint", greedy_joint(lambda s: float(np.prod(poisson.cdf(s, lam_ds))),
                                           np.array([int(poisson.ppf(LEVEL, l)) for l in lam_ds]), LEVEL))
         Y = models["eb"].predict(s, prods, H, R_DRAWS, rng)
-        record("eb_gamma", plan_joint_draws(Y, LEVEL), Y)
+        record("eb_gamma", plan_joint_draws_robust(Y, LEVEL), Y)
         for m in ("nb_pooled", "hier_plugin", "hier_pred", "hier_shock"):
             Yc = models[src[m]].predict(g, Z[m], rng)
             Y = np.zeros((R_DRAWS, len(prods)), int)
             for j in range(len(prods)):
                 Y[:, j] = Yc[:, col == j].sum(axis=1)
-            record(m, plan_joint_draws(Y, LEVEL), Y)
+            record(m, plan_joint_draws_robust(Y, LEVEL), Y)
             if m == "hier_pred":
                 record("hier_marg", plan_marginal_draws(Y, LEVEL))
 
