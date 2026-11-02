@@ -2,111 +2,22 @@ macro,value,provenance,source,note
 quadGrid,2\times 10^{-14},ANALYTIC,analysis/theory_cover.py -> data/theory_cover.json,stability of the Simpson grid
 quadNodes,4001,ANALYTIC,analysis/theory_cover.py -> data/theory_cover.json,
 quadGH,5.1,ANALYTIC,analysis/theory_cover.py -> data/theory_cover.json,"error of 60-node Gauss-Hermite, percentage points"
-spreadKQtrNn,0.9,ANALYTIC,analysis/theory_cover.py -> data/theory_cover.json,spread of exact 99 pct cover at kappa=0.25
-spreadKQtrNt,4.5,ANALYTIC,analysis/theory_cover.py -> data/theory_cover.json,spread of exact 90 pct cover at kappa=0.25
-spreadKHalfNn,1.0,ANALYTIC,analysis/theory_cover.py -> data/theory_cover.json,spread of exact 99 pct cover at kappa=0.5
-spreadKHalfNt,4.9,ANALYTIC,analysis/theory_cover.py -> data/theory_cover.json,spread of exact 90 pct cover at kappa=0.5
-spreadKOneNn,2.4,ANALYTIC,analysis/theory_cover.py -> data/theory_cover.json,spread of exact 99 pct cover at kappa=1.0
-spreadKOneNt,7.9,ANALYTIC,analysis/theory_cover.py -> data/theory_cover.json,spread of exact 90 pct cover at kappa=1.0
-spreadKTwoNn,12.7,ANALYTIC,analysis/theory_cover.py -> data/theory_cover.json,spread of exact 99 pct cover at kappa=2.0
-spreadKTwoNt,23.1,ANALYTIC,analysis/theory_cover.py -> data/theory_cover.json,spread of exact 90 pct cover at kappa=2.0
-inspTwoLo,85.4,ANALYTIC,analysis/theory_cover.py -> data/theory_cover.json,
-inspTwoHi,98.1,ANALYTIC,analysis/theory_cover.py -> data/theory_cover.json,
-inspTwoRule,85.1,ANALYTIC,analysis/theory_cover.py -> data/theory_cover.json,
-domMaxGap,27.1,ANALYTIC,analysis/theory_cover.py -> data/theory_cover.json,largest |closed form - exact| on the grid
-domOverstate,0.4,ANALYTIC,analysis/theory_cover.py -> data/theory_cover.json,largest amount by which the closed form OVERstates cover
-domBest,2.3,ANALYTIC,analysis/theory_cover.py -> data/theory_cover.json,"kappa<0.25, lambda>=20"
-domSmallLam,14.3,ANALYTIC,analysis/theory_cover.py -> data/theory_cover.json,worst case for lambda<1
-domBigKappa,27.1,ANALYTIC,analysis/theory_cover.py -> data/theory_cover.json,worst case for kappa>=2
-domModerate,5.0,ANALYTIC,analysis/theory_cover.py -> data/theory_cover.json,"kappa<0.5, 5<=lambda<20"
-marMaxRel,54,ANALYTIC,analysis/theory_cover.py -> data/theory_cover.json,largest relative error of the sqrt(1+kappa^2) margin factor
-marMaxUnits,676,ANALYTIC,analysis/theory_cover.py -> data/theory_cover.json,largest error of that factor in spare units
-marMedMid,11,ANALYTIC,analysis/theory_cover.py -> data/theory_cover.json,"median relative error, 10<=lambda<100"
 mpSigma,0.6,ANALYTIC,analysis/multiproduct.py -> data/multiproduct.json,assumed total latent sd
 mpMean,8,ANALYTIC,analysis/multiproduct.py -> data/multiproduct.json,assumed expected failures
-mpTrunc,3\times 10^{-07},ANALYTIC,analysis/multiproduct.py -> data/multiproduct.json,
+mpTrunc,3\times 10^{-7},ANALYTIC,analysis/multiproduct.py -> data/multiproduct.json,
 mpShipOne,29,ANALYTIC,analysis/multiproduct.py -> data/multiproduct.json,
 mpInterOne,29,ANALYTIC,analysis/multiproduct.py -> data/multiproduct.json,
-mpMixedOne,29,ANALYTIC,analysis/multiproduct.py -> data/multiproduct.json,
-mpShipTwo,29,ANALYTIC,analysis/multiproduct.py -> data/multiproduct.json,
-mpInterTwo,23,ANALYTIC,analysis/multiproduct.py -> data/multiproduct.json,
-mpMixedTwo,26,ANALYTIC,analysis/multiproduct.py -> data/multiproduct.json,
 mpShipFour,29,ANALYTIC,analysis/multiproduct.py -> data/multiproduct.json,
 mpInterFour,19,ANALYTIC,analysis/multiproduct.py -> data/multiproduct.json,
-mpMixedFour,24,ANALYTIC,analysis/multiproduct.py -> data/multiproduct.json,
 mpShipEight,29,ANALYTIC,analysis/multiproduct.py -> data/multiproduct.json,
 mpInterEight,17,ANALYTIC,analysis/multiproduct.py -> data/multiproduct.json,
-mpMixedEight,23,ANALYTIC,analysis/multiproduct.py -> data/multiproduct.json,
-mpWrongCover,93.2,ANALYTIC,analysis/multiproduct.py -> data/multiproduct.json,"plan assuming interaction only, truth ship-wide, 8 products"
+mpWrongCover,93.2,ANALYTIC,analysis/multiproduct.py -> data/multiproduct.json,"plan assuming interaction only, truth ship-wide, 8 references"
 mpConsCover,99.999,ANALYTIC,analysis/multiproduct.py -> data/multiproduct.json,
-capUnits,24,REALDATA,analysis/real_data_audit.py -> data/real_data_audit.json (NASA PCoE capacitor),
-capLevels,10/12/14,REALDATA,analysis/real_data_audit.py -> data/real_data_audit.json,
-capHours,"5\,424",REALDATA,analysis/real_data_audit.py -> data/real_data_audit.json,
-capCrit,2.8,REALDATA,analysis/real_data_audit.py -> data/real_data_audit.json,
-capAnyCross,5,REALDATA,analysis/real_data_audit.py -> data/real_data_audit.json,
-capSustained,3,REALDATA,analysis/real_data_audit.py -> data/real_data_audit.json,
-capEndsAbove,0,REALDATA,analysis/real_data_audit.py -> data/real_data_audit.json,
-capMaxFinal,1.89,REALDATA,analysis/real_data_audit.py -> data/real_data_audit.json,
-capFinalTen,1.01,REALDATA,analysis/real_data_audit.py -> data/real_data_audit.json,
-capFinalTwelve,1.29,REALDATA,analysis/real_data_audit.py -> data/real_data_audit.json,
-capFinalFourteen,1.61,REALDATA,analysis/real_data_audit.py -> data/real_data_audit.json,
-capSd,0.070,REALDATA,analysis/real_data_audit.py -> data/real_data_audit.json,
-nSources,4,REALDATA,analysis/real_data_audit.py -> data/real_data_audit.json,
-nSuitable,0,REALDATA,analysis/real_data_audit.py -> data/real_data_audit.json,sources meeting all four requirements
-dsReps,200,SIM,analysis/design_sim.py + design_summary.py -> data/design_sim.json,
-dsEps,0.3,SIM,analysis/design_sim.py + design_summary.py -> data/design_sim.json,assumed mission-to-mission sd
-dsBound,0.02,SIM,analysis/design_sim.py + design_summary.py -> data/design_sim.json,boundary threshold
-dsAllocOneLo,66,SIM,analysis/design_sim.py + design_summary.py -> data/design_sim.json,"M=1, worst case"
-dsAllocOneHi,84,SIM,analysis/design_sim.py + design_summary.py -> data/design_sim.json,"M=1, best case"
-dsAllocTenLo,94,SIM,analysis/design_sim.py + design_summary.py -> data/design_sim.json,
-dsAllocTenHi,98,SIM,analysis/design_sim.py + design_summary.py -> data/design_sim.json,
-dsAllocTwentyLo,99,SIM,analysis/design_sim.py + design_summary.py -> data/design_sim.json,
-dsSpurShipLo,41,SIM,analysis/design_sim.py + design_summary.py -> data/design_sim.json,tau=0 yet a ship-wide term is estimated
-dsSpurShipHi,53,SIM,analysis/design_sim.py + design_summary.py -> data/design_sim.json,
-dsSpurInterLo,19,SIM,analysis/design_sim.py + design_summary.py -> data/design_sim.json,omega=0 yet an interaction term is estimated
-dsSpurInterHi,46,SIM,analysis/design_sim.py + design_summary.py -> data/design_sim.json,
-dsSpurShipForty,44,SIM,analysis/design_sim.py + design_summary.py -> data/design_sim.json,
-dsSpurInterForty,44,SIM,analysis/design_sim.py + design_summary.py -> data/design_sim.json,
-dsTenFail,159,SIM,analysis/design_sim.py + design_summary.py -> data/design_sim.json,
-dsTenTauRmse,0.20,SIM,analysis/design_sim.py + design_summary.py -> data/design_sim.json,
-dsTenOmRmse,0.20,SIM,analysis/design_sim.py + design_summary.py -> data/design_sim.json,
-dsTenCover,99.0,SIM,analysis/design_sim.py + design_summary.py -> data/design_sim.json,
-dsTenCoverPTen,98.3,SIM,analysis/design_sim.py + design_summary.py -> data/design_sim.json,
-dsOneFail,40,SIM,analysis/design_sim.py + design_summary.py -> data/design_sim.json,
-dsOneOmBound,72,SIM,analysis/design_sim.py + design_summary.py -> data/design_sim.json,
-dsFortyTauRmse,0.08,SIM,analysis/design_sim.py + design_summary.py -> data/design_sim.json,
-dsFortyCover,99.3,SIM,analysis/design_sim.py + design_summary.py -> data/design_sim.json,
-dsFortyCoverPTen,98.9,SIM,analysis/design_sim.py + design_summary.py -> data/design_sim.json,
-dsTwentyCover,99.1,SIM,analysis/design_sim.py + design_summary.py -> data/design_sim.json,
-dsTwentyCoverPTen,98.3,SIM,analysis/design_sim.py + design_summary.py -> data/design_sim.json,
-dsShipOneCoverPTen,93.6,SIM,analysis/design_sim.py + design_summary.py -> data/design_sim.json,
-gridPts,"5\,664",ANALYTIC,analysis/theory_cover.py -> data/theory_rule_grid.csv,
-gridLam,236,ANALYTIC,analysis/theory_cover.py -> data/theory_rule_grid.csv,
-gridSig,8,ANALYTIC,analysis/theory_cover.py -> data/theory_rule_grid.csv,
-gridLamLo,0.05,ANALYTIC,analysis/theory_cover.py -> data/theory_rule_grid.csv,
-gridLamHi,1000,ANALYTIC,analysis/theory_cover.py -> data/theory_rule_grid.csv,
-gridSigLo,0.05,ANALYTIC,analysis/theory_cover.py -> data/theory_rule_grid.csv,
-gridSigHi,1.5,ANALYTIC,analysis/theory_cover.py -> data/theory_rule_grid.csv,
-svJointOne,29,ANALYTIC,analysis/stock_vector.py -> data/stock_vector.json,"per-reference stock, joint criterion, ship-wide"
-svJointTotOne,29,ANALYTIC,analysis/stock_vector.py -> data/stock_vector.json,
-svMargOne,29,ANALYTIC,analysis/stock_vector.py -> data/stock_vector.json,per-reference marginal quantile
-svMargTotOne,29,ANALYTIC,analysis/stock_vector.py -> data/stock_vector.json,
-svJointTwo,17,ANALYTIC,analysis/stock_vector.py -> data/stock_vector.json,"per-reference stock, joint criterion, ship-wide"
-svJointTotTwo,34,ANALYTIC,analysis/stock_vector.py -> data/stock_vector.json,
-svMargTwo,15,ANALYTIC,analysis/stock_vector.py -> data/stock_vector.json,per-reference marginal quantile
-svMargTotTwo,30,ANALYTIC,analysis/stock_vector.py -> data/stock_vector.json,
-svJointFour,11,ANALYTIC,analysis/stock_vector.py -> data/stock_vector.json,"per-reference stock, joint criterion, ship-wide"
-svJointTotFour,44,ANALYTIC,analysis/stock_vector.py -> data/stock_vector.json,
-svMargFour,9,ANALYTIC,analysis/stock_vector.py -> data/stock_vector.json,per-reference marginal quantile
-svMargTotFour,36,ANALYTIC,analysis/stock_vector.py -> data/stock_vector.json,
 svJointEight,7,ANALYTIC,analysis/stock_vector.py -> data/stock_vector.json,"per-reference stock, joint criterion, ship-wide"
 svJointTotEight,56,ANALYTIC,analysis/stock_vector.py -> data/stock_vector.json,
-svMargEight,5,ANALYTIC,analysis/stock_vector.py -> data/stock_vector.json,per-reference marginal quantile
 svMargTotEight,40,ANALYTIC,analysis/stock_vector.py -> data/stock_vector.json,
 svNaiveShip,96.4,ANALYTIC,analysis/stock_vector.py -> data/stock_vector.json,"P=8, ship-wide"
 svNaiveInter,94.9,ANALYTIC,analysis/stock_vector.py -> data/stock_vector.json,"P=8, interaction"
 svNaiveShipFour,98.3,ANALYTIC,analysis/stock_vector.py -> data/stock_vector.json,
 svJointShipTwo,17,ANALYTIC,analysis/stock_vector.py -> data/stock_vector.json,
 svJointInterTwo,18,ANALYTIC,analysis/stock_vector.py -> data/stock_vector.json,
-svTotJointEight,56,ANALYTIC,analysis/stock_vector.py -> data/stock_vector.json,
-svTotJointInterEight,56,ANALYTIC,analysis/stock_vector.py -> data/stock_vector.json,

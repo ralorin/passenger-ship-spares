@@ -46,33 +46,33 @@ Spain (e-mail: ricardoserafin.alonso@unir.net).}}
 \maketitle
 
 \begin{abstract}
-Spares for power-electronic equipment on a passenger ship must be embarked before
-sailing, since no resupply is possible between calls. The required quantity is the
-predictive distribution of the mission failure count, which is hard to obtain:
-counts per ship are small and the supporting evidence is divided among ships,
-operators and integrators. This paper formulates the decision and models the
-count hierarchically, with an exposure offset and crossed product and data-holder
-effects separating ship-wide heterogeneity from ship--product interaction. For an
-idealised mixed-Poisson case, the cover a nominal plan delivers when latent
-spread is ignored is shown to be an exact one-dimensional mixture integral, and
-the customary reduction of that integral to a single dimensionless group, together
-with its associated margin factor, is shown to be a first-order approximation
-whose error over a grid of \gridPts{} points reaches \spreadKTwoNn{} percentage
-points in cover and \marMaxUnits{} spare units. Because spares are held per
-product reference, the decision is a stock vector, and the joint and aggregate
-coverage criteria respond to the dependence structure with opposite signs:
-per-reference 99\,\% quantiles deliver only \svNaiveShip\,\% joint cover at eight
-references. A simulation study indicates the campaign size at which that structure
-becomes estimable, and the estimator admits a federated form keeping unit-level
-records and all ship-level effects local. No shipboard failure records were
-available, so the contribution is methodological; the records required for
-empirical validation are specified.
+Spares for the power electronics of a passenger ship must be embarked before
+sailing, so the plan should come from the predictive distribution of failures
+over the mission. That distribution has to be built from records that are small
+per ship and divided among ships, operators and integrators. This paper models
+the count with an exposure offset and crossed ship-wide and ship--product random
+effects, fits it by a Laplace approximation that also runs in federated form, and
+turns it into the stock vector a ship embarks. For one population, a Poisson plan
+falls up to \spPoisShort{} points short of a 99\,\% target and a
+variance-inflated margin up to \spKapShort{}, while a moment-matched negative
+binomial falls at most \spNbShort{} short. For several references, the joint and
+aggregate criteria respond to the ship--product dependence with opposite signs,
+and cost-minimal vectors save a median \rvSaveMed\,\% over a common stock. In
+\dsCampaigns{} simulated campaigns, how heterogeneity divides between ship and
+product is identified only by repeated missions. In a passenger fleet simulated
+from public datasheets and ship data, datasheet-MTBF provisioning covers
+\flMtbfJointLo--\flMtbfJointHi\,\% of missions against a 99\,\% target, whereas
+plans fitted to field records reach it under supply events, bad lots and
+misrecorded replacements. On \niTrainFail{} failures of LED street lighting in
+Northern Ireland, a public network divided like a fleet, the heterogeneity is
+almost entirely an area--family interaction, and only the hierarchical plans meet
+the target in a year held out of the fit. No shipboard records were available;
+every value for ships is simulated.
 \end{abstract}
 
 \begin{IEEEkeywords}
-Experiment design, failure count prediction, federated
-estimation, hierarchical models, identifiability, power electronics, predictive
-distribution, random effects, ships, spare parts.
+Federated estimation, hierarchical models, negative binomial, passenger ships,
+power electronics, predictive distribution, random effects, spare parts.
 \end{IEEEkeywords}
 
 \IEEEpeerreviewmaketitle
@@ -122,10 +122,11 @@ distribution, random effects, ships, spare parts.
 \input{sec_conclusion}
 
 \section*{Acknowledgment}
-The authors used Claude (Anthropic) to review the manuscript and the analysis
-code and to suggest improvements to both. The authors checked every suggestion,
-verified all code, results and text, and take full responsibility for the
-content of this article.
+The authors used Claude (Anthropic) as a review and editing aid. It reviewed
+the text of all sections and the analysis code behind Sections~IV to~IX, and
+proposed improvements to the wording of the manuscript and to that code. The
+authors checked every proposal, verified all code, results and text, and take
+full responsibility for the content of this article.
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}

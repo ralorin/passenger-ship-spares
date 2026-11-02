@@ -76,6 +76,7 @@ SCENARIOS = {
 METHODS = ["mtbf", "mtbf_joint", "nb_pooled", "eb_gamma", "hier_plugin", "hier_pred",
            "hier_marg", "hier_shock"]
 PRODUCTS = list(PAR["products"])
+COVARIATES = ["temp_c", "log_age", "occ_c"]
 COST = np.array([PAR["products"][p]["cost"] for p in PRODUCTS])
 
 
@@ -200,8 +201,9 @@ class Hier:
     def __init__(self, train, levels, shock=False):
         self.levels = levels
         self.shock = shock
+        self.span = {c: (train[c].min(), train[c].max()) for c in COVARIATES}
         cells = self.prepare(train)
-        self.fixed = [c for c in cells.columns if "=" in c] + ["temp_c", "log_age", "occ_c"]
+        self.fixed = [c for c in cells.columns if "=" in c] + COVARIATES
         self.random = ["maker", "ship", "sp"] + (["sm"] if shock else [])
         self.fit = hglmm.Fit(hglmm.Design(cells, self.fixed, self.random)).fit(sigma_max=SIGMA_MAX)
 
@@ -229,6 +231,11 @@ class Hier:
         f = self.fit
         d = f.d
         new = self.prepare(new)
+        # A planned mission can lie outside the record, e.g. units renewed by a
+        # refit are younger than any unit seen. Hold covariates to the range of
+        # the record rather than extrapolate the fitted slopes.
+        for c, (lo, hi) in self.span.items():
+            new[c] = new[c].clip(lo, hi)
         R = Z.shape[0]
         X = np.column_stack([np.ones(len(new))] + [new[c].to_numpy(float) for c in d.fixed])
         eta = Z[:, :d.p] @ X.T + np.log(new.hours_plan.to_numpy(float))[None, :]
@@ -258,8 +265,9 @@ class Pooled(Hier):
     def __init__(self, train, levels):
         self.levels = levels
         self.shock = False
+        self.span = {c: (train[c].min(), train[c].max()) for c in COVARIATES}
         cells = self.prepare(train)
-        self.fixed = [c for c in cells.columns if "=" in c] + ["temp_c", "log_age", "occ_c"]
+        self.fixed = [c for c in cells.columns if "=" in c] + COVARIATES
         self.random = []
         self.fit = hglmm.Fit(hglmm.Design(cells, self.fixed, [])).fit(sigma_max=SIGMA_MAX)
 
@@ -277,8 +285,12 @@ class EBGamma:
             rbar = h.y.sum() / h.E.sum()
             w = h.E / h.E.sum()
             v = float(np.sum(w * (r - rbar) ** 2) - rbar * np.mean(1 / h.E))
-            a = rbar ** 2 / v if v > 0 else 1e6
-            b = a / rbar if rbar > 0 else 1e6
+            if rbar == 0:
+                # no failure on record: Jeffreys posterior of the pooled rate
+                a, b = 0.5, float(h.E.sum())
+            else:
+                a = rbar ** 2 / v if v > 0 else 1e6
+                b = a / rbar
             self.par[p] = (a, b, dict(zip(h.ship, zip(h.y, h.E))))
 
     def predict(self, ship, products, H, R, rng):

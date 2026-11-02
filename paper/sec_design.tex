@@ -8,8 +8,11 @@ simulated under assumed parameters.
 \subsection{Design of the Study}
 For ship $s$, reference $p$ and mission $t$ the generating model is
 \begin{equation}
-y_{spt}\sim\mathrm{Poisson}\!\left(m\,a_p\exp\{u_s+w_{sp}+e_{spt}
--\tfrac12(\tau^2+\omega^2+\varepsilon^2)\}\right),
+\begin{aligned}
+y_{spt}&\sim\mathrm{Poisson}(\mu_{spt}),\\
+\log\mu_{spt}&=\log(m\,a_p)+u_s+w_{sp}+e_{spt}\\
+&\quad-\tfrac12(\tau^2+\omega^2+\varepsilon^2),
+\end{aligned}
 \label{eq:sim}
 \end{equation}
 with $u_s\sim\mathcal N(0,\tau^2)$, $w_{sp}\sim\mathcal N(0,\omega^2)$ and a
@@ -20,7 +23,7 @@ interaction only $(0,0.6)$, equal splits $(0.42,0.42)$ and $(0.3,0.3)$, and none
 $(0,0)$. A full factorial in the number of ships $S\in\{5,10,20,40,80\}$ and
 missions per ship $M\in\{1,2,4,8\}$, with $P=4$, $m=1$ and $\varepsilon=0.3$, is
 completed by one-factor variations of $m\in\{0.1,0.3,3\}$, $P\in\{2,8\}$,
-$\varepsilon\in\{0,0.6\}$ and unequal weights: \dsCells{} cells of \dsReps{}
+$\varepsilon\in\{0,0.6\}$ and unequal weights: \dsCells{} cells of \cdReps{}
 campaigns each, \dsCampaigns{} in all.
 
 Every campaign is fitted three times with the estimator of
@@ -70,7 +73,7 @@ profile intervals cover the true values in \dsCiLo--\dsCiHi\,\% of the
 \begin{table}[!t]
 \caption{Power of the boundary likelihood-ratio test at 5\,\% when both
 components are present, $(\tau,\omega)=(0.42,0.42)$, in percent
-(\textsc{simulation}, \dsReps{} campaigns per cell, $P=4$, $m=1$)}
+(\textsc{simulation}, \cdReps{} campaigns per cell, $P=4$, $m=1$)}
 \label{tab:power}
 \centering
 \footnotesize
@@ -100,7 +103,7 @@ expects three failures and \dsPoisPEight\,\% with eight references, since its
 shortfall grows with the count and with the number of references that must
 all be covered.
 
-The price of a small campaign shows in the stock rather than in the cover.
+A small campaign pays in stock.
 With five ships the predictive plan has a median of \dsUnitsFiveMed{} units,
 close to the \dsUnitsOracle{} of the plan that knows the parameters, but a mean
 of \dsUnitsFiveMean: in a minority of campaigns the coefficients are so poorly
@@ -110,17 +113,19 @@ ships should expect to pay.
 
 \begin{table}[!t]
 \caption{Mean joint cover of a 99\,\% plan for a four-reference zone of an
-unseen ship, in percent, averaged over five allocations, with the mean tenth
-percentile of the predictive plan and median units of the predictive and
-oracle plans (\textsc{simulation}; $M=4$)}
+unseen ship, in percent, averaged over five allocations: plug-in, predictive,
+conservative and Poisson plans, the mean tenth percentile of the predictive
+plan's cover, and median units of the predictive and oracle plans
+(\textsc{simulation}; $M=4$)}
 \label{tab:campaign}
 \centering
 \footnotesize
 \setlength{\tabcolsep}{3.2pt}
 \begin{tabular}{@{}cccccccc@{}}
 \toprule
-$S$ & plug-in & predictive & conservative & Poisson & pred. p10 &
-\multicolumn{2}{c}{units (pred./oracle)} \\
+& & & & & pred. & \multicolumn{2}{c}{units} \\
+\cmidrule(l){7-8}
+$S$ & plug-in & pred. & cons. & Poisson & p10 & pred. & oracle \\
 \midrule
 \tabinput{tables/tab_campaign_cover.tex}
 \bottomrule
@@ -128,12 +133,9 @@ $S$ & plug-in & predictive & conservative & Poisson & pred. p10 &
 \end{table}
 
 \subsection{Implications for a First Campaign}
-Within the configurations examined, a campaign should follow several references
-on the same ships over repeated missions; breadth in ships does not substitute
-for repetition, and a cross-sectional snapshot cannot separate the two terms at
-all. Ten ships over four missions is the smallest configuration in this grid
-that orders the components reliably, and twenty to forty ships detect the
-interaction with high probability. Plans should be computed from the full
-predictive distribution, which keeps its cover in small campaigns at the cost
-of stock, and the components should be reported with their intervals and
-tests.
+Within this grid, a campaign should follow several references on the same
+ships over repeated missions, since more ships do not replace repetition and a
+snapshot cannot separate the two terms. Ten ships over four missions order the
+components reliably, and twenty to forty detect the interaction with high
+probability. Plans should come from the full predictive distribution, and the
+components should be reported with their intervals and tests.

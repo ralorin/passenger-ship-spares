@@ -5,9 +5,11 @@ installed population as exposure.
 
 Faults carry no asset identifier, only "STREET, TOWN" and the operational area,
 so each fault is shared among the lanterns on its street in proportion to
-their numbers. The inventory carries no operational area; a street takes the
-area its faults were reported under, and a street with no faults takes the
-area of the nearest street that has one.
+their numbers. On streets lit by a single family the attribution is exact;
+those counts are kept apart (the *_pure columns) and are the ones the analysis
+uses. The inventory carries no operational area; a street takes the area its
+faults were reported under, and a street with no faults takes the area of the
+nearest street that has one.
 
 Inputs (downloaded 2026-11-01 into data/v2/raw/ni/, not tracked):
   LightingFaults{2021..2024}.csv, LightingFaultsCurrentYear.csv

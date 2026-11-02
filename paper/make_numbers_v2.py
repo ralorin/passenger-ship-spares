@@ -39,6 +39,11 @@ def sci(x):
     return f"{m}\\times 10^{{{int(e)}}}"
 
 
+def thou(n):
+    """Integer with a thin space as thousands separator."""
+    return f"{int(n):,}".replace(",", "\\,")
+
+
 # ------------------------------------------------- one population (E6) --
 src = "analysis/single_plan.py -> data/v2/single_plan_grid.csv"
 G = pd.read_csv(os.path.join(V2, "single_plan_grid.csv"))
@@ -48,14 +53,14 @@ put("spLamLo", f"{G.lam.min():g}", "ANALYTIC", src)
 put("spSigLo", f"{G.sigma.min():g}", "ANALYTIC", src)
 put("spSigHi", f"{G.sigma.max():g}", "ANALYTIC", src)
 put("spPts", f"{len(G):,}".replace(",", "\\,"), "ANALYTIC", src)
-names = dict(poisson="Poisson", kappa="Margin factor", negbin="Negative binomial")
+names = dict(poisson="Poisson", kappa="Margin factor", negbin="Neg. binomial")
 lines = []
 for key, label in names.items():
     G[f"short_{key}"] = (G.level - G[f"cover_{key}"]).clip(lower=0)
     cells = [label]
     for lev in (0.90, 0.95, 0.99):
         g = G[np.isclose(G.level, lev)]
-        cells += [pct(g[f"short_{key}"].max(), 1), pct((g[f"diff_{key}"] == 0).mean(), 0),
+        cells += [pct(g[f"short_{key}"].max(), 1),
                   f"${int(g[f'diff_{key}'].min())}$/$+{int(g[f'diff_{key}'].max())}$"]
     lines.append(" & ".join(cells) + " \\\\")
     g99 = G[np.isclose(G.level, 0.99)]
@@ -122,7 +127,7 @@ src = "analysis/campaign.py -> data/v2/campaign_summary.csv, campaign_reps.csv.g
 T = pd.read_csv(os.path.join(V2, "campaign_summary.csv"))
 Rp = pd.read_csv(os.path.join(V2, "campaign_reps.csv.gz"))
 put("dsCells", str(len(T)), "SIM", src)
-put("dsReps", f"{int(T.reps.max()):,}".replace(",", "\\,"), "SIM", src)
+put("cdReps", f"{int(T.reps.max()):,}".replace(",", "\\,"), "SIM", src)
 put("dsCampaigns", f"{len(Rp):,}".replace(",", "\\,"), "SIM", src)
 put("dsFailed", str(int(T.failed.sum())), "SIM", src)
 core = T[(T.P == 4) & (T.m == 1.0) & (T.eps == 0.3) & (~T.unbal)]
@@ -181,27 +186,67 @@ put("dsUnitsFiveMed", f"{r5.joint_units_predictive.median():.0f}", "SIM", src)
 put("dsUnitsOracle", f"{r5.joint_units_oracle.median():.0f}", "SIM", src)
 
 # ------------------------------------------------- fleet (E2, E3) --------
+FP = json.load(open(os.path.join(HERE, "..", "analysis", "fleet_params.json"), encoding="utf-8"))
+put("flShips", str(sum(c["ships"] for c in FP["classes"].values())), "SIM", "analysis/fleet_params.json")
 FS = os.path.join(V2, "fleet_summary.csv")
 if os.path.exists(FS):
     src = "analysis/fleet.py -> data/v2/fleet_summary.csv"
-    S = pd.read_csv(FS)
+    S = pd.read_csv(FS).set_index(["scenario", "method", "kind"]).sort_index()
+    R = pd.read_csv(os.path.join(V2, "fleet_reps.csv.gz"))
+    R["upm"] = R.units / R.n
     order = ["mtbf", "mtbf_joint", "nb_pooled", "eb_gamma", "hier_marg", "hier_plugin", "hier_pred", "hier_shock"]
-    scen = ["clean", "baseline", "heavy_tail", "shocks", "misclass", "sparse", "datasheet_ok"]
-    for kind in ("known", "new"):
-        lines = []
-        for sc in scen:
-            g = S[(S.scenario == sc) & (S.kind == kind)].set_index("method")
-            cells = [sc.replace("_", " ")] + [pct(g.loc[m, "cover"], 1) for m in order]
-            lines.append(" & ".join(cells) + " \\\\")
-        w(f"tab_fleet_{kind}.tex", "\n".join(lines) + "\n")
-    b = S[S.scenario == "baseline"].set_index(["method", "kind"])
-    for m, tag in (("mtbf", "Mtbf"), ("hier_pred", "Pred"), ("eb_gamma", "Eb"), ("nb_pooled", "Nb"),
-                   ("hier_marg", "Marg"), ("hier_shock", "Shock")):
-        for kind, kt in (("known", "Known"), ("new", "New")):
-            put(f"fl{tag}{kt}", pct(b.loc[(m, kind), "cover"], 1), "SIM", src)
-            put(f"fl{tag}{kt}Units", f"{b.loc[(m, kind), 'units']:.1f}", "SIM", src)
+    scen = dict(clean="Clean", baseline="Baseline", heavy_tail="Heavy tail", shocks="Supply events",
+                misclass="Misrecorded", sparse="Sparse", datasheet_ok="Datasheet right")
+    stat = ["nb_pooled", "eb_gamma", "hier_plugin", "hier_pred", "hier_shock"]
+    misled = [s for s in scen if s != "datasheet_ok"]
+
+    def cell(sc, m, col, fmt):
+        return " / ".join(fmt(S.loc[(sc, m, k), col]) for k in ("known", "new"))
+
+    lines = [" & ".join([lab] + [cell(sc, m, "cover", pct) for m in order]) + " \\\\"
+             for sc, lab in scen.items()]
+    w("tab_fleet_cover.tex", "\n".join(lines) + "\n")
+    lines = [" & ".join([lab] + [cell(sc, m, "units", lambda x: f"{x:.1f}") for m in order]) + " \\\\"
+             for sc, lab in scen.items()]
+    w("tab_fleet_units.tex", "\n".join(lines) + "\n")
+
+    def span(methods, scens, col="cover"):
+        v = S.loc[(scens, methods, slice(None)), col]
+        return v.min(), v.max()
+
+    for m, tag in (("mtbf", "Mtbf"), ("mtbf_joint", "MtbfJoint"), ("hier_marg", "Marg")):
+        lo, hi = span([m], misled)
+        put(f"fl{tag}Lo", pct(lo), "SIM", src, "cover range over scenarios with optimistic datasheets")
+        put(f"fl{tag}Hi", pct(hi), "SIM", src)
+    lo, hi = span(stat, list(scen))
+    put("flStatLo", pct(lo), "SIM", src, "cover range of the fitted joint plans, all scenarios")
+    put("flStatHi", pct(hi), "SIM", src)
+    for m, tag in (("mtbf", "Mtbf"), ("mtbf_joint", "MtbfJoint")):
+        put(f"flRight{tag}", pct(min(S.loc[("datasheet_ok", m, k), "cover"] for k in ("known", "new"))),
+            "SIM", src, "datasheets right, lower of known/new")
+    for sc, st in (("baseline", "Base"), ("sparse", "Sparse"), ("datasheet_ok", "Right"),
+                   ("shocks", "Shock"), ("heavy_tail", "Heavy")):
+        for m, tag in (("mtbf", "Mtbf"), ("mtbf_joint", "MtbfJoint"), ("nb_pooled", "Nb"),
+                       ("eb_gamma", "Eb"), ("hier_plugin", "Plug"), ("hier_pred", "Pred"),
+                       ("hier_shock", "Shock"), ("hier_marg", "Marg")):
+            for kind, kt in (("known", "Known"), ("new", "New")):
+                put(f"fl{st}{tag}{kt}", pct(S.loc[(sc, m, kind), "cover"]), "SIM", src)
+                put(f"fl{st}{tag}{kt}Units", f"{S.loc[(sc, m, kind), 'units']:.1f}", "SIM", src)
+    b = S.loc["baseline"]
+    put("flRatio", f"{b.loc[('hier_pred', 'known'), 'units'] / b.loc[('mtbf', 'known'), 'units']:.1f}",
+        "SIM", src, "units of the predictive plan over the datasheet plan, baseline, known ships")
+    for m, tag in (("nb_pooled", "Nb"), ("eb_gamma", "Eb"), ("hier_pred", "Pred")):
+        put(f"flLs{tag}", f"{b.loc[(m, 'known'), 'log_score']:.3f}", "SIM", src, "mean log score, baseline")
+    put("flPitMax", f"{S.pit_max_dev.max():.3f}", "SIM", src, "largest deviation of a PIT decile from 0.1")
+    put("flMcseMax", f"{100 * S.loc[(slice(None), stat, slice(None)), 'cover_mcse'].max():.2f}", "SIM", src,
+        "largest Monte Carlo standard error of a fitted plan's cover, points")
+    med = R.groupby(["scenario", "method", "kind"]).upm.transform("median")
+    big = R[(R.upm > 3 * med) & R.method.isin(stat + ["hier_marg"])]
+    put("flBigFleets", str(big[["scenario", "rep"]].drop_duplicates().shape[0]), "SIM", src,
+        "fleets in which some fitted plan exceeds three times its median units")
+    put("flBigHeavy", str(big[big.scenario == "heavy_tail"].rep.nunique()), "SIM", src)
     put("flFleets", str(int(S.fleets.max())), "SIM", src)
-    put("flMissions", f"{int(S[S.method == 'mtbf'].missions.sum()):,}".replace(",", "\\,"), "SIM", src)
+    put("flMissions", thou(S.loc[("baseline", "mtbf"), "missions"].sum()), "SIM", src)
 
 # ------------------------------------------------- street lighting (E7) --
 NI = os.path.join(V2, "ni_results.json")
@@ -210,10 +255,10 @@ if os.path.exists(NI):
     J = json.load(open(NI))
     C = J["components"]
     sp = J["splits"]
-    put("niTrainFail", f"{J['train_failures']:,}".replace(",", "\,"), "PUBLICDATA", src)
-    put("niWithinTrain", f"{sp['within']['train_failures']:,}".replace(",", "\,"), "PUBLICDATA", src)
-    put("niWithinTest", f"{sp['within']['test_failures']:,}".replace(",", "\,"), "PUBLICDATA", src)
-    put("niForwardTest", f"{sp['forward']['test_failures']:,}".replace(",", "\,"), "PUBLICDATA", src)
+    put("niTrainFail", thou(J["train_failures"]), "PUBLICDATA", src)
+    put("niWithinTrain", thou(sp["within"]["train_failures"]), "PUBLICDATA", src)
+    put("niWithinTest", thou(sp["within"]["test_failures"]), "PUBLICDATA", src)
+    put("niForwardTest", thou(sp["forward"]["test_failures"]), "PUBLICDATA", src)
     put("niAreas", str(J["areas"]), "PUBLICDATA", src)
     put("niFamilies", str(len(J["families"])), "PUBLICDATA", src)
     for k, tag in (("area", "Area"), ("area_family", "Inter"), ("area_month", "Month")):

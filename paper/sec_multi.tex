@@ -23,13 +23,13 @@ Given $u$ the references are conditionally independent. Writing
 $g_{p,u}$ for the conditional mass function and $G_{p,u}$ for its distribution
 function,
 \begin{align}
-g_{p,u}(m)&=\int \mathrm{Pois}\big(m;\lambda_p e^{u+w-\sigma^2/2}\big)\,
+g_{p,u}(m)&=\int \mathrm{Pois}\big(m;\lambda_p e^{u+w-\sigma^2/2}\big)
           \varphi_\omega(w)\,\mathrm dw,
 \label{eq:convb}\\
-\Pr\Big(\textstyle\sum_pY_p=n\Big)&=\int\Big[\ \ast_{p=1}^{P}\,g_{p,u}\Big](n)\,
+\Pr(\textstyle\sum_pY_p=n)&=\int\big[\ast_{p}\,g_{p,u}\big](n)\,
           \varphi_\tau(u)\,\mathrm du,
 \label{eq:conv}\\
-\Pr\big(Y_p\le s_p\,\forall p\big)&=\int\prod_{p=1}^{P}G_{p,u}(s_p)\,
+\Pr(Y_p\le s_p\,\forall p)&=\int\textstyle\prod_{p}G_{p,u}(s_p)\,
           \varphi_\tau(u)\,\mathrm du,
 \label{eq:jointexact}
 \end{align}
@@ -90,7 +90,7 @@ where \mpInterEight{} would have sufficed.
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=\columnwidth]{figures/fig2_multiproduct.pdf}
+\includegraphics[width=\columnwidth]{figures/fig_zone.pdf}
 \caption{Aggregate criterion~\eqref{eq:agg}, valid for interchangeable
 references (\textsc{analytical}; the expected count \mpMean{} and the total
 spread $\sigma=\mpSigma$ are assumed values). (top) The 99\,\% plan against the
@@ -150,11 +150,10 @@ $[0,1]$. Table~\ref{tab:robust} evaluates both against every true $f$ on a
 grid of eleven values. The conservative plan never falls below 99\,\%
 (\rvConsJointMin\,\% joint, \rvConsAggMin\,\% aggregate at worst) and pays for
 it in units, most under the aggregate criterion. The averaged plan is cheaper
-but its cover depends on the truth: it reaches \rvAvgJointMin\,\% joint and
-\rvAvgAggMin\,\% aggregate cover at worst. A fleet that cannot afford a
-shortfall uses the conservative plan until its records resolve the
-allocation; Section~\ref{sec:design} gives the campaign size at which they do,
-and Section~\ref{sec:lighting} shows a real network in which they did.
+but falls to \rvAvgJointMin\,\% joint and \rvAvgAggMin\,\% aggregate cover at
+worst. A fleet that cannot afford a shortfall uses the conservative plan until
+its records resolve the allocation (Sections~\ref{sec:design}
+and~\ref{sec:lighting}).
 
 \begin{table}[!t]
 \caption{Plans built without knowing the share of the spread that is
@@ -178,12 +177,10 @@ $P$ & $\Lambda$ & cover & units & cover & units & cover & units & cover & units 
 \end{table}
 
 \subsection{Consequences}
-The criterion must be fixed before the plan is computed, since the two answers
-differ by a factor of order $P$ and respond to the dependence structure with
-opposite signs: a fleet holding non-interchangeable references
-uses~\eqref{eq:joint}, and the aggregate figure applies only to interchangeable
-stock. Neither criterion should be approached by adding per-reference
+The criterion must be fixed before the plan is computed: non-interchangeable
+references call for~\eqref{eq:joint}, and the aggregate figure applies only to
+interchangeable stock. Neither should be approached by adding per-reference
 quantiles, since evaluating~\eqref{eq:conv} and~\eqref{eq:jointexact}, or
-drawing from the fitted model, costs little. And a single holder-level $\sigma$
-does not size a multi-reference plan under either criterion: the allocation
+drawing from the fitted model, costs little. A single holder-level $\sigma$
+does not size a multi-reference plan under either criterion; the allocation
 has to be estimated, or the conservative plan carried.

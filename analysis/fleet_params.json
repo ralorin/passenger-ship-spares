@@ -8,7 +8,7 @@
   "large": {"ships": 6, "pax_cabins": 1331, "crew_cabins": 588, "public_units": 1860, "galley_units": 66, "exterior_units": 265, "technical_units": 58,
             "_src": "Fincantieri fact sheet, 99,863 GT ship delivered 2016: 1,331 passenger cabins, 588 crew cabins"},
   "very_large": {"ships": 4, "pax_cabins": 2744, "crew_cabins": 1197, "public_units": 3840, "galley_units": 137, "exterior_units": 550, "technical_units": 118,
-                 "_src": "Oasis class (Wikipedia): 2,744 passenger cabins, 1,197 crew cabins"},
+                 "_src": "Oasis class: 2,747 staterooms for Harmony of the Seas (Ship Technology, 2015); 2,744 passenger and 1,197 crew cabins as listed for the ship on Wikipedia"},
   "cruiseferry": {"ships": 4, "pax_cabins": 1016, "crew_cabins": 150, "public_units": 1420, "galley_units": 50, "exterior_units": 200, "technical_units": 35,
                   "durations_nights": [1, 1, 2], "region": "northern_europe",
                   "_src": "MS Color Magic (Wikipedia): 1,016 cabins; crew cabins assumed"}

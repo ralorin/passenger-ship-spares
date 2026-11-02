@@ -1,6 +1,6 @@
 \subsection{Scope of the Results}
-Four classes of statement are made, and a manifest accompanying the code tags
-every reported value with one of them. Analytical: Propositions~\ref{prop:exact}
+A manifest accompanying the code tags every reported value with its class.
+Analytical: Propositions~\ref{prop:exact}
 and~\ref{prop:multi} and the plan comparisons of Sections~\ref{sec:cover}
 and~\ref{sec:multi}, which are exact under their assumptions or maxima observed
 on stated grids. Simulated: Sections~\ref{sec:fed}, \ref{sec:design}
@@ -35,12 +35,9 @@ lots and misrecorded replacements; other departures, such as rates that change
 with age in ways the covariates do not capture, or dependence that cascades
 between units, are not examined. The common-cause events of
 Section~\ref{sec:mechanisms} act on the upper tail, where a provisioning quantile
-lies, and a fleet should test for them before relying on the model.
-
-\subsubsection{No Remaining-Life Estimate}
-The model gives a failure count over a bounded horizon. Extending it to remaining
-life requires unit-level time-to-event records and a survival or recurrent-event
-formulation~\cite{meeker2022,lindqvist2006} within the same hierarchy.
+lies, and a fleet should test for them before relying on the model. Remaining
+life is outside the model, which would need unit-level times to failure and a
+recurrent-event formulation~\cite{meeker2022,lindqvist2006}.
 
 \subsection{Requirements for Shipboard Validation}
 \label{sec:needed}

@@ -34,10 +34,12 @@ At a proposed $\boldsymbol\gamma$ each holder solves for
 $\hat{\mathbf v}_s(\boldsymbol\gamma)$ locally by a Newton iteration in
 $1+P_s$ dimensions and returns
 \begin{equation}
-\Big(\ell_s,\ \nabla_{\gamma}\ell_s,\
-\mathbf S_s=\mathbf H_{\gamma\gamma}^{(s)}-\mathbf H_{\gamma v}^{(s)}
-\big(\mathbf H_{vv}^{(s)}\big)^{-1}\mathbf H_{v\gamma}^{(s)},\
-\log\det\mathbf H_{vv}^{(s)}\Big),
+\begin{aligned}
+&\big(\ell_s,\ \nabla_{\gamma}\ell_s,\ \mathbf S_s,\
+\log\det\mathbf H_{vv}^{(s)}\big),\\
+&\mathbf S_s=\mathbf H_{\gamma\gamma}^{(s)}-\mathbf H_{\gamma v}^{(s)}
+\big(\mathbf H_{vv}^{(s)}\big)^{-1}\mathbf H_{v\gamma}^{(s)},
+\end{aligned}
 \label{eq:message}
 \end{equation}
 evaluated at $(\boldsymbol\gamma,\hat{\mathbf v}_s)$, where $\mathbf H$ is the
@@ -45,16 +47,16 @@ negative Hessian and $\mathbf H_{vv}^{(s)}$ is the $(1+P_s)\times(1+P_s)$ local
 block. The coordinator sums the messages, adds the prior precision $\mathbf P$ of
 the global random effects, takes a damped Newton step in $\boldsymbol\gamma$ and
 repeats; the resulting Laplace value
-\begin{equation}
-\sum_s\ell_s-\tfrac12\boldsymbol\gamma^{\top}\mathbf P\boldsymbol\gamma
+\begin{multline}
+\sum_s\ell_s-\tfrac12\boldsymbol\gamma^{\top}\mathbf P\boldsymbol\gamma\\
 -\tfrac12\Big[\sum_s\log\det\mathbf H_{vv}^{(s)}
 +\log\det\big(\textstyle\sum_s\mathbf S_s+\mathbf P\big)\Big]
 \label{eq:laplace}
-\end{equation}
+\end{multline}
 feeds an outer quasi-Newton search over the variance parameters
 $(\tau,\omega,\phi,\dots)$.
 
-The construction is exact rather than approximate because the joint negative
+The construction is exact because the joint negative
 Hessian over $(\boldsymbol\gamma,\mathbf v_1,\dots,\mathbf v_S)$ is
 block-arrowhead: $\mathbf v_s$ couples with $\boldsymbol\gamma$ only, and only
 through the cells of holder $s$, so the blocks $\mathbf v_s$ and
@@ -72,19 +74,13 @@ mixed-model literature~\cite{li2022fedglmm,luo2022dpql}, specialised so that the
 whole local block, including every ship--product interaction, is eliminated
 locally and never transmitted.
 
-Two consequences of carrying the full local block follow. The local cost
-rises from a scalar solve to a factorisation of order $(1+P_s)^3$, which is
-negligible for the tens of references a zone carries. The transmitted quantities
-are unchanged in dimension: only $\mathbf S_s$, of size $m_s\times m_s$ in the
-global coordinates, and the scalar $\log\det\mathbf H_{vv}^{(s)}$ leave the
-holder, so the interaction effects raise neither the message size nor what the
-coordinator observes.
-
-Holders of very different size enter unchanged. A ship that records no failure of
-a product in a mission still returns a well-defined message, because its exposure
-alone informs the rate and its own effect is shrunk towards zero, which is the
-normal case on board and the reason such populations must not be dropped
-(Section~\ref{sec:mechanisms}).
+Carrying the full local block costs a factorisation of order $(1+P_s)^3$ per
+holder, negligible for the tens of references a zone carries, and leaves the
+message unchanged in dimension: only $\mathbf S_s$, of size $m_s\times m_s$, and
+the scalar $\log\det\mathbf H_{vv}^{(s)}$ leave the holder. A ship that records
+no failure of a product still returns a well-defined message, since its exposure
+informs the rate and its own effect is shrunk towards zero; such populations
+must not be dropped (Section~\ref{sec:mechanisms}).
 
 \subsection{Numerical Check and Communication Cost}
 The protocol was checked against the centralised fit on \fedN{} simulated
@@ -112,14 +108,10 @@ holder, and no holder's own effect is transmitted}. This is a statement about
 data flow and not a confidentiality guarantee, and none is claimed here.
 
 The messages are functions of the holder's cell aggregates
-$\{(y_c,H_c,\mathbf x_c)\}_{c\in\mathcal C_s}$. An honest-but-curious
-coordinator selects the parameter values at which those functions are evaluated
-and receives many evaluations, and may therefore reconstruct the aggregates or
-features of them. Sufficiency of an aggregate for estimation is not a bound on
-what an adversary can infer. In addition, the set of global
-coordinates a holder touches reveals which products it operates, which may be
-commercially sensitive, and a minimum cell size limits what a single aggregate
-describes without providing a formal guarantee. A deployment that
-requires confidentiality must add secure aggregation or a differential-privacy
-mechanism, and must then re-examine calibration, since noise added for privacy
-enters the predictive distribution and therefore the plan.
+$\{(y_c,H_c,\mathbf x_c)\}_{c\in\mathcal C_s}$, evaluated at parameter values the
+coordinator chooses, so an honest-but-curious coordinator may reconstruct those
+aggregates or features of them; the global coordinates a holder touches also
+reveal which products it operates. A deployment that requires confidentiality
+must add secure aggregation or a differential-privacy mechanism, and then
+re-examine calibration, since noise added for privacy enters the predictive
+distribution and therefore the plan.
