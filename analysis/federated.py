@@ -78,6 +78,7 @@ class BlockFederatedFit:
             gv = Jv.T @ g - D * v
             Hv = Jv.T @ (w[:, None] * Jv) + np.diag(D)
             dv = np.linalg.solve(Hv, gv)
+            dv *= min(1.0, 2.0 / max(np.max(np.abs(dv)), 1e-300))    # damped far from the mode
             v += dv
             if np.max(np.abs(dv)) < 1e-12:
                 break
@@ -146,6 +147,10 @@ class BlockFederatedFit:
         def obj(th):
             th = np.clip(th, lower, upper)
             v, zg, vs = self.laplace(th, cache["zg"], cache["v"])
+            if not np.isfinite(v):
+                v, zg, vs = self.laplace(th, None, None)
+            if not np.isfinite(v):
+                return 1e12
             cache["zg"], cache["v"] = zg, vs
             return -v
 

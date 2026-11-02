@@ -1,0 +1,11 @@
+{
+ "n": 100,
+ "max_d_loglik_same_theta": 4.3589523102127714e-08,
+ "max_d_loglik_fit": 0.9056394749733272,
+ "max_d_beta": 0.01592828097857832,
+ "max_d_sigma": 0.3012383034365407,
+ "median_d_sigma": 0.0018477428854041472,
+ "median_rounds": 464.0,
+ "median_floats": 426880.0,
+ "median_oneshot_floats": 1920.0
+}

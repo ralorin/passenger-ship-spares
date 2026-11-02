@@ -1,0 +1,61 @@
+{
+ "inventory": "2026",
+ "inventory_points": 308936,
+ "led_points": 267398,
+ "families": {
+  "Urbis Axia": 115722,
+  "Philips Lumistreet": 68222,
+  "LCL Quantum": 31026,
+  "LED other": 14138,
+  "Thorn R2L2": 13709,
+  "Ignis Mini": 9875,
+  "Urbis Ampera": 8440,
+  "Philips Digistreet": 6266
+ },
+ "led_points_pure": 170414,
+ "families_pure": {
+  "Urbis Axia": 79108,
+  "Philips Lumistreet": 49871,
+  "LCL Quantum": 19223,
+  "Thorn R2L2": 6935,
+  "LED other": 5401,
+  "Urbis Ampera": 4216,
+  "Ignis Mini": 3792,
+  "Philips Digistreet": 1868
+ },
+ "areas": 16,
+ "area_direct_share": 0.8035029909107388,
+ "area_nearest_share": 0.1964970090892612,
+ "fault_types_all": {
+  "Light Out": 129821,
+  "All lights out in street": 15416,
+  "Other Problem": 12528,
+  "Day Burner": 5266,
+  "Knocked down or hanging off": 3949,
+  "Wires exposed": 1759,
+  "Missing Door/Replace Door": 1610,
+  "Missing Bowl": 493,
+  "Accident - Damaged Cable": 26,
+  "Column Leaning": 22,
+  "Vandalism": 18,
+  "No Supply": 4,
+  "Obscured Lamp": 2,
+  "Replace Cable": 2
+ },
+ "faults_kept": 133330,
+ "faults_matched_share": 0.9194329858246456,
+ "lines_skipped": {
+  "LightingFaults2020.csv": 381,
+  "LightingFaults2021.csv": 343,
+  "LightingFaults2022.csv": 382,
+  "LightingFaults2023.csv": 352,
+  "LightingFaults2024.csv": 675,
+  "LightingFaultsCurrentYear.csv": 262
+ },
+ "faults_on_pure_streets_share": 0.4775100336085098,
+ "months": [
+  "2020-04",
+  "2026-11"
+ ],
+ "n_months": 68
+}
