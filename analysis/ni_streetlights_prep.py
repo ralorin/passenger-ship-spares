@@ -37,6 +37,8 @@ FAMILIES = [("Urbis Axia", r"URBIS AXIA"), ("Urbis Ampera", r"URBIS AMPERA"),
             ("Philips Lumistreet", r"LUMI?N?STREET"), ("Philips Digistreet", r"DIGISTREET"),
             ("LCL Quantum", r"QUANTUM"), ("Thorn R2L2", r"R2L2"), ("Ignis Mini", r"IGNIS")]
 LAT = 54.6
+REPEAT_DAYS = 7      # a report this soon after the last one on the street is the same repair
+NOT_LANTERN = r"cable|NIE|working on attendance|not out|no fault|all ok|operational"
 SKIPPED = {}         # malformed lines (unquoted commas in free-text comments)
 
 
@@ -120,6 +122,18 @@ def main():
     F = F[F.FAULT_TYPE.isin(KEEP) & (F.ASSET_TYPE == "Lighting Point")
           & (F.OPERATIONAL_AREA != "Unable to determine") & F.date.notna()].copy()
     F["kind"] = F.FAULT_TYPE.map(KEEP)
+    n_kept = len(F)
+    not_lantern = F.CLEARED_COMMENTS.fillna("").str.contains(NOT_LANTERN, case=False, regex=True)
+    F = F[~not_lantern].sort_values("date")
+    # keep a report only if it starts a new episode on its street
+    keep = np.zeros(len(F), bool)
+    start_of = {}
+    for i, (k, t) in enumerate(zip(zip(F.street, F.town, F.kind), F.date)):
+        if k not in start_of or (t - start_of[k]).days > REPEAT_DAYS:
+            start_of[k] = t
+            keep[i] = True
+    dropped = dict(not_lantern=int(not_lantern.sum()), repeats=int((~keep).sum()))
+    F = F[keep]
 
     # share each fault among the families on its street
     street_mix = A.groupby(["street", "town", "family"]).size().rename("n").reset_index()
@@ -161,6 +175,7 @@ def main():
         areas=int(A.area.nunique()), area_direct_share=share_direct, area_nearest_share=share_nn,
         fault_types_all=types.to_dict(), faults_kept=int(len(F)),
         faults_matched_share=float(matched.mean()), lines_skipped=SKIPPED,
+        faults_before_cleaning=n_kept, dropped=dropped,
         faults_on_pure_streets_share=float(M.groupby("DATA_UID").pure.first().mean()),
         months=[months[0], months[-1]], n_months=len(months))
     json.dump(report, open(os.path.join(OUT, f"ni_prep_{args.inventory}.json"), "w"), indent=1)

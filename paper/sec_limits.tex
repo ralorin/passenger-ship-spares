@@ -1,71 +1,60 @@
 \subsection{Scope of the Results}
-Three classes of statement are supported. The analytical class:
-Propositions~\ref{prop:exact} and~\ref{prop:multi} are exact under their stated
-assumptions, and the figures accompanying Proposition~\ref{prop:approx} are maxima
-observed on the stated grid, properties of the idealised mixture rather than of any
-fleet. The simulated class: everything in Section~\ref{sec:design} is generated
-under~\eqref{eq:sim} with assumed parameters. The measured class: only the capacitor
-figures of Section~\ref{sec:evidence}. A manifest accompanying the code gives every
-reported value's script, result file and provenance tag; no tag denotes a shipboard
-measurement, because there is none.
+Four classes of statement are made, and a manifest accompanying the code tags
+every reported value with one of them. Analytical: Propositions~\ref{prop:exact}
+and~\ref{prop:multi} and the plan comparisons of Sections~\ref{sec:cover}
+and~\ref{sec:multi}, which are exact under their assumptions or maxima observed
+on stated grids. Simulated: Sections~\ref{sec:fed}, \ref{sec:design}
+and~\ref{sec:fleet}, generated under declared parameters, those of
+Section~\ref{sec:fleet} taken from public datasheets, ship fact sheets and
+climate normals. Measured: Section~\ref{sec:lighting}, from public records of
+a land-based network. No value is a measurement of shipboard equipment.
 
 \subsection{Limitations}
-\subsubsection{No Shipboard Quantity}
-No failure rate, temperature coefficient, variance
-component, coverage or spares count for shipboard power electronics is reported,
-because none could be estimated. The values $\sigma=\mpSigma$ and $\tau,\omega$
-used in Sections~\ref{sec:multi} and~\ref{sec:design} illustrate the arithmetic
-and must not be quoted as fleet characteristics.
+\subsubsection{No Shipboard Records}
+Public sources were searched for failures of shipboard power electronics with
+installed populations, exposure and a holder label. Port-state-control and
+casualty databases record deficiencies and incidents without a denominator,
+and the accelerated-ageing sets for capacitors and power devices contain no
+populations or holders, so none supports a rate. No failure rate, variance
+component or spares count is therefore reported for ships, and the values used
+in Section~\ref{sec:fleet} illustrate the method and must not be quoted as fleet
+characteristics.
 
-\subsubsection{No Empirical Calibration}
-No predictive interval has been checked against
-observed shipboard failures, so the calibration of the predictive distribution
-remains open and is the first thing a campaign should test.
+\subsubsection{Transfer From the Analogue}
+The street-lighting network shares the structure of a fleet, with power
+electronics divided among holders and products and with common-cause events,
+but its units are outdoors, its failures are reported by the public and its
+maintenance areas are not ships. The allocation measured there shows that the
+question has an empirical answer that can be obtained; it is not an estimate of
+the allocation on ships.
 
-\subsubsection{No Identified Dependence Structure}
-The division of latent spread between
-the ship-wide and interaction terms is not determined by any evidence here. Since
-it changes a multi-reference plan materially under either criterion
-(Section~\ref{sec:multi}) and is difficult to estimate
-(Section~\ref{sec:design}), this limits any provisioning recommendation,
-including the one developed here.
-
-\subsubsection{Idealised Theory}
-Propositions~\ref{prop:exact} and~\ref{prop:approx}
-concern the mixed-Poisson case~\eqref{eq:mixture}, not the full model with its
-cell dispersion, crossed effects and parameter uncertainty; the common-cause and
-cascading mechanisms of Section~\ref{sec:mechanisms} are outside
-Assumption~\ref{as:mix} altogether and act on the upper tail, where a
-provisioning quantile lies. A plan computed under Assumption~\ref{as:mix} will
-understate the stock required if such events occur at non-negligible rates.
+\subsubsection{Model Form}
+The latent effects are Gaussian on the log-rate scale. Section~\ref{sec:fleet}
+shows how plans behave under heavy-tailed effects, ship-wide supply events, bad
+lots and misrecorded replacements; other departures, such as rates that change
+with age in ways the covariates do not capture, or dependence that cascades
+between units, are not examined. The common-cause events of
+Section~\ref{sec:mechanisms} act on the upper tail, where a provisioning quantile
+lies, and a fleet should test for them before relying on the model.
 
 \subsubsection{No Remaining-Life Estimate}
-The model gives a failure count over a bounded
-horizon; extending it to remaining life requires unit-level time-to-event records
-and a survival or recurrent-event formulation~\cite{meeker2022} within the same
-hierarchy. Finally, the federated protocol is not the cheaper option for
-cell-aggregated counts and offers no confidentiality guarantee
-(Section~\ref{sec:fed}).
+The model gives a failure count over a bounded horizon. Extending it to remaining
+life requires unit-level time-to-event records and a survival or recurrent-event
+formulation~\cite{meeker2022,lindqvist2006} within the same hierarchy.
 
-\subsection{Requirements for Empirical Validation}
+\subsection{Requirements for Shipboard Validation}
 \label{sec:needed}
 Six records are necessary. The first is an inventory of the installed population
 by ship, zone, reference, manufacturer and installation date, maintained through
 refits. The second is a set of event records in which every replacement is dated
 and classified as functional failure or preventive by a rule fixed in advance,
-with removals for refit, obsolescence and cannibalisation recorded separately;
-where that classification is ambiguous the ambiguity must be quantified and the
-analysis repeated under both readings. The third is exposure in powered
-unit-hours per population and mission. The fourth is a set of covariates logged
-over complete missions, so that the previous mission's summaries exist at the
-moment of decision, since a covariate available only contemporaneously cannot
-enter this decision however predictive it is. The fifth is repeated missions and
-several references per ship, without which the two terms of~\eqref{eq:structure}
-cannot be separated (Section~\ref{sec:design}). The sixth is a record of
-common-cause events, together with teardown of a sample of removed units, so
-that conditional independence and the limiting failure mode are tested rather
-than assumed.
-
-With such records the analysis developed here can be carried out on ships, and its
-calibration, variance components and dependence structure become measurable. In
-their absence those quantities cannot be estimated, and none is reported.
+with removals for refit, obsolescence and cannibalisation recorded separately.
+The third is exposure in powered unit-hours per population and mission. The
+fourth is a set of covariates logged over complete missions, so that the previous
+mission's summaries exist at the moment of decision. The fifth is repeated
+missions and several references per ship, without which the two terms
+of~\eqref{eq:structure} cannot be separated (Section~\ref{sec:design}). The sixth
+is a record of common-cause events, together with teardown of a sample of removed
+units, so that conditional independence and the limiting failure mode are tested
+rather than assumed. With such records the analysis of
+Section~\ref{sec:lighting} can be repeated on ships.

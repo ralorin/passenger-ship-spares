@@ -42,8 +42,8 @@
   "Obscured Lamp": 2,
   "Replace Cable": 2
  },
- "faults_kept": 133330,
- "faults_matched_share": 0.9201080027000675,
+ "faults_kept": 88299,
+ "faults_matched_share": 0.920418124780575,
  "lines_skipped": {
   "LightingFaults2020.csv": 381,
   "LightingFaults2021.csv": 343,
@@ -52,7 +52,12 @@
   "LightingFaults2024.csv": 675,
   "LightingFaultsCurrentYear.csv": 262
  },
- "faults_on_pure_streets_share": 0.46004173527445835,
+ "faults_before_cleaning": 133330,
+ "dropped": {
+  "not_lantern": 3319,
+  "repeats": 41712
+ },
+ "faults_on_pure_streets_share": 0.4717737966335269,
  "months": [
   "2020-04",
   "2026-11"

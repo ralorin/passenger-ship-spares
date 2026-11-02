@@ -66,7 +66,20 @@ carries a weakly informative $\mathcal N(0,5^2)$ prior on the log-rate-ratio
 scale, negligible for identified coefficients but keeping the mode finite when a
 covariate class records no failure, as a first shipboard campaign should expect.
 Standard errors of $\boldsymbol\beta$ come from the joint Hessian and so include
-the uncertainty of $\mathbf b$.
+the uncertainty of $\mathbf b$. Every cell belongs to one ship--product level,
+so the block of the Hessian for the largest grouping is diagonal and is
+eliminated exactly inside each Newton step; the remaining system has the size
+of the coefficients and the smaller groupings, which is what makes the
+simulation studies below affordable.
+
+Whether a variance component is present is tested by the likelihood ratio
+against the model without it, referred to the equal mixture of $\chi^2_0$ and
+$\chi^2_1$ that applies on the boundary~\cite{self1987,stram1994,crainiceanu2004};
+intervals for the standard deviations are obtained by profiling the
+approximate marginal likelihood, with zero included when the test does not
+reject. In the two case studies the fitted standard deviations are capped at 3
+on the log-rate scale, a bound that only binds for terms the data barely
+identify.
 
 \subsection{Predictive Distribution for an Unobserved Population}
 The object the decision needs is the predictive distribution of the count of a

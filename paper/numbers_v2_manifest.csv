@@ -1,0 +1,135 @@
+macro,value,provenance,source,note
+spLamN,121,ANALYTIC,analysis/single_plan.py -> data/v2/single_plan_grid.csv,
+spLamHi,50,ANALYTIC,analysis/single_plan.py -> data/v2/single_plan_grid.csv,
+spLamLo,0.05,ANALYTIC,analysis/single_plan.py -> data/v2/single_plan_grid.csv,
+spSigLo,0.1,ANALYTIC,analysis/single_plan.py -> data/v2/single_plan_grid.csv,
+spSigHi,1,ANALYTIC,analysis/single_plan.py -> data/v2/single_plan_grid.csv,
+spPts,"3\,630",ANALYTIC,analysis/single_plan.py -> data/v2/single_plan_grid.csv,
+spPoisShort,21.2,ANALYTIC,analysis/single_plan.py -> data/v2/single_plan_grid.csv,"worst shortfall at 99 pct, pp"
+spPoisUnits,245,ANALYTIC,analysis/single_plan.py -> data/v2/single_plan_grid.csv,most units short at 99 pct
+spPoisEqual,38,ANALYTIC,analysis/single_plan.py -> data/v2/single_plan_grid.csv,share equal to exact plan
+spKapShort,3.2,ANALYTIC,analysis/single_plan.py -> data/v2/single_plan_grid.csv,"worst shortfall at 99 pct, pp"
+spKapUnits,140,ANALYTIC,analysis/single_plan.py -> data/v2/single_plan_grid.csv,most units short at 99 pct
+spKapEqual,18,ANALYTIC,analysis/single_plan.py -> data/v2/single_plan_grid.csv,share equal to exact plan
+spNbShort,0.4,ANALYTIC,analysis/single_plan.py -> data/v2/single_plan_grid.csv,"worst shortfall at 99 pct, pp"
+spNbUnits,15,ANALYTIC,analysis/single_plan.py -> data/v2/single_plan_grid.csv,most units short at 99 pct
+spNbEqual,70,ANALYTIC,analysis/single_plan.py -> data/v2/single_plan_grid.csv,share equal to exact plan
+spNbOver,25,ANALYTIC,analysis/single_plan.py -> data/v2/single_plan_grid.csv,largest NB excess at 90-95 pct
+spCfErr,15.9,ANALYTIC,analysis/single_plan.py -> data/v2/single_plan_grid.csv,closed form vs exact cover of the Poisson plan
+spNbShortOp,0.35,ANALYTIC,analysis/single_plan.py -> data/v2/single_plan_grid.csv,"lambda<=20, sigma<=0.6"
+spKapShortOp,2.2,ANALYTIC,analysis/single_plan.py -> data/v2/single_plan_grid.csv,"lambda<=20, sigma<=0.6"
+spPoisShortOp,14.4,ANALYTIC,analysis/single_plan.py -> data/v2/single_plan_grid.csv,"lambda<=20, sigma<=0.6"
+rvSaveMed,14,ANALYTIC,"analysis/robust_plan.py -> data/v2/robust_part1.csv, robust_part2.csv","median cost saving, unequal means or costs"
+rvSaveMax,66,ANALYTIC,"analysis/robust_plan.py -> data/v2/robust_part1.csv, robust_part2.csv",
+rvSaveEq,2,ANALYTIC,"analysis/robust_plan.py -> data/v2/robust_part1.csv, robust_part2.csv",
+rvMargMin,93.1,ANALYTIC,"analysis/robust_plan.py -> data/v2/robust_part1.csv, robust_part2.csv","joint cover of per-reference quantiles, worst"
+rvExOpt,54,ANALYTIC,"analysis/robust_plan.py -> data/v2/robust_part1.csv, robust_part2.csv","P=8, 8 expected, ship-wide"
+rvExCom,56,ANALYTIC,"analysis/robust_plan.py -> data/v2/robust_part1.csv, robust_part2.csv",
+rvConsJointMin,99.0,ANALYTIC,"analysis/robust_plan.py -> data/v2/robust_part1.csv, robust_part2.csv",
+rvConsAggMin,99.0,ANALYTIC,"analysis/robust_plan.py -> data/v2/robust_part1.csv, robust_part2.csv",
+rvAvgJointMin,98.8,ANALYTIC,"analysis/robust_plan.py -> data/v2/robust_part1.csv, robust_part2.csv",
+rvAvgAggMin,97.6,ANALYTIC,"analysis/robust_plan.py -> data/v2/robust_part1.csv, robust_part2.csv",
+fedN,100,SIM,analysis/federated.py -> data/v2/federated.csv,
+fedSameTheta,4\times 10^{-8},SIM,analysis/federated.py -> data/v2/federated.csv,max |Laplace difference| at equal theta
+fedSigMed,0.002,SIM,analysis/federated.py -> data/v2/federated.csv,
+fedBetaMax,0.016,SIM,analysis/federated.py -> data/v2/federated.csv,
+fedDiverge,16,SIM,analysis/federated.py -> data/v2/federated.csv,fits whose optima differ by >1e-3 in loglik
+fedRounds,464,SIM,analysis/federated.py -> data/v2/federated.csv,
+fedFloats,"426\,880",SIM,analysis/federated.py -> data/v2/federated.csv,
+fedOneShot,"1\,920",SIM,analysis/federated.py -> data/v2/federated.csv,
+fedRatio,222,SIM,analysis/federated.py -> data/v2/federated.csv,
+dsCells,155,SIM,"analysis/campaign.py -> data/v2/campaign_summary.csv, campaign_reps.csv.gz",
+dsReps,"1\,000",SIM,"analysis/campaign.py -> data/v2/campaign_summary.csv, campaign_reps.csv.gz",
+dsCampaigns,"155\,000",SIM,"analysis/campaign.py -> data/v2/campaign_summary.csv, campaign_reps.csv.gz",
+dsFailed,0,SIM,"analysis/campaign.py -> data/v2/campaign_summary.csv, campaign_reps.csv.gz",
+dsTypeOneMax,6.1,SIM,"analysis/campaign.py -> data/v2/campaign_summary.csv, campaign_reps.csv.gz",rejection at 5 pct when the component is zero
+dsTypeOneMed,2.7,SIM,"analysis/campaign.py -> data/v2/campaign_summary.csv, campaign_reps.csv.gz",
+dsMcseRej,0.7,SIM,"analysis/campaign.py -> data/v2/campaign_summary.csv, campaign_reps.csv.gz","MCSE of a 5 pct rate, 1000 reps"
+dsCiLo,92.0,SIM,"analysis/campaign.py -> data/v2/campaign_summary.csv, campaign_reps.csv.gz",
+dsCiHi,100.0,SIM,"analysis/campaign.py -> data/v2/campaign_summary.csv, campaign_reps.csv.gz",
+dsCiReps,300,SIM,"analysis/campaign.py -> data/v2/campaign_summary.csv, campaign_reps.csv.gz",
+dsOrderOneLo,60,SIM,"analysis/campaign.py -> data/v2/campaign_summary.csv, campaign_reps.csv.gz","M=1, interaction-only truth"
+dsOrderOneHi,71,SIM,"analysis/campaign.py -> data/v2/campaign_summary.csv, campaign_reps.csv.gz","M=1, interaction-only truth"
+dsOrderFour,93,SIM,"analysis/campaign.py -> data/v2/campaign_summary.csv, campaign_reps.csv.gz",
+dsPowOmTwentyFour,74,SIM,"analysis/campaign.py -> data/v2/campaign_summary.csv, campaign_reps.csv.gz",
+dsPowOmFortyEight,100,SIM,"analysis/campaign.py -> data/v2/campaign_summary.csv, campaign_reps.csv.gz",
+dsPowOmTenFour,46,SIM,"analysis/campaign.py -> data/v2/campaign_summary.csv, campaign_reps.csv.gz",
+dsPredCoverTen,99.0,SIM,"analysis/campaign.py -> data/v2/campaign_summary.csv, campaign_reps.csv.gz",
+dsPlugCoverFive,98.2,SIM,"analysis/campaign.py -> data/v2/campaign_summary.csv, campaign_reps.csv.gz",
+dsPoisLo,89.2,SIM,"analysis/campaign.py -> data/v2/campaign_summary.csv, campaign_reps.csv.gz",
+dsPoisHi,97.6,SIM,"analysis/campaign.py -> data/v2/campaign_summary.csv, campaign_reps.csv.gz",
+dsPoisMThree,84.9,SIM,"analysis/campaign.py -> data/v2/campaign_summary.csv, campaign_reps.csv.gz",
+dsPoisPEight,87.9,SIM,"analysis/campaign.py -> data/v2/campaign_summary.csv, campaign_reps.csv.gz",
+dsPredMin,97.7,SIM,"analysis/campaign.py -> data/v2/campaign_summary.csv, campaign_reps.csv.gz","worst cell, S>=10, M>=2"
+dsPredMThree,98.5,SIM,"analysis/campaign.py -> data/v2/campaign_summary.csv, campaign_reps.csv.gz",
+dsUnitsFiveMean,135,SIM,"analysis/campaign.py -> data/v2/campaign_summary.csv, campaign_reps.csv.gz",
+dsUnitsFiveMed,28,SIM,"analysis/campaign.py -> data/v2/campaign_summary.csv, campaign_reps.csv.gz",
+dsUnitsOracle,27,SIM,"analysis/campaign.py -> data/v2/campaign_summary.csv, campaign_reps.csv.gz",
+niTrainFail,"4\,697",PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niWithinTrain,"2\,962",PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niWithinTest,"1\,735",PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niForwardTest,648,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niAreas,16,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niFamilies,8,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niSigArea,0.00,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niSigInter,0.71,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niSigMonth,0.20,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niCiArea,0.00--0.47,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niPArea,1.00,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niCiInter,0.52--0.92,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niPInter,<10^{-20},PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niCiMonth,0.00--0.31,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niPMonth,0.047,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niPhi,6.6,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niFamLo,0.16,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",smallest family rate ratio
+niFamHi,1.24,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",largest family rate ratio
+niPoissonWithinKnownCover,95.8,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niPoissonWithinKnownUnits,31,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niPoissonWithinNewCover,92.7,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niPoissonWithinNewUnits,31,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niPoissonForwardKnownCover,100.0,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niPoissonForwardKnownUnits,25,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niPoissonJntWithinKnownCover,97.9,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niPoissonJntWithinKnownUnits,33,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niPoissonJntWithinNewCover,95.3,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niPoissonJntWithinNewUnits,34,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niPoissonJntForwardKnownCover,100.0,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niPoissonJntForwardKnownUnits,27,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niNbPooledWithinKnownCover,98.4,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niNbPooledWithinKnownUnits,70,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niNbPooledWithinNewCover,98.4,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niNbPooledWithinNewUnits,73,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niNbPooledForwardKnownCover,100.0,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niNbPooledForwardKnownUnits,53,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niEbGammaWithinKnownCover,97.4,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niEbGammaWithinKnownUnits,34,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niEbGammaWithinNewCover,95.8,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niEbGammaWithinNewUnits,38,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niEbGammaForwardKnownCover,100.0,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niEbGammaForwardKnownUnits,26,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niHierMargWithinKnownCover,99.5,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niHierMargWithinKnownUnits,36,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niHierMargWithinNewCover,99.0,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niHierMargWithinNewUnits,118,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niHierMargForwardKnownCover,99.1,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niHierMargForwardKnownUnits,34,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niHierPluginWithinKnownCover,100.0,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niHierPluginWithinKnownUnits,37,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niHierPluginWithinNewCover,100.0,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niHierPluginWithinNewUnits,139,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niHierPluginForwardKnownCover,100.0,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niHierPluginForwardKnownUnits,36,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niHierPredWithinKnownCover,100.0,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niHierPredWithinKnownUnits,40,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niHierPredWithinNewCover,100.0,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niHierPredWithinNewUnits,166,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niHierPredForwardKnownCover,100.0,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niHierPredForwardKnownUnits,39,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niHierShockWithinKnownCover,99.5,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niHierShockWithinKnownUnits,35,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niHierShockWithinNewCover,100.0,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niHierShockWithinNewUnits,164,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niHierShockForwardKnownCover,100.0,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niHierShockForwardKnownUnits,40,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niWithinMonths,192,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",
+niForwardMonths,112,PUBLICDATA,"analysis/ni_streetlights.py -> data/v2/ni_results.json, ni_results.csv",

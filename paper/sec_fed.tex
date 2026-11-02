@@ -86,17 +86,25 @@ alone informs the rate and its own effect is shrunk towards zero, which is the
 normal case on board and the reason such populations must not be dropped
 (Section~\ref{sec:mechanisms}).
 
-\subsection{Communication Cost}
-A message~\eqref{eq:message} carries $2+m_s+m_s(m_s+1)/2$ numbers, so the cost per
-round is quadratic in the global coordinates a holder touches and linear in the
-number of holders, multiplied by the number of coordinator rounds. For the
-cell-aggregated counts of this model, however, a single exchange of each
-holder's cell table is also lossless for the
-likelihood~\cite{luo2022dlmm,tong2025cola} and is cheaper whenever the cells per
-holder are few, as for one product class on one ship. The iterative protocol is
-therefore justified not by communication volume but by the cases in which a holder
-will not release even the cell table, or in which covariates are continuous rather
-than banded, so that no finite sufficient aggregate exists.
+\subsection{Numerical Check and Communication Cost}
+The protocol was checked against the centralised fit on \fedN{} simulated
+fleets of 20 holders, four references, four missions, a maker term shared
+across holders and a continuous pre-mission covariate. At equal variance
+parameters the two Laplace values agree to $\fedSameTheta$, which is the
+identity above in floating point. Full fits from the same starting point give
+a median absolute difference of \fedSigMed{} in the fitted standard deviations
+and at most \fedBetaMax{} in the coefficients; in \fedDiverge{} of the
+\fedN{} fleets the two outer optimisers stopped at different points of a flat
+likelihood, which is a property of the optimiser and not of the protocol.
+
+A message~\eqref{eq:message} carries $2+m_s+m_s(m_s+1)/2$ numbers. A complete
+fit took a median of \fedRounds{} coordinator rounds and \fedFloats{}
+transmitted numbers, against \fedOneShot{} for a single exchange of the cell
+tables, which is also lossless for this
+likelihood~\cite{luo2022dlmm,tong2025cola}: the iterative protocol is about
+\fedRatio{} times more expensive. It is justified only where a holder will not
+release even its cell table, or where covariates are continuous and recorded
+per unit, so that no small sufficient aggregate exists.
 
 \subsection{Disclosure Properties}
 The protocol establishes one property: \emph{no unit-level record leaves its

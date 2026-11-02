@@ -1,0 +1,79 @@
+{
+ "splits": {
+  "forward": {
+   "train": [
+    "2023-04",
+    "2025-03"
+   ],
+   "test": [
+    "2026-04",
+    "2026-10"
+   ],
+   "train_failures": 4697,
+   "test_failures": 648,
+   "test_cells": 616
+  },
+  "within": {
+   "train": [
+    "2023-04",
+    "2024-03"
+   ],
+   "test": [
+    "2024-04",
+    "2025-03"
+   ],
+   "train_failures": 2962,
+   "test_failures": 1735,
+   "test_cells": 1008
+  }
+ },
+ "train_cells": 2016,
+ "train_failures": 4697,
+ "areas": 16,
+ "families": [
+  "Ignis Mini",
+  "LCL Quantum",
+  "LED other",
+  "Philips Digistreet",
+  "Philips Lumistreet",
+  "Thorn R2L2",
+  "Urbis Ampera",
+  "Urbis Axia"
+ ],
+ "components": {
+  "sigma": {
+   "area": 0.0024787521766663585,
+   "area_family": 0.7096134241200032,
+   "area_month": 0.199512646956224
+  },
+  "phi": 6.578438989771538,
+  "loglik": -2000.9557883240268,
+  "family_effects": {
+   "LCL Quantum": -1.2118922541389616,
+   "LED other": -0.19964444623635572,
+   "Philips Digistreet": -0.9566697681068244,
+   "Philips Lumistreet": 0.21495966980221518,
+   "Thorn R2L2": -1.8453313049888918,
+   "Urbis Ampera": -1.0183695665373442,
+   "Urbis Axia": -0.5554285013598474
+  },
+  "lrt_area": 0.0,
+  "p_area": 1.0,
+  "ci_area": [
+   0.0,
+   0.466414733918288
+  ],
+  "lrt_af": 105.52920512761011,
+  "p_af": 4.675475913632155e-25,
+  "ci_af": [
+   0.519268060779899,
+   0.9196681985342158
+  ],
+  "lrt_am": 2.7902836132079756,
+  "p_am": 0.047418720638535826,
+  "ci_am": [
+   0.0,
+   0.30586351716676263
+  ]
+ }
+}

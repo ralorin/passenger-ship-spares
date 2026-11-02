@@ -1,4 +1,4 @@
-\documentclass[journal,10pt]{IEEEtran}
+\documentclass[journal,11pt]{IEEEtran}
 
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{booktabs}
@@ -23,16 +23,16 @@
 \makeatother
 
 \input{numbers}
+\input{numbers_v2}
 
 \markboth{IEEE Transactions on Reliability}%
-{Spares Provisioning for Shipboard Power Electronics from Divided Evidence}
+{Spares Provisioning for Power Electronics on Passenger Ships}
 
 \begin{document}
 \bstctlcite{BSTcontrol}
 
-\title{Spares Provisioning for Shipboard Power Electronics\\
-from Divided Evidence: Exact Plan Cover, Ship--Product\\
-Dependence and Federated Count Estimation}
+\title{Spares Provisioning for Power Electronics on\\
+Passenger Ships from Divided Fleet Records}
 
 \author{Paula~Lamo,~\IEEEmembership{Senior Member,~IEEE,}
         and~Ricardo~S.~Alonso%
@@ -41,9 +41,7 @@ Dependence and Federated Count Estimation}
 (e-mail: paula.lamo@unican.es). Corresponding author: P. Lamo.}%
 \thanks{R. S. Alonso is with the Universidad Internacional de La Rioja (UNIR),
 26006 Logro\~{n}o, Spain, and also with the AIR Institute, 37002 Salamanca,
-Spain (e-mail: ricardoserafin.alonso@unir.net).}%
-\thanks{No shipboard failure records were available for this study;
-Section~\ref{sec:evidence} documents the search and its outcome.}}
+Spain (e-mail: ricardoserafin.alonso@unir.net).}}
 
 \maketitle
 
@@ -91,7 +89,7 @@ distribution, random effects, ships, spare parts.
 \label{sec:model}
 \input{sec_model}
 
-\section{Cover Delivered by a Provisioning Plan}
+\section{Plans for One Population}
 \label{sec:cover}
 \input{sec_cover}
 
@@ -107,9 +105,13 @@ distribution, random effects, ships, spare parts.
 \label{sec:design}
 \input{sec_design}
 
-\section{Available Power-Electronics Evidence}
-\label{sec:evidence}
-\input{sec_evidence}
+\section{A Simulated Passenger Fleet}
+\label{sec:fleet}
+\input{sec_fleet}
+
+\section{A Real Fleet: LED Street Lighting}
+\label{sec:lighting}
+\input{sec_lighting}
 
 \section{Limitations and Requirements for Validation}
 \label{sec:limits}

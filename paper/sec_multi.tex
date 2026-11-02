@@ -126,18 +126,64 @@ $s_{\mathrm{joint}}$ & total & total \\
 \end{tabular}
 \end{table}
 
-\subsection{Consequences}
-Two conclusions for practice follow. The criterion must be fixed before the plan
-is computed, since the two answers differ by a factor of order $P$ and respond to
-the dependence structure with opposite signs: a fleet holding non-interchangeable
-references uses~\eqref{eq:joint}, and the aggregate figure applies only to
-interchangeable stock. Neither criterion should then be approached by adding
-per-reference quantiles, since evaluating~\eqref{eq:conv}
-and~\eqref{eq:jointexact}, or drawing from the fitted model, costs little.
+\subsection{Cost-Minimal Vectors}
+Table~\ref{tab:stock} uses a common stock for references with equal means. With
+unequal means or costs the stock should differ by reference, and the smallest
+cost vector meeting~\eqref{eq:joint} is found by marginal analysis, adding at
+each step the unit with the largest gain in log joint cover per unit cost, the
+procedure of the availability-oriented spares
+literature~\cite{sherbrooke2004,basten2014}. Over a grid of 2, 4 and 8
+references, expected totals of 2, 8 and 20 failures, equal or doubling means,
+equal or alternating fivefold costs and three allocations, the minimal vector
+costs a median \rvSaveMed\,\% less than the common stock when means or costs
+differ, and up to \rvSaveMax\,\%; with everything equal the saving is
+\rvSaveEq\,\% (\rvExOpt{} units against \rvExCom{} at eight references under a
+ship-wide deviation). Per-reference quantiles deliver as little as
+\rvMargMin\,\% joint cover on the same grid.
 
-The allocation between $\tau$ and $\omega$, however, is an empirical quantity that
-no data in this paper determine, so a single data-holder $\sigma$ is not
-sufficient to size a multi-reference plan under either criterion and none is
-reported. While the ordering is unresolved, the defensible practice is to compute
-the plan under both extremes and adopt the more conservative figure for the
-criterion in force.
+\subsection{Plans Under an Unknown Allocation}
+Suppose the total spread $\sigma=\mpSigma$ is known but the share
+$f=\tau^2/\sigma^2$ is not. Two plans are available without that share: the
+\emph{conservative} plan, the larger of the plans for $f=0$ and $f=1$, and an
+\emph{averaged} plan meeting the target under the mixture over $f$ uniform on
+$[0,1]$. Table~\ref{tab:robust} evaluates both against every true $f$ on a
+grid of eleven values. The conservative plan never falls below 99\,\%
+(\rvConsJointMin\,\% joint, \rvConsAggMin\,\% aggregate at worst) and pays for
+it in units, most under the aggregate criterion. The averaged plan is cheaper
+but its cover depends on the truth: it reaches \rvAvgJointMin\,\% joint and
+\rvAvgAggMin\,\% aggregate cover at worst. A fleet that cannot afford a
+shortfall uses the conservative plan until its records resolve the
+allocation; Section~\ref{sec:design} gives the campaign size at which they do,
+and Section~\ref{sec:lighting} shows a real network in which they did.
+
+\begin{table}[!t]
+\caption{Plans built without knowing the share of the spread that is
+ship-wide (\textsc{analytical}; $\sigma=\mpSigma$, equal means): lowest cover
+over the true share and largest excess of units over the plan that knows it}
+\label{tab:robust}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}cccccccccc@{}}
+\toprule
+& & \multicolumn{4}{c}{conservative} & \multicolumn{4}{c}{averaged} \\
+\cmidrule(lr){3-6}\cmidrule(lr){7-10}
+& & \multicolumn{2}{c}{joint} & \multicolumn{2}{c}{aggregate} &
+\multicolumn{2}{c}{joint} & \multicolumn{2}{c}{aggregate} \\
+$P$ & $\Lambda$ & cover & units & cover & units & cover & units & cover & units \\
+\midrule
+\tabinput{tables/tab_robust.tex}
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Consequences}
+The criterion must be fixed before the plan is computed, since the two answers
+differ by a factor of order $P$ and respond to the dependence structure with
+opposite signs: a fleet holding non-interchangeable references
+uses~\eqref{eq:joint}, and the aggregate figure applies only to interchangeable
+stock. Neither criterion should be approached by adding per-reference
+quantiles, since evaluating~\eqref{eq:conv} and~\eqref{eq:jointexact}, or
+drawing from the fitted model, costs little. And a single holder-level $\sigma$
+does not size a multi-reference plan under either criterion: the allocation
+has to be estimated, or the conservative plan carried.

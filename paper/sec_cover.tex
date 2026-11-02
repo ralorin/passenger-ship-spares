@@ -1,6 +1,7 @@
-A fleet weighing the cost of collecting and combining evidence needs to know not
-that ignoring heterogeneity is wrong, which is established, but whether it changes
-the number of spares embarked. This section answers that for an idealised case.
+A fleet weighing the cost of collecting and combining evidence needs to know
+not that ignoring heterogeneity is wrong, which is established, but how many
+spares it changes. This section answers that for one population, first exactly
+for an idealised case and then for the shortcuts a planner is likely to use.
 
 \subsection{Setting and Exact Result}
 \begin{assumption}
@@ -10,184 +11,108 @@ ignores latent log-rate spread of standard deviation $\sigma$. The ignored
 spread acts multiplicatively on the rate and preserves the mean:
 \begin{equation}
 Y\mid u\sim\mathrm{Poisson}\!\left(\lambda e^{u-\sigma^2/2}\right),\qquad
-u\sim\mathcal N(0,\sigma^2),
+u\sim\mathcal N(0,\sigma^2).
 \label{eq:mixture}
 \end{equation}
-and the predictor embarks $q_p=\min\{q:F_{\mathrm{Pois}}(q;\lambda)\ge p\}$.
 \end{assumption}
 
-Assumption~\ref{as:mix} describes an idealised case, not the full model of
-Section~\ref{sec:model}. It is obtained from that model for a population at an
-unseen holder by collapsing the omitted latent terms into a single lognormal
-factor with $\sigma^2$ equal to the sum of their variances. That step is exact
-only under conditions the full model does not generally satisfy: the omitted
-terms must be Gaussian on the log-rate scale and act on the whole population
-alike, the negative-binomial cell dispersion of~\eqref{eq:model} must either be
-absent or be absorbed into $\sigma^2$ as a further lognormal component, the
-retained effects must be held at their estimates rather than integrated, and the
-uncertainty of $\boldsymbol\beta$ and of the variance parameters must be
-ignored. A latent factor that is not multiplicative, not mean-preserving or not
-lognormal yields a different mixture, and the common-cause events of
-Section~\ref{sec:mechanisms} are not of this form at all.
-
-The results below therefore apply exactly to~\eqref{eq:mixture} and approximately
-to the full model. Their purpose is diagnostic: a plan for a real population must
-be computed from the predictive distribution of Section~\ref{sec:model}, which
-carries the cell dispersion, crossed effects and parameter uncertainty
-that~\eqref{eq:mixture} omits.
+Assumption~\ref{as:mix} is obtained from the model of Section~\ref{sec:model}
+for a population at an unseen holder by collapsing the omitted latent terms into
+one lognormal factor. The collapse is exact only if those terms are Gaussian on
+the log-rate scale and act on the whole population alike, the cell dispersion
+is absent or absorbed into $\sigma^2$, and parameter uncertainty is ignored.
+The results below are therefore diagnostic. A plan for a real population is
+computed from the predictive distribution of Section~\ref{sec:model}, as
+Sections~\ref{sec:design}--\ref{sec:lighting} do.
 
 \begin{proposition}[Exact delivered cover]
 \label{prop:exact}
-Under Assumption~\ref{as:mix} the probability that the plan $q_p$ is not
-exceeded is
+Under Assumption~\ref{as:mix} a stock $q$ is not exceeded with probability
 \begin{equation}
-C(q_p)=\int F_{\mathrm{Pois}}\!\left(q_p;\lambda e^{u-\sigma^2/2}\right)
+C(q)=\int F_{\mathrm{Pois}}\!\left(q;\lambda e^{u-\sigma^2/2}\right)
 \varphi_\sigma(u)\,\mathrm du ,
 \label{eq:cover}
 \end{equation}
-where $\varphi_\sigma$ is the $\mathcal N(0,\sigma^2)$ density.
+where $\varphi_\sigma$ is the $\mathcal N(0,\sigma^2)$ density, and the smallest
+stock with cover at least $p$ is $q^\ast_p=\min\{q:C(q)\ge p\}$.
 \end{proposition}
 \begin{IEEEproof}
-Condition on $u$, apply the Poisson distribution function, and integrate against
-the law of $u$; $q_p$ does not depend on $u$.
+Condition on $u$, apply the Poisson distribution function and integrate
+against the law of $u$; $q$ does not depend on $u$.
 \end{IEEEproof}
 
-The integral in~\eqref{eq:cover} is one-dimensional and inexpensive to evaluate.
-Two of its features account for the errors quantified below. It depends on
-$\lambda$ and $\sigma$ separately: on $\lambda$ through the conditional
-Poisson and through the integer plan quantile $q_p$, and on $\sigma$ through the
-mixing measure. Being an integer, $q_p$ also makes $C(q_p)$ increase in steps
-rather than smoothly in $\lambda$.
+The integral is one-dimensional and cheap. Its integrand is a sigmoid in $u$
+whose transition narrows as $\lambda$ grows, and Gauss--Hermite quadrature with
+60 nodes misplaces it by up to \quadGH{} percentage points; a composite Simpson
+rule on $[-10\sigma,10\sigma]$ with \quadNodes{} points is stable to
+$\quadGrid$ and is used throughout.
 
-\begin{remark}[Numerical evaluation]
-\label{rem:quad}
-The integrand is a sigmoid in $u$ whose transition narrows as $\lambda$ grows.
-Gauss--Hermite quadrature, the natural first choice for a Gaussian mixing
-measure, places too few nodes there: with 60 nodes it misstates
-\eqref{eq:cover} by up to \quadGH{} percentage points on the grid used below.
-A composite Simpson rule is used on $[-10\sigma,10\sigma]$ with \quadNodes{} points,
-stable to $\quadGrid$ against a fourfold refinement. Since this error can exceed
-the effect being reported, any use of~\eqref{eq:cover} should state its quadrature
-and its convergence.
-\end{remark}
-
-\subsection{Approximation Error of the $\kappa$ Reduction}
-\begin{proposition}[First-order reduction]
-\label{prop:approx}
-Let $\kappa=\sigma\sqrt\lambda$. If, in addition to
-Assumption~\ref{as:mix}, (i) $\lambda$ is large enough that
-$Y\mid u$ admits the normal approximation
-$\lambda e^{u-\sigma^2/2}+\sqrt{\lambda e^{u}}\,\varepsilon$ with
-$\varepsilon\sim\mathcal N(0,1)$, (ii) the plan may be replaced by its normal
-counterpart $q_p\approx\lambda+z_p\sqrt\lambda$, and (iii) $\sigma$ is small
-enough that the event $\{Y\le q_p\}$ may be linearised in $u$, then
+\subsection{Shortcut Plans}
+Three shortcuts are within reach of a planner who has an estimate of $\sigma$.
+The first ignores it and embarks the Poisson quantile $q^{\mathrm P}_p$. The
+second scales the Poisson safety margin,
 \begin{equation}
-C(q_p)\approx\Phi\!\left(\frac{z_p}{\sqrt{1+\kappa^2}}\right),
-\qquad
-\frac{q_p^{\mathrm{(with)}}-\lambda}{q_p^{\mathrm{(without)}}-\lambda}
-\approx\sqrt{1+\kappa^2}.
+q^{\kappa}_p=\big\lceil\lambda+(q^{\mathrm P}_p-\lambda)\sqrt{1+\kappa^2}\,\big\rceil,
+\qquad \kappa=\sigma\sqrt\lambda ,
 \label{eq:kappa}
 \end{equation}
-\end{proposition}
-\begin{IEEEproof}
-Under (i)--(iii) the event becomes $\{\varepsilon\le z_p-\sqrt\lambda\,u\}$ to
-first order in $u$, and
-$\mathbb E_u\Phi(z_p-\sqrt\lambda\,u)=\Phi(z_p/\sqrt{1+\lambda\sigma^2})$. The
-second statement follows from
-$\mathrm{Var}(Y)=\lambda+\lambda^2(e^{\sigma^2}-1)\approx\lambda(1+\kappa^2)$.
-\end{IEEEproof}
+which is what a normal approximation gives: with $Y\mid u$ approximately normal
+and $u$ small, $\mathrm{Var}(Y)\approx\lambda(1+\kappa^2)$. The same group
+appears in capacity sizing under an uncertain arrival rate, where the
+coefficient of variation of the rate is compared with the inverse square root
+of the load~\cite{bassamboo2010,mathijsen2018}; moment-based safety stocks of
+this kind are known to miss their target when the demand distribution is
+skewed~\cite{eppen1988}. The third replaces the lognormal mixture by the
+negative binomial with the same mean and variance, shape
+$1/(e^{\sigma^2}-1)$, the gamma--Poisson form common in spare-parts
+models~\cite{aronis2004,sherbrooke2004}.
 
-Proposition~\ref{prop:approx} is the form usually quoted, since it compresses two
-quantities into one. That compression breaks down when hypotheses (i)--(iii) do,
-which is the regime most relevant to provisioning.
+Table~\ref{tab:single} compares the three with $q^\ast_p$ over
+\spLamN{} values of $\lambda\in[\spLamLo,\spLamHi]$, ten values of
+$\sigma\in[\spSigLo,\spSigHi]$ and three levels, \spPts{} points in all, a
+range chosen to cover a single reference on a single ship. These are maxima
+observed on a grid, not analytical bounds.
 
-\subsubsection{Insufficiency of $\kappa$}
-The lower panel of Fig.~\ref{fig:cover} holds
-$\kappa$ fixed and moves along the curve $\sigma=\kappa/\sqrt\lambda$. If
-$\kappa$ were sufficient, each curve would coincide with its horizontal line. At
-$\kappa=0.25$ the exact 99\,\% cover varies by \spreadKQtrNn{} percentage
-points, which is negligible; at $\kappa=1$ by \spreadKOneNn{} points; and at
-$\kappa=2$ by \spreadKTwoNn{} points, from \inspTwoLo\,\% to \inspTwoHi\,\%,
-against the single value \inspTwoRule\,\% that~\eqref{eq:kappa} assigns to that
-$\kappa$. At the 90\,\% level the variation at $\kappa=2$ reaches
-\spreadKTwoNt{} points. The assertion that $\kappa$ governs the cover for
-arbitrary $\lambda$ and $\sigma$ is therefore incorrect; it governs the cover to
-within a fraction of a point only for $\kappa\lesssim0.5$.
-
-\subsubsection{Validity Domain of the Closed Form}
-Table~\ref{tab:domain} reports the
-largest $|\text{closed form}-\text{exact}|$ observed on a finite grid:
-\gridLam{} values of $\lambda$ spanning $[\gridLamLo,\gridLamHi]$, \gridSig{}
-values of $\sigma$ spanning $[\gridSigLo,\gridSigHi]$ and the three plan levels,
-\gridPts{} points in all. These are results of numerical exploration, not
-analytical bounds, and no claim is made about points between grid values or
-outside its extent. On that grid the closed form is accurate only in the
-upper-left region: for $\kappa<0.25$ and $\lambda\ge20$ it lies within
-\domBest{} points, and for $\kappa<0.5$ with $5\le\lambda<20$ within
-\domModerate{} points. The discrepancy reaches \domSmallLam{} points for
-$\lambda<1$, where the integer plan quantile dominates, and \domBigKappa{} points
-for $\kappa\ge2$, where the linearisation in $u$ fails; the largest observed
-anywhere on the grid is \domMaxGap{} points. The sign of the error is
-informative: the closed form understates the delivered cover at almost
-every grid point, overstating it by at most \domOverstate{} points. Used as a
-screening test it is therefore conservative over the region explored,
-occasionally indicating that heterogeneity matters more than it does and rarely
-the reverse.
-
-\subsubsection{Unsuitability of the Margin Factor}
-The second statement
-in~\eqref{eq:kappa} appears to give the additional spares directly. Compared
-with the exact plan $\min\{q:C(q)\ge p\}$ obtained from~\eqref{eq:cover}, the
-factor $\sqrt{1+\kappa^2}$ is in error by up to \marMaxRel\,\% of the margin,
-with a median of \marMedMid\,\% for $10\le\lambda<100$, reaching \marMaxUnits{}
-spare units in the worst case on the grid. It is a scaling relation rather than a
-provisioning formula.
+Ignoring $\sigma$ is costly: at the 99\,\% level the Poisson plan falls short
+of its target by up to \spPoisShort{} percentage points, and by
+\spPoisShortOp{} points even for $\lambda\le 20$ and $\sigma\le0.6$. The
+margin factor removes most of that loss but not all of it. It still falls
+\spKapShort{} points short, \spKapShortOp{} in the restricted range, and
+matches the exact plan at only \spKapEqual\,\% of the grid points, because
+both the normal approximation and the linearisation in $u$ fail for small
+$\lambda$ and large $\kappa$. The moment-matched negative binomial is the
+useful shortcut. At the 99\,\% level it equals the exact plan at
+\spNbEqual\,\% of the points and is never more than \spNbShort{} points short,
+because the gamma mixture has a lighter far tail than the lognormal, which
+costs at most \spNbUnits{} units at the largest $\lambda\sigma$ explored. At 90
+and 95\,\% the error changes sign and it over-provisions by up to
+\spNbOver{} units.
 
 \begin{table}[!t]
-\caption{Largest absolute error of the closed form~the closed form~\eqref{eq:kappa} against the
-exact mixture~the exact mixture~\eqref{eq:cover}, in percentage points, observed on a grid
-of \gridLam{} values of $\lambda\in[\gridLamLo,\gridLamHi]$, \gridSig{} values of
-$\sigma\in[\gridSigLo,\gridSigHi]$ and three plan levels
-(\textsc{analytical; numerical exploration, not an analytical bound}). The closed
-form is accurate in the upper-left region only}
-\label{tab:domain}
+\caption{Shortcut plans against the exact plan of
+Proposition~\ref{prop:exact} (\textsc{analytical}; grid maxima, not bounds):
+largest shortfall of delivered cover below the target, in percentage points;
+share of grid points where the plan equals $q^\ast_p$; and the range of the
+difference in units}
+\label{tab:single}
 \centering
 \footnotesize
-\setlength{\tabcolsep}{5pt}
-\begin{tabular}{@{}lcccc@{}}
+\setlength{\tabcolsep}{2.4pt}
+\begin{tabular}{@{}lccccccccc@{}}
 \toprule
-& \multicolumn{4}{c}{expected failures $\lambda$} \\
-\cmidrule(lr){2-5}
-& $<1$ & $1$--$5$ & $5$--$20$ & $\ge20$ \\
+& \multicolumn{3}{c}{90\,\%} & \multicolumn{3}{c}{95\,\%} & \multicolumn{3}{c}{99\,\%} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}\cmidrule(lr){8-10}
+Plan & short & equal & units & short & equal & units & short & equal & units \\
 \midrule
-\tabinput{tables/tab_domain.tex}
+\tabinput{tables/tab_single.tex}
 \bottomrule
 \end{tabular}
 \end{table}
 
-\begin{figure}[!t]
-\centering
-\includegraphics[width=\columnwidth]{figures/fig1_cover.pdf}
-\caption{Delivered cover of a 99\,\% plan (\textsc{analytical}). (top) Exact
-mixture~\eqref{eq:cover} against the expected count, one curve per ignored
-spread $\sigma$; the steps are the integer plan quantile. (bottom) The same along
-curves of constant $\kappa=\sigma\sqrt\lambda$: if $\kappa$ determined the cover
-each curve would coincide with its horizontal line, which is the value the
-closed form~\eqref{eq:kappa} assigns to that $\kappa$. The discrepancy grows
-with $\kappa$ and at small $\lambda$.}
-\label{fig:cover}
-\end{figure}
-
-
-
-
-
-\subsection{Use of the Criterion}
-The resulting recommendation is narrow. The quantity $\kappa=\sigma\sqrt\lambda$,
-computed from the fleet's estimated variance components and the population to be
-provisioned, should be used only to screen: for $\kappa\lesssim0.25$ heterogeneity
-is immaterial at these levels and a pooled plan suffices. Beyond that threshold
-$\kappa$ must not size the margin; \eqref{eq:cover} should be evaluated instead,
-or preferably the quantile of the full predictive distribution of
-Section~\ref{sec:model}, which requires no approximation, admits several
-references at once and propagates the uncertainty of the variance components.
+\subsection{Use of the Result}
+The recommendation is narrow. When a single reference is planned on its own,
+the negative binomial with the fitted total spread is an adequate shortcut at
+high cover levels, and the margin factor should not be used to size stock. Two
+things the shortcuts do not handle are the subject of the rest of the paper:
+spares are held as a vector over several references, and the spread $\sigma$
+is itself estimated, with an uncertainty the plan has to carry.

@@ -7,8 +7,10 @@ reference and a month the part of a mission. Demand is the number of
 "Light Out" reports on streets carrying a single lantern family (see
 ni_streetlights_prep.py). The models are fitted on April 2023 - March 2025
 with the April 2025 inventory and tested on April - October 2026 with the
-November 2026 inventory, so every forecast is at least a year ahead. A second
-test leaves each area out of the fit in turn, as a holder never seen before.
+November 2026 inventory, so every forecast is at least a year ahead; a second
+split fits on the first of those two years and tests on the second. Each test
+is also run leaving each area out of the fit in turn, as a holder never seen
+before.
 
 Predictors give a joint 99 % stock vector over the families an area holds:
   poisson      family and calendar-month rates, Poisson, own quantile per family
@@ -38,7 +40,9 @@ from plan_cover import greedy_joint, plan_joint_draws_robust, plan_marginal_draw
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "..", "data", "v2")
 TRAIN = ("2023-04", "2025-03")
-TEST = ("2026-04", "2026-10")
+# (name, training months, inventory for training, test months, inventory for test)
+SPLITS = [("forward", TRAIN, "2025", ("2026-04", "2026-10"), "2026"),
+          ("within", ("2023-04", "2024-03"), "2025", ("2024-04", "2025-03"), "2025")]
 LEVEL = 0.99
 R_DRAWS = 6000
 SEED = 20261102
@@ -165,34 +169,36 @@ def components(train, levels):
 
 def main():
     rng = np.random.default_rng(SEED)
-    train = load("2025", TRAIN)
-    test = load("2026", TEST)
-    test = test[test.family.isin(train.family.unique())]
-    levels = {c: sorted(train[c].unique()) for c in ("family", "moy")}
-    levels["moy"] = sorted(set(levels["moy"]))
+    full = load("2025", TRAIN)
+    levels = {c: sorted(full[c].unique()) for c in ("family", "moy")}
+    comp = components(full, levels)
 
-    comp = components(train, levels)
-    acc = {}
-    evaluate(fit_all(train, levels), test, "known", rng, acc)
-    for area in sorted(train.area.unique()):
-        evaluate(fit_all(train[train.area != area], levels), test[test.area == area], "new", rng, acc)
-
-    rows = []
-    for (method, kind), a in acc.items():
-        h = np.histogram(a["pit"], bins=10, range=(0, 1))[0] if a["pit"] else np.zeros(10)
-        rows.append(dict(method=method, kind=kind, n=a["n"], cover=a["covered"] / a["n"],
-                         units=a["units"] / a["n"],
-                         log_score=a["ls"] / a["n"] if a["pit"] else np.nan,
-                         pit_max_dev=float(np.max(np.abs(h / max(h.sum(), 1) - 0.1))) if a["pit"] else np.nan))
-    T = pd.DataFrame(rows).sort_values(["kind", "method"])
+    rows, sizes = [], {}
+    for name, tr, inv_tr, te, inv_te in SPLITS:
+        train, test = load(inv_tr, tr), load(inv_te, te)
+        test = test[test.family.isin(train.family.unique())]
+        sizes[name] = dict(train=tr, test=te, train_failures=int(train.y.sum()),
+                           test_failures=int(test.y.sum()), test_cells=len(test))
+        acc = {}
+        evaluate(fit_all(train, levels), test, "known", rng, acc)
+        for area in sorted(train.area.unique()):
+            evaluate(fit_all(train[train.area != area], levels), test[test.area == area], "new", rng, acc)
+        for (method, kind), a in acc.items():
+            h = np.histogram(a["pit"], bins=10, range=(0, 1))[0] if a["pit"] else np.zeros(10)
+            rows.append(dict(split=name, method=method, kind=kind, n=a["n"], covered=a["covered"],
+                             cover=a["covered"] / a["n"], units=a["units"] / a["n"],
+                             log_score=a["ls"] / a["n"] if a["pit"] else np.nan,
+                             pit_max_dev=float(np.max(np.abs(h / max(h.sum(), 1) - 0.1)))
+                             if a["pit"] else np.nan))
+    T = pd.DataFrame(rows).sort_values(["split", "kind", "method"])
     T.to_csv(os.path.join(OUT, "ni_results.csv"), index=False)
-    summ = dict(train=TRAIN, test=TEST, train_cells=len(train), train_failures=int(train.y.sum()),
-                test_cells=len(test), test_failures=int(test.y.sum()),
-                areas=int(train.area.nunique()), families=levels["family"], components=comp)
+    summ = dict(splits=sizes, train_cells=len(full), train_failures=int(full.y.sum()),
+                areas=int(full.area.nunique()), families=levels["family"], components=comp)
     with open(os.path.join(OUT, "ni_results.json"), "w") as f:
         json.dump(summ, f, indent=1, default=float)
     print(json.dumps(comp, indent=1, default=float))
-    print(T.pivot_table(index="method", columns="kind", values=["cover", "units", "log_score"]).round(3))
+    print(T.pivot_table(index="method", columns=["split", "kind"], values=["cover", "units"]).round(3))
+    print(T.pivot_table(index="method", columns=["split", "kind"], values="log_score").round(3))
 
 
 if __name__ == "__main__":
