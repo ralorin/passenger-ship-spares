@@ -41,17 +41,15 @@ recurrent-event formulation~\cite{meeker2022,lindqvist2006}.
 
 \subsection{Requirements for Shipboard Validation}
 \label{sec:needed}
-Six records are necessary. The first is an inventory of the installed population
-by ship, zone, reference, manufacturer and installation date, maintained through
-refits. The second is a set of event records in which every replacement is dated
-and classified as functional failure or preventive by a rule fixed in advance,
-with removals for refit, obsolescence and cannibalisation recorded separately.
-The third is exposure in powered unit-hours per population and mission. The
-fourth is a set of covariates logged over complete missions, so that the previous
-mission's summaries exist at the moment of decision. The fifth is repeated
-missions and several references per ship, without which the two terms
-of~\eqref{eq:structure} cannot be separated (Section~\ref{sec:design}). The sixth
-is a record of common-cause events, together with teardown of a sample of removed
-units, so that conditional independence and the limiting failure mode are tested
-rather than assumed. With such records the analysis of
+Six records are necessary: an inventory of the installed population by ship,
+zone, reference, manufacturer and installation date, maintained through refits;
+dated replacements classified as functional failure or preventive by a rule
+fixed in advance, with removals for refit, obsolescence and cannibalisation kept
+apart; exposure in powered unit-hours per population and mission; covariates
+logged over complete missions, so that the previous mission's summaries exist
+at the decision; repeated missions and several references per ship, without
+which the two terms of~\eqref{eq:structure} cannot be separated
+(Section~\ref{sec:design}); and common-cause events, with teardown of a sample
+of removed units, so that conditional independence and the limiting failure mode
+are tested rather than assumed. With such records the analysis of
 Section~\ref{sec:lighting} can be repeated on ships.

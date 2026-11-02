@@ -93,8 +93,8 @@ plug-in & predictive & + mission \\
 
 \subsection{Results}
 \label{sec:fleetres}
-Table~\ref{tab:fleet} gives the cover and stock of every plan. Monte Carlo
-standard errors of the fitted plans' cover are at most \flMcseMax{} points.
+Monte Carlo standard errors of the fitted plans' cover in Table~\ref{tab:fleet}
+are at most \flMcseMax{} points.
 
 \subsubsection{Datasheet Practice}
 Planned from datasheet rates, a fleet covers \flMtbfLo--\flMtbfHi\,\% of
@@ -119,20 +119,27 @@ for per-reference plans. The randomised probability integral transforms are
 close to uniform, no decile departing from 0.1 by more than \flPitMax.
 
 \subsubsection{Hierarchy Against Pooling}
-In this fleet the hierarchy buys little. For known ships in the baseline the
-predictive plan embarks \flBasePredKnownUnits{} units per mission against
-\flBaseNbKnownUnits{} for the pooled negative binomial at the same cover, and
-for new ships \flBasePredNewUnits{} against \flBaseNbNewUnits, since it carries
-the spread of a ship never seen; the mean log scores are \flLsPred{} and
-\flLsNb. With standard deviations of 0.3 for the ship, ship--reference and maker
-terms, a model that ignores where the heterogeneity lies loses little. The
-street-lighting network of Section~\ref{sec:lighting}, with an interaction more
-than twice as large, is the case where the structure pays.
+On average the hierarchy buys little in this fleet. For known ships in the
+baseline the predictive plan embarks \flBasePredKnownUnits{} units per mission
+against \flBaseNbKnownUnits{} for the pooled negative binomial at the same
+cover, and fewer in \flFewerBase\,\% of fleets; for new ships it embarks
+\flBasePredNewUnits{} against \flBaseNbNewUnits, since it carries the spread of
+a ship never seen. Its mean log score is the best in every scenario, but only by
+\flLsGapLo--\flLsGapHi{} per mission. With standard deviations of 0.3 for all
+three terms, where the heterogeneity lies matters little. An extreme ship is the
+exception: in one heavy-tailed fleet, with a fitted ship standard deviation of
+\flOutSigShip, the pooled negative binomial, which has no ship term, embarks
+\flOutNbUnits{} units per mission at known ships for \flOutNbCover\,\% cover,
+against \flOutPredUnits{} and \flOutPredCover\,\% for the predictive plan, and
+that fleet accounts for most of the pooled models' excess in the heavy-tail row
+of Table~\ref{tab:fleet}. The street-lighting network of
+Section~\ref{sec:lighting}, with an interaction more than twice as large, is the
+case where the structure pays throughout.
 
 \subsubsection{Common-Cause Events}
-With supply events at 0.5 per ship-year, the predictive plan covers
+With supply events at 0.5 per ship-year, the predictive plan still covers
 \flShockPredKnown\,\% of missions of known ships with \flShockPredKnownUnits{}
-units, and adding the ship--mission term raises that to \flShockShockKnown\,\%
-with \flShockShockKnownUnits{} units. The term absorbs part of the clustering
-that the events cause, although at the rates assumed here the plans hold their
-cover without it.
+units; the ship--mission term raises these to \flShockShockKnown\,\% and
+\flShockShockKnownUnits{} units. At the rates assumed here the fitted dispersion
+absorbs the clustering the events cause, and the extra term buys little cover
+for its stock.

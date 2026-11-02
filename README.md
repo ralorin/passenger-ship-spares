@@ -66,7 +66,7 @@ the forward test uses the current-year file.
 The two large simulations are split into independent tasks. On a SLURM cluster:
 
     sbatch slurm/campaign.sbatch      # 155 000 campaigns, about 3 h on 28 cores
-    sbatch slurm/fleet.sbatch         # 1 400 fleets, several hours on 28 cores
+    sbatch slurm/fleet.sbatch         # 1 400 fleets, about 3 h 40 min on 28 cores
     python campaign.py --summary
     python fleet.py --summary
 

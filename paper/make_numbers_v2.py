@@ -240,11 +240,26 @@ if os.path.exists(FS):
     put("flPitMax", f"{S.pit_max_dev.max():.3f}", "SIM", src, "largest deviation of a PIT decile from 0.1")
     put("flMcseMax", f"{100 * S.loc[(slice(None), stat, slice(None)), 'cover_mcse'].max():.2f}", "SIM", src,
         "largest Monte Carlo standard error of a fitted plan's cover, points")
-    med = R.groupby(["scenario", "method", "kind"]).upm.transform("median")
-    big = R[(R.upm > 3 * med) & R.method.isin(stat + ["hier_marg"])]
-    put("flBigFleets", str(big[["scenario", "rep"]].drop_duplicates().shape[0]), "SIM", src,
-        "fleets in which some fitted plan exceeds three times its median units")
-    put("flBigHeavy", str(big[big.scenario == "heavy_tail"].rep.nunique()), "SIM", src)
+    ls = S.log_score.unstack("method")
+    gap = ls.hier_pred - ls[["nb_pooled", "eb_gamma"]].max(axis=1)
+    assert (gap > 0).all(), "predictive plan no longer best in log score everywhere"
+    put("flLsGapLo", f"{gap.min():.4f}", "SIM", src, "smallest lead of the predictive plan in mean log score")
+    put("flLsGapHi", f"{gap.max():.3f}", "SIM", src, "largest lead of the predictive plan in mean log score")
+    # fleet by fleet, known ships: predictive plan against the pooled negative binomial
+    P = R[R.kind == "known"].pivot_table(index=["scenario", "rep"], columns="method", values="upm")
+    fewer = (P.hier_pred < P.nb_pooled).groupby(level=0).mean()
+    put("flFewerBase", pct(fewer["baseline"], 0), "SIM", src, "share of fleets, known ships")
+    put("flFewerLo", pct(fewer.min(), 0), "SIM", src, "share of fleets, known ships, over scenarios")
+    put("flFewerHi", pct(fewer.max(), 0), "SIM", src, "share of fleets, known ships, over scenarios")
+    # the heavy-tailed fleet in which the pooled model embarks most for known ships
+    h = R[(R.scenario == "heavy_tail") & (R.kind == "known")].set_index(["rep", "method"])
+    out = h.xs("nb_pooled", level="method").upm.idxmax()
+    for m, tag in (("nb_pooled", "Nb"), ("hier_pred", "Pred")):
+        r = h.loc[(out, m)]
+        put(f"flOut{tag}Units", f"{r.upm:.0f}", "SIM", src, f"heavy-tail fleet {out}, known ships")
+        put(f"flOut{tag}Cover", pct(r.covered / r.n), "SIM", src, f"heavy-tail fleet {out}, known ships")
+    put("flOutSigShip", f"{json.loads(h.loc[(out, 'hier_pred'), 'sigma_hier'])[1]:.1f}", "SIM", src,
+        f"fitted ship standard deviation, heavy-tail fleet {out}")
     put("flFleets", str(int(S.fleets.max())), "SIM", src)
     put("flMissions", thou(S.loc[("baseline", "mtbf"), "missions"].sum()), "SIM", src)
 
