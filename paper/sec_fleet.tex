@@ -1,145 +1,198 @@
-Section~\ref{sec:design} isolates the allocation question under the model's own
-assumptions. A provisioning method has to work on records that break those
-assumptions, and against the practice it would replace. This section builds a
-simulated passenger fleet whose orders of magnitude come from public sources and
-compares predictors on missions they have not seen. Every number in it is
-simulated, with inputs scaled to those sources.
+Every number in this section is simulated; no number describes a real fleet.
 
-\subsection{The Fleet}
+\subsection{Fleet, Parameters and Scenarios}
 The fleet has \flShips{} ships in five classes, from an expedition ship of 92
-passenger cabins to one of about 2\,750, plus a cruise ferry on overnight
-crossings, sized from shipyard fact sheets and public ship
-data~\cite{fincantieri_laperouse,oasis_class}. Seven references are carried:
-cabin LED drivers (three per passenger cabin, two per crew cabin), cabin supplies
-for charging outlets, fan-coil inverters (one per cabin), public-area and
-exterior LED drivers, galley supplies and drives in the technical spaces, the
-last four in proportion to the passenger cabins. Datasheet MTBFs are those
-published for representative products~\cite{meanwell_lpv60,schneider_atv212},
-from 0.54 to 9.1 million hours.
+cabins to one of about 2\,750 and a cruise ferry, with the seven references of
+Section~\ref{sec:ship}, each made by two makers, one per class. Parameters are
+of three kinds; none is an estimate transferred from another source.
+\emph{Published}: cabins per class from shipyard fact
+sheets~\cite{fincantieri_laperouse,oasis_class}; datasheet rates, which are
+manufacturers' predictions (Telcordia SR-332, IEC 62380) of 0.54 to 9.1
+million hours at the datasheets' reference
+conditions~\cite{meanwell_lpv60,schneider_atv212}, not observed rates; climate
+normals; and the mean cruise of 7.0 days~\cite{clia2025}.
+\emph{Assumed within published ranges}: a field factor of 3, at the low end of
+the 5 to 12 by which MIL-HDBK-217F raises naval sheltered over ground benign
+environments by part class~\cite{milhdbk217f} and near a pooled conversion of
+3.3~\cite{jeong2011}; and an activation energy of 0.5\,eV, within the
+handbook's values for silicon microcircuits. \emph{Assumed}: a bad-lot factor
+of 2.5, for which a street-lighting programme whose LED fixtures failed in
+their drivers~\cite{halifax2019} shows only that defective driver lots occur;
+drivers per cabin
+and public area, costs, a Weibull age shape of 1.3, lognormal ship,
+ship--reference, maker and cell terms of standard deviation 0.3, 0.3, 0.3 and
+0.15, the distribution of cruise lengths (3 to 14 nights, 1 to 2 for the
+ferry), and every event and recording parameter. Activation energy and age
+shape reach the plans only through temperature and age slopes fitted to the
+record. Planned powered hours follow from booked occupancy and climate
+normals, failures from realised ones. Of two simulated years, the
+first eighteen months of all ships but one per class are fitted and the last
+six predicted, at known and at held-out new ships: about \fdMissions{}
+ship-missions per fleet.
 
-The true rate of each population is the datasheet rate times a field factor of
-3, the reported ratio between office conditions at 25\,$^\circ$C and naval
-sheltered conditions~\cite{siemens_mtbf}, an Arrhenius factor with activation
-energy 0.5\,eV at the zone temperature~\cite{milhdbk217f}, a Weibull age factor
-of shape 1.3, and lognormal ship, ship--reference, maker and cell terms with
-standard deviations 0.3, 0.3, 0.3 and 0.15. Missions follow seasonal itineraries
-in four regions with their January and July climate normals, last 7.0 days on
-average~\cite{clia2025}, and run at booked occupancies near 97\,\%; cabin
-lighting and outlets are used in proportion to the actual occupancy and fan-coil
-units in proportion to the cooling load, neither of which is known before
-sailing. Two years are simulated; the first eighteen months of all ships but one
-per class are used for fitting, and the last six months are predicted, for the
-held-out ships as new ships and for the others as known ones. This gives about
-\flMissions{} predicted ship-missions over \flFleets{} fleets per scenario.
+\emph{Clean} meets the model. \emph{Baseline} adds ship-wide supply events at
+0.2 per ship-year, each failing 0.05\,\% of every population; a bad lot
+multiplying one reference's rate by 2.5 on half the ships of a class; refits
+renewing cabin units; and 10\,\% of preventive replacements recorded as
+failures. Other scenarios vary one assumption: truncated Student-$t_3$ latent effects;
+25\,\% misrecorded replacements; half the fleet observed for one year;
+datasheets that are right (field factor 1); and events at 0.5 per ship-year
+failing 0.1\,\%, and at 2 failing 0.05\,\% or 0.2\,\%. The generator draws one
+event state per ship-mission, with probability $1-e^{-rH/365}$ for rate $r$
+and $H$ nights, and an event adds $\mathrm{Binomial}(N,a)$ failures to every
+population; it never places two events in one mission. No public source gives
+$r$ or $a$ for events that damage electronics. EMSA's 2024 indicator for
+EU-flagged passenger ships, 247 occurrences per 1\,000 ship-years, times the
+2.1\,\% share of losses of electrical power in 2015--2024 gives about 0.005
+per ship-year (our derivation)~\cite{emsa2025}; the UK portal lists 24 such
+losses on passenger ships from 2020 to May 2026, without
+exposure~\cite{maib_portal}. Both count whole-ship power losses and serve as
+context only.
 
-Seven scenarios are run. \emph{Clean} meets every assumption of the model.
-\emph{Baseline} adds ship-wide supply events, such as a blackout and its
-recovery, at 0.2 per ship-year, above the reported rate of loss of propulsion on
-passenger ships~\cite{emsa2025} to allow for under-reporting, each damaging
-0.05\,\% of every population on board; a bad production lot that multiplies the
-rate of one reference by 2.5 on half the ships of a class, of the order seen in
-public LED-driver failures~\cite{halifax2019}; refits that renew cabin units;
-and 10\,\% of preventive replacements recorded as failures. The other five vary
-one feature of the baseline: Student-$t_3$ instead of Gaussian latent effects,
-supply events at 0.5 per ship-year damaging 0.1\,\%, 25\,\% of preventive
-replacements misrecorded, half the fleet observed for one year, and datasheets
-that are right (field factor 1).
+\subsection{Plans and Comparators}
+Every plan is a 99\,\% unit-minimal joint vector for one ship-mission from
+pre-sailing information, scored on realised failures of missions not used to
+fit or select it. The \emph{datasheet} benchmark plans for independent Poisson
+counts at datasheet rate times planned hours; the \emph{scaled} plan
+multiplies those rates by one fleet-wide factor fitted to the record; the
+\emph{pooled negative binomial} has covariates and maker but no ship terms.
+The \emph{hierarchical} plan uses \brDraws{} predictive draws of the model with
+maker, ship and ship--reference terms, and the \emph{fixed-marginal predictive
+comparator} the same draws with each reference column permuted independently,
+which keeps every empirical marginal and breaks the dependence; it is not the
+$f=0$ law of Proposition~\ref{prop:mono} and carries no guarantee.
 
-\subsection{Predictors}
-Eight plans are compared, all at the 99\,\% joint level for the vector of
-references on a ship for one mission. The current practice is represented by
-\emph{MTBF}, the datasheet rate times planned powered hours with each reference
-at its own Poisson quantile, and by its joint version. A \emph{pooled negative
-binomial} regression with maker, crew-cabin and pre-sailing covariates has no
-ship terms. A \emph{gamma empirical-Bayes} model per reference pools ships by
-moments in the manner of the Bayesian spares
-literature~\cite{aronis2004}. The hierarchical model of Section~\ref{sec:model},
-with maker, ship and ship--reference terms, is used with plug-in parameters,
-with draws of every latent quantity (\emph{predictive}), with each reference at
-its own predictive quantile, and with an added ship--mission term shared by all
-references (\emph{+ mission}). The covariates of a planned mission are held
-within the range seen in the record, so that units renewed by a refit, younger
-than any unit on record, are not given an extrapolated age effect; a reference
-with no failure on record takes, in the empirical-Bayes model, the Jeffreys
-posterior of its pooled rate. Plans are scored by the share of predicted
-missions in which every reference is covered, the units embarked, the log
-predictive score~\cite{gneiting2007} and the uniformity of the randomised
-probability integral transform~\cite{czado2009}.
+A vector minimises units under the empirical law of the draws, meets 99\,\%
+under that law, and is evaluated on realised failures, or under the exact law
+in Table~\ref{tab:bridge}. Minimisation is by iterative deepening on the units
+above the marginal quantiles. It was certified for all but \fdNotCertJP{}
+joint or fixed-marginal and \fdNotCertEv{} incident plans of about
+\fdPlansPerType{} per plan type (at least \fdCert\,\% in every group), all
+with severe events; these keep the best vector found, feasible under the draws
+and at most \fdNotCertGap{} units above a lower bound. With a new seed or
+24\,000 draws, only \fdStabSameSeed\,\% and \fdStabSameBig\,\% of vectors on
+\fdStabFleets{} fleets were unchanged, yet mean cover stayed at least
+\fdStabFresh\,\%: performance is stable where the vector is not.
 
 \begin{table*}[!t]
-\caption{Simulated passenger fleet: joint cover of the plans for one
-ship-mission, in percent, and mean units embarked per ship-mission, for known /
-new ships (\textsc{simulation}; \flFleets{} fleets per scenario, 99\,\% target)}
+\caption{Simulated fleet: cover $J$ (\%) and units u per mission of 99\,\%
+unit-minimal plans; hierarchical (joint) minus fixed-marginal plan from the
+same draws, in points ($\Delta J$, 95\,\% interval resampling fleets) and
+units ($\Delta$u); italics: $J<99$\,\%, star: interval below 99\,\%
+(\textsc{simulation}; \fdFleets{} fleets per scenario)}
 \label{tab:fleet}
 \centering
 \footnotesize
-\setlength{\tabcolsep}{3.4pt}
-\begin{tabular}{@{}lcccccccc@{}}
+\setlength{\tabcolsep}{1.6pt}
+\begin{tabular}{@{}lcccccrlrcrlr@{}}
 \toprule
-& \multicolumn{2}{c}{datasheet MTBF} & \multicolumn{2}{c}{pooled} &
-\multicolumn{4}{c}{hierarchical} \\
-\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(l){6-9}
-Scenario & each ref. & joint & neg.\ binomial & gamma EB & marginal &
-plug-in & predictive & + mission \\
+& \multicolumn{8}{c}{known ships} & \multicolumn{4}{c}{new ships} \\
+\cmidrule(lr){2-9}\cmidrule(l){10-13}
+& datash. & scaled & pooled & hier. & fixed & \multicolumn{2}{c}{$\Delta J$} &
+$\Delta$u & hier. & \multicolumn{2}{c}{$\Delta J$} & $\Delta$u \\
+Scenario & $J$ & $J$/u & $J$/u & $J$/u & $J$/u & & & & $J$/u & & & \\
 \midrule
-\multicolumn{9}{@{}l}{\emph{Joint cover (\%)}} \\
-\tabinput{tables/tab_fleet_cover.tex}
-\midrule
-\multicolumn{9}{@{}l}{\emph{Units per ship-mission}} \\
-\tabinput{tables/tab_fleet_units.tex}
+\tabinput{tables/tab_fleet5.tex}
 \bottomrule
 \end{tabular}
 \end{table*}
 
-\subsection{Results}
-\label{sec:fleetres}
-Monte Carlo standard errors of the fitted plans' cover in Table~\ref{tab:fleet}
-are at most \flMcseMax{} points.
+\subsection{Rates, Marginals and Dependence}
+Table~\ref{tab:fleet} separates three contributions; ranges are over the
+scenarios without frequent events. \emph{Learning field rates}: the datasheet
+benchmark covers \fdMtbfLo--\fdMtbfHi\,\% of missions at known ships when the
+field rate exceeds the datasheet rate, as the design builds in, and
+\fdMtbfRight\,\% when datasheets are right; one fleet-wide factor raises this
+to \fdScaledLo--\fdScaledHi\,\%. \emph{Estimating each ship's marginal laws}: the pooled,
+hierarchical and fixed-marginal plans cover \fdFitKLo--\fdFitKHi\,\% at known
+ships and \fdFitNLo--\fdFitNHi\,\% at new ones; in the baseline the
+hierarchical plan differs from the pooled negative binomial by \fdJpCov{}
+points (\fdJpCovLo{} to \fdJpCovHi) and \fdJpUn{} units (\fdJpUnLo{} to
+\fdJpUnHi) per mission at known ships, and by \fdJpNewCov{} points and
+\fdJpNewUn{} units at new ones. Joint cover still differs from marginal cover:
+per-reference 99\,\% quantiles taken separately cover only
+\fdMargLo--\fdMargHi\,\% jointly. \emph{Modelling dependence}: against the
+fixed-marginal comparator the hierarchical plan changed cover by \fdDcKLo{} to
+\fdDcKHi{} points at known ships and \fdDcNLo{} to \fdDcNHi{} at new ones,
+every interval within \fdDcCiKLo{} and \fdDcCiNHi{} points, and saved at most
+\fdAbsDuMax{} units per mission, systematically only at new ships. The
+permutation left up to \fdResid{} points of residual dependence, the order of
+the contrast.
 
-\subsubsection{Datasheet Practice}
-Planned from datasheet rates, a fleet covers \flMtbfLo--\flMtbfHi\,\% of
-missions with each reference at its own 99\,\% quantile and
-\flMtbfJointLo--\flMtbfJointHi\,\% with a joint plan, in every scenario in which
-the field rate exceeds the datasheet rate. The joint plan does not close the
-gap, because the mean it starts from is too low. When the datasheets are right,
-the same plans cover \flRightMtbf{} and \flRightMtbfJoint\,\%; what remains is
-the spread between ships and the temperature and age effects that a datasheet
-does not carry.
+\begin{table}[!t]
+\caption{Bridge, large ship: unit-minimal 99\,\% plan with dependence minus
+plan under independence, exact and from draws (mean $\pm$ 95\,\% half-width,
+\brSeeds{} seeds), scored exactly at the true $f$ (\textsc{exact and
+simulation}; $H$
+days, $\Lambda$ expected failures, u units at $f=0$)}
+\label{tab:bridge}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{2.2pt}
+\begin{tabular}{@{}lrrrrrrr@{}}
+\toprule
+& & & \multicolumn{2}{c}{exact $\Delta$u} & \multicolumn{3}{c}{draws} \\
+\cmidrule(lr){4-5}\cmidrule(l){6-8}
+$H$ & $\Lambda$ & u & $f{=}0.5$ & $f{=}1$ & $\Delta$u, 0.5 & $\Delta$u, $f{=}1$ &
+$\Delta J$, $f{=}1$ \\
+\midrule
+\tabinput{tables/tab_bridge.tex}
+\bottomrule
+\end{tabular}
+\end{table}
 
-\subsubsection{Plans Fitted to the Record}
-Every joint plan fitted to the fleet's own records delivers between
-\flStatLo{} and \flStatHi\,\% in every scenario, for known and for new ships,
-including those with supply events, a bad lot, heavy-tailed effects,
-misrecorded replacements and the sparse record. The cost is stock: in the
-baseline the predictive plan embarks \flRatio{} times the units of the
-datasheet plan, close to the field factor by which the datasheets understate
-the rates. Holding each reference at its own predictive quantile delivers
-\flMargLo--\flMargHi\,\%, the shortfall that Section~\ref{sec:multi} predicts
-for per-reference plans. The randomised probability integral transforms are
-close to uniform, no decile departing from 0.1 by more than \flPitMax.
+Table~\ref{tab:bridge} links that contrast to the proposition. For the large ship each horizon fixes the marginal
+laws, with means proportional to $H$ and a latent multiplier persisting until
+resupply, while $f$ varies. The exact optimum at the true $f$ is set against
+the optimum under independence, and the plan from \brDraws{} draws of the true
+law against the plan from the same draws permuted; every vector is scored by
+exact cover under the true law. At $f=0$ the draw contrast is Monte Carlo
+error, within $\pm$\brNoiseU{} units and $\pm$\brNoiseJ{} points. At the
+fleet's spreads, $\sigma=0.42$, and a weekly horizon the exact plans coincide
+and the draw contrast is \brFleetDu{} units, as in Table~\ref{tab:fleet}.
+Dependence pays when horizon and ship-wide spread grow together: at
+$\sigma=0.6$, $f=1$ and 56 days the dependent optimum needs \brBigDep{} units
+against \brBigInd, \brBigSave{} or \brBigUnitPct\,\% fewer. These plans
+minimise units, as in the fleet; Table~\ref{tab:ship} minimises relative cost.
+Plans chosen on draws are nominally 99\,\% and meet it on their draws, but
+their mean exact cover was \brJLo--\brJHi\,\%, the error of selecting on a
+sample.
 
-\subsubsection{Hierarchy Against Pooling}
-On average the hierarchy buys little in this fleet. For known ships in the
-baseline the predictive plan embarks \flBasePredKnownUnits{} units per mission
-against \flBaseNbKnownUnits{} for the pooled negative binomial at the same
-cover, and fewer in \flFewerBase\,\% of fleets; for new ships it embarks
-\flBasePredNewUnits{} against \flBaseNbNewUnits, since it carries the spread of
-a ship never seen. Its mean log score is the best in every scenario, but only by
-\flLsGapLo--\flLsGapHi{} per mission. With standard deviations of 0.3 for all
-three terms, where the heterogeneity lies matters little. An extreme ship is the
-exception: in one heavy-tailed fleet, with a fitted ship standard deviation of
-\flOutSigShip, the pooled negative binomial, which has no ship term, embarks
-\flOutNbUnits{} units per mission at known ships for \flOutNbCover\,\% cover,
-against \flOutPredUnits{} and \flOutPredCover\,\% for the predictive plan, and
-that fleet accounts for most of the pooled models' excess in the heavy-tail row
-of Table~\ref{tab:fleet}. The street-lighting network of
-Section~\ref{sec:lighting}, with an interaction more than twice as large, is the
-case where the structure pays throughout.
+\subsection{Supply Events}
+Table~\ref{tab:ev} adds to the hierarchical draws an explicit incident term of
+the generator's form, one event state per mission adding
+$\mathrm{Binomial}(N_p,a)$ failures to every reference, and replans to 99\,\%
+joint cover per mission under that law. With the generating $r$ and $a$ it is
+an idealised reference; both are also misstated by factors of 0.5 and 2.
 
-\subsubsection{Common-Cause Events}
-With supply events at 0.5 per ship-year, the predictive plan still covers
-\flShockPredKnown\,\% of missions of known ships with \flShockPredKnownUnits{}
-units; the ship--mission term raises these to \flShockShockKnown\,\% and
-\flShockShockKnownUnits{} units. At the rates assumed here the fitted dispersion
-absorbs the clustering the events cause, and the extra term buys little cover
-for its stock.
+\begin{table}[!t]
+\caption{Plans with an explicit incident term, known ships: cover (\%), mean
+units, units above the plan without the term, units short per event mission
+(\textsc{simulation}; \fdFleets{} fleets)}
+\label{tab:ev}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{2.4pt}
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+& \multicolumn{3}{c}{$J$ (\%)} & & & short \\
+\cmidrule(lr){2-4}
+Plan & all & event & no event & units & extra & /event \\
+\midrule
+\tabinput{tables/tab_ev.tex}
+\bottomrule
+\end{tabular}
+\end{table}
+
+Without an event term the hierarchical plan covered \fdEvFreqOmitEv\,\%
+(\fdEvFreqOmitEvLo--\fdEvFreqOmitEvHi) of event missions at two events a year
+failing 0.05\,\%, and \fdEvSevOmitEv\,\% when each fails 0.2\,\%; the
+idealised plan raised these to \fdEvFreqKnownEv{} and \fdEvSevKnownEv\,\% and
+overall cover from \fdEvFreqOmitAll{} to \fdEvFreqKnownAll{} and from
+\fdEvSevOmitAll{} to \fdEvSevKnownAll\,\%, for \fdEvFreqExtra{} and
+\fdEvSevExtra\,\% more units. The model of incidents buys this cover and its
+parameters size the stock: halving the stated size lost half or more of the
+gain on event missions, halving the rate less, and doubling either bought
+further cover with stock. In the baseline (\fdEvBaseN{} event missions of
+\fdEvBaseAll) it left event-mission cover unchanged (\fdEvBaseOmitEv{} and
+\fdEvBaseKnownEv\,\%): events are rarer than the 1\,\% the target allows.

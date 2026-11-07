@@ -4,6 +4,8 @@
 \usepackage{booktabs}
 \usepackage{graphicx}
 \usepackage{url}
+\usepackage{xurl}
+\usepackage{microtype}
 \usepackage[hidelinks]{hyperref}
 
 % IEEE house style for theorem-like environments: italic head, colon, italic body
@@ -24,15 +26,21 @@
 
 \input{numbers}
 \input{numbers_v2}
+\input{numbers_v3}
+\input{numbers_v4}
+\input{numbers_v5}
+\input{numbers_v6}
+\input{numbers_v7}
+\newcommand{\codeTag}{v1.0-tr}
 
 \markboth{IEEE Transactions on Reliability}%
-{Spares Provisioning for Power Electronics on Passenger Ships}
+{Heterogeneity in Joint Spares Provisioning}
 
 \begin{document}
 \bstctlcite{BSTcontrol}
 
-\title{Spares Provisioning for Power Electronics on\\
-Passenger Ships from Divided Fleet Records}
+\title{Ship-Wide and Ship--Product Heterogeneity in\\
+Joint Spares Provisioning for Passenger-Ship\\ Power Electronics}
 
 \author{Paula~Lamo,~\IEEEmembership{Senior Member,~IEEE,}
         and~Ricardo~S.~Alonso%
@@ -46,32 +54,34 @@ Spain (e-mail: ricardoserafin.alonso@unir.net).}}
 \maketitle
 
 \begin{abstract}
-Spares for the power electronics of a passenger ship must be embarked before
-sailing, so the plan should come from the predictive distribution of failures
-over the mission. That distribution has to be built from records that are small
-per ship and divided among ships, operators and integrators. This paper models
-the count with an exposure offset and crossed ship-wide and ship--product random
-effects, fits it by a Laplace approximation that also runs in federated form, and
-turns it into the stock vector a ship embarks. For one population, a Poisson plan
-falls up to \spPoisShort{} points short of a 99\,\% target and a
-variance-inflated margin up to \spKapShort{}, while a moment-matched negative
-binomial falls at most \spNbShort{} short. For several references, the joint and
-aggregate criteria respond to the ship--product dependence with opposite signs,
-and cost-minimal vectors save a median \rvSaveMed\,\% over a common stock. In
-\dsCampaigns{} simulated campaigns, how heterogeneity divides between ship and
-product is identified only by repeated missions. In a passenger fleet simulated
-from public datasheets and ship data, datasheet-MTBF provisioning covers
-\flMtbfJointLo--\flMtbfJointHi\,\% of missions against a 99\,\% target, whereas
-joint plans fitted to field records cover \flStatLo--\flStatHi\,\% under supply
-events, bad lots and misrecorded replacements. On \niTrainFail{} failures of LED street lighting in
-Northern Ireland, a public network divided like a fleet, the heterogeneity is
-almost entirely an area--family interaction, and only the hierarchical plans meet
-the target in a year held out of the fit. No shipboard records were available;
-every value for ships is simulated.
+Before a passenger ship sails, it embarks a vector of spares for power
+electronics whose references cannot replace one another, to last until the
+next port where spares can be received. This paper studies how ship-wide and
+ship--reference heterogeneity enter that vector. With known parameters, the
+supermodular ordering of Gaussian vectors implies that, with marginal laws and
+total latent variance fixed, the joint cover of any vector is non-decreasing
+in the ship-wide share, so the cost-minimal vector for independent references
+is the cheapest one feasible for every split. In certified optima, with cover
+computed numerically to within $\mpTrunc$, this robust vector cost a median
+\seIndCertMed\,\% more than the optimum for the true split over \seCertPos{}
+cases with a positive share, \shPremFourteen--\shPremMax\,\% for a large
+passenger ship resupplied every one to four weekly cruises, and needed
+\brBigInd{} units against \brBigDep{} at 56 days with a large ship-wide
+spread. With estimated parameters, in simulation, references observed
+together identified the shared effect from one mission, while the
+interaction, separated from cell dispersion only by parametric form, was
+rarely detected without repeated missions; with five ships, bootstrap stocks
+reached extremes that changed by orders of magnitude between random streams.
+In a simulated fleet built from public data, without frequent events, fitting
+the record raised cover at known ships from \fdMtbfLo--\fdMtbfHi\,\% with datasheet rates to
+\fdFitKLo--\fdFitKHi\,\%, and modelling dependence changed it by at most
+\fdAbsDcMax{} points; an incident term recovered cover on event missions, at a
+stock set by the assumed frequency and severity of events. No public naval
+record gave failures per ship and reference.
 \end{abstract}
 
 \begin{IEEEkeywords}
-Federated estimation, hierarchical models, negative binomial, passenger ships,
+Hierarchical models, joint service level, negative binomial, passenger ships,
 power electronics, predictive distribution, random effects, spare parts.
 \end{IEEEkeywords}
 
@@ -81,25 +91,13 @@ power electronics, predictive distribution, random effects, spare parts.
 \label{sec:intro}
 \input{sec_intro}
 
-\section{The Provisioning Decision}
-\label{sec:decision}
-\input{sec_decision}
-
-\section{Hierarchical Count Model}
+\section{Decision, Model and Estimation}
 \label{sec:model}
 \input{sec_model}
 
-\section{Plans for One Population}
-\label{sec:cover}
-\input{sec_cover}
-
-\section{Zones Carrying Several Product References}
-\label{sec:multi}
-\input{sec_multi}
-
-\section{Federated Estimation}
-\label{sec:fed}
-\input{sec_fed}
+\section{Plans and the Decomposition of Heterogeneity}
+\label{sec:plans}
+\input{sec_plans}
 
 \section{Identifiability and Campaign Design}
 \label{sec:design}
@@ -109,66 +107,20 @@ power electronics, predictive distribution, random effects, spare parts.
 \label{sec:fleet}
 \input{sec_fleet}
 
-\section{A Real Fleet: LED Street Lighting}
+\section{A Terrestrial Illustration}
 \label{sec:lighting}
 \input{sec_lighting}
 
-\section{Limitations and Requirements for Validation}
-\label{sec:limits}
-\input{sec_limits}
-
-\section{Conclusion}
+\section{Limitations and Conclusion}
 \label{sec:conclusion}
 \input{sec_conclusion}
 
 \section*{Acknowledgment}
-The authors used Claude (Anthropic) as a review and editing aid. It reviewed
-the text of all sections and the analysis code behind Sections~IV to~IX, and
-proposed improvements to the wording of the manuscript and to that code. The
-authors checked every proposal, verified all code, results and text, and take
-full responsibility for the content of this article.
+The authors used Claude (Anthropic) for language editing: rewording passages
+of the manuscript and translating them into English. The authors reviewed the
+edited text and take full responsibility for the content of this article.
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}
-
-\begin{IEEEbiographynophoto}{Paula Lamo}
-(Senior Member, IEEE) received the bachelor's degree in naval engineering and
-marine engineering from the University of Cantabria, Cantabria, Spain, in 2010;
-the master's degrees in maritime engineering and teacher training from the
-University of Cantabria, in 2011; the integrated master's degree in management of
-environmental quality and occupational risk prevention and renewable energy, and
-the master's degree in occupational risk prevention and industrial engineering
-from University CEU San Pablo, Madrid, Spain, in 2012, 2013, and 2014,
-respectively; and the Ph.D. degree in occupational risk prevention and industrial
-engineering from the University of Cantabria, in 2019.
-
-From 2019 to 2025, she was an Associate Professor with the Universidad
-Internacional de La Rioja, Logro\~no, Spain. Since then, she has been an
-Associate Professor with the Universidad de Cantabria, Santander, Spain. She is
-also the President of the IEEE Power Electronics and Industrial Electronics
-Spanish Chapter.
-\end{IEEEbiographynophoto}
-
-\begin{IEEEbiographynophoto}{Ricardo S. Alonso}
-received the Ph.D. degree in computer engineering from the University of
-Salamanca, Salamanca, Spain.
-
-He is currently a Senior Lecturer with the Universidad Internacional de La Rioja
-(UNIR), Logro\~{n}o, Spain, where he serves as Academic Director of two master's
-programmes in artificial intelligence, and Director General of the AIR
-Institute, Salamanca, Spain, a nationally recognised research and technology
-centre specialised in artificial intelligence and computer science. He has
-authored numerous contributions in JCR-indexed journals, international
-conferences, and book chapters. He has coordinated and participated in
-regional, national, and European R\&D projects, including Horizon Europe,
-PRIMA, and CDTI initiatives, and coordinates the DIGIS3 European Digital
-Innovation Hub. He previously co-founded NEBUSENS, a technology company devoted
-to wireless sensor networks and real-time location systems. His research
-interests include artificial intelligence, multi-agent systems, the Internet of
-Things, wireless sensor networks, edge computing, and federated learning.
-
-Dr. Alonso holds two six-year research periods recognised by the Spanish
-National Commission for the Evaluation of Research Activity (CNEAI).
-\end{IEEEbiographynophoto}
 
 \end{document}

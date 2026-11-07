@@ -1,0 +1,346 @@
+{
+ "window 1": {
+  "dropped_repeats": 33225,
+  "fit_failures": 5136.0,
+  "sigma_area": 0.0024787521903880086,
+  "sigma_area_family": 0.7288092058838117,
+  "sigma_area_month": 0.2228899697664528,
+  "phi": 5.514910251109646,
+  "within": {
+   "eb_gamma|known": {
+    "n": 192,
+    "covered": 184,
+    "cover": 0.9583333333333334,
+    "units": 35.8125
+   },
+   "hier_pred|known": {
+    "n": 192,
+    "covered": 191,
+    "cover": 0.9947916666666666,
+    "units": 45.901041666666664
+   },
+   "nb_pooled|known": {
+    "n": 192,
+    "covered": 189,
+    "cover": 0.984375,
+    "units": 80.609375
+   },
+   "poisson|known": {
+    "n": 192,
+    "covered": 178,
+    "cover": 0.9270833333333334,
+    "units": 32.614583333333336
+   }
+  }
+ },
+ "window 3": {
+  "dropped_repeats": 36327,
+  "fit_failures": 4990.0,
+  "sigma_area": 0.0024787521766663585,
+  "sigma_area_family": 0.7256153553529916,
+  "sigma_area_month": 0.21711764450285043,
+  "phi": 5.726661578939007,
+  "within": {
+   "eb_gamma|known": {
+    "n": 192,
+    "covered": 186,
+    "cover": 0.96875,
+    "units": 35.125
+   },
+   "hier_pred|known": {
+    "n": 192,
+    "covered": 191,
+    "cover": 0.9947916666666666,
+    "units": 44.546875
+   },
+   "nb_pooled|known": {
+    "n": 192,
+    "covered": 189,
+    "cover": 0.984375,
+    "units": 77.82291666666667
+   },
+   "poisson|known": {
+    "n": 192,
+    "covered": 181,
+    "cover": 0.9427083333333334,
+    "units": 31.958333333333332
+   }
+  }
+ },
+ "window 7": {
+  "dropped_repeats": 41712,
+  "fit_failures": 4697.0,
+  "sigma_area": 0.0024787521766663585,
+  "sigma_area_family": 0.7096129478892695,
+  "sigma_area_month": 0.19951223850064748,
+  "phi": 6.57841062418717,
+  "within": {
+   "eb_gamma|known": {
+    "n": 192,
+    "covered": 187,
+    "cover": 0.9739583333333334,
+    "units": 33.65625
+   },
+   "hier_pred|known": {
+    "n": 192,
+    "covered": 192,
+    "cover": 1.0,
+    "units": 40.520833333333336
+   },
+   "nb_pooled|known": {
+    "n": 192,
+    "covered": 189,
+    "cover": 0.984375,
+    "units": 69.68229166666667
+   },
+   "poisson|known": {
+    "n": 192,
+    "covered": 184,
+    "cover": 0.9583333333333334,
+    "units": 30.677083333333332
+   }
+  }
+ },
+ "window 14": {
+  "dropped_repeats": 47408,
+  "fit_failures": 4424.0,
+  "sigma_area": 0.0039653708380038444,
+  "sigma_area_family": 0.6964853696766555,
+  "sigma_area_month": 0.19310211456689785,
+  "phi": 7.0606265062192435,
+  "within": {
+   "eb_gamma|known": {
+    "n": 192,
+    "covered": 189,
+    "cover": 0.984375,
+    "units": 32.348958333333336
+   },
+   "eb_gamma|new": {
+    "n": 192,
+    "covered": 185,
+    "cover": 0.9635416666666666,
+    "units": 35.588541666666664
+   },
+   "hier_pred|known": {
+    "n": 192,
+    "covered": 192,
+    "cover": 1.0,
+    "units": 38.401041666666664
+   },
+   "hier_pred|new": {
+    "n": 192,
+    "covered": 192,
+    "cover": 1.0,
+    "units": 151.44270833333334
+   },
+   "nb_pooled|known": {
+    "n": 192,
+    "covered": 189,
+    "cover": 0.984375,
+    "units": 64.109375
+   },
+   "nb_pooled|new": {
+    "n": 192,
+    "covered": 189,
+    "cover": 0.984375,
+    "units": 66.56770833333333
+   },
+   "poisson|known": {
+    "n": 192,
+    "covered": 185,
+    "cover": 0.9635416666666666,
+    "units": 29.463541666666668
+   },
+   "poisson|new": {
+    "n": 192,
+    "covered": 178,
+    "cover": 0.9270833333333334,
+    "units": 29.927083333333332
+   }
+  }
+ },
+ "window 7, streets <= 10 points only": {
+  "dropped_repeats": 8703,
+  "fit_failures": 6034.0,
+  "sigma_area": 0.0024787521766663585,
+  "sigma_area_family": 0.781560634565792,
+  "sigma_area_month": 0.31369439547024586,
+  "phi": 2.674893371485228,
+  "within": {
+   "eb_gamma|known": {
+    "n": 192,
+    "covered": 181,
+    "cover": 0.9427083333333334,
+    "units": 40.442708333333336
+   },
+   "hier_pred|known": {
+    "n": 192,
+    "covered": 187,
+    "cover": 0.9739583333333334,
+    "units": 76.02083333333333
+   },
+   "nb_pooled|known": {
+    "n": 192,
+    "covered": 190,
+    "cover": 0.9895833333333334,
+    "units": 125.65104166666667
+   },
+   "poisson|known": {
+    "n": 192,
+    "covered": 174,
+    "cover": 0.90625,
+    "units": 36.838541666666664
+   }
+  }
+ },
+ "window 7, streets <= 30 points only": {
+  "dropped_repeats": 25144,
+  "fit_failures": 5189.0,
+  "sigma_area": 0.0024787521766663585,
+  "sigma_area_family": 0.7317384178544813,
+  "sigma_area_month": 0.2229509287269325,
+  "phi": 4.70023021521776,
+  "within": {
+   "eb_gamma|known": {
+    "n": 192,
+    "covered": 182,
+    "cover": 0.9479166666666666,
+    "units": 35.895833333333336
+   },
+   "hier_pred|known": {
+    "n": 192,
+    "covered": 189,
+    "cover": 0.984375,
+    "units": 48.713541666666664
+   },
+   "nb_pooled|known": {
+    "n": 192,
+    "covered": 188,
+    "cover": 0.9791666666666666,
+    "units": 79.77604166666667
+   },
+   "poisson|known": {
+    "n": 192,
+    "covered": 179,
+    "cover": 0.9322916666666666,
+    "units": 32.682291666666664
+   }
+  }
+ },
+ "window 0 (same day)": {
+  "dropped_repeats": 31176,
+  "fit_failures": 5239.0,
+  "sigma_area": 0.0024787521766663585,
+  "sigma_area_family": 0.7314038654363937,
+  "sigma_area_month": 0.22554707021160594,
+  "phi": 5.165629504374521,
+  "within": {
+   "eb_gamma|known": {
+    "n": 192,
+    "covered": 182,
+    "cover": 0.9479166666666666,
+    "units": 36.307291666666664
+   },
+   "eb_gamma|new": {
+    "n": 192,
+    "covered": 177,
+    "cover": 0.921875,
+    "units": 42.609375
+   },
+   "hier_pred|known": {
+    "n": 192,
+    "covered": 191,
+    "cover": 0.9947916666666666,
+    "units": 47.755208333333336
+   },
+   "hier_pred|new": {
+    "n": 192,
+    "covered": 192,
+    "cover": 1.0,
+    "units": 201.24479166666666
+   },
+   "nb_pooled|known": {
+    "n": 192,
+    "covered": 188,
+    "cover": 0.9791666666666666,
+    "units": 83.30729166666667
+   },
+   "nb_pooled|new": {
+    "n": 192,
+    "covered": 186,
+    "cover": 0.96875,
+    "units": 86.30208333333333
+   },
+   "poisson|known": {
+    "n": 192,
+    "covered": 178,
+    "cover": 0.9270833333333334,
+    "units": 33.140625
+   },
+   "poisson|new": {
+    "n": 192,
+    "covered": 173,
+    "cover": 0.9010416666666666,
+    "units": 33.505208333333336
+   }
+  }
+ },
+ "no merging": {
+  "dropped_repeats": 0,
+  "fit_failures": 6778.0,
+  "sigma_area": 0.0024787521766663585,
+  "sigma_area_family": 0.80093283166788,
+  "sigma_area_month": 0.35388100730951455,
+  "phi": 2.1124254355051573,
+  "within": {
+   "eb_gamma|known": {
+    "n": 192,
+    "covered": 174,
+    "cover": 0.90625,
+    "units": 43.880208333333336
+   },
+   "eb_gamma|new": {
+    "n": 192,
+    "covered": 171,
+    "cover": 0.890625,
+    "units": 51.088541666666664
+   },
+   "hier_pred|known": {
+    "n": 192,
+    "covered": 186,
+    "cover": 0.96875,
+    "units": 96.63020833333333
+   },
+   "hier_pred|new": {
+    "n": 192,
+    "covered": 192,
+    "cover": 1.0,
+    "units": 466.0520833333333
+   },
+   "nb_pooled|known": {
+    "n": 192,
+    "covered": 189,
+    "cover": 0.984375,
+    "units": 166.1875
+   },
+   "nb_pooled|new": {
+    "n": 192,
+    "covered": 189,
+    "cover": 0.984375,
+    "units": 178.15625
+   },
+   "poisson|known": {
+    "n": 192,
+    "covered": 163,
+    "cover": 0.8489583333333334,
+    "units": 40.067708333333336
+   },
+   "poisson|new": {
+    "n": 192,
+    "covered": 160,
+    "cover": 0.8333333333333334,
+    "units": 40.901041666666664
+   }
+  }
+ }
+}

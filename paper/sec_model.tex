@@ -1,100 +1,129 @@
-\subsection{Cells, Counts, and Exposure}
-A \emph{cell} is a group of units of one product, held by one data holder, in
-one band of age and of operating condition, over one mission. Let cell $c$
-record $y_c$ failures over an exposure of $H_c$ powered unit-hours. The count is
-modelled directly,
+\subsection{The Decision on Board}
+\label{sec:decision}
+For one class of power-electronic unit a ship carries $P$ references with
+$N_p$ installed units each, known from its equipment register. The
+replaceable unit is the driver, supply or drive module the crew exchanges. A
+\emph{reference} is a group of units with a common spare: units belong to
+different references when rating, dimming interface, mounting or class
+approval differ, and units with a common approved replacement are merged. A
+reference may be a functional family made by two makers; the \emph{exact
+part} is the reference--maker pair, one per ship, since a class is fitted from
+one maker. Ships share the reference effect, those of one maker also the maker
+effect, and the ship--reference effect below belongs to one exact part on one
+ship. The \emph{horizon} is the interval until the next effective
+replenishment opportunity, a port call at which ordered spares can be loaded.
+It equals a cruise only for a ship resupplied at every turnaround, as the
+fleet of Section~\ref{sec:fleet} assumes; otherwise it spans several cruises
+(Section~\ref{sec:ship}).
+
+A \emph{failure} is the loss of function of an installed unit, a
+\emph{replacement need} a failure that must be made good from stock before
+resupply, and a \emph{store issue} a spare drawn. A repair deferred to port
+removes a failure from the need; an approved equivalent from another
+reference, or a unit repaired on board, moves or removes an issue; and when
+stock runs out a need waits and is never issued, so issues understate need in
+the missions that matter. With $Y_p$ the needs of reference $p$ over the
+horizon, taken here and in every simulation as its failures (each failure
+needs a spare before resupply), and $\mathbf s=(s_1,\dots,s_P)$ the
+stocks, two criteria are distinguished:
+\begin{align}
+J(\mathbf s)&=\Pr\big(Y_p\le s_p\ \text{for all } p\big)\ \ge\ \gamma,
+\label{eq:joint}\\
+A(S)&=\Pr\Big(\textstyle\sum_p Y_p\le S\Big)\ \ge\ \gamma .
+\label{eq:agg}
+\end{align}
+The joint criterion~\eqref{eq:joint} is the one a ship needs; the
+aggregate criterion~\eqref{eq:agg} applies only within a merged group. With
+unit costs $\mathbf c>0$ the decision is
 \begin{equation}
-y_c\sim\mathrm{NB}(\mu_c,\phi),\qquad
-\log\mu_c=\log H_c+\mathbf{x}_c^{\top}\boldsymbol\beta+\sum_{k}b^{(k)}_{\ell_k(c)},
+\min_{\mathbf s\in\mathbb N^P}\ \mathbf c^\top\mathbf s
+\quad\text{subject to}\quad J(\mathbf s)\ge\gamma .
+\label{eq:ip}
+\end{equation}
+Only quantities known before sailing enter the prediction: product, maker,
+age, zone, planned itinerary and its climate normals, booked occupancy and the
+planned powered hours that follow; realised conditions enter the evaluation.
+
+\subsection{Records and Model}
+\label{sec:mechanisms}
+A \emph{cell} is the units of one reference, on one ship, in one zone and band
+of age, over one mission, with $y_c$ failures over $H_c$ powered unit-hours.
+Populations with no failure stay in the fit; preventive replacements are
+excluded from $y_c$ but keep their hours; a common-cause failure is logged as
+one incident. The count of cell $c$ is modelled as
+\begin{equation}
+\begin{gathered}
+y_c\mid\mathbf b\sim\mathrm{NB}(\mu_c,\phi),\\
+\log\mu_c=\log H_c+\mathbf x_c^{\top}\boldsymbol\beta+\textstyle\sum_k b^{(k)}_{\ell_k(c)},
+\end{gathered}
 \label{eq:model}
 \end{equation}
-with $\log H_c$ an offset of coefficient fixed at one, $\mathbf{x}_c$ the
-covariates available at the decision (Section~\ref{sec:decision}) and one
-Gaussian random effect $b^{(k)}_\ell\sim\mathcal N(0,\sigma_k^2)$ for each level
-$\ell$ of each grouping $k$. The negative binomial variance
-$\mathrm{Var}(y_c)=\mu_c+\mu_c^2/\phi$ absorbs dispersion between cells that the
-grouped effects do not explain, and $\phi\to\infty$ recovers the Poisson model.
-Cells with $y_c=0$ enter~\eqref{eq:model} like any other, since nothing is taken
-on the logarithmic scale; populations that record no failure therefore
-contribute their exposure, which matters because on board most of them will.
-
-The groupings are of two kinds: on the product side the product and its
-manufacturer, and on the data-holding side the operator, the ship and, where
-zones are recorded separately, the zone. The two sides are crossed rather than
-nested, since the same product is installed on many ships and a ship carries many
-products. This is what identifies product and holder effects separately, and what
-raises the question treated in Section~\ref{sec:multi}.
-
-The model predicts a \emph{mission failure count}: the number of failures in a
-population of known size, age and condition over a bounded horizon. It is not a
-model of remaining life, as Section~\ref{sec:limits} sets out.
-
-\subsection{Ship-Wide Heterogeneity and Ship--Product Interaction}
-\label{sec:structure}
-Two quantities that are easily conflated must be separated. Write the
-data-holding part of the latent log rate for product $p$ on ship $s$ as
+with $b^{(k)}_\ell\sim\mathcal N(0,\sigma_k^2)$ independent over groupings $k$
+and levels $\ell$. The negative binomial is a Poisson count with an
+independent $\mathrm{Gamma}(\phi,\phi)$ multiplier per cell, so $\phi$ acts at
+the scale of the cell: a reference total sums cells with their own
+multipliers, and predictions use the cell partition of the fit, so a horizon
+of several missions has one multiplier per mission cell while the latent
+effects persist. The ship part
+of the latent log rate of reference $p$ on ship $s$ is
 \begin{equation}
-u_s+w_{sp},\qquad u_s\sim\mathcal N(0,\tau^2),\quad
-w_{sp}\sim\mathcal N(0,\omega^2),
+u_s+w_{sp},\qquad u_s\sim\mathcal N(0,\tau^2),\quad w_{sp}\sim\mathcal N(0,\omega^2),
 \label{eq:structure}
 \end{equation}
-independently. Here $\tau$ is \emph{ship-wide} heterogeneity: a deviation shared
-by every product on that ship, as would arise from its environment, its
-electrical supply quality, its crew's maintenance practice or its recording
-conventions. The second, $\omega$, is the \emph{ship--product interaction}: the
-deviation of one product at one ship, as would arise from a bad installation
-batch, a zone-specific duty cycle or a product that suits one vessel's
-conditions worse than another's.
-
-For a single population the two are indistinguishable. Their sum has variance
-$\tau^2+\omega^2$, and any allocation of a given total reproduces the same
-marginal distribution, the same predictive mean and the same one-population
-predictive interval. They differ only
-in the dependence they induce between the products of one ship, and therefore
-only in a plan that spans the products of one zone, which is the plan a ship
-requires. Both terms in~\eqref{eq:structure} are therefore retained and reported
-separately, and their allocation is treated as an empirical question that
-shipboard records have not yet answered.
+where $\tau$ is \emph{ship-wide} heterogeneity, shared by every reference on a
+ship (electrical environment, supply quality, maintenance), and $\omega$ the
+\emph{ship--reference interaction} (an installation batch, a zone-specific
+duty). Exact parts are nested in manufacturer and crossed with ship.
 
 \subsection{Estimation}
-The random effects $\mathbf b$ and the coefficients $\boldsymbol\beta$ are
-integrated by a Laplace approximation at their joint
-mode~\cite{tierney1986,breslow1993}, the restricted-likelihood analogue in common
-use~\cite{brooks2017}, and the approximate marginal likelihood is maximised over
-$\boldsymbol\theta=(\log\sigma_k,\log\phi)$. Each non-intercept coefficient
-carries a weakly informative $\mathcal N(0,5^2)$ prior on the log-rate-ratio
-scale, negligible for identified coefficients but keeping the mode finite when a
-covariate class records no failure, as a first shipboard campaign should expect.
-Standard errors of $\boldsymbol\beta$ come from the joint Hessian and so include
-the uncertainty of $\mathbf b$. Every cell belongs to one ship--product level,
-so the block of the Hessian for the largest grouping is diagonal and is
-eliminated exactly inside each Newton step; the remaining system has the size
-of the coefficients and the smaller groupings, which is what makes the
-simulation studies below affordable.
+Let $\boldsymbol\psi=(\boldsymbol\beta,\mathbf b)$ have dimension $d$ and let
+$\boldsymbol\theta=(\log\sigma_k,\log\phi)$. The fit maximises over
+$\boldsymbol\theta$ the Laplace approximation to
+$\log\int p(\mathbf y\mid\boldsymbol\psi,\phi)\,p(\mathbf b\mid\boldsymbol\theta)
+\,\pi(\boldsymbol\beta)\,\mathrm d\boldsymbol\psi$,
+\begin{multline}
+\ell_{\mathrm{LA}}(\boldsymbol\theta)=\log p(\mathbf y\mid\hat{\boldsymbol\psi},\phi)
++\log\pi(\hat{\boldsymbol\beta})\\
+-\sum_k\Big[\frac{q_k}{2}\log(2\pi\sigma_k^2)+\frac{\|\hat{\mathbf b}^{(k)}\|^2}{2\sigma_k^2}\Big]\\
++\frac d2\log 2\pi-\frac12\log\det\mathbf H_{\boldsymbol\theta},
+\label{eq:objective}
+\end{multline}
+where $q_k$ is the number of levels of grouping $k$,
+$\hat{\boldsymbol\psi}(\boldsymbol\theta)$ the joint mode and
+$\mathbf H_{\boldsymbol\theta}$ the negative Hessian there~\cite{tierney1986}.
+The prior $\pi$ is flat for the intercept and $\mathcal N(0,5^2)$ for the
+other coefficients. Since $\boldsymbol\beta$ is integrated with $\mathbf b$,
+\eqref{eq:objective} is of restricted type~\cite{breslow1993}, and maximising
+it is empirical-Bayes estimation; its error grows when levels carry few
+failures, so tests, intervals and plans are checked by simulation. The mode is
+found by damped Newton steps and $\boldsymbol\theta$ by L-BFGS-B, with standard
+deviations capped at 3 in the fleet and street-lighting fits.
 
-Whether a variance component is present is tested by the likelihood ratio
-against the model without it, referred to the equal mixture of $\chi^2_0$ and
-$\chi^2_1$ that applies on the boundary~\cite{self1987,stram1994,crainiceanu2004};
-intervals for the standard deviations are obtained by profiling the
-approximate marginal likelihood, with zero included when the test does not
-reject. In the two case studies the fitted standard deviations are capped at 3
-on the log-rate scale, a bound that only binds for terms the data barely
-identify.
+A variance component is tested by the likelihood ratio of~\eqref{eq:objective}
+with and without it, referred to the equal mixture of $\chi^2_0$ and
+$\chi^2_1$~\cite{self1987}, whose 5\,\% point is 2.71. That limit is for the
+exact likelihood with one component on the boundary and the others interior;
+here the criterion is approximate, samples are finite~\cite{crainiceanu2004},
+and when the other component is also near zero the limit has more terms, so
+the size is measured in Section~\ref{sec:design}, including splits with both
+components zero. Profile intervals invert the same criterion and, to agree with
+the test, contain zero when the statistic is below 2.71.
 
-\subsection{Predictive Distribution for an Unobserved Population}
-The object the decision needs is the predictive distribution of the count of a
-population that was not used in fitting, typically at a ship with no history.
-It is obtained by drawing jointly from the Gaussian approximation to
-$(\boldsymbol\beta,\mathbf b)$; a level present in the fit keeps its conditional
-draw, while a level never seen (a new ship, a new operator, a newly installed
-product) receives a draw from $\mathcal N(0,\hat\sigma_k^2)$ shared by all its
-cells, and each cell then receives its dispersion multiplier. Given the latent
-draws the total count of any set of cells is Poisson with the summed mean, which
-gives both draws of the total and an exact predictive probability for scoring.
-The plan is a quantile of that distribution.
-
-Two consequences follow, made precise in Section~\ref{sec:cover}. A predictor
-without a holder term has no draw for a new ship, so its predictive spread
-reflects only coefficient uncertainty and Poisson noise and is too narrow; and the
-shortfall grows with the provisioned population, since Poisson noise averages
-away as the count grows and the latent deviation does not.
+\subsection{Predictive Distribution}
+For a population not used in fitting, such as the next mission of a ship, the
+decision needs the predictive law of its counts, integrating over
+$\boldsymbol\psi$, the effects $\mathbf b^\ast$ of levels absent from the fit,
+and $\boldsymbol\theta$. The \emph{predictive} plan fixes
+$\boldsymbol\theta=\hat{\boldsymbol\theta}$ and draws $\boldsymbol\psi$ from
+$\mathcal N(\hat{\boldsymbol\psi},\hat{\mathbf H}^{-1})$, with
+$\hat{\mathbf H}=\mathbf H_{\hat{\boldsymbol\theta}}$;
+it omits the uncertainty of the variance components. The \emph{bootstrap}
+plan propagates it approximately: $B$ data sets are simulated from the fitted
+model on the observed cells and exposures; $\boldsymbol\theta$ is re-estimated
+on each; for each $\boldsymbol\theta_b$, $\boldsymbol\psi$ is drawn from the
+Laplace approximation \emph{on the observed data}, followed by unseen effects,
+gamma multipliers and Poisson counts; and the draws are pooled. The
+re-estimates follow the sampling distribution of the estimator, not the
+posterior, so Section~\ref{sec:design} checks how far they serve in its place.
+In both plans a vector is chosen from the draws and evaluated on data not
+used to choose it.

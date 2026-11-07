@@ -45,6 +45,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "..", "data", "v2")
 RAW = os.path.join(OUT, "raw", "campaign")
 SEED = 20261101
+# SPARES_RULE=1: every fit and refit follows the convergence rule of hglmm.Fit.fit
+RULE = os.environ.get("SPARES_RULE") == "1"
+SUFFIX = "_rule" if RULE else ""
 REPS = 1000
 BLOCK = 50
 CI_REPS = 300
@@ -114,10 +117,10 @@ def fixed_cols(P):
 
 def fit_all(d, P):
     fx = fixed_cols(P)
-    full = hglmm.Fit(hglmm.Design(d, fx, ["ship", "sp"])).fit()
+    full = hglmm.Fit(hglmm.Design(d, fx, ["ship", "sp"])).fit(rule=RULE)
     t, o, lp = full.theta
-    no_ship = hglmm.Fit(hglmm.Design(d, fx, ["sp"])).fit(theta0=np.r_[o, lp])
-    no_sp = hglmm.Fit(hglmm.Design(d, fx, ["ship"])).fit(theta0=np.r_[t, lp])
+    no_ship = hglmm.Fit(hglmm.Design(d, fx, ["sp"])).fit(theta0=np.r_[o, lp], rule=RULE)
+    no_sp = hglmm.Fit(hglmm.Design(d, fx, ["ship"])).fit(theta0=np.r_[t, lp], rule=RULE)
     return full, no_ship, no_sp
 
 

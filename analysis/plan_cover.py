@@ -153,14 +153,20 @@ def plan_joint_draws_robust(Y, level, cost=None, max_drops=500):
     met (bisection), then remove units one at a time, the costliest first,
     while the target still holds."""
     cost = np.ones(Y.shape[1]) if cost is None else np.asarray(cost, float)
+    Ys = np.sort(Y, axis=0)
+    n = Y.shape[0]
+
+    def marg(q):                       # same as plan_marginal_draws, columns sorted once
+        return Ys[min(n - 1, max(0, int(math.ceil(n * q)) - 1))].astype(int)
+
     lo, hi = level, 1.0
     for _ in range(40):
         mid = 0.5 * (lo + hi)
-        if joint_cover_draws(Y, plan_marginal_draws(Y, mid)) >= level:
+        if joint_cover_draws(Y, marg(mid)) >= level:
             hi = mid
         else:
             lo = mid
-    s = plan_marginal_draws(Y, hi)
+    s = marg(hi)
     for _ in range(max_drops):
         best = None
         for p in np.argsort(-cost):

@@ -22,6 +22,8 @@ from glmm import BETA_PRIOR_SD, LOG2PI, Design, _nb_terms
 
 __all__ = ["Design", "Fit", "fit", "lrt_boundary"]
 
+GRAD_TOL = 0.05     # largest projected gradient of an accepted fit (criterion per unit of log sd)
+
 
 class Fit:
     def __init__(self, design, family="nb"):
@@ -117,13 +119,39 @@ class Fit:
         val = ll + logprior + 0.5 * d.dim * LOG2PI - 0.5 * self._logdet(*blocks)
         return val, z, blocks
 
-    def fit(self, theta0=None, lower=-6.0, upper=12.0, sigma_max=None):
+    def projected_gradient(self, theta, lower, ub, eps=1e-5):
+        """Central-difference gradient of the criterion in theta, with the
+        components that push against an active bound set to zero."""
+        g = np.zeros(len(theta))
+        for i in range(len(theta)):
+            e = np.zeros(len(theta))
+            e[i] = eps
+            g[i] = (self.laplace(np.clip(theta + e, lower, ub))[0]
+                    - self.laplace(np.clip(theta - e, lower, ub))[0]) / (2 * eps)
+            if theta[i] <= lower + 1e-8 and g[i] < 0:
+                g[i] = 0.0
+            if theta[i] >= ub[i] - 1e-8 and g[i] > 0:
+                g[i] = 0.0
+        return g
+
+    def fit(self, theta0=None, lower=-6.0, upper=12.0, sigma_max=None, rule=False):
         """sigma_max, if given, caps every random-effect sd (not the NB shape); it
-        keeps weakly identified terms from drifting to absurd values."""
+        keeps weakly identified terms from drifting to absurd values.
+
+        rule=True applies the rule of the revised campaigns. The criterion is
+        maximised from three starts: theta0, the default (sds 0.5, NB shape 5)
+        and small spreads (sds e^-3, shape 1), which reaches the solutions that
+        put the dispersion in the gamma multiplier. A run is accepted when the
+        largest projected gradient, by central differences, is at most GRAD_TOL,
+        whatever the optimiser's exit message; the accepted run with the highest
+        criterion is kept, and with none accepted the fit is declared failed
+        (self.accepted False). self.start_won is the index of the start kept and
+        self.crit_gain its criterion minus that of the first start."""
         nth = self.k + (1 if self.family == "nb" else 0)
+        default = np.r_[np.full(self.k, math.log(0.5)),
+                        [math.log(5.0)] if self.family == "nb" else []]
         if theta0 is None:
-            theta0 = np.r_[np.full(self.k, math.log(0.5)),
-                           [math.log(5.0)] if self.family == "nb" else []]
+            theta0 = default
         ub = np.full(nth, upper)
         if sigma_max is not None:
             ub[:self.k] = math.log(sigma_max)
@@ -140,14 +168,44 @@ class Fit:
             cache["z"] = z
             return -v
 
+        def run(start):
+            return optimize.minimize(obj, start, method="L-BFGS-B",
+                                     bounds=list(zip(np.full(nth, lower), ub)),
+                                     options=dict(maxiter=500, ftol=1e-11, gtol=1e-6))
+
+        self.accepted, self.grad_max, self.n_starts = True, 0.0, 1
+        self.start_won, self.crit_gain = 0, 0.0
+        z_end = None
         if nth:
-            res = optimize.minimize(obj, theta0, method="L-BFGS-B",
-                                    bounds=list(zip(np.full(nth, lower), ub)),
-                                    options=dict(maxiter=500, ftol=1e-11, gtol=1e-6))
+            res = run(theta0)
             self.theta, self.converged, self.n_eval = res.x, bool(res.success), res.nfev
+            z_end = cache["z"]
+            if rule:
+                small = np.minimum(np.r_[np.full(self.k, -3.0), [0.0] if self.family == "nb" else []], ub)
+                tried, starts = [], []
+                for start in (theta0, default, small):
+                    if any(np.allclose(start, s) for s in starts):
+                        continue
+                    starts.append(start)
+                    if tried:
+                        cache["z"] = None
+                        r = run(start)
+                    else:
+                        r = res
+                    gm = float(np.max(np.abs(self.projected_gradient(r.x, lower, ub))))
+                    tried.append((gm <= GRAD_TOL, -r.fun, gm, r))
+                ok = [t for t in tried if t[0]]
+                best = max(ok, key=lambda t: t[1]) if ok else min(tried, key=lambda t: t[2])
+                if best[3] is not res:
+                    z_end = None
+                self.theta, self.converged = best[3].x, bool(best[3].success)
+                self.accepted, self.grad_max, self.n_starts = bool(ok), best[2], len(tried)
+                self.start_won = next(i for i, t in enumerate(tried) if t is best)
+                self.crit_gain = float(best[1] - tried[0][1])
+                self.n_eval = sum(t[3].nfev for t in tried)
         else:
             self.theta, self.converged, self.n_eval = np.zeros(0), True, 1
-        self.loglik, self.z, self.blocks = self.laplace(self.theta, cache["z"])
+        self.loglik, self.z, self.blocks = self.laplace(self.theta, z_end)
         self.sigma, self.phi = self._unpack(self.theta)
         self.beta = self.z[:self.d.p]
         Haa, Hac, hcc = self.blocks
@@ -177,3 +235,57 @@ def lrt_boundary(ll_full, ll_reduced):
     """LRT for one variance component at zero: 50:50 mixture of chi2_0 and chi2_1."""
     t = max(0.0, 2.0 * (ll_full - ll_reduced))
     return t, 0.5 * chi2.sf(t, 1) if t > 0 else 1.0
+
+
+# variance-parameter uncertainty ------------------------------------------------
+def at_theta(f, theta):
+    """Conditional mode and covariance of the coefficients and effects at a given
+    theta, on the data of fit f. Returns a copy of f evaluated there."""
+    g = Fit(f.d, f.family)
+    g.theta = np.asarray(theta, float)
+    g.loglik, g.z, g.blocks = g.laplace(g.theta, f.z)
+    g.sigma, g.phi = g._unpack(g.theta)
+    g.beta = g.z[:g.d.p]
+    Haa, Hac, hcc = g.blocks
+    Sa = Haa if hcc is None else Haa - (Hac / hcc) @ Hac.T
+    g.cov_a = np.linalg.inv(Sa)
+    g.se_beta = np.sqrt(np.diag(g.cov_a)[:g.d.p])
+    g.converged, g.n_eval = True, 1
+    return g
+
+
+def simulate_counts(f, rng):
+    """Counts from the fitted model: coefficients at their estimates, fresh
+    random effects at the fitted sds, fresh NB multipliers."""
+    d = f.d
+    eta = d.X @ f.beta + d.log_off
+    for i, k in enumerate(d.random):
+        eta = eta + rng.normal(0, f.sigma[i], d.q[i])[d.idx[k]]
+    mu = np.exp(np.minimum(eta, 30))
+    if f.phi is not None:
+        mu = mu * rng.gamma(f.phi, 1.0 / f.phi, len(mu))
+    return rng.poisson(mu).astype(float)
+
+
+def bootstrap_theta(f, B, rng, rule=False, info=None, fit_cls=None, **fit_kw):
+    """Parametric bootstrap with refit: B draws of theta from the sampling
+    distribution of the estimator, used as approximate posterior draws.
+
+    With rule=True every refit follows the convergence rule of Fit.fit; a refit
+    declared failed is dropped and counted in info["failed"] (info, a dict, also
+    receives the restarts and the largest projected gradient kept)."""
+    out = []
+    make = fit_cls or (lambda d: Fit(d, f.family))
+    for _ in range(B):
+        d = Design.__new__(Design)
+        d.__dict__.update(f.d.__dict__)
+        d.y = simulate_counts(f, rng)
+        g = make(d).fit(theta0=f.theta.copy(), rule=rule, **fit_kw)
+        if info is not None:
+            info["failed"] = info.get("failed", 0) + int(not g.accepted)
+            # "restarted": another start than the estimate reached a higher criterion (by > 1e-3)
+            info["restarted"] = info.get("restarted", 0) + int(g.start_won > 0 and g.crit_gain > 1e-3)
+            info["grad_max"] = max(info.get("grad_max", 0.0), g.grad_max if g.accepted else 0.0)
+        if g.accepted:
+            out.append(g.theta)
+    return np.array(out)

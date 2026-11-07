@@ -1,98 +1,55 @@
-A public street-lighting network has the structure of the provisioning problem
-on ships: LED drivers of several product families, installed in populations of
-known size, divided among maintenance units that each hold their own spares, and
-exposed to events that put a whole street out at once. This section applies the
-method to such a network; every number in it is measured, from public records.
-
-\subsection{Data}
-The Department for Infrastructure of Northern Ireland publishes, under the Open
-Government Licence, every fault report on its street lighting since 2020 and an
-inventory of its about 300\,000 lighting points with the lantern type of each~\cite{dfi_lighting}.
-An operational area plays the part of a ship, a lantern family the part of a
-product reference and a month the part of a mission. Eight LED families are
-distinguished, seven named product lines and a residual group, the smallest
-with about 2\,000 points on the streets used. Fault reports carry the street but not the lantern, so only
-streets equipped with a single family are used, where the attribution is exact;
-they hold about 166\,000 LED points. A report of a single light out is taken as
-demand for a lantern spare. Reports closed as cable or supply faults, or as no
-fault found, are excluded, and a report within seven days of the previous one on
-the same street is counted as the same repair, which removes about a third of
-the reports. Exposure is the installed count times the dusk-to-dawn hours of
-the month at the network's latitude, and the calendar month enters as a fixed
-effect for seasonal reporting.
-
-The inventory is a snapshot, and older lanterns were still being replaced by
-LED during the period. The models are therefore fitted on April 2023 to
-March 2025 with the snapshot of April 2025, a total of \niTrainFail{} failures
-over \niAreas{} areas and \niFamilies{} families. Two tests are made: a split
-within that period, fitting on its first year (\niWithinTrain{} failures) and
-predicting the second (\niWithinTest{} failures, \niWithinMonths{} area-months),
-and a forward test on April to October 2026 with the November 2026 snapshot
-(\niForwardTest{} failures, \niForwardMonths{} area-months). Each test is run
-once with all areas in the fit and once leaving each area out in turn, as a
-holder never seen before.
-
-\subsection{The Allocation, Measured}
-Fitted with an area term, an area--family interaction and an area--month term,
-the network gives an area-wide standard deviation of \niSigArea{} (profile
-interval \niCiArea, boundary test $p=\niPArea$), an interaction of
-\niSigInter{} (\niCiInter, $p\niPInter$) and a month term of \niSigMonth{}
-(\niCiMonth, $p=\niPMonth$). Family rate ratios range from \niFamLo{} to
-\niFamHi{} relative to the reference family. On this network the heterogeneity
-between holders is almost entirely of the interaction kind: an area is not
-worse for every family, but particular families do markedly better or worse in
-particular areas. Under the aggregate criterion this is the allocation for which
-risk pools best, and under the joint criterion the one that is hardest to
-cover (Section~\ref{sec:multi}). The shared month term, the analogue of a
-ship-wide event, is small but detectable.
-
-\subsection{Plans Tested Out of Sample}
-Table~\ref{tab:ni} gives the joint cover of a 99\,\% plan over the families an
-area holds. In the within-period test with known areas, the Poisson plan covers
-\niPoissonWithinKnownCover\,\% of area-months and the empirical-Bayes plan
-\niEbGammaWithinKnownCover\,\%. The hierarchical predictive plan covers
-\niHierPredWithinKnownCover\,\% with \niHierPredWithinKnownUnits{} units, against
-\niPoissonWithinKnownUnits{} for Poisson and \niNbPooledWithinKnownUnits{} for
-the pooled negative binomial, which reaches \niNbPooledWithinKnownCover\,\%.
-Knowing which families run high in which area is what lets the hierarchical
-plan reach the target without the pooled model's uniform margin.
-
-For an area left out of the fit the picture changes. The interaction of an
-unseen area is unknown, and with a standard deviation of \niSigInter{} the
-hierarchical plan has to cover it, at \niHierPredWithinNewUnits{} units. The
-pooled negative binomial, which spreads the same heterogeneity over all cells,
-covers \niNbPooledWithinNewCover\,\% with \niNbPooledWithinNewUnits{} units,
-while Poisson and empirical Bayes fall to \niPoissonWithinNewCover{} and
-\niEbGammaWithinNewCover\,\%. For a new holder the large interaction makes the
-hierarchical plan safe but expensive, and its history, once available, is
-worth most of that stock.
-
-The forward test fell in a quieter year: failure rates in April to October 2026
-were below those of the fitting period, and every plan covered every
-area-month, Poisson with \niPoissonForwardKnownUnits{} units and the
-hierarchical predictive plan with \niHierPredForwardKnownUnits. It confirms that
-the plans are not exceeded a year ahead but cannot separate the methods; a
-fleet should expect drifts of this kind and refit as records accumulate.
+A street-lighting network shares the grouping of the shipboard problem, LED
+lantern families of known size divided among maintenance areas and observed
+monthly, and only illustrates it: nothing here is evidence about ships.
+The Department for Infrastructure of Northern Ireland publishes fault reports
+by financial year and an inventory of lighting points~\cite{dfi_lighting}; the
+portal held April 2020 to March 2025 and April 2026 onwards. Of \niRowsAll{}
+reports, \niSkipped{} malformed records are skipped; reports of a light out are
+kept, cable, supply and no-fault closures removed, and a report within seven
+days of the previous one on the same street merged with it
+(\niMergeShare\,\%). Streets are linked to the inventory by name and town, and
+the \niNearShare\,\% of points on streets never reported take the area of the
+nearest reported street. The variable is the \emph{cleaned report}: only
+\niCommentShare\,\% carry a closure comment and none names a driver, so it is
+neither a confirmed failure nor a consumed spare. Exposure is installed count,
+from the snapshot of 24 April 2025, times dusk-to-dawn hours, on \niStreets{}
+streets lit by one LED family.
 
 \begin{table}[!t]
-\caption{Northern Ireland street lighting: joint cover (\%) of a 99\,\% plan
-over an area's families, mean units per area-month and mean log score per
-family-month
-(\textsc{measured}; new areas are left out of the fit in turn)}
+\caption{Street lighting, retrospective tests: area-months with cleaned
+reports above the 99\,\% joint plan and mean units per area-month
+(\textsc{observed reports, calculated stock}; \niWithinN{} and \niForwardN{}
+area-months in every cell; bootstrap row from a separate run)}
 \label{tab:ni}
 \centering
 \footnotesize
-\setlength{\tabcolsep}{2.6pt}
-\begin{tabular}{@{}lccccccc@{}}
+\setlength{\tabcolsep}{2.4pt}
+\begin{tabular}{@{}lcccccccc@{}}
 \toprule
-& \multicolumn{5}{c}{within-period test} & \multicolumn{2}{c}{forward test} \\
-\cmidrule(lr){2-6}\cmidrule(lr){7-8}
-& \multicolumn{3}{c}{known areas} & \multicolumn{2}{c}{new area} &
-\multicolumn{2}{c}{known areas} \\
-\cmidrule(lr){2-4}\cmidrule(lr){5-6}\cmidrule(lr){7-8}
-Plan & cover & units & log sc. & cover & units & cover & units \\
+& \multicolumn{4}{c}{temporal split} & \multicolumn{4}{c}{later period} \\
+\cmidrule(lr){2-5}\cmidrule(l){6-9}
+& \multicolumn{2}{c}{known} & \multicolumn{2}{c}{new} &
+\multicolumn{2}{c}{known} & \multicolumn{2}{c}{new} \\
+Plan & exc. & units & exc. & units & exc. & units & exc. & units \\
 \midrule
-\tabinput{tables/tab_ni.tex}
+\tabinput{tables/tab_ni6.tex}
 \bottomrule
 \end{tabular}
 \end{table}
+
+Both tests are retrospective, using an inventory taken after the months
+evaluated. The \emph{temporal split} fits
+April 2023 to March 2024 and predicts the next twelve months, each new area
+left out in turn; the \emph{later period} fits April 2023 to March 2025 and
+predicts April to October 2026 with the inventory of 1 November 2026. Zero
+exceedances in \niWithinN{} area-months bound the cover from below only at
+\niLowZero\,\% for independent months, an optimistic bound: the data rank plans but cannot show 99\,\%. In known
+areas the predictive plan had no exceedance with \niPairUnits{} fewer units
+than the pooled negative binomial (area-cluster interval
+\niPairUnitsLo--\niPairUnitsHi), \niSeedKnownRange{} in each of \niSeedN{}
+further seeds. A new area carries an interaction it has not observed: its
+predictive plan took \niTabPredNew{} units per area-month in the run of the
+predictive rows of Table~\ref{tab:ni} and \niSeedPredNewLo--\niSeedPredNewHi{}
+with the further seeds; the bootstrap row comes from a separate run with its
+own random stream, in which the predictive plan took \niBootRunPredNew{} and
+the bootstrap plan \niBootNewUnits.

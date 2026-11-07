@@ -1,0 +1,50 @@
+macro,value,kind,source,note
+shCabin,"5\,169",ANALYTIC,analysis/ship_cases.py -> data/v2/ship_cases.json,"installed units, large class"
+shUsb,"1\,919",ANALYTIC,analysis/ship_cases.py -> data/v2/ship_cases.json,"installed units, large class"
+shFan,"1\,919",ANALYTIC,analysis/ship_cases.py -> data/v2/ship_cases.json,"installed units, large class"
+shPublic,"1\,860",ANALYTIC,analysis/ship_cases.py -> data/v2/ship_cases.json,"installed units, large class"
+shGalley,66,ANALYTIC,analysis/ship_cases.py -> data/v2/ship_cases.json,"installed units, large class"
+shExt,265,ANALYTIC,analysis/ship_cases.py -> data/v2/ship_cases.json,"installed units, large class"
+shVfd,58,ANALYTIC,analysis/ship_cases.py -> data/v2/ship_cases.json,"installed units, large class"
+shLamWeek,1.57,ANALYTIC,analysis/ship_cases.py -> data/v2/ship_cases.json,7 days
+shMargLo,96.2,ANALYTIC,analysis/ship_cases.py -> data/v2/ship_cases.json,
+shMargHi,98.2,ANALYTIC,analysis/ship_cases.py -> data/v2/ship_cases.json,
+shPremMax,3.5,ANALYTIC,analysis/ship_cases.py -> data/v2/ship_cases.json,robust vs optimum at f = 1
+shExpLo,97.7,ANALYTIC,analysis/ship_cases.py -> data/v2/ship_cases.json,
+shExpHi,98.3,ANALYTIC,analysis/ship_cases.py -> data/v2/ship_cases.json,
+shEvLo,54.4,ANALYTIC,analysis/ship_cases.py -> data/v2/ship_cases.json,
+shEvHi,95.7,ANALYTIC,analysis/ship_cases.py -> data/v2/ship_cases.json,
+shEvAllLo,97.4,ANALYTIC,analysis/ship_cases.py -> data/v2/ship_cases.json,
+shEvAllHi,98.5,ANALYTIC,analysis/ship_cases.py -> data/v2/ship_cases.json,
+shEvCostLo,4,ANALYTIC,analysis/ship_cases.py -> data/v2/ship_cases.json,
+shEvCostHi,17,ANALYTIC,analysis/ship_cases.py -> data/v2/ship_cases.json,
+shBigCostLo,27,ANALYTIC,analysis/ship_cases.py -> data/v2/ship_cases.json,
+shBigCostHi,103,ANALYTIC,analysis/ship_cases.py -> data/v2/ship_cases.json,
+cvTauLo,52,SIM,data/v2/campaign_boot_reps.csv.gz (analysis/campaign_boot.py),"80 pct bootstrap percentile interval, per cell"
+cvTauHi,82,SIM,data/v2/campaign_boot_reps.csv.gz (analysis/campaign_boot.py),
+cvOmLo,57,SIM,data/v2/campaign_boot_reps.csv.gz (analysis/campaign_boot.py),
+cvOmHi,82,SIM,data/v2/campaign_boot_reps.csv.gz (analysis/campaign_boot.py),
+cvOmOneHi,12,SIM,data/v2/campaign_boot_reps.csv.gz (analysis/campaign_boot.py),
+cvShareLo,57,SIM,data/v2/campaign_boot_reps.csv.gz (analysis/campaign_boot.py),
+cvShareHi,80,SIM,data/v2/campaign_boot_reps.csv.gz (analysis/campaign_boot.py),
+bcCells,four,SIM,analysis/campaign_bconv.py -> data/v2/campaign_bconv.json,
+bcDiffMax,0.07,SIM,analysis/campaign_bconv.py -> data/v2/campaign_bconv.json,
+bcMcse,0.07,SIM,analysis/campaign_bconv.py -> data/v2/campaign_bconv.json,
+bcRedraw,0.00,SIM,analysis/campaign_bconv.py -> data/v2/campaign_bconv.json,
+bcRedrawMax,1.0,SIM,analysis/campaign_bconv.py -> data/v2/campaign_bconv.json,
+bcUnitsMax,1227,SIM,analysis/campaign_bconv.py -> data/v2/campaign_bconv.json,
+bcRedrawTen,10,SIM,data/v2/campaign_bconv_reps.csv,plan changed by > 10 units
+bcN,160,SIM,data/v2/campaign_bconv_reps.csv,
+bcRedrawUnitsMed,1,SIM,data/v2/campaign_bconv_reps.csv,
+cbBigN,30,SIM,data/v2/campaign_boot_reps.csv.gz,"S=5, M=1: bootstrap plan above 5x the oracle units"
+cbBigTot,160,SIM,data/v2/campaign_boot_reps.csv.gz,
+cbBigMax,9\times 10^{5},SIM,data/v2/campaign_boot_reps.csv.gz,910527
+cbBigSd,1.7,SIM,data/v2/campaign_boot_reps.csv.gz,median of the larger 90th bootstrap percentile of the sds in those campaigns
+niSkipped,5,PUBLICDATA,analysis/ni_audit.py -> data/v2/ni_audit.json,records with a wrong field count
+niNearShare,19,PUBLICDATA,analysis/ni_audit.py -> data/v2/ni_audit.json,
+niHoursPerReport,0.30,PUBLICDATA,analysis/ni_audit.py -> data/v2/ni_audit.json,
+niHoursFamLo,0.20,PUBLICDATA,analysis/ni_audit.py -> data/v2/ni_audit.json,
+niHoursFamHi,0.80,PUBLICDATA,analysis/ni_audit.py -> data/v2/ni_audit.json,
+niDsRatio,7,PUBLICDATA,analysis/ni_audit.py -> data/v2/ni_audit.json,datasheet MTBF of the exterior driver over hours per report
+niTabPredNew,164,PUBLICDATA,tables/tab_ni3.tex,
+niTabNbNew,72,PUBLICDATA,tables/tab_ni3.tex,

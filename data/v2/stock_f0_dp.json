@@ -1,0 +1,71 @@
+[
+ {
+  "P": 8,
+  "total": 20.0,
+  "means": "equal",
+  "costs": "skewed",
+  "f": 0.0,
+  "best_found": 343.0,
+  "lower_bound": 340.4194254624307,
+  "dp_cost": 341.0,
+  "dp_vector": [
+   18,
+   13,
+   18,
+   14,
+   18,
+   13,
+   17,
+   14
+  ],
+  "dp_cover": 0.9900718286288669,
+  "log_margin_below": 8.844541124907943e-05,
+  "certified": true
+ },
+ {
+  "P": 8,
+  "total": 20.0,
+  "means": "skewed",
+  "costs": "equal",
+  "f": 0.0,
+  "best_found": 105.0,
+  "lower_bound": 104.9711087357058,
+  "dp_cost": 105.0,
+  "dp_vector": [
+   2,
+   3,
+   4,
+   6,
+   9,
+   15,
+   24,
+   42
+  ],
+  "dp_cover": 0.990015604407017,
+  "log_margin_below": 0.0005300702157688356,
+  "certified": true
+ },
+ {
+  "P": 8,
+  "total": 20.0,
+  "means": "skewed",
+  "costs": "skewed",
+  "f": 0.0,
+  "best_found": 357.0,
+  "lower_bound": 356.0001254822571,
+  "dp_cost": 357.0,
+  "dp_vector": [
+   3,
+   3,
+   5,
+   6,
+   10,
+   14,
+   29,
+   39
+  ],
+  "dp_cover": 0.9900922350238646,
+  "log_margin_below": 5.3670942095858376e-05,
+  "certified": true
+ }
+]

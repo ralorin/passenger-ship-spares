@@ -1,0 +1,36 @@
+macro,value,kind,source,note
+shPremSevenMid,1.3,ANALYTIC,analysis/ship_cases.py -> data/v2/ship_cases.json,"robust over optimum at f = 1, 7 d, sigma 0.6"
+shPremFourteen,0.0,ANALYTIC,analysis/ship_cases.py -> data/v2/ship_cases.json,"robust over optimum at f = 1, 14 d, sigma 0.6"
+shPremTwentyEight,2.5,ANALYTIC,analysis/ship_cases.py -> data/v2/ship_cases.json,"robust over optimum at f = 1, 28 d, sigma 0.6"
+shPremSevenLow,0.0,ANALYTIC,analysis/ship_cases.py -> data/v2/ship_cases.json,"robust over optimum at f = 1, 7 d, sigma 0.3"
+shPremSevenHigh,3.5,ANALYTIC,analysis/ship_cases.py -> data/v2/ship_cases.json,"robust over optimum at f = 1, 7 d, sigma 0.9"
+shUnitsTwo,6,ANALYTIC,analysis/ship_cases.py -> data/v2/ship_cases.json,
+shUnitsFour,24,ANALYTIC,analysis/ship_cases.py -> data/v2/ship_cases.json,
+shDiffRefs,3,ANALYTIC,analysis/ship_cases.py -> data/v2/ship_cases.json,references where robust and f = 1 optimum differ
+brSeeds,100,SIM,analysis/bridge.py -> data/v2/bridge.json,
+brDraws,"6\,000",SIM,analysis/bridge.py -> data/v2/bridge.json,
+brCert,100,SIM,analysis/bridge.py -> data/v2/bridge.json,
+brNoiseU,0.05,SIM,analysis/bridge.py -> data/v2/bridge.json,f = 0: largest |end| of the 95 pct interval of the unit contrast
+brNoiseJ,0.01,SIM,analysis/bridge.py -> data/v2/bridge.json,
+brResid,0.05,SIM,analysis/bridge.py -> data/v2/bridge.json,max over seeds and cases of permuted-draw cover minus product cover at the chosen vector
+brJLo,98.90,SIM,analysis/bridge.py -> data/v2/bridge.json,mean exact cover of draw plans
+brJHi,99.19,SIM,analysis/bridge.py -> data/v2/bridge.json,
+brFleetDu,$-0.04$,SIM,analysis/bridge.py -> data/v2/bridge.json,"sigma 0.42, 7 d, f = 1"
+brFleetDJ,$-0.02$,SIM,analysis/bridge.py -> data/v2/bridge.json,
+brBigDep,65,SIM,analysis/bridge.py -> data/v2/bridge.json,
+brBigInd,69,SIM,analysis/bridge.py -> data/v2/bridge.json,
+brBigDu,$-3.87$,SIM,analysis/bridge.py -> data/v2/bridge.json,
+brBigCostPct,8.7,SIM,analysis/bridge.py -> data/v2/bridge.json,"cost of independence over dependent optimum, relative costs"
+brBigJInd,99.29,SIM,analysis/bridge.py -> data/v2/bridge.json,
+ceCiCorrLo,92,SIM,analysis/campaign_extra.py -> data/v2/campaign_extra.json,zero inside when LRT < 2.71
+ceCiCorrHi,99,SIM,analysis/campaign_extra.py -> data/v2/campaign_extra.json,
+ceCiZeroCorr,97.0,SIM,analysis/campaign_extra.py -> data/v2/campaign_extra.json,
+niFwdNewN,112,PUBLICDATA,"analysis/ni_validation.py -> data/v2/ni_validation_evidence.json, ni_validation_boot.json",
+niFwdPredNew,117,PUBLICDATA,"analysis/ni_validation.py -> data/v2/ni_validation_evidence.json, ni_validation_boot.json",
+niFwdNbNew,54,PUBLICDATA,"analysis/ni_validation.py -> data/v2/ni_validation_evidence.json, ni_validation_boot.json",
+niLsWithinN,1008,PUBLICDATA,"analysis/ni_validation.py -> data/v2/ni_validation_evidence.json, ni_validation_boot.json","family-months per group, temporal split"
+niLsFwdN,616,PUBLICDATA,"analysis/ni_validation.py -> data/v2/ni_validation_evidence.json, ni_validation_boot.json","family-months per group, later period"
+niLsFwdKnown,$-0.018$,PUBLICDATA,"analysis/ni_validation.py -> data/v2/ni_validation_evidence.json, ni_validation_boot.json",
+niLsFwdKnownLo,$-0.069$,PUBLICDATA,"analysis/ni_validation.py -> data/v2/ni_validation_evidence.json, ni_validation_boot.json",
+niLsFwdKnownHi,$+0.033$,PUBLICDATA,"analysis/ni_validation.py -> data/v2/ni_validation_evidence.json, ni_validation_boot.json",
+niBootRunPredNew,168,PUBLICDATA,"analysis/ni_validation.py -> data/v2/ni_validation_evidence.json, ni_validation_boot.json","bootstrap run, its own stream"

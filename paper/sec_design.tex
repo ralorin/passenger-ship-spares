@@ -1,141 +1,160 @@
-Sections~\ref{sec:cover} and~\ref{sec:multi} show that a multi-reference plan
-depends on how the latent spread is divided between a ship-wide term $\tau$ and
-a ship--product term $\omega$. Whether a fleet's records could estimate that
-division, and what a plan built from them delivers, can be answered by
-simulation before any record is collected. Every number in this section is
-simulated under assumed parameters.
+Every number in this section is simulated.
+\subsection{Identification}
+Structural identification, practical identification and power are different
+questions. Under~\eqref{eq:structure} the latent effects $u_s+w_{sp}$ of two
+references on one ship have covariance $\tau^2$ and each has variance
+$\tau^2+\omega^2$. For counts with means $m_p$, a gamma multiplier per cell and
+the mean correction of~\eqref{eq:multi}, the covariance is
+$m_pm_q(e^{\tau^2}-1)$ and the variance of a single cell
+$m_p+m_p^2\{e^{\tau^2+\omega^2}(1+1/\phi)-1\}$. Three facts follow.
+References observed together on the same ships inform the shared effect,
+through the covariance of their counts. With one mission, each
+ship--reference level is a single cell on which $w_{sp}$ and the multiplier
+both act, so the lognormal interaction and the gamma dispersion are separated
+only through their parametric forms, which differ in the tails of single
+counts; that information is small at fleet counts. Repeated missions add
+persistence: $w_{sp}$ recurs while the multiplier is renewed, so the
+covariance of a level across missions measures $\tau^2+\omega^2$ without
+appeal to tail shape. Misattribution matters for a ship with history, since
+only the persistent part carries over, and for an unseen ship, since lognormal
+and gamma multipliers of equal variance have different upper tails. Power is
+the rejection rate of the boundary test; practical identification is judged by
+how often an estimate sits at zero and by interval cover, and low power below
+is evidence that it is weak.
 
 \subsection{Design of the Study}
-For ship $s$, reference $p$ and mission $t$ the generating model is
-\begin{equation}
-\begin{aligned}
-y_{spt}&\sim\mathrm{Poisson}(\mu_{spt}),\\
-\log\mu_{spt}&=\log(m\,a_p)+u_s+w_{sp}+e_{spt}\\
-&\quad-\tfrac12(\tau^2+\omega^2+\varepsilon^2),
-\end{aligned}
+For ship $s$, reference $p$ and mission $t$,
+$y_{spt}\sim\mathrm{Poisson}(\mu_{spt})$ with
+\begin{multline}
+\log\mu_{spt}=\log(m\,a_p)+u_s+w_{sp}+e_{spt}\\
+-\tfrac12(\tau^2+\omega^2+\varepsilon^2),
 \label{eq:sim}
-\end{equation}
-with $u_s\sim\mathcal N(0,\tau^2)$, $w_{sp}\sim\mathcal N(0,\omega^2)$ and a
-mission term $e_{spt}\sim\mathcal N(0,\varepsilon^2)$, so that each cell expects
-$m\,a_p$ failures. The reference weights $a_p$ are equal or proportional to
-$1:2:4:8$. Five allocations are studied: ship-wide only $(\tau,\omega)=(0.6,0)$,
-interaction only $(0,0.6)$, equal splits $(0.42,0.42)$ and $(0.3,0.3)$, and none
-$(0,0)$. A full factorial in the number of ships $S\in\{5,10,20,40,80\}$ and
-missions per ship $M\in\{1,2,4,8\}$, with $P=4$, $m=1$ and $\varepsilon=0.3$, is
-completed by one-factor variations of $m\in\{0.1,0.3,3\}$, $P\in\{2,8\}$,
-$\varepsilon\in\{0,0.6\}$ and unequal weights: \dsCells{} cells of \cdReps{}
-campaigns each, \dsCampaigns{} in all.
+\end{multline}
+$e_{spt}\sim\mathcal N(0,\varepsilon^2)$, so each cell expects $m\,a_p$
+failures. The splits $(\tau,\omega)$ are $(0.6,0)$, $(0,0.6)$, $(0.42,0.42)$,
+$(0.3,0.3)$ and $(0,0)$, crossed with $S\in\{5,10,20,40,80\}$ ships and
+$M\in\{1,2,4,8\}$ missions at $P=4$, $m=1$, equal $a_p$ and
+$\varepsilon=0.3$, with one-factor variations of $m$, $P$, $\varepsilon$ and
+the weights: \dsCells{} cells of \cdReps{} campaigns. Each campaign is fitted
+with both terms and with each alone; $\varepsilon$ is absorbed by the negative
+binomial dispersion, so the fitted mission term has the wrong form. The 99\,\%
+plan for one mission of an unseen ship is scored exactly under the true model
+by~\eqref{eq:jointexact}.
 
-Every campaign is fitted three times with the estimator of
-Section~\ref{sec:model} (both terms, ship term only, interaction term only,
-reference as a fixed effect), which gives the estimates and the likelihood-ratio
-statistic for each term. Because a variance at zero lies on the boundary of the
-parameter space, the statistic is referred to an equal mixture of
-$\chi^2_0$ and $\chi^2_1$~\cite{self1987,stram1994}. In 15 cells the first 300
-campaigns also receive profile-likelihood intervals for $\tau$ and $\omega$.
-A 99\,\% plan for one mission of an unseen ship is then built from each fit in
-four ways: \emph{plug-in}, from draws of the latent terms at the estimated
-parameters; \emph{predictive}, adding draws of the coefficients from their
-approximate posterior; \emph{conservative}, the larger of the plug-in plans with
-the estimated total spread put wholly on $\tau$ and wholly on $\omega$; and
-\emph{Poisson}, each reference at its own Poisson quantile. The cover each plan
-delivers is computed exactly under the true model~\eqref{eq:sim} by
-Proposition~\ref{prop:multi}, with the mission term folded into the reference
-term. Monte Carlo standard errors follow~\cite{morris2019}: \dsMcseRej{}
-percentage points for a rejection rate near 5\,\%.
+\subsection{Tests and Intervals}
+Over the \ceTypeCells{} cells and terms with a true zero, including those
+with both components zero, the boundary test at 5\,\% rejected in a median \ceTypeMed\,\% and at most \ceTypeMax\,\% of
+campaigns (Clopper--Pearson interval \ceTypeMaxLo--\ceTypeMaxHi\,\%):
+conservative or close to nominal on these designs, with no guarantee for
+others. Tests and intervals here use one start per fit; refitting \csN{}
+campaigns of the main grid from the three starts described below found a higher maximum in \csHigherPct\,\% of them, \csHigherOnePct\,\% with
+one mission, and changed the decision for $\omega$ in \csOmChanged{} and for
+$\tau$ in \csTauChanged.
 
-No campaign failed to fit. The conditioning is specific: the latent effects are
-Gaussian, $\varepsilon$ is fixed within a cell and there are no common-cause
-events, reference changes or reporting errors. Section~\ref{sec:fleet} relaxes
-those assumptions.
+Under the split $(0.42,0.42)$, with $P=4$ and $m=1$, the interaction was
+detected in at most \ceOnePowOm\,\% of single-mission campaigns at any number
+of ships from 5 to 80, and its estimate was at zero in a median
+\ceOneBound\,\% of them, as weak practical identification predicts; the
+ship-wide term was detected in \ceOnePowTauLo--\ceOnePowTauHi\,\%. With two,
+four and eight missions the interaction was detected in
+\pwOmTwoLo--\pwOmTwoHi, \pwOmFourLo--\pwOmFourHi{} and
+\pwOmEightLo--\pwOmEightHi\,\% of campaigns from 5 to 80 ships, and the
+ship-wide term in \pwTauTwoLo--\pwTauTwoHi, \pwTauFourLo--\pwTauFourHi{} and
+\pwTauEightLo--\pwTauEightHi\,\% (\cdReps{} campaigns per cell, Monte Carlo
+s.e.\ at most 1.6 points). Profile intervals, with zero included below
+the mixture point, covered the true values in \ceCiCorrLo--\ceCiCorrHi\,\% of
+\ceCiReps{} campaigns in each of \ceCiCells{} cells, against 95\,\%, and a zero
+component in \ceCiZeroCorr\,\%.
 
-\subsection{Testing and Estimating the Allocation}
-The boundary test holds its size. Across the cells where a component is zero
-the rejection rate at the 5\,\% level has median \dsTypeOneMed\,\% and maximum
-\dsTypeOneMax\,\%, conservative as the mixture theory predicts. A spurious
-component is therefore no more frequent than the test allows, provided it is
-tested and not judged from whether a point estimate leaves the boundary, which
-happens about half the time under the null whatever the campaign size.
-
-Table~\ref{tab:power} gives the power under the equal split $(0.42,0.42)$.
-With one mission per ship the interaction term is never detected, at any
-number of ships: it varies at the same level as the mission term and cannot be
-told apart from it, and when the truth is interaction only the larger component
-is identified correctly in only \dsOrderOneLo--\dsOrderOneHi\,\% of campaigns.
-Repeated missions are what identifies it. With four missions, the interaction
-is detected in \dsPowOmTenFour\,\% of ten-ship campaigns and
-\dsPowOmTwentyFour\,\% of twenty-ship ones, and with eight missions and forty
-ships in \dsPowOmFortyEight\,\%. With at least four missions and ten ships the
-larger component is identified in at least \dsOrderFour\,\% of campaigns. The
-profile intervals cover the true values in \dsCiLo--\dsCiHi\,\% of the
-\dsCiReps{} campaigns per cell against a nominal 95\,\%.
+\subsection{Plans With and Without Variance Uncertainty}
+With $\boldsymbol\theta$ fixed at its estimate, mean cover falls to
+\cePredMinTen\,\% in cells with at least ten ships and two missions where each
+cell expects three failures. On \cbCells{} cells (\cbReps{} campaigns, \cbB{}
+refits each) the bootstrap raised mean cover by \cbGainLo--\cbGainHi{}
+points, most where ships are few and missions single. It does not repair the
+busiest cells, where both plans cover \cbNullPred\,\% with no latent spread:
+the truth has a lognormal mission term and the fit a gamma multiplier, so the
+shortfall comes from the form of the dispersion, not from its uncertainty.
+These fits use the three-start rule described below; in \rlFitsBad{} of these
+campaigns no run met it (gradient up to \rlFitsBadGrad), the best run was
+kept, and dropping them changes no cell's gain by more than
+\rlFitsBadEffect{} points.
 
 \begin{table}[!t]
-\caption{Power of the boundary likelihood-ratio test at 5\,\% when both
-components are present, $(\tau,\omega)=(0.42,0.42)$, in percent
-(\textsc{simulation}, \cdReps{} campaigns per cell, $P=4$, $m=1$)}
-\label{tab:power}
+\caption{Small campaigns: mean and 10th-percentile joint cover (\%) of 99\,\%
+plans for an unseen ship, median and 90th-percentile units, and campaigns
+whose plan exceeds five times the stock of the plan with known parameters
+(\textsc{simulation}; $P=4$, $m=1$, four splits, \rgReps{} campaigns each)}
+\label{tab:boot}
 \centering
 \footnotesize
-\setlength{\tabcolsep}{4.5pt}
-\begin{tabular}{@{}ccccccccc@{}}
+\setlength{\tabcolsep}{1.6pt}
+\begin{tabular}{@{}lcccrr@{\hspace{5pt}}cccrr@{}}
 \toprule
-& \multicolumn{4}{c}{ship-wide $\tau$, missions $M$} &
-\multicolumn{4}{c}{interaction $\omega$, missions $M$} \\
-\cmidrule(lr){2-5}\cmidrule(lr){6-9}
-$S$ & 1 & 2 & 4 & 8 & 1 & 2 & 4 & 8 \\
+& \multicolumn{5}{c}{$S=5$, $M=1$} & \multicolumn{5}{c}{$S=10$, $M=1$} \\
+\cmidrule(lr){2-6}\cmidrule(l){7-11}
+Dispersion & $\bar J$ & $J_{10}$ & u$_{50}$ & u$_{90}$ & $>$5$\times$ &
+$\bar J$ & $J_{10}$ & u$_{50}$ & u$_{90}$ & $>$5$\times$ \\
 \midrule
-\tabinput{tables/tab_power.tex}
+\tabinput{tables/tab_reg7.tex}
 \bottomrule
 \end{tabular}
 \end{table}
 
-\subsection{Cover of Plans for an Unseen Ship}
-Table~\ref{tab:campaign} reports the joint cover delivered by each plan,
-averaged over the five allocations. The predictive plan reaches its target from
-ten ships on (\dsPredCoverTen\,\%), and in no cell with at least ten ships and
-two missions does its mean fall below \dsPredMin\,\%. The plug-in plan, which
-ignores the uncertainty of the coefficients, falls short when the campaign is
-small (\dsPlugCoverFive\,\% with five ships). The conservative plan behaves
-like the plug-in one at slightly higher cost. The Poisson plan delivers
-\dsPoisLo--\dsPoisHi\,\% across allocations, \dsPoisMThree\,\% when each cell
-expects three failures and \dsPoisPEight\,\% with eight references, since its
-shortfall grows with the count and with the number of references that must
-all be covered.
+With five ships observed once, the extreme bootstrap plans of a first run
+differed between machines, each repeating its own run exactly: one campaign
+gave \dgCaseHpc{} units on a Linux cluster and \dgCaseLocal{} on a Windows PC.
+In \dgCases{} such campaigns followed step by step, the data agreed, the
+estimates differed by at most \dgSdDiffMax{} in total standard deviation,
+\dgBootSameMin--\dgBootSameMax{} of the \cbB{} bootstrap data sets agreed, and
+the refits diverged. Two causes were found. In \dgTwoMax{} campaigns the
+criterion has a second maximum, \dgTwoMaxLo--\dgTwoMaxHi{} above the one
+reached from the default start, with the dispersion in the gamma multiplier
+instead of the interaction: the near-equivalence one mission leaves, with
+different tails. In \rlAltN{} of the \rlAltOf{} small campaigns
+(Table~\ref{tab:boot} and five ships with four missions) another start raised
+the criterion by more than 0.05, and the predictive plan fell from a median of
+\rlAltOneMed{} to \rlAltThreeMed{} units. And the bootstrap is Monte Carlo: at a fixed estimate,
+\dgFreshK{} streams gave plans differing by a median factor of \dgRatioMed{}
+(\dgCaseLo{} to \dgCaseHi{} units in that campaign), set by the refit with the
+widest spread (median total standard deviation \dgTopSdMed).
 
-A small campaign pays in stock.
-With five ships the predictive plan has a median of \dsUnitsFiveMed{} units,
-close to the \dsUnitsOracle{} of the plan that knows the parameters, but a mean
-of \dsUnitsFiveMean: in a minority of campaigns the coefficients are so poorly
-determined that the plan becomes very large. That is the correct response of a
-predictive distribution to little evidence, and it is what a fleet with five
-ships should expect to pay.
+Every fit and refit in this section therefore maximises the criterion from
+three starts, the given one, the default and small spreads, and keeps the
+accepted run with the largest criterion, a run being accepted when the largest
+projected gradient is at most 0.05 per unit of log standard deviation; a refit
+with none accepted is dropped (\rlFailed{} of \rlRefits). Another start won in
+\rlFitsWonPct\,\% of point estimates, \rlFitsWonFivePct\,\% with five ships
+observed once, and \rlRestartedPct\,\% of refits. The bootstrap plan still
+exceeded five times the known-parameter stock in \rgBigN{} of \rgN{} such
+campaigns (Table~\ref{tab:boot}), up to \rgBigMax{} units, where the estimate
+had a median total standard deviation of \rgTraceHatSig{} against
+\rgTraceHatSigOther{} in the others. An assumed cap of 15 units per reference,
+on the final stock only, keeps true cover at \rgCapCov\,\% but misses the
+target under the bootstrap law in \rgCapInfeas{} of \rgN{} campaigns; it
+prices a storage limit and does not correct the estimate.
 
-\begin{table}[!t]
-\caption{Mean joint cover of a 99\,\% plan for a four-reference zone of an
-unseen ship, in percent, averaged over five allocations: plug-in, predictive,
-conservative and Poisson plans, the mean tenth percentile of the predictive
-plan's cover, and median units of the predictive and oracle plans
-(\textsc{simulation}; $M=4$)}
-\label{tab:campaign}
-\centering
-\footnotesize
-\setlength{\tabcolsep}{3.2pt}
-\begin{tabular}{@{}cccccccc@{}}
-\toprule
-& & & & & pred. & \multicolumn{2}{c}{units} \\
-\cmidrule(l){7-8}
-$S$ & plug-in & pred. & cons. & Poisson & p10 & pred. & oracle \\
-\midrule
-\tabinput{tables/tab_campaign_cover.tex}
-\bottomrule
-\end{tabular}
-\end{table}
+The regularisation studied, a modelling choice, maximises~\eqref{eq:objective} minus
+$(\tau^2+\omega^2+1/\phi)/(2s^2)$, a half-normal prior of scale $s$ on the two
+latent standard deviations and on $\phi^{-1/2}$~\cite{gelman2006}, in the fit
+and every refit. The scale trades stock for cover: with five ships
+observed once, $s=0.5$, 1 and 2 left \rgPenHalfBig, \rgPenOneBig{} and
+\rgPenTwoBig{} extreme plans with mean cover \rgPenHalfCov, \rgPenOneCov{}
+and \rgPenTwoCov\,\%. With four missions, plans with $\boldsymbol\theta$
+fixed, bootstrapped and penalised at $s=1$ covered \rgFourPredCov,
+\rgFourBootCov{} and \rgFourPenOneCov\,\% with median stocks of
+\rgFourPredUnits, \rgFourBootUnits{} and \rgFourPenOneUnits{} units, against
+\rgFourOracleUnits{} with known parameters.
 
-\subsection{Implications for a First Campaign}
-Within this grid, a campaign should follow several references on the same
-ships over repeated missions, since more ships do not replace repetition and a
-snapshot cannot separate the two terms. Ten ships over four missions order the
-components reliably, and twenty to forty detect the interaction with high
-probability. Plans should come from the full predictive distribution, and the
-components should be reported with their intervals and tests.
+Three properties of the bootstrap differ. \emph{Interval
+calibration} is partial: nominal 80\,\% percentile intervals
+contained a positive true $\tau$ in \cvTauLo--\cvTauHi\,\% of campaigns per
+cell, a positive $\omega$ in \cvOmLo--\cvOmHi\,\% with four missions but at
+most \cvOmOneHi\,\% with one, and the share $f$ in \cvShareLo--\cvShareHi\,\%
+at $(0.42,0.42)$, the refits being less dispersed than the estimator's
+error. \emph{Stability of mean cover}: on \bcCells{} cells refitted 80 times,
+plans from the first 20 refits and from all 80 differed in mean cover by at
+most \bcDiffMax{} points (s.e.\ \bcMcse). \emph{Stability of one campaign's vector} follows from
+neither: it changed by more than ten units in \bcRedrawTen{} of \bcN{}
+campaigns when only the predictive draws were redrawn.
+

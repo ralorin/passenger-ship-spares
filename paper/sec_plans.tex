@@ -1,0 +1,200 @@
+\subsection{Exact Cover}
+Let a ship carry $P$ references with expected counts
+$\lambda_1,\dots,\lambda_P$ over the horizon, total latent variance
+$\sigma^2=\tau^2+\omega^2>0$ and ship-wide share $f=\tau^2/\sigma^2$
+($\sigma^2=0$ leaves no spread to share and is excluded), and let
+\begin{equation}
+Y_p\mid u,w_p\sim\mathrm{Poisson}\big(\lambda_p e^{u+w_p-\sigma^2/2}\big)
+\label{eq:multi}
+\end{equation}
+conditionally independent, where $u=u_s$ and $w_p=w_{sp}$
+of~\eqref{eq:structure} are independent normal with variances $\tau^2$ and
+$\omega^2$, so that $\lambda_p=E\,Y_p$ whatever $f$; other random terms
+of~\eqref{eq:model}, such as the maker, are common to the ships of a maker and
+enter $\lambda_p$. Given $u$
+the counts are independent; with $\varphi_a$ the $\mathcal N(0,a^2)$ density
+and $G_p(s\mid u)=\int F_{\mathrm{Pois}}(s;\lambda_pe^{u+w-\sigma^2/2})
+\varphi_\omega(w)\,\mathrm dw$,
+\begin{equation}
+J(\mathbf s)=\int\textstyle\prod_{p}G_p(s_p\mid u)\,\varphi_\tau(u)\,\mathrm du,
+\label{eq:jointexact}
+\end{equation}
+evaluated on a lattice holding every value of $u+w$, truncated at eight
+standard deviations (omitted mass below $\mpTrunc$); halving the spacing
+leaves every reported plan unchanged.
+
+\subsection{The Joint Criterion and the Ship-Wide Share}
+M\"uller and Scarsini~\cite{muller2000} showed that Gaussian vectors with equal
+means and variances are ordered in the supermodular order when their
+covariances are; the proposition applies this to the cover of a stock vector.
+
+\begin{proposition}[Monotone joint cover]
+\label{prop:mono}
+Let the Gaussian vector $\mathbf v=(v_1,\dots,v_P)$ have $E\,v_p=0$,
+$\mathrm{Var}(v_p)=\sigma^2$ and $\mathrm{Cov}(v_p,v_q)=f\sigma^2$ for $p\ne q$,
+$f\in[0,1]$, and let $Y_1,\dots,Y_P$ be conditionally independent given
+$\mathbf v$, with $\Pr(Y_p\le s\mid\mathbf v)=h_{p,s}(v_p)$ non-increasing and
+continuous in $v_p$. With $\sigma^2$ and the functions $h_{p,s}$ held fixed,
+the marginal law of every $Y_p$ is free of $f$, and $J(\mathbf s)$ is
+non-decreasing in $f$ on $[0,1]$ for every $\mathbf s\in\mathbb N^P$.
+\end{proposition}
+\begin{IEEEproof}
+Each $v_p\sim\mathcal N(0,\sigma^2)$ whatever $f$, so the marginals are fixed.
+Write $J_f(\mathbf s)=E\,\phi(\mathbf v)$ with
+$\phi(\mathbf v)=\prod_p h_{p,s_p}(v_p)\in[0,1]$. For $p\ne q$, $x_p\ge x'_p$
+and $x_q\ge x'_q$, let $d_r=h_{r,s_r}(x_r)-h_{r,s_r}(x'_r)\le0$ for
+$r\in\{p,q\}$; with the other coordinates fixed, the second difference of
+$\phi$ in $(p,q)$ is $d_pd_q\prod_{r\ne p,q}h_{r,s_r}(x_r)\ge0$.
+Non-negative second differences in every pair of coordinates make $\phi$
+supermodular~\cite{muller2000}. For $0\le f<f'<1$ both covariance matrices are
+positive definite, with eigenvalues $\sigma^2(1-f)$ and
+$\sigma^2(1+(P-1)f)$, the variances agree and every covariance is larger at
+$f'$, so $\mathbf v^{(f)}$ precedes $\mathbf v^{(f')}$ in the supermodular
+order~\cite{muller2000} and $J_f\le J_{f'}$. At $f=1$ the matrix is singular.
+Write $v^{(f)}_p=\sigma(\sqrt f\,z_0+\sqrt{1-f}\,z_p)$ with independent
+standard normal $z_r$; as $f\to1$, $\mathbf v^{(f)}\to\sigma z_0\mathbf 1=
+\mathbf v^{(1)}$ for every realisation, so $\phi(\mathbf v^{(f)})\to
+\phi(\mathbf v^{(1)})$ by continuity of the $h_{p,s}$, and $J_f\to J_1$ by
+bounded convergence, $0\le\phi\le1$. Hence $J_1\ge J_f$ for all $f<1$.
+\end{IEEEproof}
+
+As $f$ varies only the correlation between the $v_p$ changes.
+Model~\eqref{eq:multi} satisfies the hypotheses with $v_p=u+w_p$ and
+$h_{p,s}(v)=F_{\mathrm{Pois}}(s;\lambda_pe^{v-\sigma^2/2})$. So
+does~\eqref{eq:model} with $\phi$ fixed: gamma multipliers independent across
+cells and of $\mathbf v$ make each cell negative binomial, and a reference
+total over its cells is still stochastically increasing and continuous in
+$e^{v_p}$.
+
+The proposition concerns one vector; its consequence for the integer
+program~\eqref{eq:ip} is the point of this paper. Since $J_0(\mathbf s)\le
+J_f(\mathbf s)$ for every $\mathbf s$, a vector feasible at $f=0$ is feasible
+at every $f$, and one feasible for every $f$ is feasible at $f=0$. Hence, with
+$\sigma$ and the marginal laws known, the optimum of~\eqref{eq:ip} for
+independent references minimises the cost among the vectors feasible for all
+$f\in[0,1]$, the \emph{robust} plan, and the optimal cost is non-increasing in
+$f$; the optimum for a larger $f$ may fail at a smaller one.
+
+The guarantee is reserved for this family; four things lie outside it. The
+\emph{aggregate criterion}: the variance of the total increases with $f$, but
+that does not order a 99\,\% quantile; for \mpMean{} expected failures over
+eight equal references the aggregate plan needs \mpShipEight{} units at $f=1$
+and \mpInterEight{} at $f=0$. \emph{Uncertain rates and dispersion}: estimated
+$\lambda_p$, $\sigma$ or $\phi$ make the marginals themselves uncertain, and
+the robust plan inherits their error. \emph{Dependence induced by estimation}:
+a fitted predictive law mixes over coefficients and shared covariates, which
+correlates references even when $f=0$. \emph{Incidents}: an event failing units of every
+reference adds counts the latent law lacks. The proposition extends to an
+incident law fixed and independent of $f$: if, given the event state, each
+reference gains failures independent of $\mathbf v$ and of the other
+references, $h_{p,s}$ keeps its properties in each state and $J$ is a mixture
+of non-decreasing functions of $f$, so the plan at $f=0$ for that law is
+robust; a plan built without incidents is not protected.
+
+\subsection{Cost-Minimal Vectors}
+For unequal means or costs, \eqref{eq:ip} is solved by branch and bound: each
+$s_p$ is at least its own $\gamma$-quantile, since
+$J(\mathbf s)\le\Pr(Y_p\le s_p)$, and a branch is cut when the largest
+affordable stock of the remaining references cannot reach $\gamma$. Four other
+plans are compared: the smallest common stock; \emph{equal risk}, every
+reference at the smallest common marginal level meeting $\gamma$; the
+\emph{independence} plan, the optimum at $f=0$; and \emph{marginal analysis},
+adding the unit with the largest gain in $\log J$ per unit
+cost~\cite{sherbrooke2004,basten2014}. The grid has $P\in\{2,4,8\}$, totals of
+2, 8 and 20 expected failures, equal or doubling means, equal or alternating
+fivefold costs and $f\in\{0,0.5,1\}$, \seCases{} cases.
+
+\begin{table}[!t]
+\caption{Cost of plans in excess of the certified optimum of~\eqref{eq:ip}
+(\%), medians over the \seCertPos{} certified cases with $f>0$, maximum over
+all \seCert; lower panel, searches not finished: optimum by dynamic
+programming at $f=0$, best cost / lower bound otherwise
+(\textsc{analytical}; $\sigma=\mpSigma$, 99\,\%)}
+\label{tab:opt}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3.2pt}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+& \multicolumn{2}{c}{median, $f>0$} & max., & lowest \\
+\cmidrule(lr){2-3}
+Plan & unequal & equal & cert. & $J$ (\%) \\
+\midrule
+\tabinput{tables/tab_opt7.tex}
+\bottomrule
+\end{tabular}
+\end{table}
+
+Branch and bound, limited to ten minutes per search, certified \seCertBB{}
+cases. The other \seUnprovedBB{} have $P=8$, 20 expected failures and unequal
+means or costs; at $f=0$, where $J$ is the product of the marginal covers,
+dynamic programming over the integer budget solved the three exactly, one two
+cost units below the best found, giving \seCert{} certified cases. For the
+\seUnproved{} left, Table~\ref{tab:opt} gives the best cost $C_{\mathrm{best}}$
+and a lower bound $C_{\mathrm{low}}$, the Lagrangian dual of the separable
+relaxation from H\"older's inequality,
+$J(\mathbf s)\le\prod_p(E_u G_p(s_p\mid u)^P)^{1/P}$, rounded up for integer
+costs; the gap $100(C_{\mathrm{best}}-C_{\mathrm{low}})/C_{\mathrm{low}}$
+reaches \seGapHi\,\%. Marginal analysis, a heuristic since $\log J$
+is not separable when $f>0$, was optimal in \seGreedyCertOpt{} certified cases
+and at most \seGreedyCertMax\,\% above. Over the \seCertPos{} certified cases
+with $f>0$, the independence plan costs a median \seIndCertMed\,\% and at most
+\seIndCertMax\,\% more than the optimum for the true $f$, while a plan meeting the target only on average over $f$ falls to
+\rvAvgJointMin\,\% at some share. On \seMonoCases{} plans evaluated at 101
+values of $f$, $J$ increased at every step. If $\sigma$ is misjudged, the
+independence plan for $\sigma=\mpSigma$ delivers \seSigJointMin\,\% when the
+true $\sigma$ is 0.9.
+
+\subsection{A Large Passenger Ship}
+\label{sec:ship}
+Table~\ref{tab:ship} applies these results to the seven references of the
+large class of Section~\ref{sec:fleet}. Expected failures are installed units
+times planned powered hours times datasheet rate, multiplied by an assumed
+field factor of~3 and an Arrhenius factor at the zone temperature, for a
+Mediterranean summer itinerary with booked occupancy 0.97. Costs $c_p$ are
+assumed relative prices, the cabin LED driver being 1. Horizons of 7, 14 and
+28 days stand for resupply at every turnaround of a weekly cruise, every
+second and every fourth; $\lambda_p$ grows in proportion to the horizon while
+the latent multiplier persists until resupply, so the variance of a count,
+$\lambda_p+\lambda_p^2(e^{\sigma^2}-1)$, grows faster than its mean. The
+supply event is a stress assumption: probability $1-e^{-2H/365}$ over $H$
+days, each event failing 0.05\,\% of every population. Every vector is a
+certified optimum.
+
+\begin{table}[!t]
+\caption{99\,\% joint plans for one large passenger ship: robust vector (the
+optimum at $f=0$, nominal $J\ge99$\,\% for every $f$) per reference, its cost,
+and its cover $J$ (\%) at $f=0$ off nominal (\textsc{analytical}; $N$
+installed units, $c$ relative unit cost, $\lambda$ expected failures per week;
+premium over the cost of the optimum at $f=1$)}
+\label{tab:ship}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{2.1pt}
+\begin{tabular}{@{}lrrrccccc@{}}
+\toprule
+& & & & \multicolumn{3}{c}{$\sigma=0.6$} & \multicolumn{2}{c}{7 days} \\
+\cmidrule(lr){5-7}\cmidrule(l){8-9}
+Reference & $N$ & $c$ & $\lambda$ & 7 d & 14 d & 28 d & $\sigma{=}0.3$ & $\sigma{=}0.9$ \\
+\midrule
+\tabinput{tables/tab_ship5.tex}
+\bottomrule
+\end{tabular}
+\end{table}
+
+With fewer than one expected failure a week for most references, the seven
+marginal 99\,\% quantiles deliver only \shMargLo--\shMargHi\,\% jointly.
+Doubling the horizon added \shUnitsTwo{} units to the robust vector and
+quadrupling it \shUnitsFour, mostly fan-coil drives. The premium is taken over
+the optimum at $f=1$, which knows the spread to be wholly ship-wide and is the
+cheapest feasible plan in the family: \shPremSevenMid, \shPremFourteen{} and
+\shPremTwentyEight\,\% at 7, 14 and 28 days with $\sigma=0.6$, and
+\shPremSevenLow{} and \shPremSevenHigh\,\% at 7 days with $\sigma=0.3$ and
+0.9, the two vectors differing by one unit in at most \shDiffRefs{}
+references. In the rows below the premium each robust vector is held fixed and
+re-evaluated at $f=0$, the least favourable split: with powered hours a
+quarter above plan it covers \shExpLo--\shExpHi\,\%, on a mission with a supply
+event \shEvLo--\shEvHi\,\%, and over missions with and without events at two a
+year \shEvAllLo--\shEvAllHi\,\%. Only the last row re-optimises: putting the event in the
+law restores 99\,\% at \shEvCostLo--\shEvCostHi\,\% more cost,
+\shBigCostLo--\shBigCostHi\,\% when each event fails 0.2\,\%.

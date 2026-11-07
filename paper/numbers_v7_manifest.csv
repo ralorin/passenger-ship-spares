@@ -1,0 +1,109 @@
+macro,value,kind,source,note
+seCertBB,99,ANALYTIC,"analysis/stock_exact.py + analysis/stock_f0_dp.py -> data/v2/stock_exact_part1.csv, stock_f0_dp.json",certified by branch and bound
+seUnprovedBB,9,ANALYTIC,"analysis/stock_exact.py + analysis/stock_f0_dp.py -> data/v2/stock_exact_part1.csv, stock_f0_dp.json",
+seDpBetter,1,ANALYTIC,"analysis/stock_exact.py + analysis/stock_f0_dp.py -> data/v2/stock_exact_part1.csv, stock_f0_dp.json",
+seDpMarginMin,5.4e-05,ANALYTIC,"analysis/stock_exact.py + analysis/stock_f0_dp.py -> data/v2/stock_exact_part1.csv, stock_f0_dp.json",log(level) - best log cover one unit of cost below the optimum
+seCert,102,ANALYTIC,"analysis/stock_exact.py + analysis/stock_f0_dp.py -> data/v2/stock_exact_part1.csv, stock_f0_dp.json",branch and bound plus dynamic programming at f = 0
+seUnproved,6,ANALYTIC,"analysis/stock_exact.py + analysis/stock_f0_dp.py -> data/v2/stock_exact_part1.csv, stock_f0_dp.json",
+seCertPos,66,ANALYTIC,"analysis/stock_exact.py + analysis/stock_f0_dp.py -> data/v2/stock_exact_part1.csv, stock_f0_dp.json",certified cases with f > 0
+seGapLo,1.5,ANALYTIC,"analysis/stock_exact.py + analysis/stock_f0_dp.py -> data/v2/stock_exact_part1.csv, stock_f0_dp.json",100 (best - ceil(lower bound)) / ceil(lower bound)
+seGapHi,12.9,ANALYTIC,"analysis/stock_exact.py + analysis/stock_f0_dp.py -> data/v2/stock_exact_part1.csv, stock_f0_dp.json",
+seIndCertMed,1.0,ANALYTIC,"analysis/stock_exact.py + analysis/stock_f0_dp.py -> data/v2/stock_exact_part1.csv, stock_f0_dp.json",certified cases with f > 0
+seIndCertMax,12.6,ANALYTIC,"analysis/stock_exact.py + analysis/stock_f0_dp.py -> data/v2/stock_exact_part1.csv, stock_f0_dp.json",
+seGreedyCertOpt,79,ANALYTIC,"analysis/stock_exact.py + analysis/stock_f0_dp.py -> data/v2/stock_exact_part1.csv, stock_f0_dp.json",certified cases
+seGreedyCertMax,8.3,ANALYTIC,"analysis/stock_exact.py + analysis/stock_f0_dp.py -> data/v2/stock_exact_part1.csv, stock_f0_dp.json",
+brBigSave,4,EXACT,analysis/bridge.py -> data/v2/bridge.json,units saved by the dependent optimum
+brBigUnitPct,5.8,EXACT,analysis/bridge.py -> data/v2/bridge.json,share of the units of the independence plan
+fdNotCertJP,7,SIM,analysis/fleet_dep.py -> data/v2/raw/fleet_dep (counts kept in data/v2/fleet_dep_cert.json),joint and fixed-marginal plans not certified
+fdNotCertEv,6,SIM,analysis/fleet_dep.py -> data/v2/raw/fleet_dep (counts kept in data/v2/fleet_dep_cert.json),incident plans not certified
+fdNotCertGap,24,SIM,analysis/fleet_dep.py -> data/v2/raw/fleet_dep (counts kept in data/v2/fleet_dep_cert.json),"best vector minus lower bound, units"
+fdPlansPerType,"302\,000",SIM,analysis/fleet_dep.py -> data/v2/raw/fleet_dep (counts kept in data/v2/fleet_dep_cert.json),ship-missions planned per plan type
+cbCells,32,SIM,"analysis/campaign_boot.py, SPARES_RULE=1 -> data/v2/campaign_boot_rule_*",
+cbReps,40,SIM,"analysis/campaign_boot.py, SPARES_RULE=1 -> data/v2/campaign_boot_rule_*",
+cbGainLo,0.1,SIM,"analysis/campaign_boot.py, SPARES_RULE=1 -> data/v2/campaign_boot_rule_*",
+cbGainHi,1.0,SIM,"analysis/campaign_boot.py, SPARES_RULE=1 -> data/v2/campaign_boot_rule_*",
+cbNullPred,97.9,SIM,"analysis/campaign_boot.py, SPARES_RULE=1 -> data/v2/campaign_boot_rule_*",
+cbNullBoot,98.1,SIM,"analysis/campaign_boot.py, SPARES_RULE=1 -> data/v2/campaign_boot_rule_*",
+cvTauLo,55,SIM,"analysis/campaign_boot.py, SPARES_RULE=1 -> data/v2/campaign_boot_rule_*","80 pct bootstrap percentile interval, per cell"
+cvTauHi,85,SIM,"analysis/campaign_boot.py, SPARES_RULE=1 -> data/v2/campaign_boot_rule_*",
+cvOmLo,52,SIM,"analysis/campaign_boot.py, SPARES_RULE=1 -> data/v2/campaign_boot_rule_*",
+cvOmHi,80,SIM,"analysis/campaign_boot.py, SPARES_RULE=1 -> data/v2/campaign_boot_rule_*",
+cvOmOneHi,18,SIM,"analysis/campaign_boot.py, SPARES_RULE=1 -> data/v2/campaign_boot_rule_*",
+cvShareLo,65,SIM,"analysis/campaign_boot.py, SPARES_RULE=1 -> data/v2/campaign_boot_rule_*",
+cvShareHi,90,SIM,"analysis/campaign_boot.py, SPARES_RULE=1 -> data/v2/campaign_boot_rule_*",
+rgN,160,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz","campaigns with S=5, M=1"
+rgReps,40,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz",
+rgBigN,36,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz",bootstrap plan > 5x oracle
+rgBigMax,"698\,097",SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz",
+rgPredBig,7,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz",
+rgPredCov,99.2,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz","S=5, M=1 mean cover"
+rgPenHalfBig,0,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz",
+rgPenHalfCov,98.6,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz","S=5, M=1 mean cover"
+rgPenOneBig,0,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz",
+rgPenOneCov,99.5,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz","S=5, M=1 mean cover"
+rgPenTwoBig,11,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz",
+rgPenTwoCov,99.8,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz","S=5, M=1 mean cover"
+rgCapBig,0,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz",
+rgCapCov,99.9,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz","S=5, M=1 mean cover"
+rgPenPredOneBig,0,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz",
+rgPenPredOneCov,99.0,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz","S=5, M=1 mean cover"
+rgCapInfeas,101,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz",
+rgTraceWide,2,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz","refits with total sd > 1.5, median"
+rgTraceEither,61,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz",
+rgTraceHatSig,0.77,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz",
+rgTraceHatSigOther,0.02,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz",
+rgFourPredCov,98.9,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz","S=5, M=4"
+rgFourPredUnits,28,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz",
+rgFourBootCov,99.4,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz","S=5, M=4"
+rgFourBootUnits,35,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz",
+rgFourPenOneCov,99.1,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz","S=5, M=4"
+rgFourPenOneUnits,31,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz",
+rgFourOracleUnits,27,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz",
+rlRefits,"76\,800",SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv",bootstrap refits under the rule
+rlFailed,400,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv",refits declared failed and dropped
+rlFailedPct,0.52,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv",
+rlRestarted,10296,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv",refits of Tables III and IV restarted
+rlRestartedPct,29.2,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv",
+rlFitsBad,24,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv",point estimates not accepted
+rlFits,"1\,920",SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv",
+rlFitsBadGrad,0.61,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv",largest projected gradient of a point estimate with no accepted run
+rlFitsBadEffect,0.02,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv",largest change in a cell's bootstrap cover gain (points) when they are dropped
+rlAltOf,480,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv","small campaigns: Table III designs and S = 5, M = 4"
+rlAltN,8,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv","of them, where another start gained > 0.05"
+rlAltOneMed,274,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv","predictive units, one start"
+rlAltThreeMed,85,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv","predictive units, three starts"
+rlFitsWonPct,7.4,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv",point estimates where a start other than the default reached a higher criterion
+rlFitsWonFivePct,6,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv","same, S = 5, M = 1"
+csN,"1\,000",SIM,analysis/campaign_starts.py -> data/v2/campaign_starts.json,
+csReps,10,SIM,analysis/campaign_starts.py -> data/v2/campaign_starts.json,
+csHigherPct,5.9,SIM,analysis/campaign_starts.py -> data/v2/campaign_starts.json,
+csHigherOnePct,5,SIM,analysis/campaign_starts.py -> data/v2/campaign_starts.json,
+csOmChanged,6,SIM,analysis/campaign_starts.py -> data/v2/campaign_starts.json,
+csTauChanged,5,SIM,analysis/campaign_starts.py -> data/v2/campaign_starts.json,
+bcCells,four,SIM,"analysis/campaign_bconv.py, SPARES_RULE=1 -> data/v2/campaign_bconv_rule*",
+bcDiffMax,0.06,SIM,"analysis/campaign_bconv.py, SPARES_RULE=1 -> data/v2/campaign_bconv_rule*",
+bcMcse,0.05,SIM,"analysis/campaign_bconv.py, SPARES_RULE=1 -> data/v2/campaign_bconv_rule*",
+bcRedrawTen,7,SIM,"analysis/campaign_bconv.py, SPARES_RULE=1 -> data/v2/campaign_bconv_rule*",plan changed by > 10 units
+bcN,160,SIM,"analysis/campaign_bconv.py, SPARES_RULE=1 -> data/v2/campaign_bconv_rule*",
+dgCases,10,SIM,"analysis/campaign_diag.py -> data/v2/campaign_diag_{hpc,local}_*.json",
+dgSameData,10,SIM,"analysis/campaign_diag.py -> data/v2/campaign_diag_{hpc,local}_*.json",cases with identical simulated counts
+dgSdDiffMax,0.010,SIM,"analysis/campaign_diag.py -> data/v2/campaign_diag_{hpc,local}_*.json",largest difference in fitted total sd between machines
+dgCritDiffMax,2.7e-04,SIM,"analysis/campaign_diag.py -> data/v2/campaign_diag_{hpc,local}_*.json",largest difference in the criterion at the two estimates
+dgBootSameMin,0,SIM,"analysis/campaign_diag.py -> data/v2/campaign_diag_{hpc,local}_*.json",fewest identical bootstrap data sets of 20
+dgBootSameMax,20,SIM,"analysis/campaign_diag.py -> data/v2/campaign_diag_{hpc,local}_*.json",
+dgBootSameMed,5,SIM,"analysis/campaign_diag.py -> data/v2/campaign_diag_{hpc,local}_*.json",
+dgStartFlat,9e-01,SIM,"analysis/campaign_diag.py -> data/v2/campaign_diag_{hpc,local}_*.json","largest criterion difference over restarts, point estimate"
+dgMachines,Linux and Windows,SIM,"analysis/campaign_diag.py -> data/v2/campaign_diag_{hpc,local}_*.json",
+dgFreshK,10,SIM,"analysis/campaign_diag.py -> data/v2/campaign_diag_{hpc,local}_*.json",
+dgRatioMed,20,SIM,"analysis/campaign_diag.py -> data/v2/campaign_diag_{hpc,local}_*.json",median max/min of the bootstrap plan over fresh streams
+dgRatioMax,"1\,252",SIM,"analysis/campaign_diag.py -> data/v2/campaign_diag_{hpc,local}_*.json",
+dgCaseLo,878,SIM,"analysis/campaign_diag.py -> data/v2/campaign_diag_{hpc,local}_*.json","campaign (1, 19), HPC estimate"
+dgCaseHi,"1\,099\,032",SIM,"analysis/campaign_diag.py -> data/v2/campaign_diag_{hpc,local}_*.json",
+dgCaseHpc,"14\,978",SIM,"analysis/campaign_diag.py -> data/v2/campaign_diag_{hpc,local}_*.json","Table IV stream, HPC"
+dgCaseLocal,"910\,527",SIM,"analysis/campaign_diag.py -> data/v2/campaign_diag_{hpc,local}_*.json","Table IV stream, PC"
+dgTopSdMed,3.1,SIM,"analysis/campaign_diag.py -> data/v2/campaign_diag_{hpc,local}_*.json",total sd of the refit with most draws above the vector
+dgTwoMax,6,SIM,"analysis/campaign_diag.py -> data/v2/campaign_diag_{hpc,local}_*.json",campaigns where another start found a higher maximum
+dgTwoMaxLo,0.10,SIM,"analysis/campaign_diag.py -> data/v2/campaign_diag_{hpc,local}_*.json",
+dgTwoMaxHi,0.48,SIM,"analysis/campaign_diag.py -> data/v2/campaign_diag_{hpc,local}_*.json",
+dgAbnormal,6,SIM,"analysis/campaign_diag.py -> data/v2/campaign_diag_{hpc,local}_*.json","refits whose optimiser exit was not success, HPC"
+dgRefits,200,SIM,"analysis/campaign_diag.py -> data/v2/campaign_diag_{hpc,local}_*.json",

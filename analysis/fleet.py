@@ -25,6 +25,13 @@ Predictors, each giving a joint 99 % stock vector for a ship's mission:
   hier_pred    hierarchical model with draws of every latent quantity
   hier_marg    hier_pred draws, each reference at its own quantile
   hier_shock   hier_pred plus a ship-mission term shared by all references
+  mtbf_scaled  datasheet MTBF times one fleet-wide factor fitted to the record, joint plan
+  poisson_glm  Poisson GLM with the pooled covariates and coefficient draws, joint plan
+  hier_agg     hier_pred fitted and predicted on cells summed over zones (NB2 granularity check)
+
+Heavy-tailed effects are Student-t3 on the log scale, truncated at 4 sd and
+shifted so that the mean multiplier equals the Gaussian one; an untruncated t
+has no finite exponential moment.
 
     python fleet.py --list
     python fleet.py --worker I --nworkers N [--hours 3.6]
@@ -40,24 +47,26 @@ import time
 
 import numpy as np
 import pandas as pd
+from scipy import integrate
 from scipy.special import gammaln
-from scipy.stats import poisson
+from scipy.stats import poisson, t as student_t
 
 import hglmm
 from plan_cover import greedy_joint, plan_joint_draws_robust, plan_marginal_draws
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "..", "data", "v2")
-RAW = os.path.join(OUT, "raw", "fleet")
+RAW = os.path.join(OUT, "raw", "fleet_v4")
 PAR = json.load(open(os.path.join(HERE, "fleet_params.json"), encoding="utf-8"))
 
 SEED = 20261103
 LEVEL = 0.99
 R_DRAWS = 6000
-REPS = 200
+REPS = 100
 K_EV = 8.617e-5
 SD = dict(tau=0.3, omega=0.3, maker=0.3, eps=0.15)
 SIGMA_MAX = 3.0     # cap on fitted log-rate sds; see hglmm.Fit.fit
+T_TRUNC = 4.0       # heavy-tail effects are truncated at this many sds
 
 BASE = dict(latent="normal", shock_rate=0.0, shock_size=0.0, misclass=0.0, lot=False,
             refit=False, field_factor=PAR["field_factor"], ship_frac=1.0,
@@ -72,18 +81,39 @@ SCENARIOS = {
     "misclass": dict(REALISTIC, misclass=0.25),
     "sparse": dict(REALISTIC, ship_frac=0.5, horizon_days=365, train_days=274),
     "datasheet_ok": dict(REALISTIC, field_factor=1.0),
+    "shocks_frequent": dict(REALISTIC, shock_rate=2.0, shock_size=0.0005),
+    "shocks_severe": dict(REALISTIC, shock_rate=2.0, shock_size=0.002),
 }
-METHODS = ["mtbf", "mtbf_joint", "nb_pooled", "eb_gamma", "hier_plugin", "hier_pred",
-           "hier_marg", "hier_shock"]
+METHODS = ["mtbf", "mtbf_joint", "mtbf_scaled", "poisson_glm", "nb_pooled", "eb_gamma",
+           "hier_plugin", "hier_pred", "hier_marg", "hier_shock", "hier_agg"]
 PRODUCTS = list(PAR["products"])
 COVARIATES = ["temp_c", "log_age", "occ_c"]
 COST = np.array([PAR["products"][p]["cost"] for p in PRODUCTS])
 
 
 # ---------------------------------------------------------------- simulation --
+_T_SHIFT = {}
+
+
+def t3_shift(sd):
+    """Shift making E exp(x) equal exp(sd^2/2) for the truncated, scaled t3."""
+    if sd not in _T_SHIFT:
+        s = sd / math.sqrt(3.0)
+        lim = T_TRUNC * sd / s
+        mass = student_t.cdf(lim, 3) - student_t.cdf(-lim, 3)
+        m = integrate.quad(lambda z: math.exp(s * z) * student_t.pdf(z, 3), -lim, lim)[0] / mass
+        _T_SHIFT[sd] = math.log(m) - sd ** 2 / 2
+    return _T_SHIFT[sd]
+
+
 def latent(dist, sd, size, rng):
     if dist == "t3":
-        return rng.standard_t(3, size) * sd / math.sqrt(3.0)
+        x = rng.standard_t(3, size) * sd / math.sqrt(3.0)
+        bad = np.abs(x) > T_TRUNC * sd
+        while bad.any():
+            x[bad] = rng.standard_t(3, bad.sum()) * sd / math.sqrt(3.0)
+            bad = np.abs(x) > T_TRUNC * sd
+        return x - t3_shift(sd)
     return rng.normal(0, sd, size)
 
 
@@ -179,7 +209,7 @@ def simulate(scn, rng):
                                          maker=f"{p}:{maker_of[p]}", mission=t, sm=f"{ship}:{t}",
                                          sp=f"{ship}:{p}", start=mis["start"], nights=mis["nights"],
                                          temp_normal=normal, occ_plan=mis["occ_plan"], age=age, N=N,
-                                         hours=N * h_act, hours_plan=N * h_plan,
+                                         hours=N * h_act, hours_plan=N * h_plan, shock=int(shock),
                                          failures=float(rec), true_failures=int(y)))
             ship += 1
     d = pd.DataFrame(rows)
@@ -274,6 +304,51 @@ class Pooled(Hier):
     factors = ("maker",)            # maker is nested in product
 
 
+class PoissonGLM(Pooled):
+    def __init__(self, train, levels):
+        self.levels = levels
+        self.shock = False
+        self.span = {c: (train[c].min(), train[c].max()) for c in COVARIATES}
+        cells = self.prepare(train)
+        self.fixed = [c for c in cells.columns if "=" in c] + COVARIATES
+        self.random = []
+        self.fit = hglmm.Fit(hglmm.Design(cells, self.fixed, []), family="poisson").fit()
+
+    def predict(self, new, Z, rng):
+        f = self.fit
+        new = self.prepare(new)
+        for c, (lo, hi) in self.span.items():
+            new[c] = new[c].clip(lo, hi)
+        X = np.column_stack([np.ones(len(new))] + [new[c].to_numpy(float) for c in f.d.fixed])
+        eta = Z[:, :f.d.p] @ X.T + np.log(new.hours_plan.to_numpy(float))[None, :]
+        return rng.poisson(np.exp(np.minimum(eta, 30)))
+
+
+def by_product(d):
+    """Cells summed over zones: one cell per ship, product and mission."""
+    keys = ["ship", "cls", "product", "maker", "mission", "sm", "sp", "start", "nights",
+            "temp_normal", "occ_plan", "shock"]
+    d = d.assign(wage=d.log_age * d.hours)
+    g = d.groupby(keys, as_index=False).agg(hours=("hours", "sum"), hours_plan=("hours_plan", "sum"),
+                                            failures=("failures", "sum"),
+                                            true_failures=("true_failures", "sum"),
+                                            wage=("wage", "sum"), N=("N", "sum"))
+    g["log_age"] = g.wage / g.hours
+    g["temp_c"] = g.temp_normal - 22.0
+    g["occ_c"] = g.occ_plan - 0.9
+    g["zone"] = "all"
+    return g.drop(columns="wage")
+
+
+class HierAgg(Hier):
+    def prepare(self, d):
+        d = d.reset_index(drop=True)
+        cols = {}
+        for col in self.factors:
+            cols.update(dummies(d, col, self.levels[col]))
+        return pd.concat([d, pd.DataFrame(cols)], axis=1)
+
+
 class EBGamma:
     """Per reference, a gamma prior on the ship-level rate fitted by moments."""
 
@@ -328,13 +403,20 @@ def one_fleet(name, rep):
 
     t0 = time.time()
     models = dict(nb_pooled=Pooled(train, levels), hier=Hier(train, levels),
-                  hier_shock=Hier(train, levels, shock=True), eb=EBGamma(train))
+                  hier_shock=Hier(train, levels, shock=True), eb=EBGamma(train),
+                  poisson_glm=PoissonGLM(train, levels), hier_agg=HierAgg(by_product(train), levels))
     t_fit = time.time() - t0
     Z = dict(nb_pooled=models["nb_pooled"].draws(R_DRAWS, rng, plugin=False),
+             poisson_glm=models["poisson_glm"].draws(R_DRAWS, rng, plugin=False),
              hier_plugin=models["hier"].draws(R_DRAWS, rng, plugin=True),
              hier_pred=models["hier"].draws(R_DRAWS, rng, plugin=False),
-             hier_shock=models["hier_shock"].draws(R_DRAWS, rng, plugin=False))
-    src = dict(nb_pooled="nb_pooled", hier_plugin="hier", hier_pred="hier", hier_shock="hier_shock")
+             hier_shock=models["hier_shock"].draws(R_DRAWS, rng, plugin=False),
+             hier_agg=models["hier_agg"].draws(R_DRAWS, rng, plugin=False))
+    src = dict(nb_pooled="nb_pooled", poisson_glm="poisson_glm", hier_plugin="hier",
+               hier_pred="hier", hier_shock="hier_shock")
+    # datasheet rates times one factor fitted to the record (maximum likelihood)
+    ds_train = (train.hours / train["product"].map(lambda p: PAR["products"][p]["mtbf_h"])).sum()
+    factor = float(train.failures.sum() / ds_train)
 
     acc = {}
     for (s, t), g in test.groupby(["ship", "mission"]):
@@ -346,23 +428,35 @@ def one_fleet(name, rep):
         H = g.groupby("product").hours_plan.sum().reindex(prods).to_numpy()
         lam_ds = np.array([H[j] / PAR["products"][p]["mtbf_h"] for j, p in enumerate(prods)])
         cost = COST[idx]
+        shocked = bool(g.shock.iloc[0])
 
         def record(method, plan, Y=None):
-            a = acc.setdefault((method, kind), dict(n=0, covered=0, units=0.0, cost=0.0, ls=0.0, pit=[]))
-            a["n"] += 1
-            a["covered"] += int(np.all(y <= plan))
-            a["units"] += float(plan.sum())
-            a["cost"] += float(cost @ plan)
-            if Y is not None:
-                a["ls"] += log_score(Y, y)
-                a["pit"].extend(pit(Y, y, rng).tolist())
+            short = np.maximum(y - plan, 0)
+            groups = [kind] + ([kind + "_shock"] if shocked else [])
+            ls = log_score(Y, y) if Y is not None else None
+            for kk in groups:
+                a = acc.setdefault((method, kk), dict(n=0, covered=0, units=0.0, cost=0.0, ls=0.0,
+                                                      pit=[], short=0.0, short_cost=0.0))
+                a["n"] += 1
+                a["covered"] += int(np.all(y <= plan))
+                a["units"] += float(plan.sum())
+                a["cost"] += float(cost @ plan)
+                a["short"] += float(short.sum())
+                a["short_cost"] += float(cost @ short)
+                if Y is not None:
+                    a["ls"] += ls
+                    if kk == kind:
+                        a["pit"].extend(pit(Y, y, rng).tolist())
 
         record("mtbf", np.array([int(poisson.ppf(LEVEL, l)) for l in lam_ds]))
         record("mtbf_joint", greedy_joint(lambda s: float(np.prod(poisson.cdf(s, lam_ds))),
                                           np.array([int(poisson.ppf(LEVEL, l)) for l in lam_ds]), LEVEL))
+        lam_sc = lam_ds * factor
+        record("mtbf_scaled", greedy_joint(lambda s: float(np.prod(poisson.cdf(s, lam_sc))),
+                                           np.array([int(poisson.ppf(LEVEL, l)) for l in lam_sc]), LEVEL))
         Y = models["eb"].predict(s, prods, H, R_DRAWS, rng)
         record("eb_gamma", plan_joint_draws_robust(Y, LEVEL), Y)
-        for m in ("nb_pooled", "hier_plugin", "hier_pred", "hier_shock"):
+        for m in ("poisson_glm", "nb_pooled", "hier_plugin", "hier_pred", "hier_shock"):
             Yc = models[src[m]].predict(g, Z[m], rng)
             Y = np.zeros((R_DRAWS, len(prods)), int)
             for j in range(len(prods)):
@@ -370,17 +464,28 @@ def one_fleet(name, rep):
             record(m, plan_joint_draws_robust(Y, LEVEL), Y)
             if m == "hier_pred":
                 record("hier_marg", plan_marginal_draws(Y, LEVEL))
+        ga = by_product(g)
+        Yc = models["hier_agg"].predict(ga, Z["hier_agg"], rng)
+        cola = np.array([prods.index(p) for p in ga["product"]])
+        Y = np.zeros((R_DRAWS, len(prods)), int)
+        for j in range(len(prods)):
+            Y[:, j] = Yc[:, cola == j].sum(axis=1)
+        record("hier_agg", plan_joint_draws_robust(Y, LEVEL), Y)
 
     rows = []
     for (method, kind), a in acc.items():
         h = np.histogram(a["pit"], bins=10, range=(0, 1))[0] if a["pit"] else np.zeros(10, int)
         rows.append(dict(scenario=name, rep=rep, method=method, kind=kind, n=a["n"],
                          covered=a["covered"], units=a["units"], cost=a["cost"],
-                         log_score=a["ls"] / a["n"] if a["pit"] else np.nan,
+                         short=a["short"], short_cost=a["short_cost"],
+                         log_score=a["ls"] / a["n"] if a["ls"] else np.nan,
                          **{f"pit{i}": int(v) for i, v in enumerate(h)},
                          fit_seconds=t_fit, train_cells=len(train),
                          sigma_hier=json.dumps([float(x) for x in models["hier"].fit.sigma]),
-                         sigma_shock=json.dumps([float(x) for x in models["hier_shock"].fit.sigma])))
+                         sigma_shock=json.dumps([float(x) for x in models["hier_shock"].fit.sigma]),
+                         sigma_agg=json.dumps([float(x) for x in models["hier_agg"].fit.sigma]),
+                         phi=json.dumps([float(models[k].fit.phi) for k in ("hier", "hier_agg", "nb_pooled")]),
+                         factor=factor))
     return rows
 
 
@@ -414,7 +519,7 @@ def worker(i, n, hours):
 
 def summary():
     R = pd.concat([pd.read_csv(f) for f in sorted(glob.glob(os.path.join(RAW, "*.csv")))])
-    R.to_csv(os.path.join(OUT, "fleet_reps.csv.gz"), index=False)
+    R.to_csv(os.path.join(OUT, "fleet_v4_reps.csv.gz"), index=False)
     out = []
     for (s, m, k), g in R.groupby(["scenario", "method", "kind"]):
         rate = g.covered / g.n
@@ -427,7 +532,7 @@ def summary():
                         pit_max_dev=float(np.max(np.abs(pit_counts / max(pit_counts.sum(), 1) - 0.1)))
                         if pit_counts.sum() else np.nan))
     T = pd.DataFrame(out)
-    T.to_csv(os.path.join(OUT, "fleet_summary.csv"), index=False)
+    T.to_csv(os.path.join(OUT, "fleet_v4_summary.csv"), index=False)
     print(T.pivot_table(index=["scenario", "kind"], columns="method", values="cover").round(3).to_string())
     return T
 

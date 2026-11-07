@@ -1,0 +1,9 @@
+{
+ "n": 100,
+ "same_plan": 82,
+ "units_diff_max": 2,
+ "units_diff_mean": 0.19,
+ "cover_diff_max": 0.00509798531126604,
+ "cover_central_mean": 0.9904403091348536,
+ "cover_federated_mean": 0.9901918965139707
+}

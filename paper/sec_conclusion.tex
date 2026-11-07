@@ -1,33 +1,34 @@
-This paper has built the predictive distribution of a passenger ship's mission
-failure count from a hierarchical model with crossed ship-wide and ship--product
-terms, fitted from pooled or divided records, and has followed it through to the
-spares a ship embarks.
+\subsection{Limitations}
+No rate, variance component or stock is reported for real ships: the public
+naval sources give no failures per ship and reference with exposure. A
+shipboard application needs an equipment register kept through refits,
+failures recorded as replacement needs, powered hours, several references per
+ship over repeated missions, replenishment dates and a log of common-cause
+events. Code, seeds and
+the scripts that write every number and table are at
+\url{https://github.com/ralorin/passenger-ship-spares}, tag
+\texttt{\codeTag} (Python 3.10, NumPy 2.2, SciPy 1.15).
 
-For one population, the negative binomial matched to the moments of the mixture
-is close to the exact plan, at most \spNbShort{} points short at the 99\,\%
-level on the grid examined, and can be used where the exact computation is not
-available. The Poisson plan and the variance-inflated margin should not be. For
-a zone with several references, the plan is a vector whose cover depends on how
-the heterogeneity divides between ship and product. Per-reference quantiles fall
-short of a joint target, cost-minimal vectors save a median \rvSaveMed\,\% over
-a common stock, and while the division is unknown a conservative plan keeps the
-target at a premium in stock.
+\subsection{Conclusion}
+\emph{With known parameters}, marginal laws and total latent spread fixed under
+a Gaussian latent model, the joint cover of every vector is non-decreasing in
+the ship-wide share, so the optimum for independent references is the
+cheapest vector feasible for every split, also with an incident law that does
+not depend on the split. In certified optima for a large passenger ship it
+cost \shPremFourteen--\shPremMax\,\% more than the optimum that knows the
+spread to be ship-wide over 7 to 28 days, and needed \brBigInd{} units against
+\brBigDep{} with a large ship-wide spread at 56 days. It does not extend to
+the aggregate criterion or to estimated parameters.
 
-In the simulated passenger fleet the largest loss came from planning with
-datasheet rates, which covered \flMtbfJointLo--\flMtbfJointHi\,\% of missions
-against a 99\,\% target even as a joint plan. Joint plans fitted to the fleet's
-own records covered \flStatLo--\flStatHi\,\% under supply events, bad lots,
-heavy-tailed effects and misrecorded replacements, and from half the fleet over
-one year. With the moderate heterogeneity assumed there, the hierarchy added
-little to a pooled negative binomial on average, but it kept its stock in
-proportion when one ship lay far in the tail, and the pooled model did not. On
-the street-lighting network, where the
-interaction between area and family was more than twice as large, the
-hierarchical plans were the only ones to meet the target in the held-out year,
-with fewer units than the pooled negative binomial in known areas and at a
-high price for an area never seen.
-
-What the model needs from a fleet's records is set out in
-Section~\ref{sec:needed}: several references followed on the same ships over
-repeated missions, ten ships or more, exposure in powered hours and a record of
-common-cause events. Applying it to such records is the next step.
+\emph{With estimated parameters, in simulation}, references observed together
+inform the shared effect from one mission; the interaction is separated from
+cell dispersion only by parametric form, repeated missions add its
+persistence, and its low detection rate shows weak practical identification.
+With five ships observed once, bootstrap stocks had extremes
+that changed by orders of magnitude between random streams. In the simulated
+fleet without frequent events, fitted plans raised cover at known ships from
+\fdMtbfLo--\fdMtbfHi\,\% with datasheet rates to \fdFitKLo--\fdFitKHi\,\%,
+and modelling dependence changed it by at most \fdAbsDcMax{} points. An incident term
+recovered much of the cover lost on event missions, with a stock that depends
+on the frequency and severity of events. Shipboard results on failures, cover
+and stock are mathematical or simulated, with public specifications as inputs.

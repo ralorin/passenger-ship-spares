@@ -1,0 +1,2735 @@
+{
+ "within": {
+  "cover": {
+   "eb_gamma|known": {
+    "n": 192,
+    "exceed": 4,
+    "cover": 0.9791666666666666,
+    "cp95": [
+     0.9475200885417698,
+     0.9942951367988042
+    ],
+    "one_sided_lower95": 0.9529624416524479,
+    "area_cluster95": [
+     0.953125,
+     1.0
+    ],
+    "month_block95": [
+     0.9635416666666666,
+     0.9947916666666666
+    ],
+    "units": 33.6875,
+    "short_per_area_month": 0.08333333333333333,
+    "worst_areas": {
+     "ARDS & NORTH DOWN": 0.8333,
+     "FERMANAGH & OMAGH (WEST)": 0.9167,
+     "MID & EAST ANTRIM": 0.9167
+    },
+    "areas_below_99": 3
+   },
+   "eb_gamma|new": {
+    "n": 192,
+    "exceed": 7,
+    "cover": 0.9635416666666666,
+    "cp95": [
+     0.9263273640738132,
+     0.985218399512193
+    ],
+    "one_sided_lower95": 0.9326139359713821,
+    "area_cluster95": [
+     0.9270833333333334,
+     0.9895833333333334
+    ],
+    "month_block95": [
+     0.9375,
+     0.9895833333333334
+    ],
+    "units": 37.869791666666664,
+    "short_per_area_month": 0.3020833333333333,
+    "worst_areas": {
+     "ARDS & NORTH DOWN": 0.8333,
+     "BELFAST SOUTH": 0.8333,
+     "MID & EAST ANTRIM": 0.8333
+    },
+    "areas_below_99": 4
+   },
+   "hier_marg|known": {
+    "n": 192,
+    "exceed": 0,
+    "cover": 1.0,
+    "cp95": [
+     0.9809704778312202,
+     1.0
+    ],
+    "one_sided_lower95": 0.9845183203813259,
+    "area_cluster95": [
+     1.0,
+     1.0
+    ],
+    "month_block95": [
+     1.0,
+     1.0
+    ],
+    "units": 36.203125,
+    "short_per_area_month": 0.0,
+    "worst_areas": {
+     "ANTRIM & NEWTOWNABBEY": 1.0,
+     "ARDS & NORTH DOWN": 1.0,
+     "ARMAGH CITY, BANBRIDGE & CRAIGAVON (EAST)": 1.0
+    },
+    "areas_below_99": 0
+   },
+   "hier_marg|new": {
+    "n": 192,
+    "exceed": 1,
+    "cover": 0.9947916666666666,
+    "cp95": [
+     0.97132415814551,
+     0.9998681451103687
+    ],
+    "one_sided_lower95": 0.9755319603250439,
+    "area_cluster95": [
+     0.984375,
+     1.0
+    ],
+    "month_block95": [
+     0.984375,
+     1.0
+    ],
+    "units": 118.08333333333333,
+    "short_per_area_month": 0.005208333333333333,
+    "worst_areas": {
+     "MID & EAST ANTRIM": 0.9167,
+     "ANTRIM & NEWTOWNABBEY": 1.0,
+     "ARMAGH CITY, BANBRIDGE & CRAIGAVON (EAST)": 1.0
+    },
+    "areas_below_99": 1
+   },
+   "hier_plugin|known": {
+    "n": 192,
+    "exceed": 1,
+    "cover": 0.9947916666666666,
+    "cp95": [
+     0.97132415814551,
+     0.9998681451103687
+    ],
+    "one_sided_lower95": 0.9755319603250439,
+    "area_cluster95": [
+     0.984375,
+     1.0
+    ],
+    "month_block95": [
+     0.984375,
+     1.0
+    ],
+    "units": 37.140625,
+    "short_per_area_month": 0.005208333333333333,
+    "worst_areas": {
+     "ARDS & NORTH DOWN": 0.9167,
+     "ANTRIM & NEWTOWNABBEY": 1.0,
+     "ARMAGH CITY, BANBRIDGE & CRAIGAVON (EAST)": 1.0
+    },
+    "areas_below_99": 1
+   },
+   "hier_plugin|new": {
+    "n": 192,
+    "exceed": 1,
+    "cover": 0.9947916666666666,
+    "cp95": [
+     0.97132415814551,
+     0.9998681451103687
+    ],
+    "one_sided_lower95": 0.9755319603250439,
+    "area_cluster95": [
+     0.984375,
+     1.0
+    ],
+    "month_block95": [
+     0.984375,
+     1.0
+    ],
+    "units": 137.765625,
+    "short_per_area_month": 0.005208333333333333,
+    "worst_areas": {
+     "MID & EAST ANTRIM": 0.9167,
+     "ANTRIM & NEWTOWNABBEY": 1.0,
+     "ARMAGH CITY, BANBRIDGE & CRAIGAVON (EAST)": 1.0
+    },
+    "areas_below_99": 1
+   },
+   "hier_pred|known": {
+    "n": 192,
+    "exceed": 0,
+    "cover": 1.0,
+    "cp95": [
+     0.9809704778312202,
+     1.0
+    ],
+    "one_sided_lower95": 0.9845183203813259,
+    "area_cluster95": [
+     1.0,
+     1.0
+    ],
+    "month_block95": [
+     1.0,
+     1.0
+    ],
+    "units": 40.411458333333336,
+    "short_per_area_month": 0.0,
+    "worst_areas": {
+     "ANTRIM & NEWTOWNABBEY": 1.0,
+     "ARDS & NORTH DOWN": 1.0,
+     "ARMAGH CITY, BANBRIDGE & CRAIGAVON (EAST)": 1.0
+    },
+    "areas_below_99": 0
+   },
+   "hier_pred|new": {
+    "n": 192,
+    "exceed": 0,
+    "cover": 1.0,
+    "cp95": [
+     0.9809704778312202,
+     1.0
+    ],
+    "one_sided_lower95": 0.9845183203813259,
+    "area_cluster95": [
+     1.0,
+     1.0
+    ],
+    "month_block95": [
+     1.0,
+     1.0
+    ],
+    "units": 163.83333333333334,
+    "short_per_area_month": 0.0,
+    "worst_areas": {
+     "ANTRIM & NEWTOWNABBEY": 1.0,
+     "ARDS & NORTH DOWN": 1.0,
+     "ARMAGH CITY, BANBRIDGE & CRAIGAVON (EAST)": 1.0
+    },
+    "areas_below_99": 0
+   },
+   "hier_shock|known": {
+    "n": 192,
+    "exceed": 1,
+    "cover": 0.9947916666666666,
+    "cp95": [
+     0.97132415814551,
+     0.9998681451103687
+    ],
+    "one_sided_lower95": 0.9755319603250439,
+    "area_cluster95": [
+     0.984375,
+     1.0
+    ],
+    "month_block95": [
+     0.984375,
+     1.0
+    ],
+    "units": 35.40625,
+    "short_per_area_month": 0.03125,
+    "worst_areas": {
+     "ARDS & NORTH DOWN": 0.9167,
+     "ANTRIM & NEWTOWNABBEY": 1.0,
+     "ARMAGH CITY, BANBRIDGE & CRAIGAVON (EAST)": 1.0
+    },
+    "areas_below_99": 1
+   },
+   "hier_shock|new": {
+    "n": 192,
+    "exceed": 0,
+    "cover": 1.0,
+    "cp95": [
+     0.9809704778312202,
+     1.0
+    ],
+    "one_sided_lower95": 0.9845183203813259,
+    "area_cluster95": [
+     1.0,
+     1.0
+    ],
+    "month_block95": [
+     1.0,
+     1.0
+    ],
+    "units": 163.34895833333334,
+    "short_per_area_month": 0.0,
+    "worst_areas": {
+     "ANTRIM & NEWTOWNABBEY": 1.0,
+     "ARDS & NORTH DOWN": 1.0,
+     "ARMAGH CITY, BANBRIDGE & CRAIGAVON (EAST)": 1.0
+    },
+    "areas_below_99": 0
+   },
+   "nb_pooled|known": {
+    "n": 192,
+    "exceed": 3,
+    "cover": 0.984375,
+    "cp95": [
+     0.9550184556764547,
+     0.996766085166641
+    ],
+    "one_sided_lower95": 0.9601138601984174,
+    "area_cluster95": [
+     0.96875,
+     1.0
+    ],
+    "month_block95": [
+     0.96875,
+     1.0
+    ],
+    "units": 70.328125,
+    "short_per_area_month": 0.041666666666666664,
+    "worst_areas": {
+     "ARDS & NORTH DOWN": 0.9167,
+     "FERMANAGH & OMAGH (WEST)": 0.9167,
+     "MID & EAST ANTRIM": 0.9167
+    },
+    "areas_below_99": 3
+   },
+   "nb_pooled|new": {
+    "n": 192,
+    "exceed": 3,
+    "cover": 0.984375,
+    "cp95": [
+     0.9550184556764547,
+     0.996766085166641
+    ],
+    "one_sided_lower95": 0.9601138601984174,
+    "area_cluster95": [
+     0.96875,
+     1.0
+    ],
+    "month_block95": [
+     0.96875,
+     1.0
+    ],
+    "units": 72.41145833333333,
+    "short_per_area_month": 0.08333333333333333,
+    "worst_areas": {
+     "ARDS & NORTH DOWN": 0.9167,
+     "FERMANAGH & OMAGH (WEST)": 0.9167,
+     "MID & EAST ANTRIM": 0.9167
+    },
+    "areas_below_99": 3
+   },
+   "poisson|known": {
+    "n": 192,
+    "exceed": 8,
+    "cover": 0.9583333333333334,
+    "cp95": [
+     0.9195534273442502,
+     0.9818422838775901
+    ],
+    "one_sided_lower95": 0.9260771319022746,
+    "area_cluster95": [
+     0.921875,
+     0.9895833333333334
+    ],
+    "month_block95": [
+     0.9375,
+     0.9791666666666666
+    ],
+    "units": 30.677083333333332,
+    "short_per_area_month": 0.22916666666666666,
+    "worst_areas": {
+     "ARDS & NORTH DOWN": 0.75,
+     "ARMAGH CITY, BANBRIDGE & CRAIGAVON (EAST)": 0.8333,
+     "ANTRIM & NEWTOWNABBEY": 0.9167
+    },
+    "areas_below_99": 5
+   },
+   "poisson|new": {
+    "n": 192,
+    "exceed": 14,
+    "cover": 0.9270833333333334,
+    "cp95": [
+     0.8806839297157544,
+     0.9595644420450723
+    ],
+    "one_sided_lower95": 0.8883568069061304,
+    "area_cluster95": [
+     0.8697916666666666,
+     0.9739583333333334
+    ],
+    "month_block95": [
+     0.9010416666666666,
+     0.9583333333333334
+    ],
+    "units": 31.09375,
+    "short_per_area_month": 0.3229166666666667,
+    "worst_areas": {
+     "BELFAST SOUTH": 0.6667,
+     "ARDS & NORTH DOWN": 0.75,
+     "MID & EAST ANTRIM": 0.75
+    },
+    "areas_below_99": 6
+   },
+   "poisson_jnt|known": {
+    "n": 192,
+    "exceed": 4,
+    "cover": 0.9791666666666666,
+    "cp95": [
+     0.9475200885417698,
+     0.9942951367988042
+    ],
+    "one_sided_lower95": 0.9529624416524479,
+    "area_cluster95": [
+     0.953125,
+     1.0
+    ],
+    "month_block95": [
+     0.9635416666666666,
+     0.9947916666666666
+    ],
+    "units": 33.359375,
+    "short_per_area_month": 0.203125,
+    "worst_areas": {
+     "ARDS & NORTH DOWN": 0.8333,
+     "FERMANAGH & OMAGH (WEST)": 0.9167,
+     "MID & EAST ANTRIM": 0.9167
+    },
+    "areas_below_99": 3
+   },
+   "poisson_jnt|new": {
+    "n": 192,
+    "exceed": 9,
+    "cover": 0.953125,
+    "cp95": [
+     0.9128841812046543,
+     0.9783447193238218
+    ],
+    "one_sided_lower95": 0.9196289317876056,
+    "area_cluster95": [
+     0.90625,
+     0.9895833333333334
+    ],
+    "month_block95": [
+     0.9270833333333334,
+     0.9791666666666666
+    ],
+    "units": 33.765625,
+    "short_per_area_month": 0.2708333333333333,
+    "worst_areas": {
+     "ARDS & NORTH DOWN": 0.75,
+     "MID & EAST ANTRIM": 0.75,
+     "BELFAST SOUTH": 0.8333
+    },
+    "areas_below_99": 4
+   }
+  },
+  "paired": {
+   "hier_pred-nb_pooled|known": {
+    "d_cover": 0.015625,
+    "d_cover95": [
+     0.0,
+     0.03125
+    ],
+    "d_units": -29.916666666666668,
+    "d_units95": [
+     -46.178906250000004,
+     -16.02825520833335
+    ]
+   },
+   "hier_pred-poisson|known": {
+    "d_cover": 0.041666666666666664,
+    "d_cover95": [
+     0.010416666666666666,
+     0.078125
+    ],
+    "d_units": 9.734375,
+    "d_units95": [
+     4.2289062500000005,
+     15.645963541666667
+    ]
+   },
+   "hier_pred-eb_gamma|known": {
+    "d_cover": 0.020833333333333332,
+    "d_cover95": [
+     0.0,
+     0.046875
+    ],
+    "d_units": 6.723958333333333,
+    "d_units95": [
+     1.7338541666666667,
+     12.39661458333333
+    ]
+   },
+   "hier_plugin-nb_pooled|known": {
+    "d_cover": 0.010416666666666666,
+    "d_cover95": [
+     0.0,
+     0.026041666666666668
+    ],
+    "d_units": -33.1875,
+    "d_units95": [
+     -49.812890625,
+     -19.07265625
+    ]
+   },
+   "hier_pred-hier_plugin|known": {
+    "d_cover": 0.005208333333333333,
+    "d_cover95": [
+     0.0,
+     0.015625
+    ],
+    "d_units": 3.2708333333333335,
+    "d_units95": [
+     2.765494791666667,
+     3.8020833333333335
+    ]
+   },
+   "hier_pred-nb_pooled|new": {
+    "d_cover": 0.015625,
+    "d_cover95": [
+     0.0,
+     0.03125
+    ],
+    "d_units": 91.421875,
+    "d_units95": [
+     49.92135416666667,
+     141.8615885416666
+    ]
+   },
+   "hier_pred-poisson|new": {
+    "d_cover": 0.07291666666666667,
+    "d_cover95": [
+     0.026041666666666668,
+     0.13020833333333334
+    ],
+    "d_units": 132.73958333333334,
+    "d_units95": [
+     77.8109375,
+     199.13138020833318
+    ]
+   },
+   "hier_pred-eb_gamma|new": {
+    "d_cover": 0.036458333333333336,
+    "d_cover95": [
+     0.010416666666666666,
+     0.07291666666666667
+    ],
+    "d_units": 125.96354166666667,
+    "d_units95": [
+     70.78750000000001,
+     193.57955729166665
+    ]
+   },
+   "hier_plugin-nb_pooled|new": {
+    "d_cover": 0.010416666666666666,
+    "d_cover95": [
+     0.0,
+     0.026041666666666668
+    ],
+    "d_units": 65.35416666666667,
+    "d_units95": [
+     34.690625000000004,
+     101.98554687499997
+    ]
+   },
+   "hier_pred-hier_plugin|new": {
+    "d_cover": 0.005208333333333333,
+    "d_cover95": [
+     0.0,
+     0.015625
+    ],
+    "d_units": 26.067708333333332,
+    "d_units95": [
+     13.926171875000001,
+     40.43854166666666
+    ]
+   }
+  },
+  "log_scores": {
+   "eb_gamma|known": {
+    "n": 1008,
+    "log_score": -1.2694399301597603,
+    "ci95": [
+     -1.4323801561408476,
+     -1.1094884618796974
+    ],
+    "exceed_q95": 0.016865079365079364,
+    "exceed_q99": 0.006944444444444444,
+    "pit_above_099": 0.010912698412698412,
+    "pit_above_095": 0.04861111111111111
+   },
+   "eb_gamma|new": {
+    "n": 1008,
+    "log_score": -1.326480681451746,
+    "ci95": [
+     -1.5122583362582225,
+     -1.1396519724404761
+    ],
+    "exceed_q95": 0.03273809523809524,
+    "exceed_q99": 0.013888888888888888,
+    "pit_above_099": 0.020833333333333332,
+    "pit_above_095": 0.057539682539682536
+   },
+   "hier_plugin|known": {
+    "n": 1008,
+    "log_score": -1.1122500749988857,
+    "ci95": [
+     -1.2390080823421872,
+     -0.9878001186152809
+    ],
+    "exceed_q95": 0.015873015873015872,
+    "exceed_q99": 0.00496031746031746,
+    "pit_above_099": 0.012896825396825396,
+    "pit_above_095": 0.05257936507936508
+   },
+   "hier_plugin|new": {
+    "n": 1008,
+    "log_score": -1.0784129170431798,
+    "ci95": [
+     -1.2267820543494472,
+     -0.9450380876109314
+    ],
+    "exceed_q95": 0.010912698412698412,
+    "exceed_q99": 0.001984126984126984,
+    "pit_above_099": 0.002976190476190476,
+    "pit_above_095": 0.0248015873015873
+   },
+   "hier_pred|known": {
+    "n": 1008,
+    "log_score": -1.0883509613161393,
+    "ci95": [
+     -1.2077082497266,
+     -0.9710878705906045
+    ],
+    "exceed_q95": 0.010912698412698412,
+    "exceed_q99": 0.0,
+    "pit_above_099": 0.007936507936507936,
+    "pit_above_095": 0.03869047619047619
+   },
+   "hier_pred|new": {
+    "n": 1008,
+    "log_score": -1.0752082711568602,
+    "ci95": [
+     -1.2190981822295286,
+     -0.9482400776136705
+    ],
+    "exceed_q95": 0.00992063492063492,
+    "exceed_q99": 0.000992063492063492,
+    "pit_above_099": 0.002976190476190476,
+    "pit_above_095": 0.028769841269841268
+   },
+   "hier_shock|known": {
+    "n": 1008,
+    "log_score": -1.1944551688082832,
+    "ci95": [
+     -1.345546922992806,
+     -1.0465331437998198
+    ],
+    "exceed_q95": 0.011904761904761904,
+    "exceed_q99": 0.000992063492063492,
+    "pit_above_099": 0.005952380952380952,
+    "pit_above_095": 0.037698412698412696
+   },
+   "hier_shock|new": {
+    "n": 1008,
+    "log_score": -1.0740066618047153,
+    "ci95": [
+     -1.214934284463742,
+     -0.9500479371902597
+    ],
+    "exceed_q95": 0.00992063492063492,
+    "exceed_q99": 0.000992063492063492,
+    "pit_above_099": 0.002976190476190476,
+    "pit_above_095": 0.021825396825396824
+   },
+   "nb_pooled|known": {
+    "n": 1008,
+    "log_score": -1.0287624874413277,
+    "ci95": [
+     -1.1508845603152493,
+     -0.9221260014286112
+    ],
+    "exceed_q95": 0.015873015873015872,
+    "exceed_q99": 0.002976190476190476,
+    "pit_above_099": 0.005952380952380952,
+    "pit_above_095": 0.03670634920634921
+   },
+   "nb_pooled|new": {
+    "n": 1008,
+    "log_score": -1.066220588051,
+    "ci95": [
+     -1.19711357312539,
+     -0.9442308413064576
+    ],
+    "exceed_q95": 0.016865079365079364,
+    "exceed_q99": 0.003968253968253968,
+    "pit_above_099": 0.00992063492063492,
+    "pit_above_095": 0.04265873015873016
+   },
+   "poisson|known": {
+    "n": 1008,
+    "log_score": -1.3380994157477033,
+    "ci95": [
+     -1.5157322092955867,
+     -1.1772986781376003
+    ],
+    "exceed_q95": 0.021825396825396824,
+    "exceed_q99": 0.008928571428571428,
+    "pit_above_099": 0.012896825396825396,
+    "pit_above_095": 0.05357142857142857
+   },
+   "poisson|new": {
+    "n": 1008,
+    "log_score": -1.4260202614752513,
+    "ci95": [
+     -1.6199558967423533,
+     -1.2365369300424331
+    ],
+    "exceed_q95": 0.037698412698412696,
+    "exceed_q99": 0.012896825396825396,
+    "pit_above_099": 0.018849206349206348,
+    "pit_above_095": 0.06349206349206349
+   }
+  },
+  "log_score_diffs": {
+   "hier_pred-nb_pooled|known": {
+    "d": -0.05958847387481172,
+    "ci95": [
+     -0.14746574962743583,
+     0.03159873035708184
+    ]
+   },
+   "hier_plugin-nb_pooled|known": {
+    "d": -0.08348758755755809,
+    "ci95": [
+     -0.17929233834282704,
+     0.018574278092052584
+    ]
+   },
+   "hier_pred-poisson|known": {
+    "d": 0.2497484544315641,
+    "ci95": [
+     0.07746906176516412,
+     0.4232778553966112
+    ]
+   },
+   "hier_pred-eb_gamma|known": {
+    "d": 0.18108896884362083,
+    "ci95": [
+     0.02427571950555883,
+     0.36044875097312684
+    ]
+   },
+   "hier_pred-nb_pooled|new": {
+    "d": -0.00898768310586031,
+    "ci95": [
+     -0.049594933468689414,
+     0.02412894107785718
+    ]
+   },
+   "hier_plugin-nb_pooled|new": {
+    "d": -0.012192328992179546,
+    "ci95": [
+     -0.06275525280432422,
+     0.025060048023497136
+    ]
+   },
+   "hier_pred-poisson|new": {
+    "d": 0.35081199031839094,
+    "ci95": [
+     0.2335181807718522,
+     0.4674828310609941
+    ]
+   },
+   "hier_pred-eb_gamma|new": {
+    "d": 0.25127241029488545,
+    "ci95": [
+     0.1454206405988617,
+     0.3616362476437442
+    ]
+   }
+  },
+  "cost_units_plus_ratio_times_shortage": {
+   "1": {
+    "eb_gamma|known": 33.770833333333336,
+    "eb_gamma|new": 38.171875,
+    "hier_marg|known": 36.203125,
+    "hier_marg|new": 118.08854166666667,
+    "hier_plugin|known": 37.145833333333336,
+    "hier_plugin|new": 137.77083333333334,
+    "hier_pred|known": 40.411458333333336,
+    "hier_pred|new": 163.83333333333334,
+    "hier_shock|known": 35.4375,
+    "hier_shock|new": 163.34895833333334,
+    "nb_pooled|known": 70.36979166666667,
+    "nb_pooled|new": 72.49479166666667,
+    "poisson|known": 30.90625,
+    "poisson|new": 31.416666666666668,
+    "poisson_jnt|known": 33.5625,
+    "poisson_jnt|new": 34.036458333333336
+   },
+   "5": {
+    "eb_gamma|known": 34.104166666666664,
+    "eb_gamma|new": 39.380208333333336,
+    "hier_marg|known": 36.203125,
+    "hier_marg|new": 118.109375,
+    "hier_plugin|known": 37.166666666666664,
+    "hier_plugin|new": 137.79166666666666,
+    "hier_pred|known": 40.411458333333336,
+    "hier_pred|new": 163.83333333333334,
+    "hier_shock|known": 35.5625,
+    "hier_shock|new": 163.34895833333334,
+    "nb_pooled|known": 70.53645833333333,
+    "nb_pooled|new": 72.828125,
+    "poisson|known": 31.822916666666668,
+    "poisson|new": 32.708333333333336,
+    "poisson_jnt|known": 34.375,
+    "poisson_jnt|new": 35.119791666666664
+   },
+   "10": {
+    "eb_gamma|known": 34.520833333333336,
+    "eb_gamma|new": 40.890625,
+    "hier_marg|known": 36.203125,
+    "hier_marg|new": 118.13541666666667,
+    "hier_plugin|known": 37.192708333333336,
+    "hier_plugin|new": 137.81770833333334,
+    "hier_pred|known": 40.411458333333336,
+    "hier_pred|new": 163.83333333333334,
+    "hier_shock|known": 35.71875,
+    "hier_shock|new": 163.34895833333334,
+    "nb_pooled|known": 70.74479166666667,
+    "nb_pooled|new": 73.24479166666667,
+    "poisson|known": 32.96875,
+    "poisson|new": 34.322916666666664,
+    "poisson_jnt|known": 35.390625,
+    "poisson_jnt|new": 36.473958333333336
+   },
+   "20": {
+    "eb_gamma|known": 35.354166666666664,
+    "eb_gamma|new": 43.911458333333336,
+    "hier_marg|known": 36.203125,
+    "hier_marg|new": 118.1875,
+    "hier_plugin|known": 37.244791666666664,
+    "hier_plugin|new": 137.86979166666666,
+    "hier_pred|known": 40.411458333333336,
+    "hier_pred|new": 163.83333333333334,
+    "hier_shock|known": 36.03125,
+    "hier_shock|new": 163.34895833333334,
+    "nb_pooled|known": 71.16145833333333,
+    "nb_pooled|new": 74.078125,
+    "poisson|known": 35.260416666666664,
+    "poisson|new": 37.552083333333336,
+    "poisson_jnt|known": 37.421875,
+    "poisson_jnt|new": 39.182291666666664
+   },
+   "50": {
+    "eb_gamma|known": 37.854166666666664,
+    "eb_gamma|new": 52.973958333333336,
+    "hier_marg|known": 36.203125,
+    "hier_marg|new": 118.34375,
+    "hier_plugin|known": 37.401041666666664,
+    "hier_plugin|new": 138.02604166666666,
+    "hier_pred|known": 40.411458333333336,
+    "hier_pred|new": 163.83333333333334,
+    "hier_shock|known": 36.96875,
+    "hier_shock|new": 163.34895833333334,
+    "nb_pooled|known": 72.41145833333333,
+    "nb_pooled|new": 76.578125,
+    "poisson|known": 42.135416666666664,
+    "poisson|new": 47.239583333333336,
+    "poisson_jnt|known": 43.515625,
+    "poisson_jnt|new": 47.307291666666664
+   },
+   "100": {
+    "eb_gamma|known": 42.020833333333336,
+    "eb_gamma|new": 68.078125,
+    "hier_marg|known": 36.203125,
+    "hier_marg|new": 118.60416666666667,
+    "hier_plugin|known": 37.661458333333336,
+    "hier_plugin|new": 138.28645833333334,
+    "hier_pred|known": 40.411458333333336,
+    "hier_pred|new": 163.83333333333334,
+    "hier_shock|known": 38.53125,
+    "hier_shock|new": 163.34895833333334,
+    "nb_pooled|known": 74.49479166666667,
+    "nb_pooled|new": 80.74479166666667,
+    "poisson|known": 53.59375,
+    "poisson|new": 63.385416666666664,
+    "poisson_jnt|known": 53.671875,
+    "poisson_jnt|new": 60.848958333333336
+   }
+  },
+  "cover_units_curve": {
+   "eb_gamma|known": {
+    "0.95": {
+     "cover": 0.9479166666666666,
+     "units": 28.442708333333332
+    },
+    "0.98": {
+     "cover": 0.96875,
+     "units": 31.541666666666668
+    },
+    "0.99": {
+     "cover": 0.9791666666666666,
+     "units": 33.6875
+    },
+    "0.995": {
+     "cover": 0.9895833333333334,
+     "units": 35.744791666666664
+    }
+   },
+   "eb_gamma|new": {
+    "0.95": {
+     "cover": 0.90625,
+     "units": 31.192708333333332
+    },
+    "0.98": {
+     "cover": 0.9479166666666666,
+     "units": 35.0
+    },
+    "0.99": {
+     "cover": 0.9635416666666666,
+     "units": 37.869791666666664
+    },
+    "0.995": {
+     "cover": 0.9635416666666666,
+     "units": 40.416666666666664
+    }
+   },
+   "hier_plugin|known": {
+    "0.95": {
+     "cover": 0.953125,
+     "units": 30.791666666666668
+    },
+    "0.98": {
+     "cover": 0.9947916666666666,
+     "units": 34.442708333333336
+    },
+    "0.99": {
+     "cover": 0.9947916666666666,
+     "units": 37.140625
+    },
+    "0.995": {
+     "cover": 1.0,
+     "units": 39.661458333333336
+    }
+   },
+   "hier_plugin|new": {
+    "0.95": {
+     "cover": 0.984375,
+     "units": 87.57291666666667
+    },
+    "0.98": {
+     "cover": 0.9895833333333334,
+     "units": 115.07291666666667
+    },
+    "0.99": {
+     "cover": 0.9947916666666666,
+     "units": 137.765625
+    },
+    "0.995": {
+     "cover": 1.0,
+     "units": 164.30208333333334
+    }
+   },
+   "hier_pred|known": {
+    "0.95": {
+     "cover": 0.9791666666666666,
+     "units": 32.901041666666664
+    },
+    "0.98": {
+     "cover": 0.9947916666666666,
+     "units": 37.375
+    },
+    "0.99": {
+     "cover": 1.0,
+     "units": 40.411458333333336
+    },
+    "0.995": {
+     "cover": 1.0,
+     "units": 43.473958333333336
+    }
+   },
+   "hier_pred|new": {
+    "0.95": {
+     "cover": 0.984375,
+     "units": 100.33333333333333
+    },
+    "0.98": {
+     "cover": 0.9895833333333334,
+     "units": 134.95833333333334
+    },
+    "0.99": {
+     "cover": 1.0,
+     "units": 163.83333333333334
+    },
+    "0.995": {
+     "cover": 1.0,
+     "units": 196.58854166666666
+    }
+   },
+   "hier_shock|known": {
+    "0.95": {
+     "cover": 0.96875,
+     "units": 29.682291666666668
+    },
+    "0.98": {
+     "cover": 0.9947916666666666,
+     "units": 33.005208333333336
+    },
+    "0.99": {
+     "cover": 0.9947916666666666,
+     "units": 35.40625
+    },
+    "0.995": {
+     "cover": 0.9947916666666666,
+     "units": 37.588541666666664
+    }
+   },
+   "hier_shock|new": {
+    "0.95": {
+     "cover": 0.984375,
+     "units": 98.94270833333333
+    },
+    "0.98": {
+     "cover": 0.9895833333333334,
+     "units": 132.9375
+    },
+    "0.99": {
+     "cover": 1.0,
+     "units": 163.34895833333334
+    },
+    "0.995": {
+     "cover": 1.0,
+     "units": 196.14583333333334
+    }
+   },
+   "nb_pooled|known": {
+    "0.95": {
+     "cover": 0.96875,
+     "units": 51.802083333333336
+    },
+    "0.98": {
+     "cover": 0.984375,
+     "units": 62.453125
+    },
+    "0.99": {
+     "cover": 0.984375,
+     "units": 70.328125
+    },
+    "0.995": {
+     "cover": 0.984375,
+     "units": 77.86979166666667
+    }
+   },
+   "nb_pooled|new": {
+    "0.95": {
+     "cover": 0.9635416666666666,
+     "units": 53.453125
+    },
+    "0.98": {
+     "cover": 0.9791666666666666,
+     "units": 65.03645833333333
+    },
+    "0.99": {
+     "cover": 0.984375,
+     "units": 72.41145833333333
+    },
+    "0.995": {
+     "cover": 0.984375,
+     "units": 80.15625
+    }
+   },
+   "poisson_jnt|known": {
+    "0.95": {
+     "cover": 0.9479166666666666,
+     "units": 28.203125
+    },
+    "0.98": {
+     "cover": 0.96875,
+     "units": 31.171875
+    },
+    "0.99": {
+     "cover": 0.9791666666666666,
+     "units": 33.359375
+    },
+    "0.995": {
+     "cover": 0.9791666666666666,
+     "units": 35.479166666666664
+    }
+   },
+   "poisson_jnt|new": {
+    "0.95": {
+     "cover": 0.9166666666666666,
+     "units": 28.598958333333332
+    },
+    "0.98": {
+     "cover": 0.9322916666666666,
+     "units": 31.604166666666668
+    },
+    "0.99": {
+     "cover": 0.953125,
+     "units": 33.765625
+    },
+    "0.995": {
+     "cover": 0.9635416666666666,
+     "units": 35.833333333333336
+    }
+   }
+  }
+ },
+ "forward": {
+  "cover": {
+   "eb_gamma|known": {
+    "n": 112,
+    "exceed": 0,
+    "cover": 1.0,
+    "cp95": [
+     0.9676000740686401,
+     1.0
+    ],
+    "one_sided_lower95": 0.973606939576347,
+    "area_cluster95": [
+     1.0,
+     1.0
+    ],
+    "month_block95": [
+     1.0,
+     1.0
+    ],
+    "units": 25.991071428571427,
+    "short_per_area_month": 0.0,
+    "worst_areas": {
+     "ANTRIM & NEWTOWNABBEY": 1.0,
+     "ARDS & NORTH DOWN": 1.0,
+     "ARMAGH CITY, BANBRIDGE & CRAIGAVON (EAST)": 1.0
+    },
+    "areas_below_99": 0
+   },
+   "eb_gamma|new": {
+    "n": 112,
+    "exceed": 0,
+    "cover": 1.0,
+    "cp95": [
+     0.9676000740686401,
+     1.0
+    ],
+    "one_sided_lower95": 0.973606939576347,
+    "area_cluster95": [
+     1.0,
+     1.0
+    ],
+    "month_block95": [
+     1.0,
+     1.0
+    ],
+    "units": 30.973214285714285,
+    "short_per_area_month": 0.0,
+    "worst_areas": {
+     "ANTRIM & NEWTOWNABBEY": 1.0,
+     "ARDS & NORTH DOWN": 1.0,
+     "ARMAGH CITY, BANBRIDGE & CRAIGAVON (EAST)": 1.0
+    },
+    "areas_below_99": 0
+   },
+   "hier_marg|known": {
+    "n": 112,
+    "exceed": 1,
+    "cover": 0.9910714285714286,
+    "cp95": [
+     0.9512566952698742,
+     0.9997739736907933
+    ],
+    "one_sided_lower95": 0.9583454467991225,
+    "area_cluster95": [
+     0.9732142857142857,
+     1.0
+    ],
+    "month_block95": [
+     0.9732142857142857,
+     1.0
+    ],
+    "units": 34.214285714285715,
+    "short_per_area_month": 0.008928571428571428,
+    "worst_areas": {
+     "LONDONDERRY & STRABANE": 0.8571,
+     "ANTRIM & NEWTOWNABBEY": 1.0,
+     "ARMAGH CITY, BANBRIDGE & CRAIGAVON (EAST)": 1.0
+    },
+    "areas_below_99": 1
+   },
+   "hier_marg|new": {
+    "n": 112,
+    "exceed": 0,
+    "cover": 1.0,
+    "cp95": [
+     0.9676000740686401,
+     1.0
+    ],
+    "one_sided_lower95": 0.973606939576347,
+    "area_cluster95": [
+     1.0,
+     1.0
+    ],
+    "month_block95": [
+     1.0,
+     1.0
+    ],
+    "units": 84.5625,
+    "short_per_area_month": 0.0,
+    "worst_areas": {
+     "ANTRIM & NEWTOWNABBEY": 1.0,
+     "ARDS & NORTH DOWN": 1.0,
+     "ARMAGH CITY, BANBRIDGE & CRAIGAVON (EAST)": 1.0
+    },
+    "areas_below_99": 0
+   },
+   "hier_plugin|known": {
+    "n": 112,
+    "exceed": 0,
+    "cover": 1.0,
+    "cp95": [
+     0.9676000740686401,
+     1.0
+    ],
+    "one_sided_lower95": 0.973606939576347,
+    "area_cluster95": [
+     1.0,
+     1.0
+    ],
+    "month_block95": [
+     1.0,
+     1.0
+    ],
+    "units": 36.32142857142857,
+    "short_per_area_month": 0.0,
+    "worst_areas": {
+     "ANTRIM & NEWTOWNABBEY": 1.0,
+     "ARDS & NORTH DOWN": 1.0,
+     "ARMAGH CITY, BANBRIDGE & CRAIGAVON (EAST)": 1.0
+    },
+    "areas_below_99": 0
+   },
+   "hier_plugin|new": {
+    "n": 112,
+    "exceed": 0,
+    "cover": 1.0,
+    "cp95": [
+     0.9676000740686401,
+     1.0
+    ],
+    "one_sided_lower95": 0.973606939576347,
+    "area_cluster95": [
+     1.0,
+     1.0
+    ],
+    "month_block95": [
+     1.0,
+     1.0
+    ],
+    "units": 101.22321428571429,
+    "short_per_area_month": 0.0,
+    "worst_areas": {
+     "ANTRIM & NEWTOWNABBEY": 1.0,
+     "ARDS & NORTH DOWN": 1.0,
+     "ARMAGH CITY, BANBRIDGE & CRAIGAVON (EAST)": 1.0
+    },
+    "areas_below_99": 0
+   },
+   "hier_pred|known": {
+    "n": 112,
+    "exceed": 0,
+    "cover": 1.0,
+    "cp95": [
+     0.9676000740686401,
+     1.0
+    ],
+    "one_sided_lower95": 0.973606939576347,
+    "area_cluster95": [
+     1.0,
+     1.0
+    ],
+    "month_block95": [
+     1.0,
+     1.0
+    ],
+    "units": 39.00892857142857,
+    "short_per_area_month": 0.0,
+    "worst_areas": {
+     "ANTRIM & NEWTOWNABBEY": 1.0,
+     "ARDS & NORTH DOWN": 1.0,
+     "ARMAGH CITY, BANBRIDGE & CRAIGAVON (EAST)": 1.0
+    },
+    "areas_below_99": 0
+   },
+   "hier_pred|new": {
+    "n": 112,
+    "exceed": 0,
+    "cover": 1.0,
+    "cp95": [
+     0.9676000740686401,
+     1.0
+    ],
+    "one_sided_lower95": 0.973606939576347,
+    "area_cluster95": [
+     1.0,
+     1.0
+    ],
+    "month_block95": [
+     1.0,
+     1.0
+    ],
+    "units": 116.78571428571429,
+    "short_per_area_month": 0.0,
+    "worst_areas": {
+     "ANTRIM & NEWTOWNABBEY": 1.0,
+     "ARDS & NORTH DOWN": 1.0,
+     "ARMAGH CITY, BANBRIDGE & CRAIGAVON (EAST)": 1.0
+    },
+    "areas_below_99": 0
+   },
+   "hier_shock|known": {
+    "n": 112,
+    "exceed": 0,
+    "cover": 1.0,
+    "cp95": [
+     0.9676000740686401,
+     1.0
+    ],
+    "one_sided_lower95": 0.973606939576347,
+    "area_cluster95": [
+     1.0,
+     1.0
+    ],
+    "month_block95": [
+     1.0,
+     1.0
+    ],
+    "units": 40.151785714285715,
+    "short_per_area_month": 0.0,
+    "worst_areas": {
+     "ANTRIM & NEWTOWNABBEY": 1.0,
+     "ARDS & NORTH DOWN": 1.0,
+     "ARMAGH CITY, BANBRIDGE & CRAIGAVON (EAST)": 1.0
+    },
+    "areas_below_99": 0
+   },
+   "hier_shock|new": {
+    "n": 112,
+    "exceed": 0,
+    "cover": 1.0,
+    "cp95": [
+     0.9676000740686401,
+     1.0
+    ],
+    "one_sided_lower95": 0.973606939576347,
+    "area_cluster95": [
+     1.0,
+     1.0
+    ],
+    "month_block95": [
+     1.0,
+     1.0
+    ],
+    "units": 120.83035714285714,
+    "short_per_area_month": 0.0,
+    "worst_areas": {
+     "ANTRIM & NEWTOWNABBEY": 1.0,
+     "ARDS & NORTH DOWN": 1.0,
+     "ARMAGH CITY, BANBRIDGE & CRAIGAVON (EAST)": 1.0
+    },
+    "areas_below_99": 0
+   },
+   "nb_pooled|known": {
+    "n": 112,
+    "exceed": 0,
+    "cover": 1.0,
+    "cp95": [
+     0.9676000740686401,
+     1.0
+    ],
+    "one_sided_lower95": 0.973606939576347,
+    "area_cluster95": [
+     1.0,
+     1.0
+    ],
+    "month_block95": [
+     1.0,
+     1.0
+    ],
+    "units": 52.794642857142854,
+    "short_per_area_month": 0.0,
+    "worst_areas": {
+     "ANTRIM & NEWTOWNABBEY": 1.0,
+     "ARDS & NORTH DOWN": 1.0,
+     "ARMAGH CITY, BANBRIDGE & CRAIGAVON (EAST)": 1.0
+    },
+    "areas_below_99": 0
+   },
+   "nb_pooled|new": {
+    "n": 112,
+    "exceed": 0,
+    "cover": 1.0,
+    "cp95": [
+     0.9676000740686401,
+     1.0
+    ],
+    "one_sided_lower95": 0.973606939576347,
+    "area_cluster95": [
+     1.0,
+     1.0
+    ],
+    "month_block95": [
+     1.0,
+     1.0
+    ],
+    "units": 54.401785714285715,
+    "short_per_area_month": 0.0,
+    "worst_areas": {
+     "ANTRIM & NEWTOWNABBEY": 1.0,
+     "ARDS & NORTH DOWN": 1.0,
+     "ARMAGH CITY, BANBRIDGE & CRAIGAVON (EAST)": 1.0
+    },
+    "areas_below_99": 0
+   },
+   "poisson|known": {
+    "n": 112,
+    "exceed": 0,
+    "cover": 1.0,
+    "cp95": [
+     0.9676000740686401,
+     1.0
+    ],
+    "one_sided_lower95": 0.973606939576347,
+    "area_cluster95": [
+     1.0,
+     1.0
+    ],
+    "month_block95": [
+     1.0,
+     1.0
+    ],
+    "units": 24.875,
+    "short_per_area_month": 0.0,
+    "worst_areas": {
+     "ANTRIM & NEWTOWNABBEY": 1.0,
+     "ARDS & NORTH DOWN": 1.0,
+     "ARMAGH CITY, BANBRIDGE & CRAIGAVON (EAST)": 1.0
+    },
+    "areas_below_99": 0
+   },
+   "poisson|new": {
+    "n": 112,
+    "exceed": 0,
+    "cover": 1.0,
+    "cp95": [
+     0.9676000740686401,
+     1.0
+    ],
+    "one_sided_lower95": 0.973606939576347,
+    "area_cluster95": [
+     1.0,
+     1.0
+    ],
+    "month_block95": [
+     1.0,
+     1.0
+    ],
+    "units": 25.053571428571427,
+    "short_per_area_month": 0.0,
+    "worst_areas": {
+     "ANTRIM & NEWTOWNABBEY": 1.0,
+     "ARDS & NORTH DOWN": 1.0,
+     "ARMAGH CITY, BANBRIDGE & CRAIGAVON (EAST)": 1.0
+    },
+    "areas_below_99": 0
+   },
+   "poisson_jnt|known": {
+    "n": 112,
+    "exceed": 0,
+    "cover": 1.0,
+    "cp95": [
+     0.9676000740686401,
+     1.0
+    ],
+    "one_sided_lower95": 0.973606939576347,
+    "area_cluster95": [
+     1.0,
+     1.0
+    ],
+    "month_block95": [
+     1.0,
+     1.0
+    ],
+    "units": 27.4375,
+    "short_per_area_month": 0.0,
+    "worst_areas": {
+     "ANTRIM & NEWTOWNABBEY": 1.0,
+     "ARDS & NORTH DOWN": 1.0,
+     "ARMAGH CITY, BANBRIDGE & CRAIGAVON (EAST)": 1.0
+    },
+    "areas_below_99": 0
+   },
+   "poisson_jnt|new": {
+    "n": 112,
+    "exceed": 0,
+    "cover": 1.0,
+    "cp95": [
+     0.9676000740686401,
+     1.0
+    ],
+    "one_sided_lower95": 0.973606939576347,
+    "area_cluster95": [
+     1.0,
+     1.0
+    ],
+    "month_block95": [
+     1.0,
+     1.0
+    ],
+    "units": 27.714285714285715,
+    "short_per_area_month": 0.0,
+    "worst_areas": {
+     "ANTRIM & NEWTOWNABBEY": 1.0,
+     "ARDS & NORTH DOWN": 1.0,
+     "ARMAGH CITY, BANBRIDGE & CRAIGAVON (EAST)": 1.0
+    },
+    "areas_below_99": 0
+   }
+  },
+  "paired": {
+   "hier_pred-nb_pooled|known": {
+    "d_cover": 0.0,
+    "d_cover95": [
+     0.0,
+     0.0
+    ],
+    "d_units": -13.785714285714286,
+    "d_units95": [
+     -24.09888392857143,
+     -5.069419642857153
+    ]
+   },
+   "hier_pred-poisson|known": {
+    "d_cover": 0.0,
+    "d_cover95": [
+     0.0,
+     0.0
+    ],
+    "d_units": 14.133928571428571,
+    "d_units95": [
+     8.008482142857142,
+     20.643973214285708
+    ]
+   },
+   "hier_pred-eb_gamma|known": {
+    "d_cover": 0.0,
+    "d_cover95": [
+     0.0,
+     0.0
+    ],
+    "d_units": 13.017857142857142,
+    "d_units95": [
+     7.437276785714285,
+     19.160714285714285
+    ]
+   },
+   "hier_plugin-nb_pooled|known": {
+    "d_cover": 0.0,
+    "d_cover95": [
+     0.0,
+     0.0
+    ],
+    "d_units": -16.473214285714285,
+    "d_units95": [
+     -26.74174107142857,
+     -7.51763392857143
+    ]
+   },
+   "hier_pred-hier_plugin|known": {
+    "d_cover": 0.0,
+    "d_cover95": [
+     0.0,
+     0.0
+    ],
+    "d_units": 2.6875,
+    "d_units95": [
+     2.044642857142857,
+     3.4464285714285716
+    ]
+   },
+   "hier_pred-nb_pooled|new": {
+    "d_cover": 0.0,
+    "d_cover95": [
+     0.0,
+     0.0
+    ],
+    "d_units": 62.38392857142857,
+    "d_units95": [
+     34.68883928571429,
+     95.94531249999991
+    ]
+   },
+   "hier_pred-poisson|new": {
+    "d_cover": 0.0,
+    "d_cover95": [
+     0.0,
+     0.0
+    ],
+    "d_units": 91.73214285714286,
+    "d_units95": [
+     54.57477678571429,
+     136.2691964285714
+    ]
+   },
+   "hier_pred-eb_gamma|new": {
+    "d_cover": 0.0,
+    "d_cover95": [
+     0.0,
+     0.0
+    ],
+    "d_units": 85.8125,
+    "d_units95": [
+     48.377901785714286,
+     131.16428571428565
+    ]
+   },
+   "hier_plugin-nb_pooled|new": {
+    "d_cover": 0.0,
+    "d_cover95": [
+     0.0,
+     0.0
+    ],
+    "d_units": 46.82142857142857,
+    "d_units95": [
+     25.169642857142858,
+     72.22790178571427
+    ]
+   },
+   "hier_pred-hier_plugin|new": {
+    "d_cover": 0.0,
+    "d_cover95": [
+     0.0,
+     0.0
+    ],
+    "d_units": 15.5625,
+    "d_units95": [
+     8.294642857142858,
+     23.96450892857143
+    ]
+   }
+  },
+  "log_scores": {
+   "eb_gamma|known": {
+    "n": 616,
+    "log_score": -0.9616548503165673,
+    "ci95": [
+     -1.131397952168331,
+     -0.8055290882869643
+    ],
+    "exceed_q95": 0.011363636363636364,
+    "exceed_q99": 0.0016233766233766235,
+    "pit_above_099": 0.003246753246753247,
+    "pit_above_095": 0.045454545454545456
+   },
+   "eb_gamma|new": {
+    "n": 616,
+    "log_score": -0.9671646648848544,
+    "ci95": [
+     -1.1506067531694069,
+     -0.8009877296312797
+    ],
+    "exceed_q95": 0.011363636363636364,
+    "exceed_q99": 0.0,
+    "pit_above_099": 0.0016233766233766235,
+    "pit_above_095": 0.032467532467532464
+   },
+   "hier_plugin|known": {
+    "n": 616,
+    "log_score": -0.8281957787123035,
+    "ci95": [
+     -0.9381454617117442,
+     -0.7360104985631903
+    ],
+    "exceed_q95": 0.012987012987012988,
+    "exceed_q99": 0.0016233766233766235,
+    "pit_above_099": 0.003246753246753247,
+    "pit_above_095": 0.030844155844155844
+   },
+   "hier_plugin|new": {
+    "n": 616,
+    "log_score": -0.8346570284561046,
+    "ci95": [
+     -0.9513052703974266,
+     -0.7354240031149737
+    ],
+    "exceed_q95": 0.006493506493506494,
+    "exceed_q99": 0.0,
+    "pit_above_099": 0.006493506493506494,
+    "pit_above_095": 0.01948051948051948
+   },
+   "hier_pred|known": {
+    "n": 616,
+    "log_score": -0.8258456397206282,
+    "ci95": [
+     -0.9350109369945944,
+     -0.7346385499232415
+    ],
+    "exceed_q95": 0.011363636363636364,
+    "exceed_q99": 0.0016233766233766235,
+    "pit_above_099": 0.003246753246753247,
+    "pit_above_095": 0.030844155844155844
+   },
+   "hier_pred|new": {
+    "n": 616,
+    "log_score": -0.8393112828148074,
+    "ci95": [
+     -0.9556712212703504,
+     -0.7425398604901404
+    ],
+    "exceed_q95": 0.006493506493506494,
+    "exceed_q99": 0.0,
+    "pit_above_099": 0.0016233766233766235,
+    "pit_above_095": 0.024350649350649352
+   },
+   "hier_shock|known": {
+    "n": 616,
+    "log_score": -0.8302884315901115,
+    "ci95": [
+     -0.938063296610964,
+     -0.7395081719291794
+    ],
+    "exceed_q95": 0.00974025974025974,
+    "exceed_q99": 0.0,
+    "pit_above_099": 0.008116883116883116,
+    "pit_above_095": 0.02922077922077922
+   },
+   "hier_shock|new": {
+    "n": 616,
+    "log_score": -0.8388974792715178,
+    "ci95": [
+     -0.9540652319063765,
+     -0.7427117848484273
+    ],
+    "exceed_q95": 0.00487012987012987,
+    "exceed_q99": 0.0,
+    "pit_above_099": 0.0,
+    "pit_above_095": 0.027597402597402596
+   },
+   "nb_pooled|known": {
+    "n": 616,
+    "log_score": -0.8073681396577352,
+    "ci95": [
+     -0.916756943330875,
+     -0.7188026985096805
+    ],
+    "exceed_q95": 0.006493506493506494,
+    "exceed_q99": 0.0,
+    "pit_above_099": 0.0,
+    "pit_above_095": 0.027597402597402596
+   },
+   "nb_pooled|new": {
+    "n": 616,
+    "log_score": -0.8147309451676105,
+    "ci95": [
+     -0.927897119715115,
+     -0.7201431992737216
+    ],
+    "exceed_q95": 0.008116883116883116,
+    "exceed_q99": 0.0,
+    "pit_above_099": 0.003246753246753247,
+    "pit_above_095": 0.037337662337662336
+   },
+   "poisson|known": {
+    "n": 616,
+    "log_score": -1.0583615814270944,
+    "ci95": [
+     -1.2708486661258924,
+     -0.8731358622504113
+    ],
+    "exceed_q95": 0.008116883116883116,
+    "exceed_q99": 0.0,
+    "pit_above_099": 0.006493506493506494,
+    "pit_above_095": 0.025974025974025976
+   },
+   "poisson|new": {
+    "n": 616,
+    "log_score": -1.0973378352918284,
+    "ci95": [
+     -1.320641274754329,
+     -0.8913315538018215
+    ],
+    "exceed_q95": 0.008116883116883116,
+    "exceed_q99": 0.0,
+    "pit_above_099": 0.003246753246753247,
+    "pit_above_095": 0.03571428571428571
+   }
+  },
+  "log_score_diffs": {
+   "hier_pred-nb_pooled|known": {
+    "d": -0.01847750006289293,
+    "ci95": [
+     -0.06925232791587765,
+     0.03291441024799441
+    ]
+   },
+   "hier_plugin-nb_pooled|known": {
+    "d": -0.0208276390545683,
+    "ci95": [
+     -0.07467420196003331,
+     0.03353652830528784
+    ]
+   },
+   "hier_pred-poisson|known": {
+    "d": 0.23251594170646642,
+    "ci95": [
+     0.09661404157074888,
+     0.37751196457042474
+    ]
+   },
+   "hier_pred-eb_gamma|known": {
+    "d": 0.13580921059593917,
+    "ci95": [
+     0.02387150404225704,
+     0.24964834566642383
+    ]
+   },
+   "hier_pred-nb_pooled|new": {
+    "d": -0.024580337647197095,
+    "ci95": [
+     -0.04280050896492324,
+     -0.0065853674431593946
+    ]
+   },
+   "hier_plugin-nb_pooled|new": {
+    "d": -0.019926083288494132,
+    "ci95": [
+     -0.041376651263906085,
+     -0.0003995481978737695
+    ]
+   },
+   "hier_pred-poisson|new": {
+    "d": 0.2580265524770209,
+    "ci95": [
+     0.11195858920903899,
+     0.41254958916451195
+    ]
+   },
+   "hier_pred-eb_gamma|new": {
+    "d": 0.12785338207004698,
+    "ci95": [
+     0.02655715551448159,
+     0.2352787443331776
+    ]
+   }
+  },
+  "cost_units_plus_ratio_times_shortage": {
+   "1": {
+    "eb_gamma|known": 25.991071428571427,
+    "eb_gamma|new": 30.973214285714285,
+    "hier_marg|known": 34.223214285714285,
+    "hier_marg|new": 84.5625,
+    "hier_plugin|known": 36.32142857142857,
+    "hier_plugin|new": 101.22321428571429,
+    "hier_pred|known": 39.00892857142857,
+    "hier_pred|new": 116.78571428571429,
+    "hier_shock|known": 40.151785714285715,
+    "hier_shock|new": 120.83035714285714,
+    "nb_pooled|known": 52.794642857142854,
+    "nb_pooled|new": 54.401785714285715,
+    "poisson|known": 24.875,
+    "poisson|new": 25.053571428571427,
+    "poisson_jnt|known": 27.4375,
+    "poisson_jnt|new": 27.714285714285715
+   },
+   "5": {
+    "eb_gamma|known": 25.991071428571427,
+    "eb_gamma|new": 30.973214285714285,
+    "hier_marg|known": 34.25892857142857,
+    "hier_marg|new": 84.5625,
+    "hier_plugin|known": 36.32142857142857,
+    "hier_plugin|new": 101.22321428571429,
+    "hier_pred|known": 39.00892857142857,
+    "hier_pred|new": 116.78571428571429,
+    "hier_shock|known": 40.151785714285715,
+    "hier_shock|new": 120.83035714285714,
+    "nb_pooled|known": 52.794642857142854,
+    "nb_pooled|new": 54.401785714285715,
+    "poisson|known": 24.875,
+    "poisson|new": 25.053571428571427,
+    "poisson_jnt|known": 27.4375,
+    "poisson_jnt|new": 27.714285714285715
+   },
+   "10": {
+    "eb_gamma|known": 25.991071428571427,
+    "eb_gamma|new": 30.973214285714285,
+    "hier_marg|known": 34.30357142857143,
+    "hier_marg|new": 84.5625,
+    "hier_plugin|known": 36.32142857142857,
+    "hier_plugin|new": 101.22321428571429,
+    "hier_pred|known": 39.00892857142857,
+    "hier_pred|new": 116.78571428571429,
+    "hier_shock|known": 40.151785714285715,
+    "hier_shock|new": 120.83035714285714,
+    "nb_pooled|known": 52.794642857142854,
+    "nb_pooled|new": 54.401785714285715,
+    "poisson|known": 24.875,
+    "poisson|new": 25.053571428571427,
+    "poisson_jnt|known": 27.4375,
+    "poisson_jnt|new": 27.714285714285715
+   },
+   "20": {
+    "eb_gamma|known": 25.991071428571427,
+    "eb_gamma|new": 30.973214285714285,
+    "hier_marg|known": 34.392857142857146,
+    "hier_marg|new": 84.5625,
+    "hier_plugin|known": 36.32142857142857,
+    "hier_plugin|new": 101.22321428571429,
+    "hier_pred|known": 39.00892857142857,
+    "hier_pred|new": 116.78571428571429,
+    "hier_shock|known": 40.151785714285715,
+    "hier_shock|new": 120.83035714285714,
+    "nb_pooled|known": 52.794642857142854,
+    "nb_pooled|new": 54.401785714285715,
+    "poisson|known": 24.875,
+    "poisson|new": 25.053571428571427,
+    "poisson_jnt|known": 27.4375,
+    "poisson_jnt|new": 27.714285714285715
+   },
+   "50": {
+    "eb_gamma|known": 25.991071428571427,
+    "eb_gamma|new": 30.973214285714285,
+    "hier_marg|known": 34.660714285714285,
+    "hier_marg|new": 84.5625,
+    "hier_plugin|known": 36.32142857142857,
+    "hier_plugin|new": 101.22321428571429,
+    "hier_pred|known": 39.00892857142857,
+    "hier_pred|new": 116.78571428571429,
+    "hier_shock|known": 40.151785714285715,
+    "hier_shock|new": 120.83035714285714,
+    "nb_pooled|known": 52.794642857142854,
+    "nb_pooled|new": 54.401785714285715,
+    "poisson|known": 24.875,
+    "poisson|new": 25.053571428571427,
+    "poisson_jnt|known": 27.4375,
+    "poisson_jnt|new": 27.714285714285715
+   },
+   "100": {
+    "eb_gamma|known": 25.991071428571427,
+    "eb_gamma|new": 30.973214285714285,
+    "hier_marg|known": 35.107142857142854,
+    "hier_marg|new": 84.5625,
+    "hier_plugin|known": 36.32142857142857,
+    "hier_plugin|new": 101.22321428571429,
+    "hier_pred|known": 39.00892857142857,
+    "hier_pred|new": 116.78571428571429,
+    "hier_shock|known": 40.151785714285715,
+    "hier_shock|new": 120.83035714285714,
+    "nb_pooled|known": 52.794642857142854,
+    "nb_pooled|new": 54.401785714285715,
+    "poisson|known": 24.875,
+    "poisson|new": 25.053571428571427,
+    "poisson_jnt|known": 27.4375,
+    "poisson_jnt|new": 27.714285714285715
+   }
+  },
+  "cover_units_curve": {
+   "eb_gamma|known": {
+    "0.95": {
+     "cover": 0.9821428571428571,
+     "units": 21.348214285714285
+    },
+    "0.98": {
+     "cover": 0.9910714285714286,
+     "units": 24.089285714285715
+    },
+    "0.99": {
+     "cover": 1.0,
+     "units": 25.991071428571427
+    },
+    "0.995": {
+     "cover": 1.0,
+     "units": 27.803571428571427
+    }
+   },
+   "eb_gamma|new": {
+    "0.95": {
+     "cover": 1.0,
+     "units": 24.571428571428573
+    },
+    "0.98": {
+     "cover": 1.0,
+     "units": 28.25
+    },
+    "0.99": {
+     "cover": 1.0,
+     "units": 30.973214285714285
+    },
+    "0.995": {
+     "cover": 1.0,
+     "units": 33.401785714285715
+    }
+   },
+   "hier_plugin|known": {
+    "0.95": {
+     "cover": 0.9732142857142857,
+     "units": 28.223214285714285
+    },
+    "0.98": {
+     "cover": 0.9910714285714286,
+     "units": 32.982142857142854
+    },
+    "0.99": {
+     "cover": 1.0,
+     "units": 36.32142857142857
+    },
+    "0.995": {
+     "cover": 1.0,
+     "units": 39.660714285714285
+    }
+   },
+   "hier_plugin|new": {
+    "0.95": {
+     "cover": 1.0,
+     "units": 63.125
+    },
+    "0.98": {
+     "cover": 1.0,
+     "units": 84.13392857142857
+    },
+    "0.99": {
+     "cover": 1.0,
+     "units": 101.22321428571429
+    },
+    "0.995": {
+     "cover": 1.0,
+     "units": 120.11607142857143
+    }
+   },
+   "hier_pred|known": {
+    "0.95": {
+     "cover": 0.9821428571428571,
+     "units": 29.821428571428573
+    },
+    "0.98": {
+     "cover": 0.9910714285714286,
+     "units": 35.160714285714285
+    },
+    "0.99": {
+     "cover": 1.0,
+     "units": 39.00892857142857
+    },
+    "0.995": {
+     "cover": 1.0,
+     "units": 42.86607142857143
+    }
+   },
+   "hier_pred|new": {
+    "0.95": {
+     "cover": 1.0,
+     "units": 71.13392857142857
+    },
+    "0.98": {
+     "cover": 1.0,
+     "units": 94.52678571428571
+    },
+    "0.99": {
+     "cover": 1.0,
+     "units": 116.78571428571429
+    },
+    "0.995": {
+     "cover": 1.0,
+     "units": 143.41964285714286
+    }
+   },
+   "hier_shock|known": {
+    "0.95": {
+     "cover": 0.9821428571428571,
+     "units": 30.482142857142858
+    },
+    "0.98": {
+     "cover": 1.0,
+     "units": 35.92857142857143
+    },
+    "0.99": {
+     "cover": 1.0,
+     "units": 40.151785714285715
+    },
+    "0.995": {
+     "cover": 1.0,
+     "units": 44.285714285714285
+    }
+   },
+   "hier_shock|new": {
+    "0.95": {
+     "cover": 1.0,
+     "units": 72.14285714285714
+    },
+    "0.98": {
+     "cover": 1.0,
+     "units": 97.01785714285714
+    },
+    "0.99": {
+     "cover": 1.0,
+     "units": 120.83035714285714
+    },
+    "0.995": {
+     "cover": 1.0,
+     "units": 143.77678571428572
+    }
+   },
+   "nb_pooled|known": {
+    "0.95": {
+     "cover": 1.0,
+     "units": 38.625
+    },
+    "0.98": {
+     "cover": 1.0,
+     "units": 47.035714285714285
+    },
+    "0.99": {
+     "cover": 1.0,
+     "units": 52.794642857142854
+    },
+    "0.995": {
+     "cover": 1.0,
+     "units": 59.0625
+    }
+   },
+   "nb_pooled|new": {
+    "0.95": {
+     "cover": 1.0,
+     "units": 39.705357142857146
+    },
+    "0.98": {
+     "cover": 1.0,
+     "units": 48.464285714285715
+    },
+    "0.99": {
+     "cover": 1.0,
+     "units": 54.401785714285715
+    },
+    "0.995": {
+     "cover": 1.0,
+     "units": 60.44642857142857
+    }
+   },
+   "poisson_jnt|known": {
+    "0.95": {
+     "cover": 0.9821428571428571,
+     "units": 22.598214285714285
+    },
+    "0.98": {
+     "cover": 1.0,
+     "units": 25.455357142857142
+    },
+    "0.99": {
+     "cover": 1.0,
+     "units": 27.4375
+    },
+    "0.995": {
+     "cover": 1.0,
+     "units": 29.366071428571427
+    }
+   },
+   "poisson_jnt|new": {
+    "0.95": {
+     "cover": 0.9910714285714286,
+     "units": 22.901785714285715
+    },
+    "0.98": {
+     "cover": 1.0,
+     "units": 25.732142857142858
+    },
+    "0.99": {
+     "cover": 1.0,
+     "units": 27.714285714285715
+    },
+    "0.995": {
+     "cover": 1.0,
+     "units": 29.633928571428573
+    }
+   }
+  }
+ },
+ "sd_cap": {
+  "fits": 68,
+  "max_sd": 0.8467140065133201,
+  "at_cap": 0,
+  "detail": [
+   {
+    "area": "all",
+    "split": "2024-04",
+    "sigmas": {
+     "hier": [
+      0.2884168878026221,
+      0.6922585944851601,
+      23.33703010705966
+     ],
+     "hier_shock": [
+      0.030638005485900045,
+      0.7599792502201489,
+      0.004379995865065419,
+      42336.82337366933
+     ]
+    }
+   },
+   {
+    "area": "ANTRIM & NEWTOWNABBEY",
+    "split": "2024-04",
+    "sigmas": {
+     "hier": [
+      0.284121552583221,
+      0.6785845887398185,
+      24.99086484826523
+     ],
+     "hier_shock": [
+      0.025261945341381174,
+      0.7445576821504727,
+      0.0027449567407397475,
+      107655.48995091047
+     ]
+    }
+   },
+   {
+    "area": "ARDS & NORTH DOWN",
+    "split": "2024-04",
+    "sigmas": {
+     "hier": [
+      0.28223478899908283,
+      0.6828197977285562,
+      20.770296527284437
+     ],
+     "hier_shock": [
+      0.28029153490334596,
+      0.6832980727371406,
+      0.07300227370797352,
+      23.344828518123435
+     ]
+    }
+   },
+   {
+    "area": "ARMAGH CITY, BANBRIDGE & CRAIGAVON (EAST)",
+    "split": "2024-04",
+    "sigmas": {
+     "hier": [
+      0.31743253103867475,
+      0.7070805570119324,
+      23.393837494886235
+     ],
+     "hier_shock": [
+      0.046826356601093834,
+      0.7926277581996778,
+      0.002523568596839478,
+      156887.3719799118
+     ]
+    }
+   },
+   {
+    "area": "ARMAGH CITY, BANBRIDGE & CRAIGAVON (WEST)",
+    "split": "2024-04",
+    "sigmas": {
+     "hier": [
+      0.30183862234976255,
+      0.7191819623307482,
+      22.194532866976214
+     ],
+     "hier_shock": [
+      0.041628166817235385,
+      0.8467140065133201,
+      0.002478752469396537,
+      162754.76684687714
+     ]
+    }
+   },
+   {
+    "area": "BELFAST NORTH",
+    "split": "2024-04",
+    "sigmas": {
+     "hier": [
+      0.0024787521766663585,
+      0.7411075105705129,
+      25.205816270837065
+     ],
+     "hier_shock": [
+      0.0083118624636718,
+      0.7427811516783357,
+      0.0031963639860647128,
+      83408.78258512731
+     ]
+    }
+   },
+   {
+    "area": "BELFAST SOUTH",
+    "split": "2024-04",
+    "sigmas": {
+     "hier": [
+      0.31251862222760707,
+      0.6930543939996961,
+      19.746780629091305
+     ],
+     "hier_shock": [
+      0.036591207613445954,
+      0.7807999767051947,
+      0.0024896909867836194,
+      118416.632177366
+     ]
+    }
+   },
+   {
+    "area": "CARRICKFERGUS",
+    "split": "2024-04",
+    "sigmas": {
+     "hier": [
+      0.28513238584818706,
+      0.7145043641445731,
+      23.851257442639533
+     ],
+     "hier_shock": [
+      0.0384021848669983,
+      0.7654497190600595,
+      0.0028727518346711714,
+      111804.91444351176
+     ]
+    }
+   },
+   {
+    "area": "CAUSEWAY COAST & GLENS",
+    "split": "2024-04",
+    "sigmas": {
+     "hier": [
+      0.31820848276333025,
+      0.6982340416097624,
+      20.167801579513633
+     ],
+     "hier_shock": [
+      0.05810041722052701,
+      0.7699205798229571,
+      0.0037163459690964253,
+      50700.19587355716
+     ]
+    }
+   },
+   {
+    "area": "FERMANAGH & OMAGH (EAST)",
+    "split": "2024-04",
+    "sigmas": {
+     "hier": [
+      0.30934240079017145,
+      0.7030917333888363,
+      23.45411039831719
+     ],
+     "hier_shock": [
+      0.30504362405781843,
+      0.7042210757706542,
+      0.10473915146664378,
+      31.900300919180463
+     ]
+    }
+   },
+   {
+    "area": "FERMANAGH & OMAGH (WEST)",
+    "split": "2024-04",
+    "sigmas": {
+     "hier": [
+      0.2992630094065934,
+      0.6974640874387833,
+      28.500952777114108
+     ],
+     "hier_shock": [
+      0.2916533784737698,
+      0.699302319688881,
+      0.13472261291402626,
+      61.322960042932
+     ]
+    }
+   },
+   {
+    "area": "LISBURN & CASTLEREAGH",
+    "split": "2024-04",
+    "sigmas": {
+     "hier": [
+      0.2544084818574622,
+      0.7346945042864357,
+      18.412759754227856
+     ],
+     "hier_shock": [
+      0.026238436643049017,
+      0.7938974917429661,
+      0.0025547431128591764,
+      161964.47969556012
+     ]
+    }
+   },
+   {
+    "area": "LONDONDERRY & STRABANE",
+    "split": "2024-04",
+    "sigmas": {
+     "hier": [
+      0.31998968213384255,
+      0.6935546350954062,
+      21.421070416425668
+     ],
+     "hier_shock": [
+      0.04376241975612576,
+      0.7798907156140479,
+      0.002550286396207631,
+      138862.55041554355
+     ]
+    }
+   },
+   {
+    "area": "MID & EAST ANTRIM",
+    "split": "2024-04",
+    "sigmas": {
+     "hier": [
+      0.33812235579843314,
+      0.6637933546442236,
+      35.151751459988986
+     ],
+     "hier_shock": [
+      0.03787100384200847,
+      0.7616872906028519,
+      0.002478880620428184,
+      152601.01778481
+     ]
+    }
+   },
+   {
+    "area": "MID ULSTER",
+    "split": "2024-04",
+    "sigmas": {
+     "hier": [
+      0.4231911682455103,
+      0.538006365553982,
+      52984.21782558461
+     ],
+     "hier_shock": [
+      0.41229098192159874,
+      0.5388839476595249,
+      0.1335946440609221,
+      39.7045257498887
+     ]
+    }
+   },
+   {
+    "area": "NEWRY MOURNE & DOWN (EAST)",
+    "split": "2024-04",
+    "sigmas": {
+     "hier": [
+      0.25874811338691367,
+      0.7160202682164151,
+      23.608011170246332
+     ],
+     "hier_shock": [
+      0.2503115072007205,
+      0.7181009107302384,
+      0.13825310026344145,
+      44.03181194386606
+     ]
+    }
+   },
+   {
+    "area": "NEWRY MOURNE & DOWN (WEST)",
+    "split": "2024-04",
+    "sigmas": {
+     "hier": [
+      0.11696440721938035,
+      0.663830452556959,
+      24.453863194174886
+     ],
+     "hier_shock": [
+      0.10305558524374124,
+      0.665699464888278,
+      0.12360272066081684,
+      39.30801467701005
+     ]
+    }
+   },
+   {
+    "area": "all",
+    "split": "2026-04",
+    "sigmas": {
+     "hier": [
+      0.0024787521766663585,
+      0.7122323925602797,
+      5.245518797055248
+     ],
+     "hier_shock": [
+      0.0024787521766663585,
+      0.7096134241200032,
+      0.199512646956224,
+      6.578438989771538
+     ]
+    }
+   },
+   {
+    "area": "ANTRIM & NEWTOWNABBEY",
+    "split": "2026-04",
+    "sigmas": {
+     "hier": [
+      0.0939444142108636,
+      0.6758115205389523,
+      5.460483631966964
+     ],
+     "hier_shock": [
+      0.07242799640425802,
+      0.6759775441609456,
+      0.2165585923816421,
+      7.237586614026265
+     ]
+    }
+   },
+   {
+    "area": "ARDS & NORTH DOWN",
+    "split": "2026-04",
+    "sigmas": {
+     "hier": [
+      0.003937501338339409,
+      0.6946647338511027,
+      5.173233205083154
+     ],
+     "hier_shock": [
+      0.0024787521766663585,
+      0.6920619300680413,
+      0.1889748591089261,
+      6.29135193775534
+     ]
+    }
+   },
+   {
+    "area": "ARMAGH CITY, BANBRIDGE & CRAIGAVON (EAST)",
+    "split": "2026-04",
+    "sigmas": {
+     "hier": [
+      0.0024787521766663585,
+      0.7401877236806608,
+      5.1372179716795685
+     ],
+     "hier_shock": [
+      0.0024787521951704,
+      0.7375001105835451,
+      0.19956236486214496,
+      6.40001595926774
+     ]
+    }
+   },
+   {
+    "area": "ARMAGH CITY, BANBRIDGE & CRAIGAVON (WEST)",
+    "split": "2026-04",
+    "sigmas": {
+     "hier": [
+      0.0024787521766663585,
+      0.73525723199,
+      5.010646355323615
+     ],
+     "hier_shock": [
+      0.0024787521766663585,
+      0.7326565890486516,
+      0.20122784209377217,
+      6.236705029509728
+     ]
+    }
+   },
+   {
+    "area": "BELFAST NORTH",
+    "split": "2026-04",
+    "sigmas": {
+     "hier": [
+      0.0024787521766663585,
+      0.720042152763199,
+      5.326870895861784
+     ],
+     "hier_shock": [
+      0.002860180529651443,
+      0.7175798001728865,
+      0.2206695201742578,
+      7.143785344492049
+     ]
+    }
+   },
+   {
+    "area": "BELFAST SOUTH",
+    "split": "2026-04",
+    "sigmas": {
+     "hier": [
+      0.005646772293632909,
+      0.724474787819115,
+      5.493871467314733
+     ],
+     "hier_shock": [
+      0.002762478151231525,
+      0.7215062781002216,
+      0.21678995882847688,
+      7.365742821732192
+     ]
+    }
+   },
+   {
+    "area": "CARRICKFERGUS",
+    "split": "2026-04",
+    "sigmas": {
+     "hier": [
+      0.0024787521766663585,
+      0.7269285027395541,
+      5.194548795542344
+     ],
+     "hier_shock": [
+      0.0024787521766663585,
+      0.7243670545870101,
+      0.20229984179722557,
+      6.546997723593525
+     ]
+    }
+   },
+   {
+    "area": "CAUSEWAY COAST & GLENS",
+    "split": "2026-04",
+    "sigmas": {
+     "hier": [
+      0.0024787521766663585,
+      0.7158135009640768,
+      4.741630890793423
+     ],
+     "hier_shock": [
+      0.0034750633365221817,
+      0.7126515835855795,
+      0.2081293108503442,
+      5.927443892056181
+     ]
+    }
+   },
+   {
+    "area": "FERMANAGH & OMAGH (EAST)",
+    "split": "2026-04",
+    "sigmas": {
+     "hier": [
+      0.0031759558233658653,
+      0.7234778998359925,
+      5.552857218786361
+     ],
+     "hier_shock": [
+      0.003832861129314629,
+      0.7209019243699016,
+      0.18620738913117008,
+      6.822140365847343
+     ]
+    }
+   },
+   {
+    "area": "FERMANAGH & OMAGH (WEST)",
+    "split": "2026-04",
+    "sigmas": {
+     "hier": [
+      0.003300816079448012,
+      0.7108132553049583,
+      5.5838696184635035
+     ],
+     "hier_shock": [
+      0.002489859319448509,
+      0.7075912585987535,
+      0.2025302419235501,
+      7.162366982978445
+     ]
+    }
+   },
+   {
+    "area": "LISBURN & CASTLEREAGH",
+    "split": "2026-04",
+    "sigmas": {
+     "hier": [
+      0.0024787521766663585,
+      0.7331207517494638,
+      5.200164189232614
+     ],
+     "hier_shock": [
+      0.0024787521766663585,
+      0.7303839709373046,
+      0.21149488524715881,
+      6.741269749986283
+     ]
+    }
+   },
+   {
+    "area": "LONDONDERRY & STRABANE",
+    "split": "2026-04",
+    "sigmas": {
+     "hier": [
+      0.0024787521766663585,
+      0.7251393147076127,
+      5.046848786717318
+     ],
+     "hier_shock": [
+      0.0024787521766663585,
+      0.722203898874277,
+      0.20325030771678165,
+      6.325745258974874
+     ]
+    }
+   },
+   {
+    "area": "MID & EAST ANTRIM",
+    "split": "2026-04",
+    "sigmas": {
+     "hier": [
+      0.14502304477936379,
+      0.6760996724004912,
+      5.595425229371015
+     ],
+     "hier_shock": [
+      0.1395833385356113,
+      0.676328447444537,
+      0.13237738537161767,
+      6.174383255181045
+     ]
+    }
+   },
+   {
+    "area": "MID ULSTER",
+    "split": "2026-04",
+    "sigmas": {
+     "hier": [
+      0.10329120812535937,
+      0.6586365252567915,
+      4.960145867928135
+     ],
+     "hier_shock": [
+      0.08638796331784099,
+      0.6593126887521829,
+      0.20269984086912948,
+      6.190000925723842
+     ]
+    }
+   },
+   {
+    "area": "NEWRY MOURNE & DOWN (EAST)",
+    "split": "2026-04",
+    "sigmas": {
+     "hier": [
+      0.0024787521766663585,
+      0.7219936636607484,
+      5.131332002293691
+     ],
+     "hier_shock": [
+      0.0024787521766663585,
+      0.7197051656406648,
+      0.19381249345030863,
+      6.312381166131502
+     ]
+    }
+   },
+   {
+    "area": "NEWRY MOURNE & DOWN (WEST)",
+    "split": "2026-04",
+    "sigmas": {
+     "hier": [
+      0.0024787521766663585,
+      0.6719673140795861,
+      5.324540178055485
+     ],
+     "hier_shock": [
+      0.0024787521766663585,
+      0.6705786774827363,
+      0.1878334965051128,
+      6.5117137721663525
+     ]
+    }
+   }
+  ]
+ }
+}

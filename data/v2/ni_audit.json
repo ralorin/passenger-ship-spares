@@ -1,0 +1,74 @@
+{
+ "files": {
+  "LightingFaults2020.csv": {
+   "text_lines": 47639,
+   "records": 47259,
+   "parsed": 47258,
+   "malformed": 1,
+   "malformed_light_out": 0,
+   "first": "2020-04-01 00:35:00",
+   "last": "2021-03-31 23:29:00"
+  },
+  "LightingFaults2021.csv": {
+   "text_lines": 37926,
+   "records": 37585,
+   "parsed": 37583,
+   "malformed": 2,
+   "malformed_light_out": 2,
+   "first": "2021-04-01 00:46:00",
+   "last": "2022-03-31 23:44:00"
+  },
+  "LightingFaults2022.csv": {
+   "text_lines": 31571,
+   "records": 31189,
+   "parsed": 31189,
+   "malformed": 0,
+   "malformed_light_out": 0,
+   "first": "2022-04-01 00:00:00",
+   "last": "2023-03-31 23:23:00"
+  },
+  "LightingFaults2023.csv": {
+   "text_lines": 26143,
+   "records": 25793,
+   "parsed": 25791,
+   "malformed": 2,
+   "malformed_light_out": 2,
+   "first": "2023-04-01 06:07:00",
+   "last": "2024-03-31 23:41:24"
+  },
+  "LightingFaults2024.csv": {
+   "text_lines": 22079,
+   "records": 21404,
+   "parsed": 21404,
+   "malformed": 0,
+   "malformed_light_out": 0,
+   "first": "2024-04-01 00:27:00",
+   "last": "2025-03-31 23:45:00"
+  },
+  "LightingFaultsCurrentYear.csv": {
+   "text_lines": 7953,
+   "records": 7691,
+   "parsed": 7691,
+   "malformed": 0,
+   "malformed_light_out": 0,
+   "first": "2026-04-01 00:15:00",
+   "last": "2026-11-01 00:49:00"
+  }
+ },
+ "malformed": 5,
+ "malformed_light_out": 4,
+ "area_nearest_share": 0.19371787512719493,
+ "reports": 4697.0,
+ "lantern_hours": 1426716848.4441414,
+ "hours_per_report": 303750.6596644968,
+ "hours_per_report_family": {
+  "Ignis Mini": 204338.35794029175,
+  "LCL Quantum": 578503.0664183841,
+  "Philips Digistreet": 489426.70650986093,
+  "Philips Lumistreet": 262258.8352451737,
+  "Thorn R2L2": 803171.5181105146,
+  "Urbis Ampera": 683049.5426903093,
+  "Urbis Axia": 279531.26469630416
+ },
+ "reports_per_point_year": 0.014177910591928522
+}

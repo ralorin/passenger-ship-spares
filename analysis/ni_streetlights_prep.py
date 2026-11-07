@@ -111,13 +111,11 @@ def assign_area(a, faults):
     return a, float(ok.mean()), float(miss.mean())
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--inventory", default="2025", choices=["2025", "2026"])
-    args = ap.parse_args()
-
-    F = load_faults()
-    A, share_direct, share_nn = assign_area(load_inventory(args.inventory), F)
+def build(which="2025", repeat_days=REPEAT_DAYS, merge_max_points=None, F=None, A=None):
+    """Cell table and preparation report. merge_max_points, if given, merges
+    repeat reports only on streets with at most that many lighting points."""
+    F = load_faults() if F is None else F
+    A, share_direct, share_nn = assign_area(load_inventory(which) if A is None else A, F)
     A = A[A.area.notna()]
 
     types = F.FAULT_TYPE.value_counts()
@@ -127,11 +125,18 @@ def main():
     n_kept = len(F)
     not_lantern = F.CLEARED_COMMENTS.fillna("").str.contains(NOT_LANTERN, case=False, regex=True)
     F = F[~not_lantern].sort_values("date")
+    small = None
+    if merge_max_points is not None:
+        size = A.groupby(["street", "town"]).size()
+        small = set(size[size <= merge_max_points].index)
     # keep a report only if it starts a new episode on its street
     keep = np.zeros(len(F), bool)
     start_of = {}
     for i, (k, t) in enumerate(zip(zip(F.street, F.town, F.kind), F.date)):
-        if k not in start_of or (t - start_of[k]).days > REPEAT_DAYS:
+        if small is not None and k[:2] not in small:
+            keep[i] = True
+            continue
+        if k not in start_of or (t - start_of[k]).days > repeat_days:
             start_of[k] = t
             keep[i] = True
     dropped = dict(not_lantern=int(not_lantern.sum()), repeats=int((~keep).sum()))
@@ -167,11 +172,10 @@ def main():
     cells["hours"] = cells.N * cells.night_hours
     cells["hours_pure"] = cells.N_pure * cells.night_hours
     cells["tech"] = np.where(cells.family.isin(["SON", "SOX", "other"]), cells.family, "LED")
-    cells.to_csv(os.path.join(OUT, f"ni_cells_{args.inventory}.csv"), index=False)
 
     led = A[~A.family.isin(["SON", "SOX", "other"])]
     report = dict(
-        inventory=args.inventory, inventory_points=len(A),
+        inventory=which, inventory_points=len(A),
         led_points=len(led), families=led.family.value_counts().to_dict(),
         led_points_pure=int(led.pure.sum()), families_pure=led[led.pure].family.value_counts().to_dict(),
         areas=int(A.area.nunique()), area_direct_share=share_direct, area_nearest_share=share_nn,
@@ -180,6 +184,15 @@ def main():
         faults_before_cleaning=n_kept, dropped=dropped,
         faults_on_pure_streets_share=float(M.groupby("DATA_UID").pure.first().mean()),
         months=[months[0], months[-1]], n_months=len(months))
+    return cells, report, dict(faults=F, matched=M, inventory=A)
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--inventory", default="2025", choices=["2025", "2026"])
+    args = ap.parse_args()
+    cells, report, _ = build(args.inventory)
+    cells.to_csv(os.path.join(OUT, f"ni_cells_{args.inventory}.csv"), index=False)
     json.dump(report, open(os.path.join(OUT, f"ni_prep_{args.inventory}.json"), "w"), indent=1)
     print(json.dumps({k: v for k, v in report.items() if k != "fault_types_all"}, indent=1))
 

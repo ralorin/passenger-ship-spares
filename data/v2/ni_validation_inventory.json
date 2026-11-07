@@ -1,0 +1,194 @@
+{
+ "snapshots": {
+  "pure_led_streets_2025": 17315,
+  "points": 165645,
+  "identical": 16670,
+  "identical_points": 157235,
+  "same_family_other_count": 303,
+  "family_changed_or_mixed": 281,
+  "missing_in_2026": 61,
+  "pure_led_streets_2026": 18014,
+  "new_pure_led_2026": 1002,
+  "led_points_2025": 256999,
+  "led_points_2026": 267398,
+  "old_points_2025": 49617,
+  "old_points_2026": 41538,
+  "years_between": 1.5222450376454484,
+  "led_growth_per_year": 0.02658126087661344,
+  "old_to_led_points_per_year": 5307.292715827338
+ },
+ "reference": {
+  "fit_failures": 4697.0,
+  "sigma": [
+   0.0024787521766663585,
+   0.7096129478892695,
+   0.19951223850064748
+  ],
+  "phi": 6.57841062418717,
+  "within": {
+   "eb_gamma|known": {
+    "n": 192,
+    "covered": 187,
+    "cover": 0.9739583333333334,
+    "units": 33.65625
+   },
+   "hier_pred|known": {
+    "n": 192,
+    "covered": 192,
+    "cover": 1.0,
+    "units": 40.520833333333336
+   },
+   "nb_pooled|known": {
+    "n": 192,
+    "covered": 189,
+    "cover": 0.984375,
+    "units": 69.68229166666667
+   },
+   "poisson|known": {
+    "n": 192,
+    "covered": 184,
+    "cover": 0.9583333333333334,
+    "units": 30.677083333333332
+   }
+  }
+ },
+ "rebuild_check_fit_failures": 4697.0,
+ "stable_subset": {
+  "fit_failures": 4361.0,
+  "sigma": [
+   0.23720766317403452,
+   0.6768941916878315,
+   0.20077868330088905
+  ],
+  "phi": 6.244582785345761,
+  "within": {
+   "eb_gamma|known": {
+    "n": 192,
+    "covered": 187,
+    "cover": 0.9739583333333334,
+    "units": 31.755208333333332
+   },
+   "eb_gamma|new": {
+    "n": 192,
+    "covered": 184,
+    "cover": 0.9583333333333334,
+    "units": 35.270833333333336
+   },
+   "hier_pred|known": {
+    "n": 192,
+    "covered": 192,
+    "cover": 1.0,
+    "units": 39.010416666666664
+   },
+   "hier_pred|new": {
+    "n": 192,
+    "covered": 192,
+    "cover": 1.0,
+    "units": 149.55208333333334
+   },
+   "nb_pooled|known": {
+    "n": 192,
+    "covered": 191,
+    "cover": 0.9947916666666666,
+    "units": 66.70833333333333
+   },
+   "nb_pooled|new": {
+    "n": 192,
+    "covered": 191,
+    "cover": 0.9947916666666666,
+    "units": 68.984375
+   },
+   "poisson|known": {
+    "n": 192,
+    "covered": 184,
+    "cover": 0.9583333333333334,
+    "units": 29.0
+   },
+   "poisson|new": {
+    "n": 192,
+    "covered": 178,
+    "cover": 0.9270833333333334,
+    "units": 29.21875
+   }
+  }
+ },
+ "ramp at observed growth": {
+  "fit_failures": 4697.0,
+  "sigma": [
+   0.0024787521766663585,
+   0.7092168509893432,
+   0.20990588106703864
+  ],
+  "phi": 6.3661872379236994,
+  "within": {
+   "eb_gamma|known": {
+    "n": 192,
+    "covered": 188,
+    "cover": 0.9791666666666666,
+    "units": 34.328125
+   },
+   "hier_pred|known": {
+    "n": 192,
+    "covered": 192,
+    "cover": 1.0,
+    "units": 41.354166666666664
+   },
+   "nb_pooled|known": {
+    "n": 192,
+    "covered": 189,
+    "cover": 0.984375,
+    "units": 72.078125
+   },
+   "poisson|known": {
+    "n": 192,
+    "covered": 184,
+    "cover": 0.9583333333333334,
+    "units": 31.296875
+   }
+  }
+ },
+ "ramp at twice the growth": {
+  "fit_failures": 4697.0,
+  "sigma": [
+   0.002478754594977039,
+   0.7089282574745643,
+   0.22160127296433868
+  ],
+  "phi": 6.1614526025097005,
+  "within": {
+   "eb_gamma|known": {
+    "n": 192,
+    "covered": 190,
+    "cover": 0.9895833333333334,
+    "units": 34.979166666666664
+   },
+   "hier_pred|known": {
+    "n": 192,
+    "covered": 192,
+    "cover": 1.0,
+    "units": 42.385416666666664
+   },
+   "nb_pooled|known": {
+    "n": 192,
+    "covered": 189,
+    "cover": 0.984375,
+    "units": 73.71354166666667
+   },
+   "poisson|known": {
+    "n": 192,
+    "covered": 185,
+    "cover": 0.9635416666666666,
+    "units": 31.890625
+   }
+  }
+ },
+ "fit Apr 2024-Mar 2025 only": {
+  "fit_failures": 1735.0,
+  "sigma": [
+   0.2052104701911398,
+   0.5544902475401116,
+   0.2036124643208856
+  ],
+  "phi": 14.98254187567752
+ }
+}

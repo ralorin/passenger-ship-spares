@@ -1,0 +1,133 @@
+{
+ "flow": [
+  [
+   "text lines in the fault files (excluding headers)",
+   173311
+  ],
+  [
+   "rows parsed (lines skipped as malformed: 2395)",
+   170916
+  ],
+  [
+   "after removing repeated DATA_UID across files",
+   170916
+  ],
+  [
+   "fault type Light Out or All lights out in street",
+   145237
+  ],
+  [
+   "asset type Lighting Point",
+   133535
+  ],
+  [
+   "operational area recorded",
+   133330
+  ],
+  [
+   "valid date",
+   133330
+  ],
+  [
+   "closure comment does not point away from the lantern",
+   128724
+  ],
+  [
+   "after merging repeats on a street within 7 days",
+   88299
+  ],
+  [
+   "  of which Light Out",
+   80977
+  ],
+  [
+   "street found in the April 2025 inventory",
+   81272
+  ],
+  [
+   "Light Out on a street with one LED family (any month)",
+   30160
+  ]
+ ],
+ "exclusions_by_comment": {
+  "cable": 2400,
+  "NIE (supply)": 1299,
+  "working on attendance": 169,
+  "not out / no fault / all ok / operational": 738
+ },
+ "status_all": {
+  "Completed": 158532,
+  "Record Closed": 9114,
+  "In Progress": 2010,
+  "Received": 1260
+ },
+ "status_after_type_filters": {
+  "Completed": 126846,
+  "Record Closed": 4381,
+  "In Progress": 1236,
+  "Received": 867
+ },
+ "empty_comment_share_after_type_filters": 0.8996699917497938,
+ "light_out_pure_led_by_window": {
+  "fit Apr 2023-Mar 2025": 4697,
+  "within-period fit": 2962,
+  "within-period test": 1735,
+  "forward test Apr-Oct 2026 (Nov 2026 inventory)": 648
+ },
+ "cell_table_check": {
+  "fit": 4697.0,
+  "within_test": 1735.0,
+  "forward": 648.0
+ },
+ "fit_window_reports": 4697,
+ "fit_window_empty_comment": 4361,
+ "fit_window_status": {
+  "Completed": 4607,
+  "Record Closed": 68,
+  "In Progress": 21,
+  "Received": 1
+ },
+ "fit_window_keyword_counts": {
+  "driver": 0,
+  "lantern / luminaire": 13,
+  "photocell / PECU": 0,
+  "lamp / LED unit": 8,
+  "fuse": 3,
+  "replaced / repaired": 71,
+  "duplicate / see other card": 104,
+  "sign lantern": 1,
+  "third party / not adopted": 25
+ },
+ "fit_window_top_comments": {
+  "DUPLICATE - W24887248": 3,
+  "CONTRACTOR ATTENDED 19/01/24 LIGHTS NOW WORKING": 3,
+  "SCAFFOLD REQUIRED TO COMPLETE REPAIR": 2,
+  "CHECKED 6-11-23 ALL LIGHTS WORKING, NO ISSUES FOUND RG": 2,
+  "DUPLICATE - W25889829": 2,
+  "PASSED TO ENGINEER": 2,
+  "THE AREA AT THE REAR OF RAWDON PLACE AND MCCARTNEY PLACE IS NOT ADOPTED BY DFI ROADS AND THEREFORE DOES NOT FORM PART OF THE PUBLIC ROAD NETWORK MAINTAINED BY THE DEPARTMENT.\nTHE EXISTING LIGHTING HAD REACHED THE END OF ITS SERVICEABLE LIFE.\nIN LINE WITH OUR EXISTING POLICY, LIGHTING WITHIN NON-ADOPTED LOCATIONS THAT HAS REACHED THE END OF ITS SERVICEABLE LIFE WILL NOT BE RETAINED OR REPLACED.": 2,
+  "DUPLICATE REPORT - WITH CONTRACTOR FOR REPAIR": 2,
+  "DUPLICATE COMPLAINT": 2,
+  "DUPLICATE - W23865777": 2,
+  "LIGHTS HAVE NOW BEEN LEFT ON IN THE AREA 24/7 AS OF MONDAY 15TH APRIL AS A TEMPORARY FIX UNTIL CONTRACTOR CAN RECTIFY FAULT.": 2,
+  "NEW SCHEME INSTALLED, OLD COLUMNS DISCONNECTED AND TO BE REMOVED.": 2,
+  "WE CAN INFORM YOU THAT THE CURRENT POLICY ON STREET LIGHTING FOR ACCESS PATHWAYS INCLUDING REAR ACCESS PATHWAYS AND BIN ALLEYS HAS BEEN IN PLACE SINCE BEFORE 1994. THE POLICY STATES THAT THOSE AREAS WHICH ONLY GIVE REAR ACCESS TO PROPERTIES, OR ARE ALTERNATIVE TO ALREADY LIT ROADS AND FOOTPATHS, WILL GENERALLY NOT BE LIT. THE DEPARTMENT IS UNDER PRESSURE TO FUND STREET LIGHTING OPERATIONS AND HAS TO PRIORITIES ITS ACTIVITIES ACCORDINGLY. \n\nTHE POLICY NOT TO LIGHT REAR PATHWAYS CONTRIBUTES TO REDUCING THE FUTURE MAINTENANCE BURDEN ON THE STREET LIGHTING BUDGET. IN ORDER TO BEST TARGET THE FINITE RESOURCES AVAILABLE, IT HAS BEEN NECESSARY TO ESTABLISH CRITERIA FOR THE PROVISION OF LIGHTING TO THE MAIN ACCESS POINT OF PROPERTIES BUT, WHERE THIS HAS BEEN PROVIDED, DOES NOT AFFORD LIGHTING TO REAR ACCESSES.": 2,
+  "DUPLICATE - W25893823": 2,
+  "DUPLICATE - W25890910": 2,
+  "ON SYSTEM AS W25891856": 2,
+  "WORK IS ONGOING TO REPLACE THESE LANTERNS.": 2,
+  "RESET RCD IN MP 55606 AND LEFT LIGHTS WORKING (KL) 18-08-2023": 1,
+  "THE NEW SECTION OF THORBURN ROAD IS NOT ADOPTED BY THE DEPARTMENT AND IS THE RESPONSIBILITY OF THE DEVELOPER": 1,
+  "PASSED TO CONTRACTOR TO CHECK AND REPAIR": 1,
+  "THE CAR PARKING AREA OFF LAUREL WAY,AT THE REAR 6B ROWAN DRIVE, IS NOT ADOPTED BY DFI.\nHISTORICALLY DFI HAVE BEEN RESPONSIBLE FOR TWO OF THE LIGHTS IN THIS AREA.\nTHE DEPARTMENT\u00c2\u0080\u0099S POLICY FOR LIGHTS IN UN ADOPTED AREAS IS TO CONTINUE TO MAINTAIN THE LIGHTS UNTIL THEY REACH THE END OF THEIR SERVICEABLE LIVES. AT THIS POINT THEY WILL BE REMOVED AND NOT REPLACED.\nTHE TWO LIGHTS THAT DFI HAVE BEEN RESPONSIBLE FOR HAVE NOW REACHED THE END OF THEIR SERVICEABLE LIFE.\nTHEY WILL NOW BE REMOVED AND WILL NOT BE REPLACED.\n\nTHE OTHER TWO LIGHTS IN THE AREA ARE THE RESPONSIBILITY OF NIHE.\nI ADVISE CONTACTING THEM.": 1,
+  "PATHWAY IS NOT ADOPTED BY DFI": 1,
+  "DUPLICATE - W25891141": 1,
+  "DUPLICATE - W25890398": 1,
+  "PRIVATE DEVELOPMENT STREET LIGHTING THE RESPONSIBILITY OF THE DEVELOPER": 1
+ },
+ "all_out_in_fit_window_pure_led": 1163,
+ "area_assignment": {
+  "direct": 0.806282124872805,
+  "nearest": 0.19371787512719493
+ }
+}

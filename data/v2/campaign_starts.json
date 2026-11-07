@@ -1,0 +1,21 @@
+{
+ "campaigns": 1000,
+ "cells": 100,
+ "higher": 59,
+ "higher_01": 21,
+ "gain_max": 18.162483704807528,
+ "tau_decision_changed": 5,
+ "omega_decision_changed": 6,
+ "higher_M1": 13,
+ "n_M1": 250,
+ "omega_changed_M1": 1,
+ "higher_M2": 18,
+ "n_M2": 250,
+ "omega_changed_M2": 3,
+ "higher_M4": 14,
+ "n_M4": 250,
+ "omega_changed_M4": 0,
+ "higher_M8": 14,
+ "n_M8": 250,
+ "omega_changed_M8": 2
+}

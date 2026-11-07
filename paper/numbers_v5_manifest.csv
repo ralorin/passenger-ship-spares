@@ -1,0 +1,234 @@
+macro,value,kind,source,note
+seCert,99,ANALYTIC,analysis/stock_exact.py -> data/v2/stock_exact_part1.csv,
+seGapLo,0.0,ANALYTIC,analysis/stock_exact.py -> data/v2/stock_exact_part1.csv,"(best - ceil(lower bound)) / best, interrupted cases"
+seGapHi,11.4,ANALYTIC,analysis/stock_exact.py -> data/v2/stock_exact_part1.csv,
+seIndCertMed,1.0,ANALYTIC,analysis/stock_exact.py -> data/v2/stock_exact_part1.csv,certified cases with f > 0
+seIndCertMax,12.6,ANALYTIC,analysis/stock_exact.py -> data/v2/stock_exact_part1.csv,
+seGreedyCertOpt,78,ANALYTIC,analysis/stock_exact.py -> data/v2/stock_exact_part1.csv,certified cases
+seGreedyCertMax,8.3,ANALYTIC,analysis/stock_exact.py -> data/v2/stock_exact_part1.csv,
+shKnowCostLo,38.1,ANALYTIC,analysis/ship_cases.py -> data/v2/ship_cases.json,
+pwTauTwoLo,20,SIM,"paper/tables/tab_power.tex (make_numbers_v2.py, campaign study)",
+pwTauTwoHi,96,SIM,"paper/tables/tab_power.tex (make_numbers_v2.py, campaign study)",
+pwOmTwoLo,9,SIM,"paper/tables/tab_power.tex (make_numbers_v2.py, campaign study)",
+pwOmTwoHi,68,SIM,"paper/tables/tab_power.tex (make_numbers_v2.py, campaign study)",
+pwTauFourLo,28,SIM,"paper/tables/tab_power.tex (make_numbers_v2.py, campaign study)",
+pwTauFourHi,99,SIM,"paper/tables/tab_power.tex (make_numbers_v2.py, campaign study)",
+pwOmFourLo,24,SIM,"paper/tables/tab_power.tex (make_numbers_v2.py, campaign study)",
+pwOmFourHi,100,SIM,"paper/tables/tab_power.tex (make_numbers_v2.py, campaign study)",
+pwTauEightLo,39,SIM,"paper/tables/tab_power.tex (make_numbers_v2.py, campaign study)",
+pwTauEightHi,100,SIM,"paper/tables/tab_power.tex (make_numbers_v2.py, campaign study)",
+pwOmEightLo,54,SIM,"paper/tables/tab_power.tex (make_numbers_v2.py, campaign study)",
+pwOmEightHi,100,SIM,"paper/tables/tab_power.tex (make_numbers_v2.py, campaign study)",
+niSeedN,5,PUBLICDATA,analysis/ni_seeds.py -> data/v2/ni_seeds.json,
+niSeedPredNewMean,166,PUBLICDATA,analysis/ni_seeds.py -> data/v2/ni_seeds.json,"predictive plan, new area, units per area-month"
+niSeedPredNewLo,165,PUBLICDATA,analysis/ni_seeds.py -> data/v2/ni_seeds.json,
+niSeedPredNewHi,167,PUBLICDATA,analysis/ni_seeds.py -> data/v2/ni_seeds.json,
+niSeedKnownLo,30,PUBLICDATA,analysis/ni_seeds.py -> data/v2/ni_seeds.json,"pooled minus predictive, known areas"
+niSeedKnownHi,30,PUBLICDATA,analysis/ni_seeds.py -> data/v2/ni_seeds.json,
+niSeedKnownRange,30,PUBLICDATA,analysis/ni_seeds.py -> data/v2/ni_seeds.json,
+niSeedNewLo,93,PUBLICDATA,analysis/ni_seeds.py -> data/v2/ni_seeds.json,"predictive minus pooled, new areas"
+niSeedNewHi,95,PUBLICDATA,analysis/ni_seeds.py -> data/v2/ni_seeds.json,
+niSeedPredExcMax,0,PUBLICDATA,analysis/ni_seeds.py -> data/v2/ni_seeds.json,
+niSeedNbNewExcLo,3,PUBLICDATA,analysis/ni_seeds.py -> data/v2/ni_seeds.json,
+niSeedNbNewExcHi,4,PUBLICDATA,analysis/ni_seeds.py -> data/v2/ni_seeds.json,
+fdFleets,30,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,fleets per scenario (minimum)
+fdFleetsMax,30,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdMissions,899,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,predicted ship-missions per fleet
+fdDcKLo,$-0.03$,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,"joint minus fixed-marginal cover, pp, known"
+fdDcKHi,$+0.02$,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdDuKLo,$0.00$,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,"joint minus fixed-marginal units per mission, known"
+fdDuKHi,$0.00$,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdDcCiKLo,$-0.13$,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,lowest lower CI limit over scenarios
+fdDcCiKHi,$+0.05$,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,highest upper CI limit over scenarios
+fdSameKLo,97.4,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,share of missions with equal total units
+fdSameKHi,99.1,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdFewerKHi,1.3,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,share of missions where the joint plan has fewer units
+fdMoreKHi,1.3,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,share of missions where the joint plan has more units
+fdDcNLo,$-0.04$,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,"joint minus fixed-marginal cover, pp, new"
+fdDcNHi,$+0.03$,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdDuNLo,$-0.04$,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,"joint minus fixed-marginal units per mission, new"
+fdDuNHi,$0.00$,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdDcCiNLo,$-0.09$,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,lowest lower CI limit over scenarios
+fdDcCiNHi,$+0.09$,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,highest upper CI limit over scenarios
+fdSameNLo,94.0,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,share of missions with equal total units
+fdSameNHi,98.7,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdFewerNHi,4.8,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,share of missions where the joint plan has fewer units
+fdMoreNHi,1.2,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,share of missions where the joint plan has more units
+fdBaseJoint,99.1,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdBaseJointLo,99.0,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdBaseJointHi,99.2,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdMtbfLo,90.1,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdMtbfHi,91.1,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdMtbfRight,98.3,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdScaledLo,97.9,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdScaledHi,98.6,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdFitKLo,98.8,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,"lowest of pooled, joint, fixed-marginal, calm scenarios"
+fdFitKHi,99.2,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdFitNLo,98.4,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,"lowest of pooled, joint, fixed-marginal, calm scenarios"
+fdFitNHi,99.4,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdJpCov,$+0.27$,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,"baseline known, joint minus pooled NB, pp"
+fdJpCovLo,$+0.13$,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdJpCovHi,$+0.40$,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdJpUn,$-0.40$,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdJpUnLo,$-0.59$,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdJpUnHi,$-0.22$,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdPsCov,$+0.77$,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,"baseline known, pooled minus scaled, pp"
+fdPsUn,$+0.66$,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdJpNewCov,$+0.43$,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdJpNewUn,$+0.93$,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdMargLo,97.9,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdMargHi,98.2,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdCert,99.94,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,share of plans certified
+fdHeurGap,0.42,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,"heuristic minus certified units, max over groups"
+fdHeurWorse,14,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdResid,0.06,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,"max |J_perm - prod of marginals| at the plan, pp"
+fdResidMean,0.006,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdPermSeedSame,87,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdPermJoint,99.05,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,"mean cover of the fixed-marginal plan under the joint draws, min over groups"
+fdJointProd,99.04,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,"mean product-of-marginals cover of the joint plan, min over groups"
+fdStabFleets,15,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdStabSameSeed,31,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,identical vector with a new seed
+fdStabSameBig,37,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,identical vector at 24000 draws
+fdStabAbs,0.24,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdStabFresh,99.06,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,"cover of the 6000-draw plan under 24000 fresh draws, mean, min over scenarios"
+fdStabDcLo,$-0.04$,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdStabDcHi,$+0.03$,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdStabDuLo,$-0.00$,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdStabDuHi,$+0.00$,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvFreqN,494,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,"event missions, known ships"
+fdEvFreqAll,22489,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvFreqOmitEv,61,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvFreqOmitEvLo,57,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvFreqOmitEvHi,65,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvFreqOmitAll,98.7,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvFreqOmitAllLo,98.5,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvFreqOmitAllHi,98.8,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvFreqOmitUnits,11.0,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvFreqOmitShort,0.9,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvFreqKnownEv,83,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvFreqKnownEvLo,80,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvFreqKnownEvHi,86,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvFreqKnownAll,99.4,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvFreqKnownAllLo,99.3,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvFreqKnownAllHi,99.5,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvFreqKnownUnits,13.5,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvFreqKnownShort,0.3,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvFreqExtra,23,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,"extra units of the known-event plan, %"
+fdEvFreqExtraCost,14,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,"extra cost of the known-event plan, %"
+fdEvFreqNewN,133,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvFreqNewKnownEv,85,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvFreqNewOmitEv,65,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvFreqNewKnownAll,99.3,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvSevN,500,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,"event missions, known ships"
+fdEvSevAll,22465,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvSevOmitEv,26,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvSevOmitEvLo,22,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvSevOmitEvHi,30,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvSevOmitAll,98.2,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvSevOmitAllLo,98.0,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvSevOmitAllHi,98.4,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvSevOmitUnits,18.3,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvSevOmitShort,5.8,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvSevKnownEv,71,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvSevKnownEvLo,68,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvSevKnownEvHi,75,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvSevKnownAll,99.3,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvSevKnownAllLo,99.2,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvSevKnownAllHi,99.4,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvSevKnownUnits,28.0,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvSevKnownShort,1.3,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvSevExtra,53,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,"extra units of the known-event plan, %"
+fdEvSevExtraCost,31,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,"extra cost of the known-event plan, %"
+fdEvSevNewN,127,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvSevNewKnownEv,70,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvSevNewOmitEv,34,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvSevNewKnownAll,99.4,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvBaseN,49,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,"event missions, known ships"
+fdEvBaseAll,22580,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvBaseOmitEv,55,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvBaseOmitEvLo,40,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvBaseOmitEvHi,69,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvBaseOmitAll,99.1,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvBaseOmitAllLo,99.0,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvBaseOmitAllHi,99.2,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvBaseOmitUnits,9.8,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvBaseOmitShort,1.0,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvBaseKnownEv,55,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvBaseKnownEvLo,41,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvBaseKnownEvHi,69,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvBaseKnownAll,99.2,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvBaseKnownAllLo,99.1,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvBaseKnownAllHi,99.3,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvBaseKnownUnits,10.1,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvBaseKnownShort,0.9,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvBaseExtra,3,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,"extra units of the known-event plan, %"
+fdEvBaseExtraCost,3,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,"extra cost of the known-event plan, %"
+fdEvBaseNewN,15,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvBaseNewKnownEv,47,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvBaseNewOmitEv,47,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvBaseNewKnownAll,98.9,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvHalfN,128,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,"event missions, known ships"
+fdEvHalfAll,22473,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvHalfOmitEv,30,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvHalfOmitEvLo,24,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvHalfOmitEvHi,35,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvHalfOmitAll,99.0,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvHalfOmitAllLo,98.8,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvHalfOmitAllHi,99.1,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvHalfOmitUnits,10.6,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvHalfOmitShort,3.5,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvHalfKnownEv,38,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvHalfKnownEvLo,31,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvHalfKnownEvHi,45,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvHalfKnownAll,99.2,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvHalfKnownAllLo,99.1,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvHalfKnownAllHi,99.4,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvHalfKnownUnits,12.5,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvHalfKnownShort,2.4,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvHalfExtra,17,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,"extra units of the known-event plan, %"
+fdEvHalfExtraCost,14,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,"extra cost of the known-event plan, %"
+fdEvHalfNewN,43,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvHalfNewKnownEv,37,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvHalfNewOmitEv,28,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdEvHalfNewKnownAll,99.0,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+fdAbsDcMax,0.04,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,"largest |joint - fixed-marginal| cover difference over scenarios and ship kinds, pp"
+fdAbsDuMax,0.06,SIM,analysis/fleet_dep.py -> data/v2/fleet_dep.json,
+rgN,160,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,"campaigns with S=5, M=1"
+rgReps,40,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,
+rgBigN,28,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,"bootstrap plan > 5x oracle, reproduces Table IV"
+rgBigMax,"14\,978",SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,
+rgPredBig,13,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,
+rgPredCov,99.2,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,"S=5, M=1 mean cover"
+rgPredPten,98.0,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,
+rgPenHalfBig,0,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,
+rgPenHalfCov,98.4,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,"S=5, M=1 mean cover"
+rgPenHalfPten,96.5,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,
+rgPenOneBig,3,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,
+rgPenOneCov,99.3,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,"S=5, M=1 mean cover"
+rgPenOnePten,98.0,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,
+rgPenTwoBig,15,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,
+rgPenTwoCov,99.6,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,"S=5, M=1 mean cover"
+rgPenTwoPten,99.1,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,
+rgCapBig,0,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,
+rgCapCov,99.6,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,"S=5, M=1 mean cover"
+rgCapPten,99.2,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,
+rgPenPredOneBig,1,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,
+rgPenPredOneCov,99.0,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,"S=5, M=1 mean cover"
+rgPenPredOnePten,97.4,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,
+rgCapInfeas,96,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,"cap 15 per reference, target missed under the bootstrap draws"
+rgCapInfeasAll,188,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,
+rgAll,480,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,
+rgTraceSigMed,1.9,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,median over extreme campaigns of the 90th pct of refitted total sd
+rgTraceWide,5,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,"refits with total sd > 1.5, median"
+rgTraceFlat,0,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,"refits with NB shape < 1, median"
+rgTraceEither,69,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,share of draws above the oracle vector that come from those refits
+rgTraceHatSig,1.05,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,median total sd of the point estimate in extreme campaigns
+rgTraceHatSigOther,0.02,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,
+rgTracePredBig,13,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,
+rgFourPredCov,98.9,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,"S=5, M=4"
+rgFourPredUnits,28,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,
+rgFourBootCov,99.3,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,"S=5, M=4"
+rgFourBootUnits,35,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,
+rgFourPenOneCov,99.1,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,"S=5, M=4"
+rgFourPenOneUnits,28,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,
+rgFourOracleUnits,27,SIM,analysis/campaign_reg.py -> data/v2/campaign_reg_reps.csv.gz,
