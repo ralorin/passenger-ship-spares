@@ -1,13 +1,12 @@
 """
-Audit of the power-electronics evidence actually available, and of what each
-candidate source can and cannot support.
+Audit of the power-electronics evidence available, and of what each candidate
+source can support.
 
-This script exists so that the manuscript's statement "no shipboard failure
-records were available" is a documented finding rather than an assertion. For
-every source examined it records the provenance, the structure, and the precise
+Backs the statement in the article that no shipboard failure records were
+available. For every source examined it records provenance, structure and the
 reason it can or cannot test the provisioning decision. The decision needs, per
-population: an installed count, an exposure, a failure count over a bounded
-horizon, and a data-holder label. A source missing any of these cannot test it.
+population, an installed count, an exposure, a failure count over a bounded
+horizon and a data-holder label; a source missing any of these cannot test it.
 
 Sources examined
   1. NASA PCoE "Capacitor Electrical Stress" (in hand, tabulated). Aluminium
@@ -23,9 +22,9 @@ Sources examined
   4. Shipboard power-electronics field records: none found in the public
      domain.
 
-Only source 1 is used in the manuscript, and only to characterise the
-degradation mechanism and the censoring it produces. It is NOT used to estimate
-a failure rate, a temperature effect, a coverage or a spares count.
+Only source 1 is used in the article, and only to characterise the degradation
+mechanism and the censoring it produces, not to estimate a failure rate, a
+temperature effect, a coverage or a spares count.
 
     python real_data_audit.py
 """
@@ -98,14 +97,14 @@ SOURCES = [
 
 
 def capacitor_summary():
-    """What the one retained real source says, and what it cannot say.
+    """Summary of the capacitor data, the one source retained.
 
-    The per-unit `censored` flag shipped with the tabulation is NOT used: it
+    The per-unit `censored` flag shipped with the tabulation is not used. It
     marks a unit as failed as soon as one impedance sweep reaches 280% of the
-    initial ESR, and in this data set every such crossing happens in the first
-    few sweeps and is followed by a decline, so the flag records a transient
-    rather than a threshold crossing sustained to end of life. The trajectories
-    are recomputed here and both readings are reported.
+    initial ESR; in this data set every such crossing happens in the first few
+    sweeps and is followed by a decline, so the flag records a transient, not a
+    crossing sustained to end of life. The trajectories are recomputed here and
+    both readings are reported.
     """
     u = pd.read_csv(os.path.join(DATA, "capacitor_units.csv"))
     s = pd.read_csv(os.path.join(DATA, "capacitor_sweeps.csv"))

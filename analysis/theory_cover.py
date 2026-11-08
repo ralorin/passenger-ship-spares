@@ -1,11 +1,11 @@
 """
 Cover delivered by a spares plan when latent heterogeneity is ignored.
 
-Everything in this file is analytical or exact numerical quadrature. No device
-data of any kind enter, so the results hold for any equipment whose mission
-failure count is modelled as a mixed Poisson count with an exposure offset.
+Analytical results and exact quadrature only; no device data are used, so the
+results apply to any equipment whose mission failure count is a mixed Poisson
+count with an exposure offset.
 
-Setting. A population expects lambda failures over the mission under a
+A population expects lambda failures over the mission under a
 predictor that ignores latent log-rate spread of standard deviation sigma. The
 ignored spread acts multiplicatively and preserves the mean:
 
@@ -17,9 +17,9 @@ Proposition 1 (exact).  The cover actually delivered is
 
     C(q_p) = E_u F_Pois(q_p; lambda e^{u - sigma^2/2}),
 
-a one-dimensional integral. It depends on lambda and sigma SEPARATELY: on
-lambda through the integer plan quantile q_p and through the conditional
-Poisson, and on sigma through the mixing measure.
+a one-dimensional integral. It depends on lambda and sigma separately: on
+lambda through the integer plan quantile q_p and the conditional Poisson, and
+on sigma through the mixing measure.
 
 Proposition 2 (first-order approximation only).  If sigma is small enough for
 a first-order expansion in u and lambda large enough for a normal
@@ -29,13 +29,12 @@ approximation to the count, then with kappa = sigma * sqrt(lambda)
 
 and the safety margin above the mean inflates by ~ sqrt(1 + kappa^2).
 
-This script quantifies the three things an author must not assume:
+The script reports:
 
-  (1) kappa alone does not determine the exact cover. For a fixed kappa we
-      vary (lambda, sigma) along kappa = sigma*sqrt(lambda) and report the
-      spread of the exact cover.
-  (2) where the closed form is usable, as max |rule - exact| over regions of
-      (kappa, lambda), and with what sign.
+  (1) the spread of the exact cover along kappa = sigma*sqrt(lambda) for fixed
+      kappa, since kappa alone does not determine it;
+  (2) max |rule - exact| and its sign over regions of (kappa, lambda), i.e.
+      where the closed form is usable;
   (3) the error of the sqrt(1+kappa^2) margin factor against the exact
       required quantile.
 
@@ -61,11 +60,11 @@ def exact_cover(q, lam, sigma, nodes=NODES):
     """C(q) = E_u F_Pois(q; lam e^{u - sigma^2/2}), u ~ N(0, sigma^2).
 
     Composite Simpson rule on u over [-10 sigma, 10 sigma], renormalised by the
-    quadrature mass of the Gaussian weight. Gauss-Hermite is NOT used: the
+    quadrature mass of the Gaussian weight. Gauss-Hermite is not used: the
     integrand F_Pois(q; lam e^u) is a sigmoid in u whose transition narrows as
-    lam grows, and Gauss-Hermite nodes are too sparse there -- with 60 nodes it
-    misplaces the cover by up to 4 percentage points at sigma >= 1. The grid
-    below is verified in check_quadrature() to be stable to < 1e-6.
+    lam grows, and Gauss-Hermite nodes are too sparse there (with 60 nodes it
+    misplaces the cover by up to 4 percentage points at sigma >= 1). The grid
+    is stable to < 1e-6, see check_quadrature().
     """
     q = np.atleast_1d(np.asarray(q, float))
     lam = np.atleast_1d(np.asarray(lam, float))
@@ -100,12 +99,8 @@ def exact_plan(lam, sigma, p, qmax_mult=40, nodes=2001):
 
 
 def check_quadrature():
-    """Convergence of the Simpson grid, and the error of Gauss-Hermite.
-
-    Reported so that the word "exact" in Proposition 1 is backed by a number:
-    the grid used is stable to `max_abs_change_grid`, while 60-node
-    Gauss-Hermite -- the natural first choice for a Gaussian mixing measure --
-    is off by `max_abs_error_gauss_hermite60`.
+    """Convergence of the Simpson grid against 16001 nodes, and the error of
+    60-node Gauss-Hermite (max_abs_change_grid, max_abs_error_gauss_hermite60).
     """
     grid, gh = [], []
     for lam in (0.05, 0.5, 2.0, 10.0, 100.0, 500.0, 2000.0):
@@ -124,7 +119,7 @@ def check_quadrature():
                 grid_nodes=NODES)
 
 
-# ---------------------------------------------------------------- (1)
+# (1)
 def kappa_insufficiency():
     """Same kappa, different (lambda, sigma): how far apart is the exact cover?
 
@@ -148,7 +143,7 @@ def kappa_insufficiency():
     return blocks
 
 
-# ---------------------------------------------------------------- (2)
+# (2)
 def rule_domain():
     """max |rule - exact| by region of (kappa, lambda), and its sign."""
     lam = np.concatenate([np.linspace(0.05, 1, 20), np.linspace(1.25, 10, 36),
@@ -182,7 +177,7 @@ def rule_domain():
                    n_grid=int(len(D)))
 
 
-# ---------------------------------------------------------------- (3)
+# (3)
 def margin_factor():
     """Error of the sqrt(1+kappa^2) inflation against the exact plan."""
     rows = []

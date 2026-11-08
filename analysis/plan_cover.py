@@ -88,7 +88,7 @@ class Zone:
     def aggregate(self, S):
         return float(self.total_cdf()[min(int(S), self.smax)])
 
-    # plans --------------------------------------------------------------------
+    # plans
     def plan_marginal(self, level):
         """Each reference at its own marginal quantile."""
         out = []
@@ -131,7 +131,7 @@ def greedy_joint(cover, start, level, cost=None, max_steps=100000):
     return s
 
 
-# from predictive draws ---------------------------------------------------------
+# the same plans from predictive draws
 def plan_marginal_draws(Y, level):
     return np.array([int(np.ceil(np.quantile(Y[:, p], level, method="inverted_cdf")))
                      for p in range(Y.shape[1])])

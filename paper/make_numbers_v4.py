@@ -1,9 +1,8 @@
 """
-Numbers added in the revision of 2026-11-04: shipboard cases, calibration and
-convergence of the bootstrap, and the audit of the street-lighting inputs.
-Writes numbers_v4.tex (loaded after numbers_v3.tex, so a \\renewcommand here
-corrects an earlier value), tables/tab_ship.tex, tables/tab_ni4.tex and
-numbers_v4_manifest.csv.
+Shipboard cases, calibration and convergence of the bootstrap, and the audit
+of the street-lighting inputs. Writes numbers_v4.tex (loaded after
+numbers_v3.tex, so a \\renewcommand here overrides an earlier value),
+tables/tab_ship.tex, tables/tab_ni4.tex and numbers_v4_manifest.csv.
 
     python make_numbers_v4.py
 """
@@ -45,7 +44,7 @@ def w(name, text):
         f.write(text)
 
 
-# ------------------------------------------------------------ shipboard cases --
+# shipboard cases
 src = "analysis/ship_cases.py -> data/v2/ship_cases.json"
 S = load("ship_cases.json")
 N = dict(zip(S["products"], S["installed"]))
@@ -86,7 +85,7 @@ put("shEvCostHi", pct(max(ev), 0), "ANALYTIC", src)
 put("shBigCostLo", pct(min(big), 0), "ANALYTIC", src)
 put("shBigCostHi", pct(max(big), 0), "ANALYTIC", src)
 
-# ------------------------------------------------- bootstrap calibration --
+# bootstrap calibration
 src = "data/v2/campaign_boot_reps.csv.gz (analysis/campaign_boot.py)"
 import sys
 sys.path.insert(0, os.path.join(HERE, "..", "analysis"))
@@ -110,7 +109,7 @@ put("cvOmOneHi", pct(o1.max(), 0), "SIM", src)
 put("cvShareLo", pct(fs.min(), 0), "SIM", src)
 put("cvShareHi", pct(fs.max(), 0), "SIM", src)
 
-# ------------------------------------------------- bootstrap convergence --
+# bootstrap convergence
 src = "analysis/campaign_bconv.py -> data/v2/campaign_bconv.json"
 B = load("campaign_bconv.json")
 put("bcCells", {3: "three", 4: "four", 5: "five"}.get(len(B), str(len(B))), "SIM", src)
@@ -135,7 +134,7 @@ put("cbBigMax", f"{mx / 10 ** e:.0f}\\times 10^{{{e}}}", "SIM", src, str(mx))
 put("cbBigSd", f"{small[big][['tau_b_q90', 'omega_b_q90']].max(axis=1).median():.1f}", "SIM", src,
     "median of the larger 90th bootstrap percentile of the sds in those campaigns")
 
-# ---------------------------------------------------- street lighting audit --
+# street lighting audit
 src = "analysis/ni_audit.py -> data/v2/ni_audit.json"
 A = load("ni_audit.json")
 put("niSkipped", str(A["malformed"]), "PUBLICDATA", src, "records with a wrong field count")

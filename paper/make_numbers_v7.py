@@ -1,7 +1,7 @@
 """
-Numbers and tables of the revision of 2026-11-07. Runs make_numbers_v6.py
-first, then writes numbers_v7.tex (loaded last, so \\renewcommand corrects an
-earlier value), the tables it names, and numbers_v7_manifest.csv.
+Runs make_numbers_v6.py first, then writes numbers_v7.tex (loaded last, so a
+\\renewcommand overrides an earlier value), the tables it names and
+numbers_v7_manifest.csv. Contents:
 
   - Table I with the f = 0 searches certified by dynamic programming
     (analysis/stock_f0_dp.py) and the gap measured against the lower bound

@@ -78,6 +78,14 @@ rlDropCamp,142,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv
 rlDropCampN,"1\,760",SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv",
 rlDropMax,6,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv","most refits lost by one campaign, of 20"
 rlDropBconvMax,11,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv","same, of 80, campaign_bconv"
+rlRefMain,"35\,200",SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv","unpenalised refits, 20 per campaign"
+rlRefMainFailed,226,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv",
+rlRefPen,"28\,800",SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv","penalised refits, three scales"
+rlRefPenFailed,70,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv",
+rlRefConv,"12\,800",SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv",refits of the 80-refit check
+rlRefConvN,160,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv",
+rlRefConvFailed,104,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv",
+rlRefConvCamp,33,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv",
 rlDraws,"40\,000",SIM,analysis/campaign_boot.py,draws per campaign plan
 rlFitsBadGrad,0.61,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv",largest projected gradient of a point estimate with no accepted run
 rlFitsBadEffect,0.02,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv",largest change in a cell's bootstrap cover gain (points) when they are dropped

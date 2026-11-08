@@ -143,8 +143,8 @@ class Fit:
         """sigma_max, if given, caps every random-effect sd (not the NB shape); it
         keeps weakly identified terms from drifting to absurd values.
 
-        rule=True applies the rule of the revised campaigns. The criterion is
-        maximised from three starts: theta0, the default (sds 0.5, NB shape 5)
+        rule=True applies the convergence rule. The criterion is maximised
+        from three starts: theta0, the default (sds 0.5, NB shape 5)
         and small spreads (sds e^-3, shape 1), which reaches the solutions that
         put the dispersion in the gamma multiplier. A run is accepted when the
         largest projected gradient, by central differences, is at most GRAD_TOL,
@@ -203,7 +203,6 @@ class Fit:
                 best = max(ok, key=lambda t: t[1]) if ok else min(tried, key=lambda t: t[2])
                 self.theta_rule = best[3].x.copy()      # the run the rule keeps, before any polish
                 if POLISH and ok:
-                    # sensitivity check: continue the kept run with much tighter tolerances
                     cache["z"] = None
                     r = optimize.minimize(obj, best[3].x, method="L-BFGS-B",
                                           bounds=list(zip(np.full(nth, lower), ub)),
@@ -254,7 +253,7 @@ def lrt_boundary(ll_full, ll_reduced):
     return t, 0.5 * chi2.sf(t, 1) if t > 0 else 1.0
 
 
-# variance-parameter uncertainty ------------------------------------------------
+# variance-parameter uncertainty
 def at_theta(f, theta):
     """Conditional mode and covariance of the coefficients and effects at a given
     theta, on the data of fit f. Returns a copy of f evaluated there."""

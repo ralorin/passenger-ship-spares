@@ -1,8 +1,8 @@
 """
-Numbers and tables for the revision (exact stock vectors, bootstrap of the
-variance components, new fleet comparators, street-lighting validation),
-written to numbers_v3.tex and numbers_v3_manifest.csv with the provenance
-tags of make_numbers.py.
+Numbers and tables for the exact stock vectors, the bootstrap of the variance
+components, the extended fleet comparison (fleet_extra.py) and the
+street-lighting validation, written to numbers_v3.tex and
+numbers_v3_manifest.csv with the provenance tags of make_numbers.py.
 
     python make_numbers_v3.py
 """
@@ -48,7 +48,7 @@ def load(name):
         return json.load(f)
 
 
-# ----------------------------------------------------- exact stock vectors --
+# exact stock vectors
 src = "analysis/stock_exact.py -> data/v2/stock_exact*.csv"
 T = pd.read_csv(os.path.join(V2, "stock_exact_part1.csv"))
 S = load("stock_exact.json")
@@ -88,7 +88,7 @@ for key, label in labels:
                 f"{pct(ex.max())} & {pct(T[f'cover_{key}'].min())} \\\\")
 w("tab_opt.tex", "\n".join(rows) + "\n")
 
-# ------------------------------------------------------------- campaign extras --
+# campaign extras
 src = "analysis/campaign_extra.py -> data/v2/campaign_extra.json"
 C = load("campaign_extra.json")
 put("ceTypeMed", pct(C["typeI"]["median"]), "SIM", src)
@@ -117,7 +117,7 @@ for e, v in C["eps"].items():
     put(f"ceEps{tag}PowOm", pct(v["pow_omega"], 0), "SIM", src)
     put(f"ceEps{tag}Cover", pct(v["pred_cover"]), "SIM", src)
 
-# ------------------------------------------------------------- federated check --
+# federated check
 if os.path.exists(os.path.join(V2, "fed_predictive.json")):
     src = "analysis/fed_predictive.py -> data/v2/fed_predictive.json"
     F = load("fed_predictive.json")
@@ -126,7 +126,7 @@ if os.path.exists(os.path.join(V2, "fed_predictive.json")):
     put("fpUnitsMax", str(F["units_diff_max"]), "SIM", src)
     put("fpCoverMax", pct(F["cover_diff_max"], 2), "SIM", src)
 
-# ------------------------------------------------- bootstrap of variance --
+# bootstrap of variance
 src = "analysis/campaign_boot.py -> data/v2/campaign_boot_summary.csv"
 CB = pd.read_csv(os.path.join(V2, "campaign_boot_summary.csv"))
 CR = pd.read_csv(os.path.join(V2, "campaign_boot_reps.csv.gz"))
@@ -159,7 +159,7 @@ put("cbShareWidth", f"{CB[CB.M == 1].share_width.median():.2f}", "SIM", src, "me
 put("cbShareWidthBig", f"{CB[(CB.S == 20) & (CB.M == 4)].share_width.median():.2f}", "SIM", src)
 put("cbMcseMax", pct(CB.joint_boot_minus_pred_mcse.max(), 2), "SIM", src)
 
-# ------------------------------------------------------------- fleet (v4) --
+# fleet (v4)
 src = "analysis/fleet.py, fleet_extra.py -> data/v2/fleet_extra.json"
 FX = load("fleet_extra.json")
 R4 = pd.read_csv(os.path.join(V2, "fleet_v4_reps.csv.gz"))
@@ -256,7 +256,7 @@ put("flvCapFleets", str(FX["caps"]["sigma_hier"]["fleets"]), "SIM", src)
 put("flvCapHits", str(FX["caps"]["sigma_hier"]["fleets_at_cap"] + FX["caps"]["sigma_shock"]["fleets_at_cap"]
                       + FX["caps"]["sigma_agg"]["fleets_at_cap"]), "SIM", src)
 
-# ------------------------------------------------------ street lighting --
+# street lighting
 src = "analysis/ni_validation.py -> data/v2/ni_validation_*.json"
 FL = load("ni_validation_flow.json")
 EV = load("ni_validation_evidence.json")

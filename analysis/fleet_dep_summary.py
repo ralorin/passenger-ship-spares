@@ -24,8 +24,8 @@ rng = np.random.default_rng(20261105)
 
 
 def ratio_ci(num, den):
-    """Ratio of sums over fleets and a cluster-bootstrap 95 % interval.
-    num, den: arrays with one entry per fleet."""
+    """Ratio of sums over fleets (one entry per fleet in num and den) and a
+    cluster-bootstrap 95 % interval."""
     num, den = np.asarray(num, float), np.asarray(den, float)
     est = num.sum() / den.sum()
     idx = rng.integers(0, len(num), (B, len(num)))

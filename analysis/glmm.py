@@ -48,9 +48,6 @@ LOG2PI = math.log(2 * math.pi)
 BETA_PRIOR_SD = 5.0
 
 
-# --------------------------------------------------------------------------
-# likelihood pieces
-# --------------------------------------------------------------------------
 def _nb_terms(y, eta, log_off, phi):
     """Log-likelihood, first and (negative) second derivative w.r.t. eta."""
     mu = np.exp(np.clip(eta + log_off, -700, 700))
@@ -200,7 +197,6 @@ class HGLMM:
         self.converged, self.n_eval = True, 1
         return self
 
-    # -- helpers -------------------------------------------------------------
     def effects(self, k):
         i = self.d.random.index(k)
         o, n = self.d.offsets[i], self.d.q[i]
@@ -215,9 +211,6 @@ class HGLMM:
         return out
 
 
-# --------------------------------------------------------------------------
-# prediction
-# --------------------------------------------------------------------------
 def predictive_draws(fit, newcells, R=4000, rng=None, groups=None, param_unc=True,
                      sigma_draws=None, return_lambda=False):
     """Joint predictive draws of failure counts for new cells.
@@ -270,9 +263,7 @@ def predictive_draws(fit, newcells, R=4000, rng=None, groups=None, param_unc=Tru
     return (y, g) if groups is not None else y
 
 
-# --------------------------------------------------------------------------
-# federated evaluation: each data holder eliminates its own source effect
-# --------------------------------------------------------------------------
+# Federated evaluation: each data holder eliminates its own source effect.
 class FederatedFit:
     """Exact federated Laplace fit.
 
@@ -314,7 +305,6 @@ class FederatedFit:
         phi = math.exp(theta[k]) if self.family == "nb" else None
         return sig, phi
 
-    # ---- one holder -------------------------------------------------------
     def local(self, h, zg_local, tau, phi, u0):
         """Holder's message for the current global coordinates."""
         y = self.d.y[h["rows"]]
@@ -341,7 +331,7 @@ class FederatedFit:
         self.messages += 1
         return f, grad, S, math.log(huu), u
 
-    # ---- coordinator ------------------------------------------------------
+    # coordinator side
     def laplace(self, theta, zg0=None, u0=None, tol=1e-9, maxit=100):
         d = self.d
         sig, phi = self._unpack(theta)
@@ -419,9 +409,6 @@ class FederatedFit:
         return self
 
 
-# --------------------------------------------------------------------------
-# variance decomposition on the latent log-rate scale
-# --------------------------------------------------------------------------
 def latent_shares(fit, cells, fixed_groups):
     """Shares of the latent (log-rate) variance of the device population.
 

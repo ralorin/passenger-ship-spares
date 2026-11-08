@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.join(HERE, "..", "analysis"))
 def main(put, w, pct, thousands, V2):
     from campaign_boot import cells as boot_cells
 
-    # ------------------------------------------------ Table IV campaigns --
+    # Table IV campaigns
     src = "analysis/campaign_boot.py, SPARES_RULE=1 -> data/v2/campaign_boot_rule_*"
     CB = pd.read_csv(os.path.join(V2, "campaign_boot_rule_summary.csv"))
     cells_m = pd.read_csv(os.path.join(V2, "campaign_summary.csv")).set_index("cell").m
@@ -51,7 +51,7 @@ def main(put, w, pct, thousands, V2):
     put("cvShareLo", pct(fs.min(), 0), "SIM", src)
     put("cvShareHi", pct(fs.max(), 0), "SIM", src)
 
-    # ----------------------------------------------- Table III campaigns --
+    # Table III campaigns
     src = "analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz"
     G = pd.read_csv(os.path.join(V2, "campaign_reg_rule_reps.csv.gz"))
     plans = [("pred", "fixed"), ("boot", "bootstrap"), ("bootcap", "boot., cap 15"),
@@ -121,6 +121,17 @@ def main(put, w, pct, thousands, V2):
     put("rlDropCampN", thousands(len(drop)), "SIM", src)
     put("rlDropMax", str(int(drop.max())), "SIM", src, "most refits lost by one campaign, of 20")
     put("rlDropBconvMax", str(int(Rc.refits_failed.max())), "SIM", src, "same, of 80, campaign_bconv")
+    # the three sets that make up rlRefits
+    put("rlRefMain", thousands(20 * len(drop)), "SIM", src, "unpenalised refits, 20 per campaign")
+    put("rlRefMainFailed", str(int(drop.sum())), "SIM", src)
+    put("rlRefPen", thousands(3 * 20 * len(G)), "SIM", src, "penalised refits, three scales")
+    put("rlRefPenFailed", str(pen_fail), "SIM", src)
+    put("rlRefConv", thousands(80 * len(Rc)), "SIM", src, "refits of the 80-refit check")
+    put("rlRefConvN", str(len(Rc)), "SIM", src)
+    put("rlRefConvFailed", str(int(Rc.refits_failed.sum())), "SIM", src)
+    put("rlRefConvCamp", str(int((Rc.refits_failed > 0).sum())), "SIM", src)
+    assert 20 * len(drop) + 3 * 20 * len(G) + 80 * len(Rc) == n_ref
+    assert int(drop.sum()) + pen_fail + int(Rc.refits_failed.sum()) == failed
     from campaign_boot import R_DRAWS
     put("rlDraws", thousands(R_DRAWS), "SIM", "analysis/campaign_boot.py", "draws per campaign plan")
     put("rlFitsBadGrad", f"{R[R.fit_accepted == 0].fit_grad.max():.2f}", "SIM", src,
@@ -183,7 +194,7 @@ def main(put, w, pct, thousands, V2):
     put("csOmChanged", str(S["omega_decision_changed"]), "SIM", src)
     put("csTauChanged", str(S["tau_decision_changed"]), "SIM", src)
 
-    # ----------------------------------------------- B = 20 against 80 --
+    # B = 20 against 80
     src = "analysis/campaign_bconv.py, SPARES_RULE=1 -> data/v2/campaign_bconv_rule*"
     B = json.load(open(os.path.join(V2, "campaign_bconv_rule.json"), encoding="utf-8"))
     put("bcCells", {3: "three", 4: "four", 5: "five"}.get(len(B), str(len(B))), "SIM", src)
@@ -193,7 +204,7 @@ def main(put, w, pct, thousands, V2):
     put("bcRedrawTen", str(int((du > 10).sum())), "SIM", src, "plan changed by > 10 units")
     put("bcN", str(len(Rc)), "SIM", src)
 
-    # ------------------------------------- the two machines, step by step --
+    # the two machines, step by step
     import glob
     src = "analysis/campaign_diag.py -> data/v2/campaign_diag_{hpc,local}_*.json"
     H, L = {}, {}

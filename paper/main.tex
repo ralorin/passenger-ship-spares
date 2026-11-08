@@ -44,7 +44,6 @@ Joint Spares Provisioning for Passenger-Ship\\ Power Electronics}
 
 \author{Paula~Lamo,~\IEEEmembership{Senior Member,~IEEE,}
         and~Ricardo~S.~Alonso%
-\thanks{Manuscript received XXXX XX, 2026; revised XXXX XX, 2026.}%
 \thanks{P. Lamo is with the Universidad de Cantabria, 39005 Santander, Spain
 (e-mail: paula.lamo@unican.es). Corresponding author: P. Lamo.}%
 \thanks{R. S. Alonso is with the Universidad Internacional de La Rioja (UNIR),
@@ -56,29 +55,24 @@ Spain (e-mail: ricardoserafin.alonso@unir.net).}}
 \begin{abstract}
 Before a passenger ship sails, it embarks a vector of spares for power
 electronics whose references cannot replace one another, to last until the
-next port where spares can be received. This paper studies how ship-wide and
-ship--reference heterogeneity enter that vector. With known parameters, the
-supermodular ordering of Gaussian vectors implies that, with marginal laws and
-total latent variance fixed, the joint cover of any vector is non-decreasing
-in the ship-wide share, so the cost-minimal vector for independent references
-is the cheapest one feasible for every split. In certified optima, with cover
-computed by quadrature, this robust vector cost a median
+next resupply. This paper studies how ship-wide and ship--reference
+heterogeneity shape that vector. With known parameters, the supermodular
+ordering of Gaussian vectors implies that, with marginal laws and total latent
+variance fixed, the joint cover of any vector is non-decreasing in the
+ship-wide share, so the cost-minimal vector for independent references is the
+cheapest one feasible for every split. Analytically, on certified optima with
+cover computed by quadrature, this robust vector cost a median
 \seIndCertMed\,\% more than the optimum for the true split over \seCertPos{}
-cases with a positive share, \shPremFourteen--\shPremMax\,\% for a large
-passenger ship resupplied every one to four weekly cruises, and needed
-\brBigInd{} units against \brBigDep{} at 56 days with a large ship-wide
-spread. With estimated parameters, in simulation, references observed
-together identified the shared effect from one mission, while the
-interaction, separated from cell dispersion only by parametric form, was
-rarely detected without repeated missions; with five ships, unregularised
-bootstrap stocks reached unusable extremes that changed by orders of magnitude
-between random streams.
-In a simulated fleet built from public data, without frequent events, fitting
-the record raised cover at known ships from \fdMtbfLo--\fdMtbfHi\,\% with datasheet rates to
-\fdFitKLo--\fdFitKHi\,\%, and modelling dependence changed it by at most
-\fdAbsDcMax{} points; an incident term recovered cover on event missions, at a
-stock set by the assumed frequency and severity of events. No public naval
-record gave failures per ship and reference.
+cases with a positive share, and \shPremFourteen--\shPremMax\,\% for a large
+passenger ship resupplied every one to four weekly cruises. With estimated
+parameters, in simulation, single missions rarely revealed the ship--reference
+interaction, and unregularised bootstrap plans were unusable in some small
+campaigns. In a simulated fleet with public inputs, fitting the record raised
+cover at known ships from \fdMtbfLo--\fdMtbfHi\,\% with datasheet rates to
+\fdFitKLo--\fdFitKHi\,\% in scenarios without frequent events, and modelling
+dependence changed it by at most \fdAbsDcMax{} points. The public sources
+consulted gave no failures per ship and reference with exposure for the
+products studied.
 \end{abstract}
 
 \begin{IEEEkeywords}

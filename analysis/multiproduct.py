@@ -2,7 +2,7 @@
 A ship carries several products: how the allocation of latent spread changes
 the plan.
 
-Analytical / exact numerical. No device data enter.
+Exact numerical calculation; no device data are used.
 
 A ship embarks spares for P product populations in the same zone and the
 decision is the total over them, so the dependence between populations of one
@@ -20,10 +20,10 @@ sigma^2 = tau^2 + omega^2 are compared:
 
 Both give the same marginal distribution for a single population, and the same
 mean for the total; they differ only in the dependence between products of one
-ship. This is not a parameterisation detail: it changes the number of spares a
-multi-product ship must embark, and the two structures are hard to tell apart
-from prediction alone, which is why the manuscript treats the allocation as
-unidentified until a fleet measures it.
+ship. That dependence changes the number of spares a multi-product ship must
+embark, and the two structures are hard to tell apart from prediction alone,
+so the manuscript treats the allocation as unidentified until a fleet
+measures it.
 
 The count distribution of the total is computed exactly (to quadrature and
 truncation error, both reported): for each node of the ship-wide term the
@@ -66,12 +66,11 @@ def _pois_pmf(lam, nmax):
 
 
 def _lattice(tau, omega, nodes):
-    """Common lattice for u and w so that u+w stays on it.
+    """Common lattice for u and w, so that u+w stays on it.
 
-    Both latent terms are discretised with the SAME step, so every sum u+w is a
-    lattice point and the Poisson pmf at a given rate is computed once instead
-    of once per (u, w) pair. Without this the cost is quadratic in the node
-    count and the calculation is not feasible at the accuracy required here.
+    With one step for both terms the Poisson pmf at a given rate is computed
+    once, not once per (u, w) pair; otherwise the cost is quadratic in the
+    node count.
     """
     span = 10.0 * max(tau, omega, 1e-12)
     n = int(nodes) | 1

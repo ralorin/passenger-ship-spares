@@ -12,10 +12,10 @@ Table IV. New plans, from fresh streams:
   pen{s}        penalised criterion l_LA(theta) - (tau^2 + omega^2 + 1/phi) / (2 s^2),
                 the mode of a half-normal prior of scale s on each of the three
                 spreads: the two latent sds and the coefficient of variation
-                1/sqrt(phi) of the gamma multiplier. Then a parametric
-                bootstrap of that estimator:
-                data from the penalised fit, each replicate refitted with the
-                same penalty; the predictive law integrates over the refits
+                1/sqrt(phi) of the gamma multiplier, followed by a parametric
+                bootstrap of that estimator (data from the penalised fit, each
+                replicate refitted with the same penalty); the predictive law
+                integrates over the refits
   penpred{s}    the penalised estimate held fixed (no bootstrap)
 
 For the trace, each bootstrap refit records its sds and NB shape, and the

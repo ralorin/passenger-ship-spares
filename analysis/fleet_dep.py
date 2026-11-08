@@ -3,7 +3,7 @@ Does modelling the dependence between references pay in the simulated fleet?
 
 The fleets of fleet.py are regenerated with the same seeds (same records, same
 held-out ships), the pooled and hierarchical models are refitted, and for every
-predicted ship-mission two predictive laws are built from the SAME hierarchical
+predicted ship-mission two predictive laws are built from the same hierarchical
 draws:
 
   joint   the draws as they are, one row per draw of the whole vector;
@@ -22,7 +22,7 @@ from modelling the dependence.
 Where the scenario has ship-wide supply events, the hierarchical draws are
 also mixed with an explicit incident: with probability 1 - exp(-rate * nights /
 365) a draw adds Binomial(N_p, a) failures to every reference p. The plan with
-the generating rate and size is a plan with KNOWN event parameters; rate and
+the generating rate and size is a plan with known event parameters; rate and
 size are also misstated by factors of 0.5 and 2.
 
 On the first STAB_REPS fleets of some scenarios the hierarchical draws are
@@ -187,7 +187,7 @@ def one_fleet(name, rep):
                 rec(f"perm_{key}", b, YY)
                 r[f"joint_{key}_same"] = int(np.array_equal(a, sj))
                 r[f"perm_{key}_same"] = int(np.array_equal(b, si))
-            # honest estimate of the cover of the first plans, on independent draws
+            # cover of the first plans, estimated on independent draws
             r["joint_Jfresh"] = jcover(Y3, sj)
             r["perm_Jfresh"] = jcover(Y3, si)
 

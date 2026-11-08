@@ -1,44 +1,37 @@
 """
-Spares are held per product reference, not as a single interchangeable pool.
+Joint against aggregate cover when spares are held per product reference.
 
-Analytical / exact numerical. No device data enter.
+Exact numerical calculation; no device data are used.
 
-The decision of the manuscript is a VECTOR of stocks, one entry per product
-reference, because a spare inverter does not replace a failed charger. Two
-coverage criteria therefore have to be distinguished, and they are not the same
-problem:
+A spare inverter does not replace a failed charger, so the decision is a
+vector of stocks, one per reference. Two criteria:
 
-  JOINT     Pr( Y_p <= s_p for every p ) >= level
-            the mission is covered only if every reference is covered. This is
-            the criterion the shipboard decision requires when references are
-            not interchangeable.
+  joint      Pr(Y_p <= s_p for every p) >= level. The mission is covered only
+             if every reference is; this is what the decision needs when
+             references are not interchangeable.
 
-  AGGREGATE Pr( sum_p Y_p <= S ) >= level
-            legitimate only when the references ARE interchangeable (a common
-            module, or a kit drawn against any of them).
+  aggregate  Pr(sum_p Y_p <= S) >= level. Appropriate only when the
+             references are interchangeable (a common module, or a kit drawn
+             against any of them).
 
-Under the structure of the manuscript, for ship s and reference p,
+For ship s and reference p,
 
     Y_p | u, w_p ~ Poisson(lambda_p exp(u + w_p - sigma^2/2)),
     u ~ N(0, tau^2) shared by the whole ship,  w_p ~ N(0, omega^2) independent,
     sigma^2 = tau^2 + omega^2 held fixed as the allocation changes.
 
-The two criteria respond to the allocation in OPPOSITE directions:
+The two criteria respond to the allocation in opposite directions. Under the
+aggregate criterion a shared deviation never averages out, so the ship-wide
+allocation needs the most stock. Under the joint criterion it makes the
+references move together, which raises the probability that all are covered
+at once, so the ship-wide allocation needs the least.
 
-  * aggregate: a shared deviation never averages out, so the ship-wide
-    allocation needs the most stock;
-  * joint: a shared deviation makes the references move together, which RAISES
-    the probability that all are simultaneously covered, so the ship-wide
-    allocation needs the least stock.
-
-Reporting only the aggregate result would therefore give a fleet the wrong sign.
-
-Implementation. Both latent terms are discretised on a COMMON lattice, so every
-value of u+w is a lattice point and the Poisson cdf is tabulated once, as
-F[j, s] = F_Pois(s; lambda e^{v_j - sigma^2/2}). The per-reference conditional
-cdf G[i, s] = E_w F(s | u_i + w) is then one matrix product, and each criterion
-is a weighted sum over the shared term. Without this the cost is quadratic in
-the node count and the calculation is infeasible at the accuracy required.
+Both latent terms are discretised on one lattice, so every value of u+w is a
+lattice point and the Poisson cdf is tabulated once, as
+F[j, s] = F_Pois(s; lambda e^{v_j - sigma^2/2}). The conditional cdf of a
+reference, G[i, s] = E_w F(s | u_i + w), is then one matrix product, and each
+criterion is a weighted sum over the shared term. With separate grids the cost
+would be quadratic in the node count.
 
     python stock_vector.py
 """

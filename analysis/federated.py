@@ -165,7 +165,6 @@ class BlockFederatedFit:
         return self
 
 
-# experiment -------------------------------------------------------------------
 def fleet(S, P, M, rng, makers=3, tau=0.4, om=0.4, s_mk=0.3, eps=0.3, m=1.0, b_temp=0.25):
     """Ships x references x missions with a continuous pre-mission covariate."""
     u = rng.normal(0, tau, S)

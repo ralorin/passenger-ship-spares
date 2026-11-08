@@ -4,10 +4,11 @@ Code, results and LaTeX sources for the article *Ship-Wide and Ship–Product
 Heterogeneity in Joint Spares Provisioning for Passenger-Ship Power Electronics*
 (P. Lamo and R. S. Alonso), prepared for IEEE Transactions on Reliability.
 
-No shipboard failure records are used: no public record with failures per unit and exposure was found for these products. Every number in
-the article is analytical, simulated under declared parameters, or measured on a
-public street-lighting network, and `paper/numbers*_manifest.csv` say which for
-each one.
+No shipboard failure records are used; we found no public record of failures
+per unit and exposure for these products. Every number in the article is
+analytical, simulated under declared parameters, or measured on a public
+street-lighting network, and `paper/numbers*_manifest.csv` say which for each
+one.
 
 ## Layout
 
@@ -63,7 +64,7 @@ checks of the rule that `rule_checks.py` uses (lists of campaigns in
 `fleet_params.json` lists every fleet parameter with its source in a `_src`
 field. Section V of the article uses `fleet_dep.py`, which regenerates the
 fleets of `fleet.py` with the same seeds; `fleet_dep_summary.py` keeps the
-first 30 fleets per scenario, all finished in every scenario.
+first 30 fleets per scenario, which finished in every scenario.
 
 ## Reproducing
 
@@ -112,7 +113,7 @@ The large simulations are split into independent tasks. On a SLURM cluster:
 writes one file per unit of work and skips the ones already written, so a job
 stopped by the time limit is completed by submitting it again. Seeds are fixed
 per task (NumPy PCG64), and results do not depend on how tasks are split. Each
-machine reproduces its own results exactly, but they can differ between
+machine reproduces its own results exactly, but results can differ between
 machines: the point estimates of the smallest campaigns differ in the third or
 fourth digit where the criterion is flat, the refits then diverge, and the most
 extreme bootstrap plans change. `campaign_diag.py` shows that these extremes

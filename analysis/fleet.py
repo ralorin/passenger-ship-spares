@@ -90,8 +90,6 @@ PRODUCTS = list(PAR["products"])
 COVARIATES = ["temp_c", "log_age", "occ_c"]
 COST = np.array([PAR["products"][p]["cost"] for p in PRODUCTS])
 
-
-# ---------------------------------------------------------------- simulation --
 _T_SHIFT = {}
 
 
@@ -219,7 +217,6 @@ def simulate(scn, rng):
     return d
 
 
-# ---------------------------------------------------------------- predictors --
 def dummies(d, col, levels):
     return {f"{col}={v}": (d[col] == v).astype(float) for v in levels[1:]}
 
@@ -390,7 +387,6 @@ def pit(Y, y, rng):
     return lo + rng.random(len(y)) * (hi - lo)
 
 
-# ---------------------------------------------------------------- one fleet --
 def one_fleet(name, rep):
     scn = SCENARIOS[name]
     rng = np.random.default_rng([SEED, list(SCENARIOS).index(name), rep])
@@ -489,7 +485,6 @@ def one_fleet(name, rep):
     return rows
 
 
-# ------------------------------------------------------------------- driver --
 def tasks():
     return [(s, r) for r in range(REPS) for s in SCENARIOS]
 

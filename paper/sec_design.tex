@@ -102,12 +102,12 @@ $\bar J$ & $J_{10}$ & u$_{50}$ & u$_{90}$ & $>$5$\times$ \\
 With five ships observed once, a first run's extreme bootstrap plans differed
 between machines, each repeating its own run exactly: \dgCaseHpc{} units on a
 Linux cluster against \dgCaseLocal{} on a Windows PC in one campaign. Followed
-step by step in \dgCases{} such campaigns, the data agreed, the estimates
-differed by at most \dgSdDiffMax{} in total standard deviation, and the refits
-diverged. Two causes were found. In \dgTwoMax{} campaigns the criterion has a
+step by step in \dgCases{} such campaigns, the estimates differed by at most
+\dgSdDiffMax{} in total standard deviation and the refits diverged, for two
+reasons. In \dgTwoMax{} campaigns the criterion has a
 second maximum, \dgTwoMaxLo--\dgTwoMaxHi{} higher than the one reached from
 the default start, with the dispersion in the gamma multiplier instead of the
-interaction: the near-equivalence one mission leaves, with different tails.
+interaction.
 In \rlAltN{} of the \rlAltOf{} small campaigns another start raised the
 criterion by more than 0.05, and the predictive plan fell from a median of
 \rlAltOneMed{} to \rlAltThreeMed{} units. And the bootstrap is Monte Carlo: at
@@ -120,22 +120,27 @@ the default and small spreads, and keeps the accepted run with the largest
 criterion, a run being accepted when its largest projected gradient is at most
 0.05 per unit of log standard deviation. Another start won in
 \rlFitsWonPct\,\% of point estimates and \rlRestartedPct\,\% of refits. A
-refit with no accepted run is dropped: \rlFailed{} of \rlRefits, in
-\rlDropCamp{} of \rlDropCampN{} campaigns with 20 refits, at most \rlDropMax{}
-in one. A plan pools \rlDraws{} draws shared equally among the campaign's
+refit with no accepted run is dropped: \rlFailed{} of \rlRefits{} refits,
+namely \rlRefMainFailed{} of the \rlRefMain{} in the \rlDropCampN{} campaigns
+with 20 refits (the \cbCells{} cells above and the \rlAltOf{} small ones), of
+which \rlDropCamp{} lost any and none more than \rlDropMax, \rlRefPenFailed{}
+of the \rlRefPen{} penalised refits at three scales (below) and
+\rlRefConvFailed{} of the \rlRefConv{} in \rlRefConvN{} campaigns with 80. A plan pools \rlDraws{} draws shared equally among the campaign's
 accepted refits, and campaigns are averaged with equal weight. In
 \rlFitsBad{} point estimates no run was accepted (gradient up to
 \rlFitsBadGrad); the best was kept, and dropping those campaigns moves no
 cell's gain by more than \rlFitsBadEffect{} points. Both choices were checked
 on \rcN{} campaigns rerun on one machine with the same seeds. Keeping the
 dropped refits at their best run changed the bootstrap plan in
-\rcKeepChanged{} of the \rcKeepN{} campaigns that lost any there, by at most
-\rcKeepUnitsMax{} units, and cover by at most \rcKeepCov{} points. Continuing every accepted fit and refit with far
-tighter tolerances than 0.05 left the predictive plan within one unit in
-\rcPolPredOne{} of \rcPolN{} single-mission campaigns and moved the bootstrap
-plan by a median of \rcPolBootMed{} units (at most \rcPolBootMax) and cover by
-at most \rcPolCov{} points, the order of the change from redrawing the
-predictive draws alone (below).
+\rcKeepChanged{} of the \rcKeepN{} campaigns that lost any there, by up to
+\rcKeepUnitsMax{} units and \rcKeepCov{} points of cover. Continuing every
+accepted fit and refit with far tighter tolerances than 0.05 left the
+predictive plan within one unit in \rcPolPredOne{} of \rcPolN{} single-mission
+campaigns, but moved the bootstrap plan by up to \rcPolBootMax{} units and its
+cover by up to \rcPolCov{} points (\rcPolCovMean{} on average). Against a
+99\,\% target these changes match some gains above: means are stable, but
+single plans keep a numerical uncertainty these checks measure without
+removing, and the bootstrap results here are exploratory.
 
 The bootstrap plan still exceeded five times the known-parameter stock in
 \rgBigN{} of \rgN{} such campaigns (Table~\ref{tab:boot}), up to \rgBigMax{}

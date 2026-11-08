@@ -1,6 +1,7 @@
 \subsection{Limitations}
 No rate, variance component or stock is reported for real ships: the public
-naval sources give no failures per ship and reference with exposure. A
+sources consulted give no failures per ship and reference with exposure for
+these products. A
 shipboard application needs an equipment register kept through refits,
 failures recorded as replacement needs, powered hours, several references per
 ship over repeated missions, replenishment dates and a log of common-cause
@@ -21,13 +22,13 @@ spread to be ship-wide over 7 to 28 days, and needed \brBigInd{} units against
 the aggregate criterion or to estimated parameters.
 
 \emph{With estimated parameters, in simulation}, references observed together
-inform the shared effect from one mission; the interaction is separated from
-cell dispersion only by parametric form, repeated missions add its
-persistence, and its low detection rate shows weak practical identification.
+inform the shared effect from one mission; the interaction, separated from
+cell dispersion only by parametric form, is weakly identified without repeated
+missions.
 With five ships observed once, unregularised bootstrap stocks had unusable
-extremes that changed by orders of magnitude between random streams, whatever
-their mean cover; regularisation traded stock for cover at a scale that has to
-be chosen. In the simulated
+extremes, whatever their mean cover; regularisation traded stock for cover at a scale that has to
+be chosen. Single bootstrap plans moved by up to \rcPolCov{} points with the
+fitting tolerances, so these results are exploratory. In the simulated
 fleet without frequent events, fitted plans raised cover at known ships from
 \fdMtbfLo--\fdMtbfHi\,\% with datasheet rates to \fdFitKLo--\fdFitKHi\,\%,
 and modelling dependence changed it by at most \fdAbsDcMax{} points. An incident term

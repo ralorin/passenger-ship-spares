@@ -11,7 +11,7 @@
 
 # cn001 hands out whole cores (two hardware threads), so each array task runs two
 # single-threaded workers: 14 tasks = 28 logical CPUs, an eighth of the node.
-# Workers stop cleanly before the 4 h limit; resubmitting picks up what is left.
+# Workers stop cleanly before the 1 h limit; resubmitting picks up what is left.
 source ~/miniconda3/etc/profile.d/conda.sh
 conda activate spares
 export TMPDIR=$HOME/tmp PYTHONUNBUFFERED=1

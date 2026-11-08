@@ -1,9 +1,8 @@
 """
-Numbers and tables of the revision of 2026-11-06: the bridge experiment
-(analysis/bridge.py), the per-configuration premiums of the large ship, the
-profile intervals inverted at the mixture point, and the street-lighting table
-with new areas in both retrospective tests. Runs make_numbers_v5.py first and
-is loaded after numbers_v5.tex.
+The bridge experiment (analysis/bridge.py), the per-configuration premiums of
+the large ship, the profile intervals inverted at the mixture point, and the
+street-lighting table with new areas in both retrospective tests. Runs
+make_numbers_v5.py first; numbers_v6.tex is loaded after numbers_v5.tex.
 
     python make_numbers_v6.py
 """
@@ -51,7 +50,7 @@ def sg(x, d=2):
     return f"${v:+.{d}f}$"
 
 
-# ------------------------------------------------------------ large ship --
+# large ship
 src = "analysis/ship_cases.py -> data/v2/ship_cases.json"
 S = load("ship_cases.json")
 C = {(c["days"], c["sigma"]): c for c in S["cases"]}
@@ -66,7 +65,7 @@ put("shDiffRefs", str(diff), "ANALYTIC", src, "references where robust and f = 1
 dmax = max(max(abs(a - b) for a, b in zip(c["robust"], c["know_f1"])) for c in S["cases"])
 assert dmax == 1
 
-# ---------------------------------------------------------------- bridge --
+# bridge
 src = "analysis/bridge.py -> data/v2/bridge.json"
 B = load("bridge.json")
 R = {(r["sigma"], r["horizon"], r["f"]): r for r in B["rows"]}
@@ -106,14 +105,14 @@ put("brBigCostPct", f"{100 * (big['ind_cost'] / big['dep_cost'] - 1):.1f}", "SIM
     "cost of independence over dependent optimum, relative costs")
 put("brBigJInd", f"{100 * big['J_ind']:.2f}", "SIM", src)
 
-# ---------------------------------------------------------- profile CIs --
+# profile CIs
 src = "analysis/campaign_extra.py -> data/v2/campaign_extra.json"
 P = load("campaign_extra.json")["profile"]
 put("ceCiCorrLo", f"{100 * P['corrected_lo']:.0f}", "SIM", src, "zero inside when LRT < 2.71")
 put("ceCiCorrHi", f"{100 * P['corrected_hi']:.0f}", "SIM", src)
 put("ceCiZeroCorr", f"{100 * P['zero_corrected']:.1f}", "SIM", src)
 
-# -------------------------------------------------------- street lighting --
+# street lighting
 src = "analysis/ni_validation.py -> data/v2/ni_validation_evidence.json, ni_validation_boot.json"
 E = load("ni_validation_evidence.json")
 BT = load("ni_validation_boot.json")["within_plans"]["cover"]

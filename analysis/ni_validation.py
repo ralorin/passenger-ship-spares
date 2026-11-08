@@ -92,7 +92,7 @@ def predict(fit, model, new, Z, rng):
     return rng.poisson(mu)
 
 
-# ------------------------------------------------------------- evaluation --
+# evaluation
 def score(Y, y, rng):
     """Per family: log score from draws (as fleet.log_score), randomised PIT,
     and whether y exceeds the marginal 95 and 99 % quantiles."""
@@ -198,7 +198,6 @@ def summarise(am, level=0.99):
             for (m, k), g in a.groupby(["method", "kind"])}
 
 
-# ------------------------------------------------------------------ flow --
 def part_flow(_jobs):
     raw_lines, parsed = {}, {}
     frames = []
@@ -272,8 +271,7 @@ def part_flow(_jobs):
     status_final = kept.STATUS.value_counts().to_dict()
     top = txt[txt != ""].value_counts().head(25).to_dict()
 
-    # same analysis on raw (pre-merge) reports, to see how much repeats inflate the street counts
-    out = dict(flow=flow, exclusions_by_comment=excl, status_all=status_all,
+    out =dict(flow=flow, exclusions_by_comment=excl, status_all=status_all,
                status_after_type_filters=status_kept, empty_comment_share_after_type_filters=empty_share,
                light_out_pure_led_by_window=counts, cell_table_check=check,
                fit_window_reports=len(kept), fit_window_empty_comment=int((txt == "").sum()),
@@ -288,7 +286,6 @@ def part_flow(_jobs):
     print(json.dumps(out, indent=1, default=float)[:6000])
 
 
-# ----------------------------------------------------------------- dedup --
 def part_dedup(jobs, only=None):
     F = P.load_faults()
     A25 = P.load_inventory("2025")
@@ -322,7 +319,7 @@ def part_dedup(jobs, only=None):
     dump("dedup", res)
 
 
-# ------------------------------------------------------------- inventory --
+# inventory
 def street_table(A):
     g = A.groupby(["street", "town"]).agg(n=("family", "size"), nfam=("family", "nunique"),
                                           family=("family", "first"))
@@ -410,7 +407,7 @@ def part_inventory(jobs):
     print(json.dumps(res, indent=1, default=float), flush=True)
 
 
-# -------------------------------------------------------------- evidence --
+# evidence
 def cluster_ci(df, col, by="area", B=NB_BOOT, seed=SEED):
     """Percentile interval for the mean of col, resampling whole groups."""
     g = df.groupby(by)[col].agg(["sum", "count"])
@@ -499,7 +496,7 @@ def part_evidence(jobs):
     dump("evidence", res)
 
 
-# ------------------------------------------------------------------ boot --
+# boot
 def simulate_like(fit, cells, rng):
     d = fit.d
     eta = d.X @ fit.beta + d.log_off
