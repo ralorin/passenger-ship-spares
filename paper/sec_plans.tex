@@ -19,9 +19,14 @@ and $G_p(s\mid u)=\int F_{\mathrm{Pois}}(s;\lambda_pe^{u+w-\sigma^2/2})
 J(\mathbf s)=\int\textstyle\prod_{p}G_p(s_p\mid u)\,\varphi_\tau(u)\,\mathrm du,
 \label{eq:jointexact}
 \end{equation}
-evaluated on a lattice holding every value of $u+w$, truncated at eight
-standard deviations (omitted mass below $\mpTrunc$); halving the spacing
-leaves every reported plan unchanged.
+evaluated by quadrature on a lattice holding every value of $u+w$, with
+\caPerSd{} points per standard deviation, cut at eight, beyond which the
+normal mass, a bound on truncation only, is about $10^{-15}$. As refinement
+evidence, not an error bound, a lattice with \caFinePerSd{} points cut at
+\caFineWidth{} changed $J$ by at most $\caErr$ at the \caN{} certified optima
+of Tables~I, II and~V and their one-unit-down neighbours; every such optimum
+exceeds 99\,\% by at least $\caMargin$, and none became cheaper when searched
+again at $0.99-\caDelta$.
 
 \subsection{The Joint Criterion and the Ship-Wide Share}
 M\"uller and Scarsini~\cite{muller2000} showed that Gaussian vectors with equal
@@ -149,7 +154,8 @@ true $\sigma$ is 0.9.
 \label{sec:ship}
 Table~\ref{tab:ship} applies these results to the seven references of the
 large class of Section~\ref{sec:fleet}. Expected failures are installed units
-times planned powered hours times datasheet rate, multiplied by an assumed
+times planned powered hours times the inverse of the datasheet MTBF or MTTF,
+multiplied by an assumed
 field factor of~3 and an Arrhenius factor at the zone temperature, for a
 Mediterranean summer itinerary with booked occupancy 0.97. Costs $c_p$ are
 assumed relative prices, the cabin LED driver being 1. Horizons of 7, 14 and

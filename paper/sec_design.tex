@@ -67,18 +67,16 @@ the mixture point, covered the true values in \ceCiCorrLo--\ceCiCorrHi\,\% of
 component in \ceCiZeroCorr\,\%.
 
 \subsection{Plans With and Without Variance Uncertainty}
-With $\boldsymbol\theta$ fixed at its estimate, mean cover falls to
-\cePredMinTen\,\% in cells with at least ten ships and two missions where each
-cell expects three failures. On \cbCells{} cells (\cbReps{} campaigns, \cbB{}
-refits each) the bootstrap raised mean cover by \cbGainLo--\cbGainHi{}
-points, most where ships are few and missions single. It does not repair the
-busiest cells, where both plans cover \cbNullPred\,\% with no latent spread:
-the truth has a lognormal mission term and the fit a gamma multiplier, so the
-shortfall comes from the form of the dispersion, not from its uncertainty.
-These fits use the three-start rule described below; in \rlFitsBad{} of these
-campaigns no run met it (gradient up to \rlFitsBadGrad), the best run was
-kept, and dropping them changes no cell's gain by more than
-\rlFitsBadEffect{} points.
+With $\boldsymbol\theta$ fixed at its estimate, in the one-start campaigns of
+Section~IV-C, mean cover falls to \cePredMinTen\,\% in cells with at least
+ten ships and two missions where each cell expects three failures. Everything
+else in this subsection uses the three-start rule described below. On
+\cbCells{} cells (\cbReps{} campaigns, \cbB{} refits each) the bootstrap
+raised mean cover by \cbGainLo--\cbGainHi{} points, most where ships are few
+and missions single. It does not repair the busiest cells, where both plans
+cover \cbNullPred\,\% with no latent spread: the truth has a lognormal mission
+term and the fit a gamma multiplier, so the shortfall comes from the form of
+the dispersion, not from its uncertainty.
 
 \begin{table}[!t]
 \caption{Small campaigns: mean and 10th-percentile joint cover (\%) of 99\,\%
@@ -101,60 +99,67 @@ $\bar J$ & $J_{10}$ & u$_{50}$ & u$_{90}$ & $>$5$\times$ \\
 \end{tabular}
 \end{table}
 
-With five ships observed once, the extreme bootstrap plans of a first run
-differed between machines, each repeating its own run exactly: one campaign
-gave \dgCaseHpc{} units on a Linux cluster and \dgCaseLocal{} on a Windows PC.
-In \dgCases{} such campaigns followed step by step, the data agreed, the
-estimates differed by at most \dgSdDiffMax{} in total standard deviation,
-\dgBootSameMin--\dgBootSameMax{} of the \cbB{} bootstrap data sets agreed, and
-the refits diverged. Two causes were found. In \dgTwoMax{} campaigns the
-criterion has a second maximum, \dgTwoMaxLo--\dgTwoMaxHi{} above the one
-reached from the default start, with the dispersion in the gamma multiplier
-instead of the interaction: the near-equivalence one mission leaves, with
-different tails. In \rlAltN{} of the \rlAltOf{} small campaigns
-(Table~\ref{tab:boot} and five ships with four missions) another start raised
-the criterion by more than 0.05, and the predictive plan fell from a median of
-\rlAltOneMed{} to \rlAltThreeMed{} units. And the bootstrap is Monte Carlo: at a fixed estimate,
-\dgFreshK{} streams gave plans differing by a median factor of \dgRatioMed{}
-(\dgCaseLo{} to \dgCaseHi{} units in that campaign), set by the refit with the
-widest spread (median total standard deviation \dgTopSdMed).
+With five ships observed once, a first run's extreme bootstrap plans differed
+between machines, each repeating its own run exactly: \dgCaseHpc{} units on a
+Linux cluster against \dgCaseLocal{} on a Windows PC in one campaign. Followed
+step by step in \dgCases{} such campaigns, the data agreed, the estimates
+differed by at most \dgSdDiffMax{} in total standard deviation, and the refits
+diverged. Two causes were found. In \dgTwoMax{} campaigns the criterion has a
+second maximum, \dgTwoMaxLo--\dgTwoMaxHi{} higher than the one reached from
+the default start, with the dispersion in the gamma multiplier instead of the
+interaction: the near-equivalence one mission leaves, with different tails.
+In \rlAltN{} of the \rlAltOf{} small campaigns another start raised the
+criterion by more than 0.05, and the predictive plan fell from a median of
+\rlAltOneMed{} to \rlAltThreeMed{} units. And the bootstrap is Monte Carlo: at
+a fixed estimate, \dgFreshK{} streams gave plans differing by a median factor
+of \dgRatioMed{} (\dgCaseLo{} to \dgCaseHi{} units in that campaign), set by
+the refit with the widest spread.
 
-Every fit and refit in this section therefore maximises the criterion from
-three starts, the given one, the default and small spreads, and keeps the
-accepted run with the largest criterion, a run being accepted when the largest
-projected gradient is at most 0.05 per unit of log standard deviation; a refit
-with none accepted is dropped (\rlFailed{} of \rlRefits). Another start won in
-\rlFitsWonPct\,\% of point estimates, \rlFitsWonFivePct\,\% with five ships
-observed once, and \rlRestartedPct\,\% of refits. The bootstrap plan still
-exceeded five times the known-parameter stock in \rgBigN{} of \rgN{} such
-campaigns (Table~\ref{tab:boot}), up to \rgBigMax{} units, where the estimate
-had a median total standard deviation of \rgTraceHatSig{} against
-\rgTraceHatSigOther{} in the others. An assumed cap of 15 units per reference,
-on the final stock only, keeps true cover at \rgCapCov\,\% but misses the
-target under the bootstrap law in \rgCapInfeas{} of \rgN{} campaigns; it
-prices a storage limit and does not correct the estimate.
+The three-start rule therefore maximises the criterion from the given start,
+the default and small spreads, and keeps the accepted run with the largest
+criterion, a run being accepted when its largest projected gradient is at most
+0.05 per unit of log standard deviation. Another start won in
+\rlFitsWonPct\,\% of point estimates and \rlRestartedPct\,\% of refits. A
+refit with no accepted run is dropped: \rlFailed{} of \rlRefits, in
+\rlDropCamp{} of \rlDropCampN{} campaigns with 20 refits, at most \rlDropMax{}
+in one. A plan pools \rlDraws{} draws shared equally among the campaign's
+accepted refits, and campaigns are averaged with equal weight. In
+\rlFitsBad{} point estimates no run was accepted (gradient up to
+\rlFitsBadGrad); the best was kept, and dropping those campaigns moves no
+cell's gain by more than \rlFitsBadEffect{} points. Both choices were checked
+on \rcN{} campaigns rerun on one machine with the same seeds. Keeping the
+dropped refits at their best run changed the bootstrap plan in
+\rcKeepChanged{} of the \rcKeepN{} campaigns that lost any there, by at most
+\rcKeepUnitsMax{} units, and cover by at most \rcKeepCov{} points. Continuing every accepted fit and refit with far
+tighter tolerances than 0.05 left the predictive plan within one unit in
+\rcPolPredOne{} of \rcPolN{} single-mission campaigns and moved the bootstrap
+plan by a median of \rcPolBootMed{} units (at most \rcPolBootMax) and cover by
+at most \rcPolCov{} points, the order of the change from redrawing the
+predictive draws alone (below).
 
-The regularisation studied, a modelling choice, maximises~\eqref{eq:objective} minus
-$(\tau^2+\omega^2+1/\phi)/(2s^2)$, a half-normal prior of scale $s$ on the two
-latent standard deviations and on $\phi^{-1/2}$~\cite{gelman2006}, in the fit
-and every refit. The scale trades stock for cover: with five ships
+The bootstrap plan still exceeded five times the known-parameter stock in
+\rgBigN{} of \rgN{} such campaigns (Table~\ref{tab:boot}), up to \rgBigMax{}
+units against a median of \rgOracleFive{} with known parameters. Without
+regularisation, then, the bootstrap can give plans no ship could carry in
+small campaigns, and its high mean cover is no reason to recommend it. An
+assumed cap of 15 units per reference keeps true cover at \rgCapCov\,\% but
+misses the target under the bootstrap law in \rgCapInfeas{} of \rgN{}
+campaigns; it prices a storage limit and does not correct the estimate.
+
+Regularisation is evaluated as an option, not recommended. The one studied
+maximises~\eqref{eq:objective} minus $(\tau^2+\omega^2+1/\phi)/(2s^2)$, a
+half-normal prior of scale $s$ on the two latent standard deviations and on
+$\phi^{-1/2}$~\cite{gelman2006}, in the fit and every refit. With five ships
 observed once, $s=0.5$, 1 and 2 left \rgPenHalfBig, \rgPenOneBig{} and
-\rgPenTwoBig{} extreme plans with mean cover \rgPenHalfCov, \rgPenOneCov{}
-and \rgPenTwoCov\,\%. With four missions, plans with $\boldsymbol\theta$
-fixed, bootstrapped and penalised at $s=1$ covered \rgFourPredCov,
-\rgFourBootCov{} and \rgFourPenOneCov\,\% with median stocks of
-\rgFourPredUnits, \rgFourBootUnits{} and \rgFourPenOneUnits{} units, against
-\rgFourOracleUnits{} with known parameters.
+\rgPenTwoBig{} extreme plans with mean cover \rgPenHalfCov, \rgPenOneCov{} and
+\rgPenTwoCov\,\%: the scale trades stock for cover, should come from
+comparable fleets, not from the campaign it regularises, and no procedure here
+is a general recommendation.
 
-Three properties of the bootstrap differ. \emph{Interval
-calibration} is partial: nominal 80\,\% percentile intervals
-contained a positive true $\tau$ in \cvTauLo--\cvTauHi\,\% of campaigns per
-cell, a positive $\omega$ in \cvOmLo--\cvOmHi\,\% with four missions but at
-most \cvOmOneHi\,\% with one, and the share $f$ in \cvShareLo--\cvShareHi\,\%
-at $(0.42,0.42)$, the refits being less dispersed than the estimator's
-error. \emph{Stability of mean cover}: on \bcCells{} cells refitted 80 times,
-plans from the first 20 refits and from all 80 differed in mean cover by at
-most \bcDiffMax{} points (s.e.\ \bcMcse). \emph{Stability of one campaign's vector} follows from
-neither: it changed by more than ten units in \bcRedrawTen{} of \bcN{}
-campaigns when only the predictive draws were redrawn.
-
+Nominal 80\,\% bootstrap percentile intervals contained a positive true $\tau$
+in \cvTauLo--\cvTauHi\,\% of campaigns per cell and a positive $\omega$ in
+\cvOmLo--\cvOmHi\,\% with four missions but at most \cvOmOneHi\,\% with one.
+Plans from 20 and from 80 refits differed in mean cover by at most
+\bcDiffMax{} points on \bcCells{} cells, yet one campaign's vector changed by
+more than ten units in \bcRedrawTen{} of \bcN{} campaigns when only the
+predictive draws were redrawn.

@@ -23,6 +23,11 @@ from glmm import BETA_PRIOR_SD, LOG2PI, Design, _nb_terms
 __all__ = ["Design", "Fit", "fit", "lrt_boundary"]
 
 GRAD_TOL = 0.05     # largest projected gradient of an accepted fit (criterion per unit of log sd)
+# sensitivity checks of the rule, off by default:
+#   SPARES_POLISH=1        the kept run is continued with much tighter tolerances
+#   SPARES_KEEP_FAILED=1   bootstrap refits with no accepted run are kept (best run)
+POLISH = os.environ.get("SPARES_POLISH") == "1"
+KEEP_FAILED = os.environ.get("SPARES_KEEP_FAILED") == "1"
 
 
 class Fit:
@@ -196,6 +201,18 @@ class Fit:
                     tried.append((gm <= GRAD_TOL, -r.fun, gm, r))
                 ok = [t for t in tried if t[0]]
                 best = max(ok, key=lambda t: t[1]) if ok else min(tried, key=lambda t: t[2])
+                self.theta_rule = best[3].x.copy()      # the run the rule keeps, before any polish
+                if POLISH and ok:
+                    # sensitivity check: continue the kept run with much tighter tolerances
+                    cache["z"] = None
+                    r = optimize.minimize(obj, best[3].x, method="L-BFGS-B",
+                                          bounds=list(zip(np.full(nth, lower), ub)),
+                                          options=dict(maxiter=5000, ftol=1e-15, gtol=1e-10))
+                    if -r.fun >= best[1] - 1e-12:
+                        gm = float(np.max(np.abs(self.projected_gradient(r.x, lower, ub))))
+                        polished = (True, -r.fun, gm, r)
+                        tried[tried.index(best)] = polished
+                        best = polished
                 if best[3] is not res:
                     z_end = None
                 self.theta, self.converged = best[3].x, bool(best[3].success)
@@ -286,6 +303,8 @@ def bootstrap_theta(f, B, rng, rule=False, info=None, fit_cls=None, **fit_kw):
             # "restarted": another start than the estimate reached a higher criterion (by > 1e-3)
             info["restarted"] = info.get("restarted", 0) + int(g.start_won > 0 and g.crit_gain > 1e-3)
             info["grad_max"] = max(info.get("grad_max", 0.0), g.grad_max if g.accepted else 0.0)
-        if g.accepted:
+            # for the sensitivity checks: every refit, with its status and its unpolished theta
+            info.setdefault("all", []).append((bool(g.accepted), getattr(g, "theta_rule", g.theta), g.theta))
+        if g.accepted or KEEP_FAILED:
             out.append(g.theta)
     return np.array(out)

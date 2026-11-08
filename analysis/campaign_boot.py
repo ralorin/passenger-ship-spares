@@ -21,6 +21,10 @@ single-mission designs, where the estimate of the allocation is weakest.
 
     python campaign_boot.py --worker I --nworkers N [--hours 3.6]
     python campaign_boot.py --summary
+
+With SPARES_POLISH=1 or SPARES_KEEP_FAILED=1 (sensitivity checks of the rule,
+see hglmm.py) and --only list.csv, a subset of campaigns is rerun with the same
+seeds into raw/campaign_boot_rule_polish or raw/campaign_boot_rule_keep.
 """
 import argparse
 import glob
@@ -111,10 +115,14 @@ def tasks():
     return [(c, r) for r in range(REPS) for c in cells()]
 
 
-def worker(i, n, hours):
+def worker(i, n, hours, only=None):
     os.makedirs(RAW, exist_ok=True)
     t0 = time.time()
-    for k, (c, rep) in enumerate(tasks()):
+    todo = tasks()
+    if only:
+        keep = set(map(tuple, pd.read_csv(only)[["cell", "rep"]].values.tolist()))
+        todo = [(c, rep) for c, rep in todo if (c["cell"], rep) in keep]
+    for k, (c, rep) in enumerate(todo):
         if k % n != i:
             continue
         path = os.path.join(RAW, f"c{c['cell']:03d}_r{rep:03d}.csv")
@@ -166,13 +174,14 @@ def main():
     ap.add_argument("--hours", type=float, default=3.6)
     ap.add_argument("--summary", action="store_true")
     ap.add_argument("--list", action="store_true")
+    ap.add_argument("--only", help="csv with cell and rep columns: run only those campaigns")
     a = ap.parse_args()
     if a.list:
         print(len(cells()), "cells,", len(tasks()), "campaigns")
     elif a.summary:
         summary()
     else:
-        worker(a.worker, a.nworkers, a.hours)
+        worker(a.worker, a.nworkers, a.hours, a.only)
 
 
 if __name__ == "__main__":

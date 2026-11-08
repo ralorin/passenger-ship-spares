@@ -4,18 +4,20 @@ Every number in this section is simulated; no number describes a real fleet.
 The fleet has \flShips{} ships in five classes, from an expedition ship of 92
 cabins to one of about 2\,750 and a cruise ferry, with the seven references of
 Section~\ref{sec:ship}, each made by two makers, one per class. Parameters are
-of three kinds; none is an estimate transferred from another source.
+of four kinds; none is an estimate transferred from another source.
 \emph{Published}: cabins per class from shipyard fact
-sheets~\cite{fincantieri_laperouse,oasis_class}; datasheet rates, which are
-manufacturers' predictions (Telcordia SR-332, IEC 62380) of 0.54 to 9.1
-million hours at the datasheets' reference
-conditions~\cite{meanwell_lpv60,schneider_atv212}, not observed rates; climate
-normals; and the mean cruise of 7.0 days~\cite{clia2025}.
-\emph{Assumed within published ranges}: a field factor of 3, at the low end of
-the 5 to 12 by which MIL-HDBK-217F raises naval sheltered over ground benign
-environments by part class~\cite{milhdbk217f} and near a pooled conversion of
-3.3~\cite{jeong2011}; and an activation energy of 0.5\,eV, within the
-handbook's values for silicon microcircuits. \emph{Assumed}: a bad-lot factor
+sheets~\cite{fincantieri_laperouse,oasis_class}; datasheet predictions at
+reference conditions, not observed values, of MTBF 2.19 to 9.09 million hours
+for the drivers and supplies (Telcordia SR-332; e.g.~\cite{meanwell_lpv60}) and MTTF
+0.54 and 0.56 million hours for the drives (IEC 62380)~\cite{schneider_atv212},
+whose inverses serve as nominal \emph{datasheet rates} under a constant-rate
+assumption; climate normals; and the mean cruise of 7.0
+days~\cite{clia2025}. \emph{Assumed within a published range}: an activation
+energy of 0.5\,eV, within MIL-HDBK-217F's values for silicon
+microcircuits~\cite{milhdbk217f}. \emph{Assumed, motivated by published
+values}: a field factor of 3, below the 5 to 12 by which the handbook raises
+naval sheltered over ground benign environments by part class and near a pooled
+conversion of 3.3~\cite{jeong2011}. \emph{Assumed}: a bad-lot factor
 of 2.5, for which a street-lighting programme whose LED fixtures failed in
 their drivers~\cite{halifax2019} shows only that defective driver lots occur;
 drivers per cabin
@@ -41,18 +43,18 @@ failing 0.1\,\%, and at 2 failing 0.05\,\% or 0.2\,\%. The generator draws one
 event state per ship-mission, with probability $1-e^{-rH/365}$ for rate $r$
 and $H$ nights, and an event adds $\mathrm{Binomial}(N,a)$ failures to every
 population; it never places two events in one mission. No public source gives
-$r$ or $a$ for events that damage electronics. EMSA's 2024 indicator for
-EU-flagged passenger ships, 247 occurrences per 1\,000 ship-years, times the
-2.1\,\% share of losses of electrical power in 2015--2024 gives about 0.005
-per ship-year (our derivation)~\cite{emsa2025}; the UK portal lists 24 such
-losses on passenger ships from 2020 to May 2026, without
-exposure~\cite{maib_portal}. Both count whole-ship power losses and serve as
-context only.
+$r$ or $a$ for events that damage electronics; whole-ship losses of electrical
+power on passenger ships, about 0.005 per ship-year from EMSA's 2024 indicator
+of 247 occurrences per 1\,000 ship-years times their 2.1\,\% share (our
+derivation)~\cite{emsa2025} and 24 in the UK from 2020 to May 2026, without
+exposure~\cite{maib_portal}, are context only.
 
 \subsection{Plans and Comparators}
-Every plan is a 99\,\% unit-minimal joint vector for one ship-mission from
-pre-sailing information, scored on realised failures of missions not used to
-fit or select it. The \emph{datasheet} benchmark plans for independent Poisson
+Every plan targets a nominal 99\,\% joint cover for one ship-mission from
+pre-sailing information, minimising units under the law used to plan it, and
+is scored on realised failures of missions not used to fit or select it; the
+term \emph{certified optimum} is reserved for vectors whose search finished.
+The \emph{datasheet} benchmark plans for independent Poisson
 counts at datasheet rate times planned hours; the \emph{scaled} plan
 multiplies those rates by one fleet-wide factor fitted to the record; the
 \emph{pooled negative binomial} has covariates and maker but no ship terms.
@@ -62,10 +64,9 @@ comparator} the same draws with each reference column permuted independently,
 which keeps every empirical marginal and breaks the dependence; it is not the
 $f=0$ law of Proposition~\ref{prop:mono} and carries no guarantee.
 
-A vector minimises units under the empirical law of the draws, meets 99\,\%
-under that law, and is evaluated on realised failures, or under the exact law
-in Table~\ref{tab:bridge}. Minimisation is by iterative deepening on the units
-above the marginal quantiles. It was certified for all but \fdNotCertJP{}
+For draw-based plans the planning law is the empirical law of the draws, and
+minimisation is by iterative deepening on the units above the marginal
+quantiles. It was certified for all but \fdNotCertJP{}
 joint or fixed-marginal and \fdNotCertEv{} incident plans of about
 \fdPlansPerType{} per plan type (at least \fdCert\,\% in every group), all
 with severe events; these keep the best vector found, feasible under the draws
@@ -75,8 +76,8 @@ and at most \fdNotCertGap{} units above a lower bound. With a new seed or
 \fdStabFresh\,\%: performance is stable where the vector is not.
 
 \begin{table*}[!t]
-\caption{Simulated fleet: cover $J$ (\%) and units u per mission of 99\,\%
-unit-minimal plans; hierarchical (joint) minus fixed-marginal plan from the
+\caption{Simulated fleet: cover $J$ (\%) and units u per mission of
+unit-minimal plans for a nominal 99\,\%; hierarchical (joint) minus fixed-marginal plan from the
 same draws, in points ($\Delta J$, 95\,\% interval resampling fleets) and
 units ($\Delta$u); italics: $J<99$\,\%, star: interval below 99\,\%
 (\textsc{simulation}; \fdFleets{} fleets per scenario)}
@@ -143,10 +144,8 @@ $\Delta J$, $f{=}1$ \\
 
 Table~\ref{tab:bridge} links that contrast to the proposition. For the large ship each horizon fixes the marginal
 laws, with means proportional to $H$ and a latent multiplier persisting until
-resupply, while $f$ varies. The exact optimum at the true $f$ is set against
-the optimum under independence, and the plan from \brDraws{} draws of the true
-law against the plan from the same draws permuted; every vector is scored by
-exact cover under the true law. At $f=0$ the draw contrast is Monte Carlo
+resupply, while $f$ varies; plans from \brDraws{} draws of the true law are
+set against plans from the same draws permuted. At $f=0$ the draw contrast is Monte Carlo
 error, within $\pm$\brNoiseU{} units and $\pm$\brNoiseJ{} points. At the
 fleet's spreads, $\sigma=0.42$, and a weekly horizon the exact plans coincide
 and the draw contrast is \brFleetDu{} units, as in Table~\ref{tab:fleet}.

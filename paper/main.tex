@@ -31,7 +31,7 @@
 \input{numbers_v5}
 \input{numbers_v6}
 \input{numbers_v7}
-\newcommand{\codeTag}{v1.0-tr}
+\newcommand{\codeTag}{v1.1-tr}
 
 \markboth{IEEE Transactions on Reliability}%
 {Heterogeneity in Joint Spares Provisioning}
@@ -62,7 +62,7 @@ supermodular ordering of Gaussian vectors implies that, with marginal laws and
 total latent variance fixed, the joint cover of any vector is non-decreasing
 in the ship-wide share, so the cost-minimal vector for independent references
 is the cheapest one feasible for every split. In certified optima, with cover
-computed numerically to within $\mpTrunc$, this robust vector cost a median
+computed by quadrature, this robust vector cost a median
 \seIndCertMed\,\% more than the optimum for the true split over \seCertPos{}
 cases with a positive share, \shPremFourteen--\shPremMax\,\% for a large
 passenger ship resupplied every one to four weekly cruises, and needed
@@ -70,8 +70,9 @@ passenger ship resupplied every one to four weekly cruises, and needed
 spread. With estimated parameters, in simulation, references observed
 together identified the shared effect from one mission, while the
 interaction, separated from cell dispersion only by parametric form, was
-rarely detected without repeated missions; with five ships, bootstrap stocks
-reached extremes that changed by orders of magnitude between random streams.
+rarely detected without repeated missions; with five ships, unregularised
+bootstrap stocks reached unusable extremes that changed by orders of magnitude
+between random streams.
 In a simulated fleet built from public data, without frequent events, fitting
 the record raised cover at known ships from \fdMtbfLo--\fdMtbfHi\,\% with datasheet rates to
 \fdFitKLo--\fdFitKHi\,\%, and modelling dependence changed it by at most

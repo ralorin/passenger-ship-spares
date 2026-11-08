@@ -55,7 +55,7 @@ def main(put, w, pct, thousands, V2):
     src = "analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz"
     G = pd.read_csv(os.path.join(V2, "campaign_reg_rule_reps.csv.gz"))
     plans = [("pred", "fixed"), ("boot", "bootstrap"), ("bootcap", "boot., cap 15"),
-             ("penpred1", "pen., $s{=}1$, fixed"), ("pen0.5", "pen.\\ boot., $s{=}0.5$"),
+             ("pen0.5", "pen.\\ boot., $s{=}0.5$"),
              ("pen1", "pen.\\ boot., $s{=}1$"), ("pen2", "pen.\\ boot., $s{=}2$")]
     designs = [(5, 1), (10, 1)]
     rows = []
@@ -82,6 +82,7 @@ def main(put, w, pct, thousands, V2):
     put("rgReps", str(int(G.groupby("cell").size().min())), "SIM", src)
     big = g5.boot_units > 5 * g5.oracle_units
     put("rgBigN", str(int(big.sum())), "SIM", src, "bootstrap plan > 5x oracle")
+    put("rgOracleFive", f"{g5.oracle_units.median():.0f}", "SIM", src, "known-parameter units, S=5, M=1, median")
     put("rgBigMax", thousands(g5.boot_units.max()), "SIM", src)
     for key, tag in (("pred", "Pred"), ("pen0.5", "PenHalf"), ("pen1", "PenOne"), ("pen2", "PenTwo"),
                      ("bootcap", "Cap"), ("penpred1", "PenPredOne")):
@@ -114,6 +115,14 @@ def main(put, w, pct, thousands, V2):
     put("rlFitsBad", str(int((R.fit_accepted == 0).sum() + (G.fit_accepted == 0).sum()
                              + (Rc.fit_accepted == 0).sum())), "SIM", src, "point estimates not accepted")
     put("rlFits", thousands(n_fit), "SIM", src)
+    # where the dropped refits fall: campaigns with 20 refits (Tables III and IV)
+    drop = pd.concat([R.refits_failed, G.refits_failed])
+    put("rlDropCamp", str(int((drop > 0).sum())), "SIM", src, "20-refit campaigns that lost any refit")
+    put("rlDropCampN", thousands(len(drop)), "SIM", src)
+    put("rlDropMax", str(int(drop.max())), "SIM", src, "most refits lost by one campaign, of 20")
+    put("rlDropBconvMax", str(int(Rc.refits_failed.max())), "SIM", src, "same, of 80, campaign_bconv")
+    from campaign_boot import R_DRAWS
+    put("rlDraws", thousands(R_DRAWS), "SIM", "analysis/campaign_boot.py", "draws per campaign plan")
     put("rlFitsBadGrad", f"{R[R.fit_accepted == 0].fit_grad.max():.2f}", "SIM", src,
         "largest projected gradient of a point estimate with no accepted run")
     gain_all = R.groupby("cell").joint_cover_boot.mean() - R.groupby("cell").joint_cover_predictive.mean()
@@ -139,6 +148,30 @@ def main(put, w, pct, thousands, V2):
         "point estimates where a start other than the default reached a higher criterion")
     g5w = G[(G.S == 5) & (G.M == 1)].fit_crit_gain
     put("rlFitsWonFivePct", pct((g5w > 1e-3).mean(), 0), "SIM", src, "same, S = 5, M = 1")
+
+    # sensitivity of the rule (analysis/rule_checks.py, one machine, same seeds)
+    src = "analysis/rule_checks.py -> data/v2/rule_checks.csv.gz"
+    D = pd.read_csv(os.path.join(V2, "rule_checks.csv.gz"))
+    k = D[D.accepted < D.refits]
+    p = D.dropna(subset=["polish_pred_units"])
+    put("rcN", str(len(D)), "SIM", src, "campaigns rerun")
+    put("rcKeepN", str(len(k)), "SIM", src, "of them, with a refit dropped on this machine")
+    put("rcKeepChanged", str(int((k.keep_boot_units != k.rule_boot_units).sum())), "SIM", src,
+        "bootstrap plan changed when the dropped refits are kept")
+    put("rcKeepUnitsMax", f"{(k.keep_boot_units - k.rule_boot_units).abs().max():.0f}", "SIM", src,
+        "largest change of a campaign's bootstrap plan, units")
+    put("rcKeepCov", f"{100 * (k.keep_boot_cover - k.rule_boot_cover).abs().max():.2f}", "SIM", src,
+        "largest change of a campaign's cover, points")
+    dpred = (p.polish_pred_units - p.rule_pred_units).abs()
+    dboot = (p.polish_boot_units - p.rule_boot_units).abs()
+    put("rcPolN", str(len(p)), "SIM", src, "single-mission campaigns polished")
+    put("rcPolPredOne", str(int((dpred <= 1).sum())), "SIM", src, "predictive plan within one unit")
+    put("rcPolBootMed", f"{dboot.median():.0f}", "SIM", src, "bootstrap plan, median absolute change, units")
+    put("rcPolBootMax", f"{dboot.max():.0f}", "SIM", src)
+    put("rcPolCov", f"{100 * (p.polish_boot_cover - p.rule_boot_cover).abs().max():.2f}", "SIM", src,
+        "largest change of a campaign's bootstrap cover, points")
+    put("rcPolCovMean", f"{100 * (p.polish_boot_cover - p.rule_boot_cover).mean():+.2f}", "SIM", src,
+        "mean change of bootstrap cover, points")
 
     # design study: one start against three (analysis/campaign_starts.py)
     S = json.load(open(os.path.join(V2, "campaign_starts.json"), encoding="utf-8"))

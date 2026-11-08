@@ -41,6 +41,8 @@ each one.
 | `campaign_reg.py` | IV | simulation | `data/v2/campaign_reg_reps.csv.gz` (small campaigns: fixed, bootstrapped, capped and half-normal penalised spreads; trace of extreme plans) |
 | `campaign_diag.py` | IV | simulation | `data/v2/campaign_diag_{hpc,local}_*.json` (extreme bootstrap plans followed step by step on two machines; bootstrap over fresh streams at a fixed estimate) |
 | `campaign_starts.py` | IV | simulation | `data/v2/campaign_starts.json` (main-grid campaigns fitted from one start and from three; higher maxima and changed test decisions) |
+| `rule_checks.py` | IV | simulation | `data/v2/rule_checks.csv.gz` (bootstrap campaigns rerun on one machine: dropped refits kept, and every fit polished with much tighter tolerances) |
+| `cover_accuracy.py` | III | analytical | `data/v2/cover_accuracy.json` (certified optima of Tables I, II and V on a finer lattice, and searched again at level 0.99 - 1e-6) |
 | `fleet.py` (+ `fleet_params.json`), `fleet_extra.py` | V | simulation | `data/v2/fleet_v4_*`, `data/v2/fleet_extra.json` (earlier fleet study) |
 | `fleet_dep.py`, `fleet_dep_summary.py` (+ `plan_exact.py`) | V | simulation | `data/v2/fleet_dep*` (joint against fixed-marginal plans from the same draws, certified unit-minimal vectors, incident plans, seed and draw-count checks) |
 | `ni_streetlights_prep.py`, `ni_streetlights.py`, `ni_validation.py`, `ni_audit.py`, `ni_seeds.py` | VI | public data | `data/v2/ni_*` |
@@ -54,6 +56,9 @@ projected gradient is at most 0.05; the accepted run with the largest criterion
 is kept, and a refit with none accepted is dropped. These runs write `*_rule*`
 files, which Section IV of the article uses; the files without the suffix are
 the first run, from one start, kept for the comparison in Section IV-D.
+`SPARES_POLISH=1` and `SPARES_KEEP_FAILED=1` switch on the two sensitivity
+checks of the rule that `rule_checks.py` uses (lists of campaigns in
+`data/v2/check_*_list.csv`).
 
 `fleet_params.json` lists every fleet parameter with its source in a `_src`
 field. Section V of the article uses `fleet_dep.py`, which regenerates the
@@ -80,6 +85,8 @@ a laptop (`stock_exact.py` about 2 h on three cores; `ni_validation.py` about
     python bridge.py                    # about 5 min
     python stock_f0_dp.py               # seconds
     python campaign_starts.py --reps 10 --workers 6
+    python cover_accuracy.py --worker I --nworkers 7   # I = 0..6, then --summary
+    python rule_checks.py --worker I --nworkers 7      # I = 0..6, then --summary; about 1.5 h
 
 The street-lighting data are downloaded from data.gov.uk and the DfI asset
 portal; the sources and dates are in the docstring of `ni_streetlights_prep.py`.

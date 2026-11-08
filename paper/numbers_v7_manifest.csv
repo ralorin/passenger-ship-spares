@@ -18,6 +18,13 @@ fdNotCertJP,7,SIM,analysis/fleet_dep.py -> data/v2/raw/fleet_dep (counts kept in
 fdNotCertEv,6,SIM,analysis/fleet_dep.py -> data/v2/raw/fleet_dep (counts kept in data/v2/fleet_dep_cert.json),incident plans not certified
 fdNotCertGap,24,SIM,analysis/fleet_dep.py -> data/v2/raw/fleet_dep (counts kept in data/v2/fleet_dep_cert.json),"best vector minus lower bound, units"
 fdPlansPerType,"302\,000",SIM,analysis/fleet_dep.py -> data/v2/raw/fleet_dep (counts kept in data/v2/fleet_dep_cert.json),ship-missions planned per plan type
+caN,141,EXACT,analysis/cover_accuracy.py -> data/v2/cover_accuracy.json,"certified optima of Tables I, II and V"
+caPerSd,16,EXACT,analysis/cover_accuracy.py -> data/v2/cover_accuracy.json,"lattice points per sd, base"
+caFinePerSd,64,EXACT,analysis/cover_accuracy.py -> data/v2/cover_accuracy.json,
+caFineWidth,10,EXACT,analysis/cover_accuracy.py -> data/v2/cover_accuracy.json,
+caErr,1.2\times 10^{-14},EXACT,analysis/cover_accuracy.py -> data/v2/cover_accuracy.json,largest change of J on the finer lattice
+caMargin,3.1\times 10^{-7},EXACT,analysis/cover_accuracy.py -> data/v2/cover_accuracy.json,smallest J - 0.99 of a certified optimum
+caDelta,10^{-6},EXACT,analysis/cover_accuracy.py -> data/v2/cover_accuracy.json,lowered level 0.99 - delta
 cbCells,32,SIM,"analysis/campaign_boot.py, SPARES_RULE=1 -> data/v2/campaign_boot_rule_*",
 cbReps,40,SIM,"analysis/campaign_boot.py, SPARES_RULE=1 -> data/v2/campaign_boot_rule_*",
 cbGainLo,0.1,SIM,"analysis/campaign_boot.py, SPARES_RULE=1 -> data/v2/campaign_boot_rule_*",
@@ -34,6 +41,7 @@ cvShareHi,90,SIM,"analysis/campaign_boot.py, SPARES_RULE=1 -> data/v2/campaign_b
 rgN,160,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz","campaigns with S=5, M=1"
 rgReps,40,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz",
 rgBigN,36,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz",bootstrap plan > 5x oracle
+rgOracleFive,27,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz","known-parameter units, S=5, M=1, median"
 rgBigMax,"698\,097",SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz",
 rgPredBig,7,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz",
 rgPredCov,99.2,SIM,"analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz","S=5, M=1 mean cover"
@@ -66,6 +74,11 @@ rlRestarted,10296,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bc
 rlRestartedPct,29.2,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv",
 rlFitsBad,24,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv",point estimates not accepted
 rlFits,"1\,920",SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv",
+rlDropCamp,142,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv",20-refit campaigns that lost any refit
+rlDropCampN,"1\,760",SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv",
+rlDropMax,6,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv","most refits lost by one campaign, of 20"
+rlDropBconvMax,11,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv","same, of 80, campaign_bconv"
+rlDraws,"40\,000",SIM,analysis/campaign_boot.py,draws per campaign plan
 rlFitsBadGrad,0.61,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv",largest projected gradient of a point estimate with no accepted run
 rlFitsBadEffect,0.02,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv",largest change in a cell's bootstrap cover gain (points) when they are dropped
 rlAltOf,480,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv","small campaigns: Table III designs and S = 5, M = 4"
@@ -74,6 +87,17 @@ rlAltOneMed,274,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bcon
 rlAltThreeMed,85,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv","predictive units, three starts"
 rlFitsWonPct,7.4,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv",point estimates where a start other than the default reached a higher criterion
 rlFitsWonFivePct,6,SIM,"data/v2/campaign_{boot,reg}_rule_reps.csv.gz, campaign_bconv_rule_reps.csv","same, S = 5, M = 1"
+rcN,210,SIM,analysis/rule_checks.py -> data/v2/rule_checks.csv.gz,campaigns rerun
+rcKeepN,69,SIM,analysis/rule_checks.py -> data/v2/rule_checks.csv.gz,"of them, with a refit dropped on this machine"
+rcKeepChanged,29,SIM,analysis/rule_checks.py -> data/v2/rule_checks.csv.gz,bootstrap plan changed when the dropped refits are kept
+rcKeepUnitsMax,17,SIM,analysis/rule_checks.py -> data/v2/rule_checks.csv.gz,"largest change of a campaign's bootstrap plan, units"
+rcKeepCov,0.46,SIM,analysis/rule_checks.py -> data/v2/rule_checks.csv.gz,"largest change of a campaign's cover, points"
+rcPolN,80,SIM,analysis/rule_checks.py -> data/v2/rule_checks.csv.gz,single-mission campaigns polished
+rcPolPredOne,80,SIM,analysis/rule_checks.py -> data/v2/rule_checks.csv.gz,predictive plan within one unit
+rcPolBootMed,0,SIM,analysis/rule_checks.py -> data/v2/rule_checks.csv.gz,"bootstrap plan, median absolute change, units"
+rcPolBootMax,12,SIM,analysis/rule_checks.py -> data/v2/rule_checks.csv.gz,
+rcPolCov,0.71,SIM,analysis/rule_checks.py -> data/v2/rule_checks.csv.gz,"largest change of a campaign's bootstrap cover, points"
+rcPolCovMean,-0.01,SIM,analysis/rule_checks.py -> data/v2/rule_checks.csv.gz,"mean change of bootstrap cover, points"
 csN,"1\,000",SIM,analysis/campaign_starts.py -> data/v2/campaign_starts.json,
 csReps,10,SIM,analysis/campaign_starts.py -> data/v2/campaign_starts.json,
 csHigherPct,5.9,SIM,analysis/campaign_starts.py -> data/v2/campaign_starts.json,

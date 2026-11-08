@@ -47,7 +47,9 @@ RAW = os.path.join(OUT, "raw", "campaign")
 SEED = 20261101
 # SPARES_RULE=1: every fit and refit follows the convergence rule of hglmm.Fit.fit
 RULE = os.environ.get("SPARES_RULE") == "1"
-SUFFIX = "_rule" if RULE else ""
+SUFFIX = ("_rule" if RULE else "") + ("_polish" if os.environ.get("SPARES_POLISH") == "1" else "") \
+    + ("_keep" if os.environ.get("SPARES_KEEP_FAILED") == "1" else "") \
+    + os.environ.get("SPARES_RUN_TAG", "")     # e.g. "_pc": a run on another machine
 REPS = 1000
 BLOCK = 50
 CI_REPS = 300
