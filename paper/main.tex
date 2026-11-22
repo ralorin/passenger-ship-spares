@@ -1,23 +1,15 @@
-\documentclass[journal,11pt]{IEEEtran}
+\documentclass[preprint,12pt]{elsarticle}
 
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{booktabs}
-\usepackage{graphicx}
+\usepackage{rotating}
 \usepackage{url}
 \usepackage{xurl}
 \usepackage{microtype}
+\usepackage{lineno}
 \usepackage[hidelinks]{hyperref}
 
-% IEEE house style for theorem-like environments: italic head, colon, italic body
-\newtheoremstyle{ieeethm}{\topsep}{\topsep}{\itshape}{0pt}{\itshape}{:}{.5em}{}
-\theoremstyle{ieeethm}
 \newtheorem{proposition}{Proposition}
-\newtheorem{assumption}{Assumption}
-\newtheoremstyle{ieeerem}{\topsep}{\topsep}{\normalfont}{0pt}{\itshape}{:}{.5em}{}
-\theoremstyle{ieeerem}
-\newtheorem{remark}{Remark}
-% Proofs use IEEEtran's own IEEEproof environment, which sets an italic
-% "Proof:" head and closes with the filled QED box of IEEE house style.
 
 % \input inside a tabular
 \makeatletter
@@ -31,56 +23,62 @@
 \input{numbers_v5}
 \input{numbers_v6}
 \input{numbers_v7}
-\newcommand{\codeTag}{v1.2-tr}
+\newcommand{\codeTag}{v1.3}
 
-\markboth{IEEE Transactions on Reliability}%
-{Heterogeneity in Joint Spares Provisioning}
+\journal{Reliability Engineering \& System Safety}
 
 \begin{document}
-\bstctlcite{BSTcontrol}
 
-\title{Ship-Wide and Ship--Product Heterogeneity in\\
-Joint Spares Provisioning for Passenger-Ship\\ Power Electronics}
+\begin{frontmatter}
 
-\author{Paula~Lamo,~\IEEEmembership{Senior Member,~IEEE,}
-        and~Ricardo~S.~Alonso%
-\thanks{P. Lamo is with the Universidad de Cantabria, 39005 Santander, Spain
-(e-mail: paula.lamo@unican.es). Corresponding author: P. Lamo.}%
-\thanks{R. S. Alonso is with the Universidad Internacional de La Rioja (UNIR),
-26006 Logro\~{n}o, Spain, and also with the AIR Institute, 37002 Salamanca,
-Spain (e-mail: ricardoserafin.alonso@unir.net).}}
+\title{Ship-Wide and Ship--Product Heterogeneity in Joint Spares Provisioning
+for Passenger-Ship Power Electronics}
 
-\maketitle
+\author[uc]{Paula Lamo\corref{cor1}}
+\ead{paula.lamo@unican.es}
+\cortext[cor1]{Corresponding author.}
+
+\author[unir,air]{Ricardo S. Alonso}
+\ead{ricardoserafin.alonso@unir.net}
+
+\affiliation[uc]{organization={Universidad de Cantabria},
+  postcode={39005}, city={Santander}, country={Spain}}
+\affiliation[unir]{organization={Universidad Internacional de La Rioja (UNIR)},
+  postcode={26006}, city={Logro\~{n}o}, country={Spain}}
+\affiliation[air]{organization={AIR Institute},
+  postcode={37002}, city={Salamanca}, country={Spain}}
 
 \begin{abstract}
-Before a passenger ship sails, it embarks a vector of spares for power
-electronics whose references cannot replace one another, to last until the
-next resupply. This paper studies how ship-wide and ship--reference
-heterogeneity shape that vector. With known parameters, the supermodular
-ordering of Gaussian vectors implies that, with marginal laws and total latent
-variance fixed, the joint cover of any vector is non-decreasing in the
-ship-wide share, so the cost-minimal vector for independent references is the
-cheapest one feasible for every split. Analytically, on certified optima with
-cover computed by quadrature, this robust vector cost a median
-\seIndCertMed\,\% more than the optimum for the true split over \seCertPos{}
-cases with a positive share, and \shPremFourteen--\shPremMax\,\% for a large
-passenger ship resupplied every one to four weekly cruises. With estimated
-parameters, in simulation, single missions rarely revealed the ship--reference
-interaction, and unregularised bootstrap plans were unusable in some small
-campaigns. In a simulated fleet with public inputs, fitting the record raised
-cover at known ships from \fdMtbfLo--\fdMtbfHi\,\% with datasheet rates to
-\fdFitKLo--\fdFitKHi\,\% in scenarios without frequent events, and modelling
-dependence changed it by at most \fdAbsDcMax{} points. The public sources
-consulted gave no failures per ship and reference with exposure for the
-products studied.
+A passenger ship carries, until its next resupply, spares for power
+electronics whose references cannot replace one another. We study
+how ship-wide and ship--reference heterogeneity shape that stock vector. With
+known parameters and fixed marginal laws and total latent variance, the
+supermodular ordering of Gaussian vectors makes the joint cover of any vector
+non-decreasing in the ship-wide share, so the cost-minimal vector for
+independent references is the cheapest feasible for every split. On
+certified optima with cover computed by quadrature, this robust vector cost a
+median \seIndCertMed\,\% more than the optimum for the true split over
+\seCertPos{} cases with a positive share, and \shPremFourteen--\shPremMax\,\%
+for a large passenger ship resupplied every one to four weekly cruises. With
+estimated parameters, in simulation, single missions rarely revealed the
+ship--reference interaction, and unregularised bootstrap plans were unusable
+in some small campaigns. In a simulated fleet with public inputs, fitting the
+record raised cover at known ships from \fdMtbfLo--\fdMtbfHi\,\% with
+datasheet rates to \fdFitKLo--\fdFitKHi\,\% in scenarios without frequent
+events, and modelling dependence changed it by at most \fdAbsDcMax{} points.
+The public sources consulted gave no failures per ship and reference with
+exposure for these products.
 \end{abstract}
 
-\begin{IEEEkeywords}
-Hierarchical models, joint service level, negative binomial, passenger ships,
-power electronics, predictive distribution, random effects, spare parts.
-\end{IEEEkeywords}
+\begin{keyword}
+Spare parts \sep joint service level \sep passenger ships \sep power
+electronics \sep hierarchical models \sep random effects \sep negative
+binomial
+\end{keyword}
 
-\IEEEpeerreviewmaketitle
+\end{frontmatter}
+
+\linenumbers
 
 \section{Introduction}
 \label{sec:intro}
@@ -110,12 +108,38 @@ power electronics, predictive distribution, random effects, spare parts.
 \label{sec:conclusion}
 \input{sec_conclusion}
 
-\section*{Acknowledgment}
-The authors used Claude (Anthropic) for language editing: rewording passages
-of the manuscript and translating them into English. The authors reviewed the
-edited text and take full responsibility for the content of this article.
+\section*{CRediT authorship contribution statement}
+\textbf{Paula Lamo:} Conceptualization, Methodology, Investigation,
+Writing -- original draft, Writing -- review \& editing.
+\textbf{Ricardo S. Alonso:} Methodology, Software, Formal analysis, Data
+curation, Validation, Writing -- review \& editing.
 
-\bibliographystyle{IEEEtran}
+\section*{Declaration of competing interest}
+The authors declare that they have no known competing financial interests or
+personal relationships that could have appeared to influence the work reported
+in this paper.
+
+\section*{Funding}
+This research did not receive any specific grant from funding agencies in the
+public, commercial, or not-for-profit sectors.
+
+\section*{Data availability}
+No field data were collected for this study. The result files of the
+computations and simulations, with the code, seeds and the scripts that write
+every number and table, are openly available at
+\url{https://github.com/ralorin/passenger-ship-spares}, tag \texttt{\codeTag}
+(Python 3.10, NumPy 2.2, SciPy 1.15). The street-lighting fault reports and
+inventory are public~\cite{dfi_lighting}, as are the other inputs cited in
+Section~\ref{sec:fleet}.
+
+\section*{Declaration of generative AI and AI-assisted technologies in the
+manuscript preparation process}
+During the preparation of this work the authors used Claude (Anthropic) to
+reword passages of the manuscript and translate them into English.
+After using this tool, the authors reviewed and edited the content as needed
+and take full responsibility for the content of the published article.
+
+\bibliographystyle{elsarticle-num}
 \bibliography{references}
 
 \end{document}

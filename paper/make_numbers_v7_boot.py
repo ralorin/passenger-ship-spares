@@ -1,5 +1,5 @@
 """
-Called by make_numbers_v7.py. Every number of Section IV that comes from a
+Called by make_numbers_v7.py. Every number of Section 4 that comes from a
 bootstrap, recomputed from the campaigns rerun with the convergence rule of
 hglmm.Fit.fit (SPARES_RULE=1), plus the diagnosis of the extreme plans across
 two machines (analysis/campaign_diag.py, run on the HPC and on a Windows PC).
@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.join(HERE, "..", "analysis"))
 def main(put, w, pct, thousands, V2):
     from campaign_boot import cells as boot_cells
 
-    # Table IV campaigns
+    # main-grid campaigns of campaign_boot.py
     src = "analysis/campaign_boot.py, SPARES_RULE=1 -> data/v2/campaign_boot_rule_*"
     CB = pd.read_csv(os.path.join(V2, "campaign_boot_rule_summary.csv"))
     cells_m = pd.read_csv(os.path.join(V2, "campaign_summary.csv")).set_index("cell").m
@@ -51,7 +51,7 @@ def main(put, w, pct, thousands, V2):
     put("cvShareLo", pct(fs.min(), 0), "SIM", src)
     put("cvShareHi", pct(fs.max(), 0), "SIM", src)
 
-    # Table III campaigns
+    # small campaigns of Table 3 (campaign_reg.py)
     src = "analysis/campaign_reg.py, SPARES_RULE=1 -> data/v2/campaign_reg_rule_reps.csv.gz"
     G = pd.read_csv(os.path.join(V2, "campaign_reg_rule_reps.csv.gz"))
     plans = [("pred", "fixed"), ("boot", "bootstrap"), ("bootcap", "boot., cap 15"),
@@ -110,12 +110,12 @@ def main(put, w, pct, thousands, V2):
     put("rlRefits", thousands(n_ref), "SIM", src, "bootstrap refits under the rule")
     put("rlFailed", str(failed), "SIM", src, "refits declared failed and dropped")
     put("rlFailedPct", pct(failed / n_ref, 2), "SIM", src)
-    put("rlRestarted", str(restarted), "SIM", src, "refits of Tables III and IV restarted")
+    put("rlRestarted", str(restarted), "SIM", src, "refits of campaign_boot and campaign_reg restarted")
     put("rlRestartedPct", pct(restarted / (20 * (len(R) + len(G))), 1), "SIM", src)
     put("rlFitsBad", str(int((R.fit_accepted == 0).sum() + (G.fit_accepted == 0).sum()
                              + (Rc.fit_accepted == 0).sum())), "SIM", src, "point estimates not accepted")
     put("rlFits", thousands(n_fit), "SIM", src)
-    # where the dropped refits fall: campaigns with 20 refits (Tables III and IV)
+    # where the dropped refits fall: campaigns with 20 refits (campaign_boot and campaign_reg)
     drop = pd.concat([R.refits_failed, G.refits_failed])
     put("rlDropCamp", str(int((drop > 0).sum())), "SIM", src, "20-refit campaigns that lost any refit")
     put("rlDropCampN", thousands(len(drop)), "SIM", src)
@@ -142,7 +142,7 @@ def main(put, w, pct, thousands, V2):
     put("rlFitsBadEffect", f"{100 * (gain_all - gain_ok).abs().max():.2f}", "SIM", src,
         "largest change in a cell's bootstrap cover gain (points) when they are dropped")
     assert (G.fit_accepted == 1).all() and (Rc.fit_accepted == 1).all()
-    # near-equivalent maxima: the same Table III campaigns fitted from one start
+    # near-equivalent maxima: the same small campaigns fitted from one start
     # (first run, campaign_reg_reps.csv.gz) and from three
     key = ["S", "M", "tau", "omega", "rep"]
     O = pd.read_csv(os.path.join(V2, "campaign_reg_reps.csv.gz"))
@@ -150,7 +150,7 @@ def main(put, w, pct, thousands, V2):
     assert len(J) == len(G) and (J.oracle_units_one == J.oracle_units_three).all()
     alt = J[J.fit_crit_gain > 0.05]
     assert set(zip(G.S, G.M)) == {(5, 1), (10, 1), (5, 4)}
-    put("rlAltOf", str(len(G)), "SIM", src, "small campaigns: Table III designs and S = 5, M = 4")
+    put("rlAltOf", str(len(G)), "SIM", src, "small campaigns: Table 3 designs and S = 5, M = 4")
     put("rlAltN", str(len(alt)), "SIM", src, "of them, where another start gained > 0.05")
     put("rlAltOneMed", f"{alt.pred_units_one.median():.0f}", "SIM", src, "predictive units, one start")
     put("rlAltThreeMed", f"{alt.pred_units_three.median():.0f}", "SIM", src, "predictive units, three starts")
@@ -247,8 +247,8 @@ def main(put, w, pct, thousands, V2):
     put("dgRatioMax", thousands(round(max(ratio))), "SIM", src)
     put("dgCaseLo", thousands(min(u19)), "SIM", src, "campaign (1, 19), HPC estimate")
     put("dgCaseHi", thousands(max(u19)), "SIM", src)
-    put("dgCaseHpc", thousands(H[k19]["boot_units"]), "SIM", src, "Table IV stream, HPC")
-    put("dgCaseLocal", thousands(L[k19]["boot_units"]), "SIM", src, "Table IV stream, PC")
+    put("dgCaseHpc", thousands(H[k19]["boot_units"]), "SIM", src, "campaign_boot stream, HPC")
+    put("dgCaseLocal", thousands(L[k19]["boot_units"]), "SIM", src, "campaign_boot stream, PC")
     # which refits set the vector: share of draws above it from the widest refit
     top = []
     for k in keys:

@@ -1,4 +1,4 @@
-\IEEEPARstart{B}{efore} a passenger ship sails, its technical staff decide how
+Before a passenger ship sails, its technical staff decide how
 many spares of each power-electronic unit to embark: drivers for cabin and
 public-area lighting, supplies for charging outlets, fan-coil drives and drives
 in the technical spaces. Until the next port where ordered spares can be
@@ -14,10 +14,19 @@ Multi-item spares models cover a system rather than an
 item~\cite{sherbrooke2004,basten2014}, including ships that cannot be
 resupplied during a mission~\cite{eruguz2018} and kits whose items must all be
 available~\cite{mamer1982}, with the demand law given and items usually
-independent. Estimated rates need a predictive
-distribution~\cite{prak2017}, gamma mixing is the usual treatment of an
-uncertain rate~\cite{aronis2004}, and random effects are standard for field
-data~\cite{meeker2022}. Left open is how the \emph{structure} of fleet
+independent; stocks for redundant systems have also been set from
+reliability-centred maintenance data~\cite{vanjaarsveld2011}. Maintenance and
+service logistics of ships have their own literature~\cite{eruguz2017}, and
+for unmanned cargo ships restricted corrective maintenance at sea has been
+identified as the main challenge~\cite{eriksen2021}. Estimated rates need a
+predictive distribution~\cite{prak2017}, gamma mixing is the usual treatment
+of an uncertain rate~\cite{aronis2004}, and random effects are standard for
+field data~\cite{meeker2022}. In risk assessment, the spread of failure rates
+over a population of similar installations is estimated by empirical or
+hierarchical Bayes~\cite{vesely1994,kelly2009,hamada2008}, and frailty terms
+carry unobserved heterogeneity between repairable
+systems~\cite{lindqvist2006}; these give each unit its marginal law. Left
+open is how the \emph{structure} of fleet
 heterogeneity enters the joint decision: spread shared by all references of a
 ship and spread specific to one reference on one ship can give the same
 marginal laws but different dependence between references.

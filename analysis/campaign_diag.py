@@ -15,7 +15,7 @@ recording what a run on another machine can be compared against:
              each simulated data set
   stream     whether a change of 1e-9 in the point estimate changes the
              bootstrap data sets drawn from the same random state
-  plan       the predictive and bootstrap vectors with the stream of Table IV,
+  plan       the predictive and bootstrap vectors with the stream of campaign_boot.py,
              the refits that put draws above the known-parameter vector, and
              the bootstrap vector over K fresh streams at the same estimate
 
@@ -115,7 +115,7 @@ def one(c, rep, K):
               "swap": np.r_[full.theta[1], full.theta[0], full.theta[2]]}
     out["fit_starts"] = {k: fit_record(design, "nb", v) for k, v in starts.items()}
 
-    # bootstrap with the stream of Table IV, refits instrumented
+    # bootstrap with the stream of campaign_boot.py, refits instrumented
     state = rng.bit_generator.state
     refits, hashes, thetas = [], [], []
     for _ in range(B):
@@ -141,7 +141,7 @@ def one(c, rep, K):
             break
     out["stream_same_before_divergence"] = same
 
-    # plans with the stream of Table IV
+    # plans with the stream of campaign_boot.py
     rng.bit_generator.state = after
     plans(full, d, P, rng)
     z = truth_zone(c)

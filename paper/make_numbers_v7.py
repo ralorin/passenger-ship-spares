@@ -3,7 +3,7 @@ Runs make_numbers_v6.py first, then writes numbers_v7.tex (loaded last, so a
 \\renewcommand overrides an earlier value), the tables it names and
 numbers_v7_manifest.csv. Contents:
 
-  - Table I with the f = 0 searches certified by dynamic programming
+  - Table 1 with the f = 0 searches certified by dynamic programming
     (analysis/stock_f0_dp.py) and the gap measured against the lower bound
   - the bridge contrast in units (both plans are unit-minimal)
   - certification counts of the fleet plans
@@ -155,7 +155,7 @@ def cover_accuracy():
     src = "analysis/cover_accuracy.py -> data/v2/cover_accuracy.json"
     S = json.load(open(os.path.join(V2, "cover_accuracy.json"), encoding="utf-8"))["summary"]
     assert S["rechecked"] == S["optima"] == S["same"] and S["below_fine"] == 0
-    put("caN", str(S["optima"]), "EXACT", src, "certified optima of Tables I, II and V")
+    put("caN", str(S["optima"]), "EXACT", src, "certified optima of Tables 1, 2 and 5")
     put("caPerSd", str(S["base"][0]), "EXACT", src, "lattice points per sd, base")
     put("caFinePerSd", str(S["fine"][0]), "EXACT", src)
     put("caFineWidth", f"{S['fine'][1]:.0f}", "EXACT", src)

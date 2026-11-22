@@ -5,8 +5,8 @@ questions. Under~\eqref{eq:structure} the latent effects $u_s+w_{sp}$ of two
 references on one ship have covariance $\tau^2$ and each has variance
 $\tau^2+\omega^2$. For counts with means $m_p$, a gamma multiplier per cell and
 the mean correction of~\eqref{eq:multi}, the covariance is
-$m_pm_q(e^{\tau^2}-1)$ and the variance of a single cell
-$m_p+m_p^2\{e^{\tau^2+\omega^2}(1+1/\phi)-1\}$. Three facts follow.
+$m_pm_q\{\exp(\tau^2)-1\}$ and the variance of a single cell
+$m_p+m_p^2\{\exp(\tau^2+\omega^2)(1+1/\phi)-1\}$. Three facts follow.
 References observed together on the same ships inform the shared effect,
 through the covariance of their counts. With one mission, each
 ship--reference level is a single cell on which $w_{sp}$ and the multiplier
@@ -42,6 +42,7 @@ plan for one mission of an unseen ship is scored exactly under the true model
 by~\eqref{eq:jointexact}.
 
 \subsection{Tests and Intervals}
+\label{sec:tests}
 Over the \ceTypeCells{} cells and terms with a true zero, including those
 with both components zero, the boundary test at 5\,\% rejected in a median \ceTypeMed\,\% and at most \ceTypeMax\,\% of
 campaigns (Clopper--Pearson interval \ceTypeMaxLo--\ceTypeMaxHi\,\%):
@@ -68,7 +69,7 @@ component in \ceCiZeroCorr\,\%.
 
 \subsection{Plans With and Without Variance Uncertainty}
 With $\boldsymbol\theta$ fixed at its estimate, in the one-start campaigns of
-Section~IV-C, mean cover falls to \cePredMinTen\,\% in cells with at least
+Section~\ref{sec:tests}, mean cover falls to \cePredMinTen\,\% in cells with at least
 ten ships and two missions where each cell expects three failures. Everything
 else in this subsection uses the three-start rule described below. On
 \cbCells{} cells (\cbReps{} campaigns, \cbB{} refits each) the bootstrap

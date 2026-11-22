@@ -39,7 +39,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "..", "data", "v2")
 SEED = 20261106
 LEVEL = 0.99
-SIGMAS = (0.42, 0.6)    # 0.42: the ship and ship-reference spreads of the fleet; 0.6: Table II
+SIGMAS = (0.42, 0.6)    # 0.42: the ship and ship-reference spreads of the fleet; 0.6: Table 2
 HORIZONS = (7, 14, 28, 56)
 SHARES = (0.0, 0.5, 1.0)
 

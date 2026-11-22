@@ -1,6 +1,6 @@
 """
 Writes numbers.tex and tables/tab_stock.tex from the analytical result files
-of Sections IV and V (quadrature check, zone totals, stock vectors), so that no
+(quadrature check, zone totals, stock vectors), so that no
 number is typed by hand and each has a provenance tag in numbers_manifest.csv.
 make_numbers_v2.py does the same for the later experiments.
 

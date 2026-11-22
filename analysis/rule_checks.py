@@ -1,5 +1,5 @@
 """
-Sensitivity of the bootstrap results of Section IV to the three-start rule of
+Sensitivity of the bootstrap results of Section 4 to the three-start rule of
 hglmm.Fit.fit, on campaigns of campaign_boot.py rerun on one machine with the
 same seeds.
 

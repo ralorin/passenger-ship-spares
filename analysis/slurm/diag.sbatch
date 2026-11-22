@@ -6,7 +6,7 @@
 #SBATCH --mem=8G
 #SBATCH --time=02:00:00
 #SBATCH --output=logs/%x_%j.out
-# Same diagnosis as the local run, on the machine of the Table III run.
+# Same diagnosis as the local run, on the cluster that ran the bootstrap campaigns.
 source ~/miniconda3/etc/profile.d/conda.sh
 conda activate spares
 export TMPDIR=$HOME/tmp PYTHONUNBUFFERED=1

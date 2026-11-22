@@ -8,7 +8,7 @@
 #SBATCH --time=03:55:00
 #SBATCH --output=logs/%x_%A_%a.out
 
-# Bootstrap campaigns of Tables III and IV again with the convergence rule of
+# Bootstrap campaigns of campaign_boot.py and campaign_reg.py again with the convergence rule of
 # hglmm.Fit.fit (SPARES_RULE=1): 11 tasks x 2 workers = 22 single-threaded workers.
 source ~/miniconda3/etc/profile.d/conda.sh
 conda activate spares

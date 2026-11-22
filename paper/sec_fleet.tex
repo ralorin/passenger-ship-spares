@@ -40,7 +40,7 @@ failures. Other scenarios vary one assumption: truncated Student-$t_3$ latent ef
 25\,\% misrecorded replacements; half the fleet observed for one year;
 datasheets that are right (field factor 1); and events at 0.5 per ship-year
 failing 0.1\,\%, and at 2 failing 0.05\,\% or 0.2\,\%. The generator draws one
-event state per ship-mission, with probability $1-e^{-rH/365}$ for rate $r$
+event state per ship-mission, with probability $1-\exp(-rH/365)$ for rate $r$
 and $H$ nights, and an event adds $\mathrm{Binomial}(N,a)$ failures to every
 population; it never places two events in one mission. No public source gives
 $r$ or $a$ for events that damage electronics; whole-ship losses of electrical
@@ -75,7 +75,7 @@ and at most \fdNotCertGap{} units above a lower bound. With a new seed or
 \fdStabFleets{} fleets were unchanged, yet mean cover stayed at least
 \fdStabFresh\,\%: performance is stable where the vector is not.
 
-\begin{table*}[!t]
+\begin{sidewaystable}
 \caption{Simulated fleet: cover $J$ (\%) and units u per mission of
 unit-minimal plans for a nominal 99\,\%; hierarchical (joint) minus fixed-marginal plan from the
 same draws, in points ($\Delta J$, 95\,\% interval resampling fleets) and
@@ -83,8 +83,8 @@ units ($\Delta$u); italics: $J<99$\,\%, star: interval below 99\,\%
 (\textsc{simulation}; \fdFleets{} fleets per scenario)}
 \label{tab:fleet}
 \centering
-\footnotesize
-\setlength{\tabcolsep}{1.6pt}
+\scriptsize
+\setlength{\tabcolsep}{2.4pt}
 \begin{tabular}{@{}lcccccrlrcrlr@{}}
 \toprule
 & \multicolumn{8}{c}{known ships} & \multicolumn{4}{c}{new ships} \\
@@ -96,7 +96,7 @@ Scenario & $J$ & $J$/u & $J$/u & $J$/u & $J$/u & & & & $J$/u & & & \\
 \tabinput{tables/tab_fleet5.tex}
 \bottomrule
 \end{tabular}
-\end{table*}
+\end{sidewaystable}
 
 \subsection{Rates, Marginals and Dependence}
 Table~\ref{tab:fleet} separates three contributions; ranges are over the

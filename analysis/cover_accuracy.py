@@ -1,6 +1,6 @@
 """
 Numerical accuracy of the exact joint cover J and its effect on the certified
-optima of Tables I, II and V.
+optima of Tables 1, 2 and 5.
 
 J (plan_cover.Zone) sums over a lattice of PER_SD points per standard
 deviation of the smaller latent term, cut at HALF_WIDTH standard deviations,
@@ -13,7 +13,7 @@ with discretised normal weights. Two checks:
             the numerical error of J, and the optimum's own margin above 0.99
             is compared with it.
   certify   every certified optimum is searched again by branch and bound (or
-            dynamic programming where Table I used it) at level 0.99 - DELTA,
+            dynamic programming where Table 1 used it) at level 0.99 - DELTA,
             starting from the optimum. If no cheaper vector reaches that lower
             level, an error in J smaller than DELTA cannot make a cheaper
             vector feasible, so the certificate stands.
@@ -54,7 +54,7 @@ def zone(lams, tau, omega, smax=None, grid=BASE):
 def tasks():
     """(name, builder, cost, optimum, time limit, method) for every certified optimum."""
     out = []
-    # Table I: grid of stock_exact.py, optimum at the true f and at f = 0
+    # Table 1: grid of stock_exact.py, optimum at the true f and at f = 0
     T = pd.read_csv(os.path.join(OUT, "stock_exact_part1.csv"))
     dp = {(d["P"], d["total"], d["means"], d["costs"]): d
           for d in json.load(open(os.path.join(OUT, "stock_f0_dp.json"), encoding="utf-8"))}
@@ -72,7 +72,7 @@ def tasks():
         elif r.f == 0 and key in dp:
             out.append((f"{tag}_f0", ("zone", lams.tolist(), *split(0.0), None), c.tolist(),
                         dp[key]["dp_vector"], 0, "dp"))
-    # Table II: the large ship (ship_cases.py)
+    # Table 2: the large ship (ship_cases.py)
     S = json.load(open(os.path.join(OUT, "ship_cases.json"), encoding="utf-8"))
     cost = S["cost"]
     for r in S["cases"]:
@@ -83,7 +83,7 @@ def tasks():
         out.append((f"{tag}_f1", ("zone", lams, *split(1.0, sg), None), cost, r["know_f1"], 600, "bb"))
         out.append((f"{tag}_event", ("mixed", lams, sg, r["event_q"], S["installed"], S["event_share"]),
                     cost, r["event_plan"], 600, "bb"))
-    # Table V: the bridge (bridge.py), unit costs
+    # Table 5: the bridge (bridge.py), unit costs
     B = json.load(open(os.path.join(OUT, "bridge.json"), encoding="utf-8"))
     rows = B["rows"] if isinstance(B, dict) else B
     seen = set()

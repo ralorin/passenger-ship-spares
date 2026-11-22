@@ -1,12 +1,33 @@
 % All entries verified against the publisher record, September 2026.
-% DOIs are given only where the item has an article number rather than page
-% numbers, or is a conference paper without pagination, as IEEE style expects.
+% Only the entries cited in the text are printed (elsarticle-num).
 
-@IEEEtranBSTCTL{BSTcontrol,
-  CTLuse_forced_etal       = "yes",
-  CTLmax_names_forced_etal = "6",
-  CTLnames_show_etal       = "1",
-  CTLdash_repeated_names   = "no"
+% Added for the RESS version, November 2026; checked against Crossref.
+
+@article{kelly2009,
+  author  = {Kelly, Dana L. and Smith, Curtis L.},
+  title   = {Bayesian inference in probabilistic risk assessment---The current
+             state of the art},
+  journal = {Reliability Engineering \& System Safety},
+  volume  = {94}, number = {2}, pages = {628--643}, year = {2009},
+  doi     = {10.1016/j.ress.2008.07.002}
+}
+
+@article{vesely1994,
+  author  = {Vesely, W. E. and Uryasev, S. P. and Samanta, P. K.},
+  title   = {Failure of emergency diesel generators: a population analysis
+             using empirical {Bayes} methods},
+  journal = {Reliability Engineering \& System Safety},
+  volume  = {46}, number = {3}, pages = {221--229}, year = {1994},
+  doi     = {10.1016/0951-8320(94)90115-5}
+}
+
+@article{eriksen2021,
+  author  = {Eriksen, Stig and Utne, Ingrid Bouwer and L{\"u}tzen, Marie},
+  title   = {An {RCM} approach for assessing reliability challenges and
+             maintenance needs of unmanned cargo ships},
+  journal = {Reliability Engineering \& System Safety},
+  volume  = {210}, pages = {107550}, year = {2021},
+  doi     = {10.1016/j.ress.2021.107550}
 }
 
 @article{higgins2009,
@@ -90,14 +111,16 @@
   author  = {Tierney, Luke and Kadane, Joseph B.},
   title   = {Accurate approximations for posterior moments and marginal densities},
   journal = {Journal of the American Statistical Association},
-  volume  = {81}, number = {393}, pages = {82--86}, year = {1986}
+  volume  = {81}, number = {393}, pages = {82--86}, year = {1986},
+  doi     = {10.1080/01621459.1986.10478240}
 }
 
 @article{breslow1993,
   author  = {Breslow, Norman E. and Clayton, David G.},
   title   = {Approximate inference in generalized linear mixed models},
   journal = {Journal of the American Statistical Association},
-  volume  = {88}, number = {421}, pages = {9--25}, year = {1993}
+  volume  = {88}, number = {421}, pages = {9--25}, year = {1993},
+  doi     = {10.1080/01621459.1993.10594284}
 }
 
 @article{brooks2017,
@@ -451,7 +474,7 @@
 
 @misc{fincantieri_laperouse,
   author       = {{Fincantieri}},
-  title        = {Le Lap{\'e}rouse: cruise ship fact sheet},
+  title        = {{Le Lap{\'e}rouse}: cruise ship fact sheet},
   howpublished = {\url{https://www.fincantieri.com/en/products-and-services/cruise-ships/le-laperouse}},
   note         = {Accessed: Nov. 1, 2026}, year = {2018}
 }
@@ -460,7 +483,7 @@
   author       = {{Ship Technology}},
   title        = {Royal {Caribbean's} third {Oasis}-class cruise ship completes exterior construction},
   howpublished = {\url{https://www.ship-technology.com/?p=13914}},
-  note         = {Published Jun. 22, 2015. Accessed: Nov. 2, 2026}
+  note         = {Published Jun. 22, 2015. Accessed: Nov. 2, 2026}, year = {2015}
 }
 
 @misc{meanwell_lpv60,

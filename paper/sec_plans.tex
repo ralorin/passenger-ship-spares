@@ -4,7 +4,7 @@ $\lambda_1,\dots,\lambda_P$ over the horizon, total latent variance
 $\sigma^2=\tau^2+\omega^2>0$ and ship-wide share $f=\tau^2/\sigma^2$
 ($\sigma^2=0$ leaves no spread to share and is excluded), and let
 \begin{equation}
-Y_p\mid u,w_p\sim\mathrm{Poisson}\big(\lambda_p e^{u+w_p-\sigma^2/2}\big)
+Y_p\mid u,w_p\sim\mathrm{Poisson}\big\{\lambda_p\exp(u+w_p-\sigma^2/2)\big\}
 \label{eq:multi}
 \end{equation}
 conditionally independent, where $u=u_s$ and $w_p=w_{sp}$
@@ -13,7 +13,7 @@ $\omega^2$, so that $\lambda_p=E\,Y_p$ whatever $f$; other random terms
 of~\eqref{eq:model}, such as the maker, are common to the ships of a maker and
 enter $\lambda_p$. Given $u$
 the counts are independent; with $\varphi_a$ the $\mathcal N(0,a^2)$ density
-and $G_p(s\mid u)=\int F_{\mathrm{Pois}}(s;\lambda_pe^{u+w-\sigma^2/2})
+and $G_p(s\mid u)=\int F_{\mathrm{Pois}}\{s;\lambda_p\exp(u+w-\sigma^2/2)\}
 \varphi_\omega(w)\,\mathrm dw$,
 \begin{equation}
 J(\mathbf s)=\int\textstyle\prod_{p}G_p(s_p\mid u)\,\varphi_\tau(u)\,\mathrm du,
@@ -24,8 +24,9 @@ evaluated by quadrature on a lattice holding every value of $u+w$, with
 normal mass, a bound on truncation only, is about $10^{-15}$. As refinement
 evidence, not an error bound, a lattice with \caFinePerSd{} points cut at
 \caFineWidth{} changed $J$ by at most $\caErr$ at the \caN{} certified optima
-of Tables~I, II and~V and their one-unit-down neighbours; every such optimum
-exceeds 99\,\% by at least $\caMargin$, and none became cheaper when searched
+of Tables~\ref{tab:opt} and~\ref{tab:ship} and of the bridge plans of
+Section~\ref{sec:fleet}, with their one-unit-down neighbours; every such
+optimum exceeds 99\,\% by at least $\caMargin$, and none became cheaper when searched
 again at $0.99-\caDelta$.
 
 \subsection{The Joint Criterion and the Ship-Wide Share}
@@ -35,7 +36,7 @@ covariances are; the proposition applies this to the cover of a stock vector.
 
 \begin{proposition}[Monotone joint cover]
 \label{prop:mono}
-Let the Gaussian vector $\mathbf v=(v_1,\dots,v_P)$ have $E\,v_p=0$,
+Let $\mathbf v=(v_1,\dots,v_P)$ be Gaussian with $E\,v_p=0$,
 $\mathrm{Var}(v_p)=\sigma^2$ and $\mathrm{Cov}(v_p,v_q)=f\sigma^2$ for $p\ne q$,
 $f\in[0,1]$, and let $Y_1,\dots,Y_P$ be conditionally independent given
 $\mathbf v$, with $\Pr(Y_p\le s\mid\mathbf v)=h_{p,s}(v_p)$ non-increasing and
@@ -43,7 +44,7 @@ continuous in $v_p$. With $\sigma^2$ and the functions $h_{p,s}$ held fixed,
 the marginal law of every $Y_p$ is free of $f$, and $J(\mathbf s)$ is
 non-decreasing in $f$ on $[0,1]$ for every $\mathbf s\in\mathbb N^P$.
 \end{proposition}
-\begin{IEEEproof}
+\begin{proof}
 Each $v_p\sim\mathcal N(0,\sigma^2)$ whatever $f$, so the marginals are fixed.
 Write $J_f(\mathbf s)=E\,\phi(\mathbf v)$ with
 $\phi(\mathbf v)=\prod_p h_{p,s_p}(v_p)\in[0,1]$. For $p\ne q$, $x_p\ge x'_p$
@@ -61,15 +62,15 @@ standard normal $z_r$; as $f\to1$, $\mathbf v^{(f)}\to\sigma z_0\mathbf 1=
 \mathbf v^{(1)}$ for every realisation, so $\phi(\mathbf v^{(f)})\to
 \phi(\mathbf v^{(1)})$ by continuity of the $h_{p,s}$, and $J_f\to J_1$ by
 bounded convergence, $0\le\phi\le1$. Hence $J_1\ge J_f$ for all $f<1$.
-\end{IEEEproof}
+\end{proof}
 
 As $f$ varies only the correlation between the $v_p$ changes.
 Model~\eqref{eq:multi} satisfies the hypotheses with $v_p=u+w_p$ and
-$h_{p,s}(v)=F_{\mathrm{Pois}}(s;\lambda_pe^{v-\sigma^2/2})$. So
+$h_{p,s}(v)=F_{\mathrm{Pois}}\{s;\lambda_p\exp(v-\sigma^2/2)\}$. So
 does~\eqref{eq:model} with $\phi$ fixed: gamma multipliers independent across
 cells and of $\mathbf v$ make each cell negative binomial, and a reference
 total over its cells is still stochastically increasing and continuous in
-$e^{v_p}$.
+$\exp(v_p)$.
 
 The proposition concerns one vector; its consequence for the integer
 program~\eqref{eq:ip} is the point of this paper. Since $J_0(\mathbf s)\le
@@ -162,8 +163,8 @@ assumed relative prices, the cabin LED driver being 1. Horizons of 7, 14 and
 28 days stand for resupply at every turnaround of a weekly cruise, every
 second and every fourth; $\lambda_p$ grows in proportion to the horizon while
 the latent multiplier persists until resupply, so the variance of a count,
-$\lambda_p+\lambda_p^2(e^{\sigma^2}-1)$, grows faster than its mean. The
-supply event is a stress assumption: probability $1-e^{-2H/365}$ over $H$
+$\lambda_p+\lambda_p^2\{\exp(\sigma^2)-1\}$, grows faster than its mean. The
+supply event is a stress assumption: probability $1-\exp(-2H/365)$ over $H$
 days, each event failing 0.05\,\% of every population. Every vector is a
 certified optimum.
 

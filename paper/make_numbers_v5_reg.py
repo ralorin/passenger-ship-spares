@@ -29,7 +29,7 @@ n5 = len(g5)
 put("rgN", str(n5), "SIM", src, "campaigns with S=5, M=1")
 put("rgReps", str(int(G.groupby("cell").size().min())), "SIM", src)
 big = g5.boot_units > 5 * g5.oracle_units
-put("rgBigN", str(int(big.sum())), "SIM", src, "bootstrap plan > 5x oracle, reproduces Table IV")
+put("rgBigN", str(int(big.sum())), "SIM", src, "bootstrap plan > 5x oracle, same plan as campaign_boot.py")
 put("rgBigMax", f"{g5.boot_units.max():,}".replace(",", "\\,"), "SIM", src)
 for key, tag in (("pred", "Pred"), ("pen0.5", "PenHalf"), ("pen1", "PenOne"), ("pen2", "PenTwo"),
                  ("bootcap", "Cap"), ("penpred1", "PenPredOne")):

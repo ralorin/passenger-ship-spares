@@ -4,7 +4,7 @@ explicit regularisation of the latent spread remove them?
 
 Each campaign of campaign_boot.py is regenerated with its seed and the same
 sequence of random numbers, so the predictive and bootstrap plans are those of
-Table IV. New plans, from fresh streams:
+campaign_boot.py. New plans, from fresh streams:
 
   boot_cap      the bootstrap plan with at most CAP units per reference, an
                 assumed storage limit; flagged infeasible when the capped
@@ -109,7 +109,7 @@ def one_rep(c, rep):
 
     score("pred", pred_plan([full], P, rng)[0])
     bfits = [hglmm.at_theta(full, th) for th in thetas]
-    score("boot", pred_plan(bfits, P, rng)[0])      # the plan of Table IV
+    score("boot", pred_plan(bfits, P, rng)[0])      # the plan of campaign_boot.py
 
     # trace, on fresh draws from the same refits
     rng2 = np.random.default_rng([SEED, c["cell"], rep, 11])
